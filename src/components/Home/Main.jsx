@@ -9,7 +9,7 @@ import { IoIosArrowDown } from "react-icons/io";
 gsap.registerPlugin(ScrollTrigger);
 
 const Main = () => {
-    const [selected, setSelected] = useState('In the Field')
+    const [selected, setSelected] = useState('CONNECT')
 
     useGSAP(() => {
         gsap.set("#video-frame", {
@@ -61,8 +61,8 @@ const Main = () => {
     return (
         <Flex >
             <Flex id="video-frame" className="w-[100%] mask-clip-path">
-                <img id="hero-img" src="main.avif" alt="main" className="absolute h-screen w-[100%] object-cover" />
-                <div id="hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302]/90 w-[100%] h-screen " />
+                <img id="hero-img" src="/sendwise-hero-picture.png" alt="main" className="absolute h-screen w-[100%] object-cover" />
+                <div id="hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-screen " />
                 <Flex className="z-30 sm:ml-[10%] ml-[2%] justify-evenly w-[100%] h-screen pt-24 pb-16 flex-col">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -71,11 +71,11 @@ const Main = () => {
                         className=" w-full"
                     >
                         <Flex className="group text-white/80 inter-semibold w-fit hover:bg-gradient-to-t from-[#514F4A]/50 to-transparent bg-[#514F4A]/30 border px-1 py-1 items-center space-x-4 rounded-3xl hover:border-[#514F4A] border-[#514F4A]/50   backdrop-blur-lg">
-                            <Flex className={`${selected === 'In the Field' && 'border border-[#514F4A] group-hover:bg-[#514F4A] group-hover:scale-105 bg-gradient-to-t to-[#514F4A] from-[#514F4A]/10 '} px-3 py-[0.4rem] rounded-3xl`}>
-                                <p className="text-[0.85rem] ">In the Field</p>
+                            <Flex className={`${selected === 'CONNECT' && 'border border-[#514F4A] group-hover:bg-[#514F4A] group-hover:scale-105 bg-gradient-to-t to-[#514F4A] from-[#514F4A]/10 '} px-3 py-[0.4rem] rounded-3xl`}>
+                                <p className="text-[0.85rem] ">CONNECT</p>
                             </Flex>
-                            <Flex className={`${selected === 'Planhat x Basic Technologies' && 'border border-[#514F4A] group-hover:bg-[#514F4A] group-hover:scale-105 bg-gradient-to-t to-[#514F4A] from-[#514F4A]/30 '} pr-3 py-[0.4rem] rounded-3xl`}>
-                                <p className="sm:text-[0.85rem] text-[0.7rem]">Planhat x Basic Technologies</p>
+                            <Flex className={`${selected === 'Eén verzendstandaard voor schaal' && 'border border-[#514F4A] group-hover:bg-[#514F4A] group-hover:scale-105 bg-gradient-to-t to-[#514F4A] from-[#514F4A]/30 '} pr-3 py-[0.4rem] rounded-3xl`}>
+                                <p className="sm:text-[0.85rem] text-[0.7rem]">Eén verzendstandaard voor schaal</p>
                             </Flex>
                         </Flex>
                     </motion.div>
@@ -83,29 +83,33 @@ const Main = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, ease: "easeOut", delay: 0.7 }}
-                        className=" w-full"
+                        className=" w-full -mt-6"
                     >
-                        <Flex className="flex-col pl-1 inter-semibold md:leading-[7rem] leading-[3.5rem] text-white w-fit">
-                            <p className="md:text-[7rem] sm:text-[4rem] text-[3rem]">Know them.</p>
-                            <p className="md:text-[7rem] sm:text-[4rem] text-[3rem]">Grow them.</p>
+                        <Flex className="flex-col pl-1 inter-semibold md:leading-[4rem] leading-[2rem] text-white w-fit">
+                            <p className="md:text-[4rem] sm:text-[2.5rem] text-[1.75rem]">Het platform voor<br />schaalbaar verzenden</p>
                         </Flex>
                     </motion.div>
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1.4, y: 0 }}
                         transition={{ duration: 1, ease: "easeOut", delay: 1.4 }}
-                        className=" w-full"
+                        className=" w-full -mt-8"
                     >
-                        <p className="text-white inter-semibold md:text-[1.3rem]">The unified customer platform for growing lifelong revenue.</p>
+                        <p className="text-white font-light md:text-[1.3rem]">
+                            <strong className="font-bold">Verzenden is onnodig complex geworden.</strong> Sendwise<br />
+                            maakt het weer eenvoudig. Eén vaste methode, één<br />
+                            prijs en altijd dezelfde betrouwbare levering.
+                        </p>
                     </motion.div>
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.8, ease: "easeOut", delay: 1.8 }}
-                        className=" w-full"
+                        className=" w-full -mt-6"
                     >
-                        <Flex className="bg-[#D44A00] w-fit hover:bg-[#EB5200] inter-medium text-[0.95rem] cursor-pointer text-white px-7 py-3 rounded-3xl">
-                            <p>Request a demo</p>
+                        <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[0.95rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                            <p className="relative z-10">Account aanmaken</p>
                         </Flex>
                     </motion.div>
                     <IoIosArrowDown className="md:hidden flex text-[#D6D7D5]/60 absolute bottom-6 animate-bounce  w-[90%] mx-auto text-[3rem]"/>

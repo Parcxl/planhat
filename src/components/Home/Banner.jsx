@@ -46,8 +46,8 @@ const Banner = () => {
                         </Flex>
                     </Flex>
                 </Flex>
-                <Flex className="lg:w-[50%]">
-                    <img src="/banner.png" alt="" className="" />
+                <Flex className="lg:w-[50%] overflow-hidden">
+                    <img src="/banner.png" alt="" className="w-full h-full object-cover" />
                 </Flex>
             </Flex>
         </Flex>

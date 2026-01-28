@@ -41,6 +41,42 @@ const Works = () => {
 
     return (
         <Flex className=" w-[100%] space-y-6 mb-32 mx-auto flex-col lg:pt-10 sm:pt-[12rem] pt-10">
+            {/* Duplicated carts side by side */}
+            <Flex className="lg:flex-row flex-col lg:space-x-6 lg:space-y-0 space-y-6 lg:w-[80%] w-[95%] mx-auto">
+                <Flex className="lg:w-[50%] w-[100%] lg:h-[24rem] sm:h-[16rem] h-[14rem] group relative rounded-2xl overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] rounded-2xl" />
+                    <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, mixBlendMode: 'overlay' }} />
+                    <Flex className="relative z-20 w-full h-full p-8 lg:pl-12 sm:pl-8 pl-6">
+                        <Flex className="text-white w-[100%] items-start flex-col space-y-6 justify-center h-full">
+                            <p className="inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.5rem] text-left">Voor webshops</p>
+                            <p className="text-left md:w-[90%] w-[100%] inter-medium lg:text-[1.2rem] text-[1rem]">Schaal je verzending met vaste tarieven, multi-carrier shipping en branded tracking — zonder contracten of complexiteit.</p>
+                            <Flex className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 w-[15rem] items-center space-x-4 cursor-pointer text-[0.9rem] hover:bg-white pl-4 py-1 rounded-3xl">
+                                <p className="whitespace-nowrap">Start met Sendwise</p>
+                                <Flex className="group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-full p-2 text-[1.5rem]">
+                                    <GoArrowUpRight />
+                                </Flex>
+                            </Flex>
+                        </Flex>
+                    </Flex>
+                </Flex>
+                <Flex className="lg:w-[50%] w-[100%] lg:h-[24rem] sm:h-[16rem] h-[14rem] group relative rounded-2xl overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] rounded-2xl" />
+                    <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, mixBlendMode: 'overlay' }} />
+                    <Flex className="relative z-20 w-full h-full p-8 lg:pl-12 sm:pl-8 pl-6">
+                        <Flex className="text-white w-[100%] items-start flex-col space-y-6 justify-center h-full">
+                            <p className="inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.5rem] text-left">Voor fulfilmentcenters</p>
+                            <p className="text-left md:w-[90%] w-[100%] inter-medium lg:text-[1.2rem] text-[1rem]">Verzend goedkoper op schaal met tientallen carriers via één pickup — zonder contracten, zonder complexiteit.</p>
+                            <Flex className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 w-[15rem] items-center space-x-4 cursor-pointer text-[0.9rem] hover:bg-white pl-4 py-1 rounded-3xl">
+                                <p className="whitespace-nowrap">Start met Sendwise</p>
+                                <Flex className="group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-full p-2 text-[1.5rem]">
+                                    <GoArrowUpRight />
+                                </Flex>
+                            </Flex>
+                        </Flex>
+                    </Flex>
+                </Flex>
+            </Flex>
+            {/* Original cart */}
             <Flex className="lg:w-[80%] w-[95%] lg:h-[31rem] sm:h-[20rem] h-[17rem] mx-auto group relative">
                 <div className="lg:hidden absolute z-10 lg:bg-gradient-to-b sm:bg-gradient-to-l bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] sm:h-[20rem] h-[17rem] rounded-2xl" />
                 <img src="/banner3.png" alt="work" className=" object-  rounded-2xl" />

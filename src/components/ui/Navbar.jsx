@@ -52,7 +52,11 @@ const Navbar = () => {
             <Flex className={`md:flex hidden w-full transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md ' : 'bg-transparent'} ${dropdown && scrolled && 'flex-col h-screen pt-4 backdrop-blur-lg bg-gradient-to-l from-transparent to-white/80'} ${dropdown ? 'flex-col h-screen pt-4 backdrop-blur-lg bg-gradient-to-l from-transparent to-[#030302]/80' : 'py-4'}`}>
                 <Flex className=" justify-around w-[84%] mx-auto items-center">
                     <Flex className="">
-                        <p className={`${scrolled ? 'text-black' : 'text-white'}  text-[1.3rem] inter-extrabold`}>planhat</p>
+                        <img 
+                            src={scrolled ? "/sendwise-tekst-blauw.png" : "/sendwise-tekst.png"} 
+                            alt="Sendwise" 
+                            className="h-[1.5rem] object-contain -mt-1"
+                        />
                     </Flex>
                     {NavList?.map((item) =>
                         <Flex className=" cursor-pointer items-center" onClick={() => handleClick(item)}>
@@ -74,11 +78,12 @@ const Navbar = () => {
                         <p className={`${scrolled ? 'text-black/60' : 'text-white/80'} inter-semibold`}>Pricing</p>
                     </Flex>
                     <Flex className=" space-x-4">
-                        <Flex className={`${scrolled ? 'text-black border-black/30 hover:border-transparent' : 'text-white border-white/30 hover:border-transparent'} inter-bold cursor-pointer text-[0.9rem] px-4 py-2 rounded-3xl`}>
-                            <p>Log in</p>
+                        <Flex className={`${scrolled ? 'text-black border-black/30 hover:border-transparent bg-blue-100/60' : 'text-white border-white/30 hover:border-transparent bg-white/20'} inter-bold cursor-pointer text-[0.9rem] px-4 py-2 rounded-3xl transition-all duration-500 ease-in-out`}>
+                            <p>Inloggen</p>
                         </Flex>
-                        <Flex className="bg-[#D44A00] hover:bg-[#EB5200] inter-medium text-[0.9rem] cursor-pointer text-white px-4 py-2 rounded-3xl">
-                            <p>Request a demo</p>
+                        <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[0.9rem] cursor-pointer text-white px-4 py-2 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                            <p className="relative z-10">Account aanmaken</p>
                         </Flex>
                     </Flex>
                 </Flex>
@@ -164,8 +169,9 @@ const Navbar = () => {
                         <Flex className=" justify-between w-[90%] mx-auto">
                             <p>Pricing</p>
                         </Flex>
-                        <Flex className="bg-[#D44A00] hover:bg-[#EB5200] inter-medium text-[0.9rem] cursor-pointer text-white px-4 py-2 w-[90%] mx-auto rounded-3xl">
-                            <p className="text-center w-[100%]">Request a demo</p>
+                        <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[0.9rem] cursor-pointer text-white px-4 py-2 w-[90%] mx-auto rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                            <p className="text-center w-[100%] relative z-10">Account aanmaken</p>
                         </Flex>
                     </Flex>
                 </Flex>
