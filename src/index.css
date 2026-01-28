@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.inter-normal {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.inter-medium {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.inter-semibold {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.inter-bold {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.inter-extrabold {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.mask-clip-path {
+  /* clip-path: polygon(50% 0%, 0% 100%, 100% 100%); triangle */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+
+}
+
+
+.autoplay-progress {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--swiper-theme-color);
+}
+
+.autoplay-progress svg {
+  --progress: 0;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  stroke-width: 4px;
+  stroke: var(--swiper-theme-color);
+  fill: none;
+  stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
+  stroke-dasharray: 125.6;
+  transform: rotate(-90deg);
+}
+
+
+
+.testimonial-swiper {
+  overflow: visible !important;
+  /* allow slides to peek out */
+  position: relative;
+}
+
+/* Base slide */
+.testimonial-swiper .swiper-slide {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  transform-origin: top center;
+}
+
+/* Active slide */
+.testimonial-swiper .swiper-slide-active {
+  transform: translateY(0px) scale(1);
+  z-index: 3;
+  opacity: 1;
+}
+
+/* Next one (just below) */
+.testimonial-swiper .swiper-slide-next {
+  transform: translateY(20px) scale(0.98);
+  z-index: 2;
+  opacity: 0.9;
+}
+
+/* The one after that (further below) */
+.testimonial-swiper .swiper-slide-next+.swiper-slide {
+  transform: translateY(40px) scale(0.96);
+  z-index: 1;
+  opacity: 0.7;
+}
