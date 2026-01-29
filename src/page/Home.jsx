@@ -10,7 +10,7 @@ import Banner from "../components/Home/Banner";
 
 const Home = () => {
     return (
-        <Flex className=" flex-col space-y-10 w-[100%] mb-10 overflow-hidden">
+        <Flex className=" flex-col lg:space-y-10 md:space-y-32 sm:space-y-40 space-y-32 w-[100%] mb-10 overflow-hidden">
             <Main />
             <Industry />
             <Journey />

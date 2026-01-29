@@ -262,7 +262,7 @@ export default function Journey() {
     });
 
     return (
-        <Flex className="flex flex-col items-center space-y-2 pt-20">
+        <Flex className="flex flex-col items-center space-y-2 pt-20 lg:pb-0 md:pb-32 sm:pb-40 pb-32 lg:mb-0 md:mb-20 sm:mb-24 mb-20">
             {/* Heading */}
             <Flex className="flex-col inter-semibold md:text-[5rem] sm:text-[4rem] text-[1.7rem] text-center gap-4">
                 <p className="md:leading-[5.5rem] sm:leading-[4.5rem] leading-[2rem]">Van verzending tot warehouse,</p>
@@ -272,7 +272,7 @@ export default function Journey() {
             {/* Wrapper */}
             <Flex
                 id="journey-wrapper"
-                className="hidden sm:flex w-full flex flex-row justify-between items-start pt-24"
+                className="hidden sm:flex w-full flex flex-row justify-between items-start pt-24 lg:mb-0 md:mb-8 sm:mb-12 mb-8"
             >
                 {/* Text */}
                 <Flex

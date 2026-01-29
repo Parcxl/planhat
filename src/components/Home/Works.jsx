@@ -40,7 +40,7 @@ const Works = () => {
     };
 
     return (
-        <Flex className=" w-[100%] space-y-6 mb-32 mx-auto flex-col lg:pt-10 sm:pt-[12rem] pt-10">
+        <Flex className=" w-[100%] space-y-6 mb-32 mx-auto flex-col lg:pt-10 md:pt-32 sm:pt-40 pt-32">
             {/* Duplicated carts side by side */}
             <Flex className="lg:flex-row flex-col lg:space-x-6 lg:space-y-0 space-y-6 lg:w-[80%] w-[95%] mx-auto">
                 <Flex className="lg:w-[50%] w-[100%] lg:h-[24rem] sm:h-[16rem] h-[14rem] group relative rounded-2xl overflow-hidden">
@@ -76,6 +76,52 @@ const Works = () => {
                     </Flex>
                 </Flex>
             </Flex>
+            
+            {/* Wat Sendwise oplost section */}
+            <Flex className="lg:flex-row flex-col lg:space-x-12 lg:space-y-0 space-y-8 lg:w-[80%] w-[95%] mx-auto lg:pt-16 md:pt-12 sm:pt-10 pt-8">
+                {/* Left column - Text */}
+                <Flex className="lg:w-[55%] w-[100%] flex-col space-y-6">
+                    <h2 className="inter-semibold lg:text-[3.5rem] md:text-[3rem] sm:text-[2.5rem] text-[2rem] lg:leading-[4rem] md:leading-[3.5rem] sm:leading-[3rem] leading-[2.5rem] text-gray-900">
+                        Wat Sendwise <span className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">oplost</span>
+                    </h2>
+                    
+                    <div className="flex flex-col space-y-6 inter-medium lg:text-[1.2rem] md:text-[1.1rem] text-[1rem] leading-[1.8rem] text-gray-700">
+                        <p>
+                            Verzenden is voor veel webshops en fulfilmentcenters onnodig duur en complex. Je zit vast aan <em>contracten</em>, <em>abonnementen</em>, hoge indexeringen en beperkte flexibiliteit, terwijl grip op kosten en het verzendproces ontbreekt.
+                        </p>
+                        
+                        <p>
+                            <strong>Sendwise doorbreekt dat model met één verzendplatform en één vaste verzendmethode: CONNECT.</strong> We brengen tientallen vervoerders samen onder één pickup en één platform, terwijl op de achtergrond altijd de beste optie wordt gebruikt.
+                        </p>
+                        
+                        <p>
+                            Daardoor kunnen we structureel lage verzendtarieven aanbieden, zonder <em>abonnementskosten</em>, <em>contracten</em> of <em>labelbijdrages</em>, en met eerlijke indexeringen. Tegelijk zorgt Sendwise voor minder fouten, <em>realtime</em> inzicht in zendingen en volledige controle over branding en verzendcommunicatie.
+                        </p>
+                    </div>
+                </Flex>
+                
+                {/* Right column - Image */}
+                <Flex className="lg:w-[45%] w-[100%] items-center justify-center">
+                    <div className="w-full h-full min-h-[400px] rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-gray-100 to-gray-200 relative">
+                        <img 
+                            src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop" 
+                            alt="Logistics and shipping" 
+                            className="w-full h-full object-cover rounded-2xl"
+                            onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'flex';
+                            }}
+                        />
+                        <div className="hidden absolute inset-0 bg-gradient-to-br from-[#1a5ee5]/20 to-[#3b82f6]/20 rounded-2xl items-center justify-center">
+                            <div className="text-center p-8">
+                                <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-[#1a5ee5] to-[#3b82f6] rounded-2xl opacity-20"></div>
+                                <p className="inter-medium text-gray-600">Logistics & Shipping</p>
+                            </div>
+                        </div>
+                    </div>
+                </Flex>
+            </Flex>
+            
             {/* Original cart */}
             <Flex className="lg:w-[80%] w-[95%] lg:h-[31rem] sm:h-[20rem] h-[17rem] mx-auto group relative">
                 <div className="lg:hidden absolute z-10 lg:bg-gradient-to-b sm:bg-gradient-to-l bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] sm:h-[20rem] h-[17rem] rounded-2xl" />
