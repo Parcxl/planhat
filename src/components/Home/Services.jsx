@@ -60,109 +60,28 @@ const Services = () => {
 
     return (
         <Flex className="flex-col spacey-5 w-[100%]">
-            <Flex
-                ref={containerRef}
-                id="wrappers"
-                className=" flex-col  w-[100%] "
-            >
-                <Flex className="flex-col lg:w-[48.3%] w-[90%] mx-auto space-y-4 ">
-                    <p className="lg:leading-[4.1rem] leading-[3rem]">
-                        <span className="highlight-span inter-semibold lg:text-[5rem] sm:text-[3.5rem] text-[2.5rem] text-[#E7E7E7]">
-                            Home to every customer.
-                        </span>
-                        <span className="highlight-span inter-semibold lg:text-[5rem] sm:text-[3.5rem] text-[2.5rem] text-[#E7E7E7] pl-4">
-                            And opportunity.
-                        </span>
-                        <span className="highlight-span inter-semibold lg:text-[5rem] sm:text-[3.5rem] text-[2.5rem] text-[#E7E7E7] pl-4">
-                            And conversation.
-                        </span>
-                        <span className="highlight-span inter-semibold lg:text-[5rem] sm:text-[3.5rem] text-[2.5rem] text-[#E7E7E7] pl-4">
-                            And ticket.
-                        </span>
-                        <span className="highlight-span inter-semibold lg:text-[5rem] sm:text-[3.5rem] text-[2.5rem] text-[#E7E7E7] pl-4">
-                            And click.
-                        </span>
-                        <p />
-                        <span className="highlight-span inter-semibold lg:text-[5rem] sm:text-[3.5rem] text-[2.5rem] text-[#E7E7E7] ">
-                            And action.
-                        </span>
-                    </p>
-                </Flex>
-                <Flex className="lg:w-[48.3%] w-[95%] mx-auto ">
-                    <p className=" highlight-fade mt-10  inter-medium text-[#7B7B79] text-[1.2rem] lg:w-[88%]">
-                        In Planhat, data is architected for action. Unify and transform data
-                        across your entire tech stack to act on customers as you analyze them.
-                    </p>
-                </Flex>
-            </Flex>
+            {/* Home to every customer section removed */}
             <Flex className="w-[100%] space-y-6 lg:pt-0 sm:pt-[12rem] pt-0 mx-auto flex-col  pt-10">
                 <Flex className="lg:w-[80%] w-[95%] h-[31rem] mx-auto group relative">
                     <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-[31rem] rounded-2xl" />
-                    <img src="/work.avif" alt="work" className=" object-cover w-[100%] rounded-2xl" />
+                    <img src="/sendwise-2.png" alt="Sendwise" className=" object-cover w-[100%] rounded-2xl" />
                     <Flex className="absolute z-20 lg:top-20 top-6 lg:left-20 left-4">
-                        <Flex className="text-white lg:items-center items-start flex-col space-y-6 ">
-                            <p className="inter-semibold lg:text-[5.5rem] text-[2rem] lg:leading-[5rem] lg:w-[100%] w-[80%] lg:text-center ">A unified ecosystem for customer action</p>
-                            <p className="lg:text-center lg:w-[67%] mx-auto px-2 inter-medium lg:text-[1.4rem] text-[1.2rem]">Planhat is a customer platform that doubles as both your single source of truth and an everyday customer-centric control centre for your sales, service and success teams.</p>
-                            <Flex className="group-hover:backdrop-blur-md group-hover:bg-white/10 group-hover:border-transparent text-white inter-medium border border-white/30 w-[11.7rem] items-center space-x-4 cursor-pointer text-[0.9rem] hover:bg-white pl-4 py-1 rounded-3xl">
-                                <p>Request a demo</p>
-                                <Flex className="group-hover:bg-[#D44A00] rounded-full p-2 text-[1.5rem]">
+                        <Flex className="text-white items-start flex-col space-y-6 ">
+                            <p className="inter-semibold lg:text-[4rem] sm:text-[2.6rem] text-[1.8rem] lg:leading-[4.2rem] lg:w-[100%] w-[90%] text-left">
+                                Start met besparen<br />op je verzending
+                            </p>
+                            <p className="text-left lg:w-[90%] px-0 inter-medium lg:text-[1.15rem] text-[1.05rem]">Lagere tarieven, minder complexiteit, volledige controle.</p>
+                            <Flex className="group relative overflow-hidden border border-white text-white hover:bg-white/10 inter-medium text-[0.95rem] cursor-pointer px-5 py-2 rounded-3xl transition-all duration-300 ease-in-out items-center space-x-3">
+                                <span className="relative z-10">Start met Sendwise</span>
+                                <Flex className="relative z-10 rounded-full p-2 transition-all duration-300 ease-in-out group-hover:bg-[#D44A00] group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1">
                                     <GoArrowUpRight />
                                 </Flex>
                             </Flex>
                         </Flex>
                     </Flex>
                 </Flex>
-                <Flex className="lg:flex-row flex-col h-fit lg:w-[80%] w-[95%] lg:space-x-6 space-x-0 lg:space-y-0 space-y-6 mx-auto">
-                    <Flex className="lg:w-[50%] lg:h-[45rem]  h-[24rem] group relative">
-                        <img src="/service.jpg" alt="work" className=" object-cover w-[100%] rounded-2xl" />
-                        <Flex className="absolute z-20 top-5 left-10">
-                            <Flex className="text-white justify-between items-between lg:h-[42rem] items-start flex-col space-y-12  ">
-                                <Flex className="flex-col space-y-2">
-                                    <p className="inter-semibold text-[2rem] ">Enterprise-grade flexibility</p>
-                                    <p className=" w-[85%] inter-medium leading-[1.7rem] text-[1.2rem]">Data warehousing, ETL, automation and reporting put your customer at the new centre of gravity.</p>
-                                </Flex>
-                                <Flex className=" group-hover:backdrop-blur-md group-hover:bg-white/10 group-hover:border-transparent text-white inter-medium border border-white/30 w-[8.7rem] items-center space-x-4 cursor-pointer text-[0.9rem] hover:bg-white pl-4 py-1 rounded-3xl">
-                                    <p>Discover</p>
-                                    <Flex className="group-hover:bg-[#D44A00] rounded-full p-2 text-[1.5rem]">
-                                        <GoArrowUpRight />
-                                    </Flex>
-                                </Flex>
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                    <Flex className="lg:w-[50%] lg:h-[45rem] h-[24rem] group relative">
-                        <img src="/pc.avif" alt="work" className=" object-cover  rounded-2xl" />
-                        <Flex className="absolute z-20 top-5 left-10">
-                            <Flex className="text-white  justify-between items-between lg:h-[42rem] flex-col space-y-12  ">
-                                <Flex className="flex-col space-y-2">
-                                    <p className="inter-semibold text-[2rem] ">Consumer-ready usability</p>
-                                    <p className=" w-[85%] inter-medium leading-[1.7rem] text-[1.2rem]">An action-first interface, shortcuts and complete-sentence formulas bring Scandi simplicity to CRM.</p>
-                                </Flex>
-                                <Flex className=" group-hover:backdrop-blur-md group-hover:bg-white/10 group-hover:border-transparent text-white inter-medium border border-white/30 w-[12rem] items-center space-x-4 cursor-pointer text-[0.9rem] hover:bg-white pl-4 py-1 rounded-3xl">
-                                    <p>Request a demo</p>
-                                    <Flex className="group-hover:bg-[#D44A00] rounded-full p-2 text-[1.5rem]">
-                                        <GoArrowUpRight />
-                                    </Flex>
-                                </Flex>
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                </Flex>
-                <Flex className="lg:w-[80%] w-[95%] lg:h-[40rem] h-[25rem] mx-auto group relative">
-                    <img src="/tab.avif" alt="work" className=" object-cover w-[100%] rounded-2xl" />
-                    <Flex className="absolute z-20 justify-between flex-col items-center  lg:h-[38rem] top-0 lg:left-20 left-6">
-                        <Flex className="text-white lg:items-center flex-col space-y-1 ">
-                            <p className="inter-semibold text-[2rem] leading-[5rem] lg:text-center ">Data explorer</p>
-                            <p className="lg:text-center lg:w-[67%] mx-auto inter-medium lg:text-[1.4rem] text-[1.2rem]">Access your data like never before. Anyone can transform a no-code query into customer action in a matter of clicks.</p>
-                        </Flex>
-                        <Flex className=" group-hover:backdrop-blur-md lg:mt-0 mt-6 group-hover:bg-white/10 group-hover:border-transparent text-white inter-medium border border-white/30 w-[12rem] items-center space-x-4 cursor-pointer text-[0.9rem] hover:bg-white pl-4 py-1 rounded-3xl">
-                            <p>Request a demo</p>
-                            <Flex className="group-hover:bg-[#D44A00] rounded-full p-2 text-[1.5rem]">
-                                <GoArrowUpRight />
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                </Flex>
+                {/* Enterprise-grade flexibility + Consumer-ready usability sections removed */}
+                {/* Data explorer section removed */}
             </Flex>
         </Flex >
     );

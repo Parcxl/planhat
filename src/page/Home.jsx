@@ -4,9 +4,6 @@ import Industry from "../components/Home/Industry";
 import Journey from "../components/Home/Journey";
 import Works from "../components/Home/Works";
 import Services from "../components/Home/Services";
-import Tools from "../components/Home/Tools";
-import Company from "../components/Home/Company";
-import Banner from "../components/Home/Banner";
 
 const Home = () => {
     return (
@@ -16,9 +13,6 @@ const Home = () => {
             <Journey />
             <Works />
             <Services />
-            <Tools />
-            <Company />
-            <Banner />
         </Flex>
     );
 };

@@ -108,3 +108,76 @@
   z-index: 1;
   opacity: 0.7;
 }
+
+@keyframes lightspeed-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.lightspeed-track {
+  display: flex;
+  width: max-content;
+  animation: lightspeed-marquee 28s linear infinite;
+  will-change: transform;
+  align-items: center;
+}
+
+.lightspeed-group {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  flex: 0 0 auto;
+  padding-right: 36px;
+}
+
+.lightspeed-icon {
+  height: 132px;
+  width: 132px;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.lightspeed-icon:hover {
+  transform: perspective(1000px) rotateY(12deg) scale(1.06);
+  box-shadow: none;
+}
+
+@keyframes tooltip-in {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.tooltip-anim {
+  animation: tooltip-in 180ms ease-out;
+  will-change: transform, opacity;
+}
+
+@media (max-width: 768px) {
+  .lightspeed-track {
+    animation-duration: 45s;
+  }
+  .lightspeed-icon {
+    height: 112px;
+    width: 112px;
+  }
+}
