@@ -402,8 +402,9 @@ const Works = () => {
                     Het eerlijke <span className="text-[#1a5ee5] font-semibold">verzendmodel</span>
                 </p>
             </Flex>
+            <div className="h-6" />
 
-            <Flex className="w-[95%] lg:w-[80%] mx-auto mt-20">
+            <Flex className="w-[95%] lg:w-[80%] mx-auto mt-32">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                     <div className="relative rounded-2xl overflow-hidden p-6">
                         <div className="absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] rounded-2xl" />
@@ -440,7 +441,8 @@ const Works = () => {
                 </div>
             </Flex>
 
-            <Flex className="mt-20 w-full justify-center">
+            <div className="h-6" />
+            <Flex className="mt-32 mb-20 w-full justify-center">
                 <Flex className="group relative overflow-hidden border border-[#1a5ee5] text-[#1a5ee5] hover:bg-[#1a5ee5]/10 inter-medium text-[0.95rem] cursor-pointer px-5 py-2 rounded-3xl transition-all duration-300 ease-in-out items-center space-x-3">
                     <span className="relative z-10">Direct starten</span>
                     <Flex className="relative z-10 rounded-full p-2 transition-all duration-300 ease-in-out group-hover:bg-[#D44A00] group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1">
@@ -448,6 +450,7 @@ const Works = () => {
                     </Flex>
                 </Flex>
             </Flex>
+            <div className="h-10" />
             {/* Intuitive yet deep + testimonial swiper section removed */}
             {/* testimonial video section removed */}
         </Flex>

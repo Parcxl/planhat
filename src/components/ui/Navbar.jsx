@@ -13,7 +13,7 @@ const Navbar = () => {
     const [mobile, setMobile] = useState(false);
     const [navMenu, setNavMenu] = useState('');
     const [scrolled, setScrolled] = useState(false);
-    const NavList = ['Solutions', 'Platform', 'Explore']
+    const NavList = ['Oplossingen']
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -58,6 +58,9 @@ const Navbar = () => {
                             className="h-[1.5rem] object-contain -mt-1"
                         />
                     </Flex>
+                    <Flex className=" cursor-pointer items-center" onClick={() => handleNavigate('Home')}>
+                        <p className={`${scrolled ? 'text-black/60' : 'text-white/80'} inter-semibold`}>Home</p>
+                    </Flex>
                     {NavList?.map((item) =>
                         <Flex className=" cursor-pointer items-center" onClick={() => handleClick(item)}>
                             <p className={`${scrolled ? 'text-black/60' : 'text-white/80'} inter-semibold`}>{item} </p>
@@ -68,14 +71,14 @@ const Navbar = () => {
                             }
                         </Flex>
                     )}
-                    <Flex className=" cursor-pointer items-center" onClick={() => handleNavigate('Editorial')}>
-                        <p className={`${scrolled ? 'text-black/60' : 'text-white/80'} inter-semibold`}>Editorial</p>
+                    <Flex className=" cursor-pointer items-center" onClick={() => handleNavigate('Prijzen')}>
+                        <p className={`${scrolled ? 'text-black/60' : 'text-white/80'} inter-semibold`}>Prijzen</p>
                     </Flex>
-                    <Flex className=" cursor-pointer items-center" onClick={() => handleNavigate('Customers')}>
-                        <p className={`${scrolled ? 'text-black/60' : 'text-white/80'} inter-semibold`}>Customers</p>
+                    <Flex className=" cursor-pointer items-center" onClick={() => handleNavigate('Over Sendwise')}>
+                        <p className={`${scrolled ? 'text-black/60' : 'text-white/80'} inter-semibold`}>Over Sendwise</p>
                     </Flex>
-                    <Flex className=" cursor-pointer items-center" onClick={() => handleNavigate('Pricing')}>
-                        <p className={`${scrolled ? 'text-black/60' : 'text-white/80'} inter-semibold`}>Pricing</p>
+                    <Flex className=" cursor-pointer items-center" onClick={() => handleNavigate('Contact')}>
+                        <p className={`${scrolled ? 'text-black/60' : 'text-white/80'} inter-semibold`}>Contact</p>
                     </Flex>
                     <Flex className=" space-x-4">
                         <Flex className={`${scrolled ? 'text-black border-black/30 hover:border-transparent bg-blue-100/60' : 'text-white border-white/30 hover:border-transparent bg-white/20'} inter-bold cursor-pointer text-[0.9rem] px-4 py-2 rounded-3xl transition-all duration-500 ease-in-out`}>
@@ -87,7 +90,7 @@ const Navbar = () => {
                         </Flex>
                     </Flex>
                 </Flex>
-                {dropdown && navMenu === 'Solutions' &&
+                {dropdown && navMenu === 'Oplossingen' &&
                     <Flex className=" w-[80%] mx-auto flex-col pt-5 space-y-7">
                         <div className="h-[1px] w-[100%] bg-white/10" />
                         <Flex className="">
@@ -149,25 +152,20 @@ const Navbar = () => {
                     </Flex>
                     <Flex className="w-[100%] flex-col space-y-6 mt-12 text-gray-400">
                         <Flex className=" justify-between w-[90%] mx-auto">
-                            <p>Solutions</p>
+                            <p>Home</p>
+                        </Flex>
+                        <Flex className=" justify-between w-[90%] mx-auto">
+                            <p>Oplossingen</p>
                             <FiPlus />
                         </Flex>
                         <Flex className=" justify-between w-[90%] mx-auto">
-                            <p>Platform</p>
-                            <FiPlus />
+                            <p>Prijzen</p>
                         </Flex>
                         <Flex className=" justify-between w-[90%] mx-auto">
-                            <p>Explore</p>
-                            <FiPlus />
+                            <p>Over Sendwise</p>
                         </Flex>
                         <Flex className=" justify-between w-[90%] mx-auto">
-                            <p>Editorial</p>
-                        </Flex>
-                        <Flex className=" justify-between w-[90%] mx-auto">
-                            <p>Customers</p>
-                        </Flex>
-                        <Flex className=" justify-between w-[90%] mx-auto">
-                            <p>Pricing</p>
+                            <p>Contact</p>
                         </Flex>
                         <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[0.9rem] cursor-pointer text-white px-4 py-2 w-[90%] mx-auto rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group">
                             <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
