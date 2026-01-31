@@ -1,10 +1,12 @@
 "use client";
 import { useGSAP } from "@gsap/react";
+import { useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Flex, Image } from "antd";
 import { GoArrowUpRight } from "react-icons/go";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { motion } from "framer-motion";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
@@ -12,6 +14,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Journey() {
     const images = ["/sendwise-1.png", "/pro-1.png", "/sales.jpg"]; // sendwise, pro, connect (overlay)
+    const mobileItems = [
+        {
+            title: "Sendwise",
+            full: "Haal orders op uit tientallen integraties, maak labels aan, track zendingen en beheer alles vanuit één verzenddashboard.",
+            cta: "Bekijk platform",
+        },
+        {
+            title: "PRO",
+            full: "Pick, pack en voorraadbeheer voor fulfilmentteams. Beheer je magazijn, workflows en orders op schaal.",
+            cta: "Bekijk PRO",
+        },
+        {
+            title: "CONNECT",
+            full: "Eén verzendmethode met tientallen carriers in Europa. Eén pickup, vaste scherpe tarieven, altijd de beste vervoerder op de achtergrond.",
+            cta: "Bekijk CONNECT",
+        },
+    ];
+    const [activeMobileIndex, setActiveMobileIndex] = useState(0);
     useGSAP(() => {
         // Initial states
         gsap.set("#journey-text", { opacity: 0, x: -50, position: "absolute" });
@@ -262,7 +282,7 @@ export default function Journey() {
     });
 
     return (
-        <Flex className="flex flex-col items-center space-y-2 pt-20 lg:pb-0 md:pb-32 sm:pb-40 pb-32 lg:mb-0 md:mb-20 sm:mb-24 mb-20">
+        <Flex className="flex flex-col items-center space-y-2 pt-20 lg:pb-0 md:pb-32 sm:pb-40 pb-32 lg:mb-0 md:mb-20 sm:mb-24 mb-20 sm:mt-0 -mt-24">
             {/* Heading */}
             <Flex className="flex-col inter-semibold md:text-[5rem] sm:text-[4rem] text-[1.7rem] text-center gap-4">
                 <p className="md:leading-[5.5rem] sm:leading-[4.5rem] leading-[2rem]">Van verzending tot warehouse,</p>
@@ -394,6 +414,7 @@ export default function Journey() {
                     }}
                     modules={[Autoplay]}
                     className="w-full relative rounded-2xl  overflow-visible"
+                    onSlideChange={(swiper) => setActiveMobileIndex(swiper.realIndex ?? swiper.activeIndex)}
                 >
                     {images?.map((item, index) => (
                         <SwiperSlide key={index} className="bg-gradient-to-b from-[#9BB0D8] via-[#B8C8E8] to-[#A5A8C8] w-[100%] shadow rounded-2xl relative overflow-hidden">
@@ -412,75 +433,32 @@ export default function Journey() {
                 <Flex
                     className="flex-col w-[93%] mx-auto justify-center space-y-6 pt-6  font-semibold text-gray-900"
                 >
-                    <p className="w-[100%]  inter-bold  text-center text-[1.5rem] ">
-                        Unify your customer journey.
-                    </p>
-                    <Flex className=" bg-[#D44A00] hover:bg-[#EB5200] mx-auto inter-medium text-[0.9rem] cursor-pointer text-white px-4 py-2 rounded-3xl">
-                        <p>Direct starten</p>
-                    </Flex>
                     <Flex className="flex-col items-start space-y-7 ">
                         <Flex className=" items-center space-x-5">
                             <div className=" h-[5.9rem] w-[4px] rounded-md  overflow-hidden relative">
                                 <div className=" absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] transform origin-top" />
                             </div>
-                            <Flex className="text-content flex-col space-y-2">
-                                <p className="inter-semibold text-[1.2rem]">Sendwise</p>
+                            <motion.div
+                                key={activeMobileIndex}
+                                initial={{ opacity: 0, y: 8 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3, ease: "easeOut" }}
+                                className="text-content flex-col space-y-2"
+                            >
+                                <p className="inter-semibold text-[1.2rem]">{mobileItems[activeMobileIndex]?.title}</p>
                                 <div className="overflow-hidden">
-                                    <p className="inter-medium subtitle-short">
-                                        Haal orders op uit tientallen integraties...
-                                    </p>
-                                    <p className="inter-medium subtitle-full opacity-0 max-h-0">
-                                        Haal orders op uit tientallen integraties, maak labels aan, track zendingen en beheer alles vanuit één verzenddashboard.
+                                    <p className="inter-medium">
+                                        {mobileItems[activeMobileIndex]?.full}
                                     </p>
                                 </div>
                                 <Flex className="text-hidden items-center space-x-1">
-                                    <p className="inter-medium text-appear bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">Bekijk platform</p>
+                                    <p className="inter-medium text-appear bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">
+                                        {mobileItems[activeMobileIndex]?.cta}
+                                    </p>
                                     <GoArrowUpRight className="text-[#1a5ee5]" />
                                 </Flex>
-                            </Flex>
+                            </motion.div>
                         </Flex>
-                        <Flex className=" items-center space-x-5">
-                            <div className=" h-[5.9rem] w-[4px] rounded-md  overflow-hidden relative">
-                                <div className=" absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] transform origin-top" />
-                            </div>
-                            <Flex className=" flex-col space-y-2">
-                                <p className="inter-semibold text-[1.2rem]">PRO</p>
-                                <div className="overflow-hidden">
-                                    <p className="inter-medium subtitle-short">
-                                        Pick, pack en voorraadbeheer voor fulfil...
-                                    </p>
-                                    <p className="inter-medium subtitle-full opacity-0 max-h-0">
-                                        Pick, pack en voorraadbeheer voor fulfilmentteams. Beheer je magazijn, workflows en orders op schaal.
-                                    </p>
-                                </div>
-                                <Flex className="text-hidden items-center space-x-1">
-                                    <p className="inter-medium text-appear bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">Bekijk PRO</p>
-                                    <GoArrowUpRight className="text-[#1a5ee5]" />
-                                </Flex>
-                            </Flex>
-                        </Flex>
-
-                        <Flex className=" items-center space-x-5">
-                            <div className=" h-[5.9rem] w-[4px] rounded-md overflow-hidden relative">
-                                <div className=" absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] transform origin-top" />
-                            </div>
-                            <Flex className="text-content flex-col space-y-2">
-                                <p className="inter-semibold text-[1.2rem]">CONNECT</p>
-                                <div className="overflow-hidden">
-                                    <p className="inter-medium subtitle-short">
-                                        Eén verzendmethode met tientallen carri...
-                                    </p>
-                                    <p className="inter-medium subtitle-full opacity-0 max-h-0">
-                                        Eén verzendmethode met tientallen carriers in Europa. Eén pickup, vaste scherpe tarieven, altijd de beste vervoerder op de achtergrond.
-                                    </p>
-                                </div>
-                                <Flex className="text-hidden items-center space-x-1">
-                                    <p className="inter-medium text-appear bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">Bekijk CONNECT</p>
-                                    <GoArrowUpRight className="text-[#1a5ee5]" />
-                                </Flex>
-                            </Flex>
-                        </Flex>
-
                     </Flex>
                 </Flex>
             </Flex>

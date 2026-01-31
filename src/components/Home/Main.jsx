@@ -61,9 +61,9 @@ const Main = () => {
     return (
         <Flex >
             <Flex id="video-frame" className="w-[100%] mask-clip-path">
-                <img id="hero-img" src="/sendwise-hero-picture.png" alt="main" className="absolute h-screen w-[100%] object-cover" />
-                <div id="hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-screen " />
-                <Flex className="z-30 sm:ml-[10%] ml-[2%] justify-evenly w-[100%] h-screen pt-24 pb-16 flex-col">
+                <img id="hero-img" src="/sendwise-hero-picture.png" alt="main" className="absolute h-[120vh] sm:h-screen w-[100%] object-cover object-right sm:object-center" />
+                <div id="hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-[120vh] sm:h-screen " />
+                <Flex className="z-30 sm:ml-[10%] ml-[4%] justify-evenly w-[100%] h-[120vh] sm:h-screen sm:pt-24 pt-16 sm:pb-16 pb-10 flex-col">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -83,7 +83,7 @@ const Main = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, ease: "easeOut", delay: 0.7 }}
-                        className=" w-full -mt-6"
+                        className=" w-full sm:-mt-6 -mt-2"
                     >
                         <Flex className="flex-col pl-1 inter-semibold md:leading-[4rem] leading-[2rem] text-white w-fit">
                             <p className="md:text-[4rem] sm:text-[2.5rem] text-[1.75rem]">Het platform voor<br />schaalbaar verzenden</p>
@@ -93,7 +93,7 @@ const Main = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1.4, y: 0 }}
                         transition={{ duration: 1, ease: "easeOut", delay: 1.4 }}
-                        className=" w-full -mt-8"
+                        className=" w-full sm:-mt-8 -mt-3"
                     >
                         <p className="text-white font-light md:text-[1.3rem]">
                             <strong className="font-bold">Verzenden is onnodig complex geworden.</strong> Sendwise<br />
@@ -105,7 +105,7 @@ const Main = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.8, ease: "easeOut", delay: 1.8 }}
-                        className=" w-full -mt-6"
+                        className=" w-full sm:-mt-6 -mt-2"
                     >
                         <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[0.95rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group">
                             <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>

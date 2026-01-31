@@ -172,6 +172,32 @@
   will-change: transform, opacity;
 }
 
+@keyframes industry-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.industry-marquee {
+  display: flex;
+  width: max-content;
+  gap: 24px;
+  align-items: center;
+  animation: industry-marquee 22s linear infinite;
+  will-change: transform;
+  padding-left: 12px;
+}
+
+.industry-logo {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(0%);
+}
+
 @media (max-width: 768px) {
   .lightspeed-track {
     animation-duration: 45s;

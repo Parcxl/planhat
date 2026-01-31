@@ -127,13 +127,13 @@ const Works = () => {
     };
 
     return (
-        <Flex className=" w-[100%] space-y-6 mb-32 mx-auto flex-col lg:pt-24 md:pt-40 sm:pt-48 pt-40">
+        <Flex className=" w-[100%] space-y-6 mb-32 mx-auto flex-col lg:pt-24 md:pt-40 sm:pt-48 pt-0">
             {/* Duplicated carts side by side */}
             <Flex className="lg:flex-row flex-col lg:space-x-6 lg:space-y-0 space-y-6 lg:w-[80%] w-[95%] mx-auto">
-                <Flex className="lg:w-[50%] w-[100%] lg:h-[24rem] sm:h-[16rem] h-[14rem] group relative rounded-2xl overflow-hidden">
+                <Flex className="lg:w-[50%] w-[100%] lg:h-[24rem] sm:h-[16rem] h-[16rem] group relative rounded-2xl overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] rounded-2xl" />
                     <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, mixBlendMode: 'overlay' }} />
-                    <Flex className="relative z-20 w-full h-full p-8 lg:pl-12 sm:pl-8 pl-6">
+                    <Flex className="relative z-20 w-full h-full p-6 sm:p-8 pt-10 pb-10 lg:pl-12 sm:pl-8">
                         <Flex className="text-white w-[100%] items-start flex-col space-y-6 justify-center h-full">
                             <p className="inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.5rem] text-left">Voor webshops</p>
                             <p className="text-left md:w-[90%] w-[100%] inter-medium lg:text-[1.2rem] text-[1rem]">Schaal je verzending met vaste tarieven, multi-carrier shipping en branded tracking — zonder contracten of complexiteit.</p>
@@ -146,10 +146,10 @@ const Works = () => {
                         </Flex>
                     </Flex>
                 </Flex>
-                <Flex className="lg:w-[50%] w-[100%] lg:h-[24rem] sm:h-[16rem] h-[14rem] group relative rounded-2xl overflow-hidden">
+                <Flex className="lg:w-[50%] w-[100%] lg:h-[24rem] sm:h-[16rem] h-[16rem] group relative rounded-2xl overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] rounded-2xl" />
                     <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, mixBlendMode: 'overlay' }} />
-                    <Flex className="relative z-20 w-full h-full p-8 lg:pl-12 sm:pl-8 pl-6">
+                    <Flex className="relative z-20 w-full h-full p-6 sm:p-8 pt-10 pb-10 lg:pl-12 sm:pl-8">
                         <Flex className="text-white w-[100%] items-start flex-col space-y-6 justify-center h-full">
                             <p className="inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.5rem] text-left">Voor fulfilmentcenters</p>
                             <p className="text-left md:w-[90%] w-[100%] inter-medium lg:text-[1.2rem] text-[1rem]">Verzend goedkoper op schaal met tientallen carriers via één pickup — zonder contracten, zonder complexiteit.</p>
@@ -345,7 +345,7 @@ const Works = () => {
             </section>
             
             {/* Original cart */}
-            <Flex ref={proSectionRef} className="lg:w-[80%] w-[95%] lg:h-[36rem] sm:h-[23.5rem] h-[20rem] mx-auto mb-16 sm:mb-20 group relative rounded-2xl overflow-hidden">
+            <Flex ref={proSectionRef} className="lg:w-[80%] w-[95%] lg:h-[36rem] sm:h-[23.5rem] h-[22rem] mx-auto mb-16 sm:mb-20 group relative rounded-2xl overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] rounded-2xl z-0" />
                 <div className="absolute inset-0 opacity-40 z-0" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, mixBlendMode: 'overlay' }} />
                 <div className="hidden md:block absolute right-[-14%] bottom-[-10%] z-10 pointer-events-none opacity-85" style={{ perspective: "1400px" }}>
@@ -378,15 +378,40 @@ const Works = () => {
                         </div>
                     </motion.div>
                 </div>
-                <Flex className="absolute z-20 top-0 w-[90%] lg:left-20">
-                    <Flex className="text-white w-[100%] justify-center pt-6 lg:pl-0 sm:pl-7 pl-0 lg:items-center sm:items-start items-center flex-col  ">
+                {/* Mobile racks */}
+                <div className="md:hidden absolute right-[-18%] bottom-[-12%] z-10 pointer-events-none opacity-70" style={{ perspective: "1400px" }}>
+                    <motion.div style={{ x: rightRackX, transformStyle: "preserve-3d", transformOrigin: "center" }} className="will-change-transform">
+                        <div style={{ transform: "translateY(-2%) scaleX(-1)", backfaceVisibility: "hidden" }}>
+                            <PalletRackShowcase
+                                width={4.6}
+                                columns={4}
+                                rackRotateY={rightRackAngle}
+                                className="w-[300px] h-[260px]"
+                            />
+                        </div>
+                    </motion.div>
+                </div>
+                <div className="md:hidden absolute left-[-18%] bottom-[-12%] z-10 pointer-events-none opacity-70" style={{ perspective: "1400px" }}>
+                    <motion.div style={{ x: leftRackX, transformStyle: "preserve-3d", transformOrigin: "center" }} className="will-change-transform">
+                        <div style={{ transform: "translateY(-2%)", backfaceVisibility: "hidden" }}>
+                            <PalletRackShowcase
+                                width={4.6}
+                                columns={4}
+                                rackRotateY={leftRackAngle}
+                                className="w-[300px] h-[260px]"
+                            />
+                        </div>
+                    </motion.div>
+                </div>
+                <Flex className="absolute z-20 top-0 w-[90%] left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 lg:left-20">
+                    <Flex className="text-white w-[100%] justify-center pt-4 lg:pl-0 sm:pl-7 pl-0 lg:items-center sm:items-start items-center flex-col  ">
                         <p className="inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.5rem]  lg:text-center sm:text-start text-center">
                             Sendwise <span className="font-bold italic lg:text-[2.6rem] sm:text-[2.2rem] text-[1.9rem] align-baseline">PRO</span>
                         </p>
                         <p className="lg:text-center sm:text-start text-center md:w-[67%] lg:mx-auto md:mx-0 mx-auto inter-medium lg:pt-0  pt-5 lg:pl-0 pl-2  lg:text-[1.2rem]">
                             Ontwerp je magazijn, optimaliseer pickroutes en schaal fulfilment zonder complexiteit.
                         </p>
-                        <Flex className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 w-[15rem] items-center space-x-4 cursor-pointer text-[0.9rem] hover:bg-white mt-10 pl-4 py-1 rounded-3xl">
+                        <Flex className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 w-[13rem] items-center space-x-4 cursor-pointer text-[0.9rem] hover:bg-white mt-10 pl-4 py-1 rounded-3xl">
                             <p className="whitespace-nowrap">Start met Sendwise</p>
                             <Flex className="group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-full p-2 text-[1.5rem]">
                                 <GoArrowUpRight />
