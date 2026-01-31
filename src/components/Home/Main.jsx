@@ -61,9 +61,9 @@ const Main = () => {
     return (
         <Flex >
             <Flex id="video-frame" className="w-[100%] mask-clip-path">
-                <img id="hero-img" src="/sendwise-hero-picture.png" alt="main" className="absolute h-[120vh] sm:h-screen w-[100%] object-cover object-right sm:object-center" />
-                <div id="hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-[120vh] sm:h-screen " />
-                <Flex className="z-30 sm:ml-[10%] ml-[4%] justify-evenly w-[100%] h-[120vh] sm:h-screen sm:pt-24 pt-16 sm:pb-16 pb-10 flex-col">
+                <img id="hero-img" src="/sendwise-hero-picture.png" alt="main" className="absolute h-screen sm:h-screen w-[100%] object-cover object-right sm:object-center" />
+                <div id="hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-screen sm:h-screen " />
+                <Flex className="z-30 sm:ml-[10%] ml-[4%] justify-start sm:justify-evenly w-[100%] h-screen sm:h-screen sm:pt-24 pt-44 sm:pb-16 pb-16 flex-col space-y-12 sm:space-y-0">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -83,19 +83,19 @@ const Main = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, ease: "easeOut", delay: 0.7 }}
-                        className=" w-full sm:-mt-6 -mt-2"
+                        className=" w-full sm:-mt-6 mt-4"
                     >
-                        <Flex className="flex-col pl-1 inter-semibold md:leading-[4rem] leading-[2rem] text-white w-fit">
-                            <p className="md:text-[4rem] sm:text-[2.5rem] text-[1.75rem]">Het platform voor<br />schaalbaar verzenden</p>
+                        <Flex className="flex-col pl-1 inter-semibold md:leading-[4rem] leading-[3.2rem] text-white w-fit">
+                            <p className="md:text-[4rem] sm:text-[2.5rem] text-[3rem]">Het platform voor<br />schaalbaar verzenden</p>
                         </Flex>
                     </motion.div>
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1.4, y: 0 }}
                         transition={{ duration: 1, ease: "easeOut", delay: 1.4 }}
-                        className=" w-full sm:-mt-8 -mt-3"
+                        className=" w-full sm:-mt-8 mt-4"
                     >
-                        <p className="text-white font-light md:text-[1.3rem]">
+                        <p className="text-white font-light text-[1.35rem] sm:text-[1.1rem] md:text-[1.3rem]">
                             <strong className="font-bold">Verzenden is onnodig complex geworden.</strong> Sendwise<br />
                             maakt het weer eenvoudig. Eén vaste methode, één<br />
                             prijs en altijd dezelfde betrouwbare levering.
@@ -105,9 +105,9 @@ const Main = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.8, ease: "easeOut", delay: 1.8 }}
-                        className=" w-full sm:-mt-6 -mt-2"
+                        className=" w-full sm:-mt-6 mt-4"
                     >
-                        <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[0.95rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group">
+                        <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group">
                             <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
                             <p className="relative z-10">Account aanmaken</p>
                         </Flex>

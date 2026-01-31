@@ -129,7 +129,7 @@ const Works = () => {
     return (
         <Flex className=" w-[100%] space-y-6 mb-32 mx-auto flex-col lg:pt-24 md:pt-40 sm:pt-48 pt-0">
             {/* Duplicated carts side by side */}
-            <Flex className="lg:flex-row flex-col lg:space-x-6 lg:space-y-0 space-y-6 lg:w-[80%] w-[95%] mx-auto">
+            <Flex className="lg:flex-row flex-col lg:space-x-6 lg:space-y-0 space-y-6 lg:w-[80%] w-[95%] mx-auto -mt-6 sm:mt-0">
                 <Flex className="lg:w-[50%] w-[100%] lg:h-[24rem] sm:h-[16rem] h-[16rem] group relative rounded-2xl overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] rounded-2xl" />
                     <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, mixBlendMode: 'overlay' }} />
@@ -422,14 +422,14 @@ const Works = () => {
             </Flex>
 
             {/* Het eerlijke verzendmodel section */}
-            <Flex className="flex-col items-center text-center w-[95%] lg:w-[80%] mx-auto mt-40 sm:mt-48 pt-10 sm:pt-14">
+            <Flex className="flex-col items-center text-center w-[95%] lg:w-[80%] mx-auto mt-40 sm:mt-48 pt-8 sm:pt-14 mb-2 sm:mb-0">
                 <p className="inter-semibold lg:text-[3rem] md:text-[2.6rem] sm:text-[2.2rem] text-[2rem] text-gray-900">
                     Het eerlijke <span className="text-[#1a5ee5] font-semibold">verzendmodel</span>
                 </p>
             </Flex>
-            <div className="h-6" />
+            <div className="h-0 sm:h-6 hidden sm:block" />
 
-            <Flex className="w-[95%] lg:w-[80%] mx-auto mt-32">
+            <Flex className="w-[95%] lg:w-[80%] mx-auto mt-1 sm:mt-32">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                     <div className="relative rounded-2xl overflow-hidden p-6">
                         <div className="absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] rounded-2xl" />
@@ -466,8 +466,8 @@ const Works = () => {
                 </div>
             </Flex>
 
-            <div className="h-6" />
-            <Flex className="mt-32 mb-20 w-full justify-center">
+            <div className="h-0 sm:h-6 hidden sm:block" />
+            <Flex className="mt-3 sm:mt-32 mb-4 sm:mb-20 w-full justify-center">
                 <Flex className="group relative overflow-hidden border border-[#1a5ee5] text-[#1a5ee5] hover:bg-[#1a5ee5]/10 inter-medium text-[0.95rem] cursor-pointer px-5 py-2 rounded-3xl transition-all duration-300 ease-in-out items-center space-x-3">
                     <span className="relative z-10">Direct starten</span>
                     <Flex className="relative z-10 rounded-full p-2 transition-all duration-300 ease-in-out group-hover:bg-[#D44A00] group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1">
@@ -475,7 +475,7 @@ const Works = () => {
                     </Flex>
                 </Flex>
             </Flex>
-            <div className="h-10" />
+            <div className="h-2 sm:h-10" />
             {/* Intuitive yet deep + testimonial swiper section removed */}
             {/* testimonial video section removed */}
         </Flex>

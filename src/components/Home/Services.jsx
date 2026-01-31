@@ -61,7 +61,7 @@ const Services = () => {
     return (
         <Flex className="flex-col spacey-5 w-[100%]">
             {/* Home to every customer section removed */}
-            <Flex className="w-[100%] space-y-6 lg:pt-0 sm:pt-[12rem] pt-0 mx-auto flex-col  pt-10">
+            <Flex className="w-[100%] space-y-6 lg:pt-0 sm:pt-[12rem] pt-2 mx-auto flex-col">
                 <Flex className="lg:w-[80%] w-[95%] h-[20rem] sm:h-[31rem] mx-auto group relative">
                     <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
                     <img src="/sendwise-2.png" alt="Sendwise" className=" object-cover w-[100%] h-full rounded-2xl" />

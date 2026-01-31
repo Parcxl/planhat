@@ -140,14 +140,14 @@ const Navbar = () => {
                     </Flex>
                 }
             </Flex>
-            <Flex className="flex md:hidden justify-between bg-[#D6D7D5] h-[3rem] p-2 w-[100%] items-center">
-                <img src="/logo.svg" alt="logo" className="h-[1.8rem]" />
-                <IoMenuOutline onClick={() => setMobile(!mobile)} className="cursor-pointer text-[1.6rem]" />
+            <Flex className={`flex md:hidden justify-between h-[3rem] p-2 w-[100%] items-center transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md' : 'bg-transparent'}`}>
+                <img src={scrolled ? "/sendwise-tekst-blauw.png" : "/sendwise-tekst.png"} alt="Sendwise" className="h-[1.4rem] ml-2 mt-1" />
+                <IoMenuOutline onClick={() => setMobile(!mobile)} className={`cursor-pointer text-[1.6rem] ${scrolled ? 'text-black' : 'text-white'}`} />
             </Flex>
             {mobile &&
                 <Flex className="flex-col absolute w-[100%] h-[43rem] top-0 bg-black">
                     <Flex className="justify-between w-[90%] mx-auto  pt-6">
-                        <img src="/logo.svg" alt="logo" className="h-[1.2rem] invert" />
+                        <img src="/sendwise-tekst.png" alt="Sendwise" className="h-[1.2rem]" />
                         <AiOutlineMinus onClick={() => setMobile(!mobile)}  className="cursor-pointer text-white text-[1.5rem]" />
                     </Flex>
                     <Flex className="w-[100%] flex-col space-y-6 mt-12 text-gray-400">
