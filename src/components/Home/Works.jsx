@@ -129,7 +129,7 @@ const Works = () => {
     return (
         <Flex className=" w-[100%] space-y-6 mb-32 mx-auto flex-col lg:pt-24 md:pt-40 sm:pt-48 pt-0">
             {/* Duplicated carts side by side */}
-            <Flex className="lg:flex-row flex-col lg:space-x-6 lg:space-y-0 space-y-6 lg:w-[80%] w-[95%] mx-auto -mt-6 sm:mt-0">
+            <Flex className="lg:flex-row flex-col lg:space-x-6 lg:space-y-0 space-y-6 lg:w-[80%] w-[95%] mx-auto -mt-10 sm:mt-0">
                 <Flex className="lg:w-[50%] w-[100%] lg:h-[24rem] sm:h-[16rem] h-[16rem] group relative rounded-2xl overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] rounded-2xl" />
                     <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, mixBlendMode: 'overlay' }} />
