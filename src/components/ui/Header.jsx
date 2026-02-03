@@ -7,10 +7,12 @@ import Cookie from "./Cookie";
 const Header = () => {
     return (
         <Flex className="flex-col">
-            <Cookie/>
             <Navbar />
-            <Outlet />
-            <Footer />
+            <div id="site-content">
+                <Cookie />
+                <Outlet />
+                <Footer />
+            </div>
         </Flex>
     );
 };

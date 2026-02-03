@@ -43,6 +43,100 @@
 
 }
 
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+@keyframes vertical-marquee {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes horizontal-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.vertical-marquee {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.vertical-marquee-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  animation: vertical-marquee 18s linear infinite;
+  will-change: transform;
+}
+
+.vertical-marquee-track--slow {
+  animation-duration: 18s;
+}
+
+.vertical-marquee-track--fast {
+  animation-duration: 18s;
+}
+
+.vertical-marquee-track--down {
+  animation-direction: reverse;
+}
+
+.integration-logo {
+  height: 102px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.95;
+}
+
+@media (min-width: 640px) {
+  .integration-logo {
+    height: 128px;
+  }
+}
+
+.integration-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .vertical-marquee {
+    height: 100%;
+    width: 100%;
+  }
+
+  .vertical-marquee-track {
+    flex-direction: row;
+    width: max-content;
+    animation-name: horizontal-marquee;
+    gap: 16px;
+    right: auto;
+  }
+
+  .integration-logo-item {
+    width: auto;
+    padding: 0 6px;
+  }
+}
+
 
 .autoplay-progress {
   position: absolute;
@@ -154,6 +248,18 @@
 .lightspeed-icon:hover {
   transform: perspective(1000px) rotateY(12deg) scale(1.06);
   box-shadow: none;
+}
+
+#site-content {
+  transition: filter 0.35s ease;
+}
+
+#site-content.menu-blur {
+  filter: blur(18px);
+}
+
+body.menu-open {
+  overflow: hidden;
 }
 
 @keyframes tooltip-in {

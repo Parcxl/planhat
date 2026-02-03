@@ -64,13 +64,18 @@ const Services = () => {
             <Flex className="w-[100%] space-y-6 lg:pt-0 sm:pt-[12rem] pt-2 mx-auto flex-col">
                 <Flex className="lg:w-[80%] w-[95%] h-[20rem] sm:h-[31rem] mx-auto group relative">
                     <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
+                    <div className="absolute z-10 inset-0 rounded-2xl bg-black/40 sm:bg-transparent" />
                     <img src="/sendwise-2.png" alt="Sendwise" className=" object-cover w-[100%] h-full rounded-2xl" />
-                    <Flex className="absolute z-20 lg:top-20 top-6 lg:left-20 left-4">
-                        <Flex className="text-white items-start flex-col space-y-6 ">
-                            <p className="inter-semibold lg:text-[4rem] sm:text-[2.6rem] text-[1.8rem] lg:leading-[4.2rem] lg:w-[100%] w-[90%] text-left">
+                    <Flex className="absolute z-20 inset-0 w-full h-full">
+                        <Flex className="text-white items-start flex-col space-y-6 w-full h-full justify-center px-4 sm:px-0 lg:pl-20">
+                            <p className="inter-semibold lg:text-[4rem] sm:text-[2.6rem] text-[1.8rem] lg:leading-[4.2rem] lg:w-[100%] w-full text-left">
                                 Start met besparen<br />op je verzending
                             </p>
-                            <p className="text-left lg:w-[90%] px-0 inter-medium lg:text-[1.15rem] text-[1.05rem]">Lagere tarieven, minder complexiteit, volledige controle.</p>
+                            <p className="text-left lg:w-[90%] px-0 inter-medium lg:text-[1.15rem] text-[1.05rem] w-full">
+                                Lagere tarieven, minder complexiteit,
+                                <br className="sm:hidden" />
+                                volledige controle.
+                            </p>
                             <Flex className="group relative overflow-hidden border border-white text-white hover:bg-white/10 inter-medium text-[0.95rem] cursor-pointer px-5 py-2 rounded-3xl transition-all duration-300 ease-in-out items-center space-x-3">
                                 <span className="relative z-10">Start met Sendwise</span>
                                 <Flex className="relative z-10 rounded-full p-2 transition-all duration-300 ease-in-out group-hover:bg-[#D44A00] group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1">
