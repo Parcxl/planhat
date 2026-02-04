@@ -9,6 +9,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiCheck } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -131,13 +132,19 @@ const SendwisePlatform = () => {
                                     Alles wat je nodig hebt om zendingen te verwerken, volgen en beheren — in één overzichtelijk dashboard.
                                 </p>
                                 <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-6 sm:space-y-0">
-                                    <div className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group">
-                                        <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                        <p className="relative z-10">Start met Sendwise</p>
-                                    </div>
-                                    <div className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl w-fit">
-                                        <span>Plan een kennismaking</span>
-                                    </div>
+                                    <Link
+                                        to="/start-met-sendwise"
+                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white hover:text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group inline-flex items-center isolate"
+                                    >
+                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                                        <span className="relative z-10 text-white group-hover:text-white">Start met Sendwise</span>
+                                    </Link>
+                                    <Link
+                                        to="/contact"
+                                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white hover:text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl w-fit flex isolate"
+                                    >
+                                        <span className="relative z-10 text-white group-hover:text-white">Plan een kennismaking</span>
+                                    </Link>
                                 </div>
                             </div>
                         </Flex>
@@ -420,13 +427,19 @@ const SendwisePlatform = () => {
                                     Verwerk zendingen sneller, houd overzicht en bespaar op verzendkosten met Sendwise.
                                 </p>
                                 <Flex className="flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
-                                    <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group">
-                                        <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                        <p className="relative z-10">Start met Sendwise</p>
-                                    </Flex>
-                                    <Flex className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl">
+                                    <Link
+                                        to="/start-met-sendwise"
+                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group inline-flex items-center"
+                                    >
+                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                                        <span className="relative z-10">Start met Sendwise</span>
+                                    </Link>
+                                    <Link
+                                        to="/contact"
+                                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl flex"
+                                    >
                                         <span>Plan een kennismaking</span>
-                                    </Flex>
+                                    </Link>
                                 </Flex>
                             </Flex>
                         </Flex>

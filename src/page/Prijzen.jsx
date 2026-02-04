@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { IoIosArrowDown, IoIosInformationCircleOutline } from "react-icons/io";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -376,7 +377,7 @@ const Prijzen = () => {
                     <Flex id="pricing-hero-frame" className="w-[100%] mask-clip-path">
                         <img
                             id="pricing-hero-img"
-                            src="/sendwise-prijzen.png"
+                            src="/EB911CA2-5E9A-4217-964C-70DA1B3436B5.png"
                             alt="Sendwise"
                             className="absolute h-screen sm:h-screen w-[100%] object-cover object-right sm:object-center"
                         />
@@ -400,7 +401,7 @@ const Prijzen = () => {
                                         onClick={handleScrollToCalculator}
                                         className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group"
                                     >
-                                        <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
                                         <p className="relative z-10">Bereken je tarief</p>
                                     </button>
                                     <div className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl w-fit">
@@ -645,13 +646,19 @@ const Prijzen = () => {
                                         )}
                                     </div>
                                     <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
-                                        <div className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[0.95rem] cursor-pointer text-white px-6 py-2 rounded-3xl transition-all duration-300 ease-out shadow-lg hover:shadow-xl hover:-translate-y-0.5 w-fit relative overflow-hidden group">
-                                            <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                            <p className="relative z-10">Plan een kennismaking</p>
-                                        </div>
-                                        <button className="text-[#1a5ee5] inter-medium text-[0.95rem] transition-all duration-300 ease-out hover:text-[#0f3d9e] hover:translate-x-0.5">
+                                        <Link
+                                            to="/contact"
+                                            className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[0.95rem] cursor-pointer text-white hover:text-white px-6 py-2 rounded-3xl transition-all duration-300 ease-out shadow-lg hover:shadow-xl hover:-translate-y-0.5 w-fit relative overflow-hidden group inline-flex items-center isolate"
+                                        >
+                                            <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                                            <span className="relative z-10 text-white group-hover:text-white">Plan een kennismaking</span>
+                                        </Link>
+                                        <Link
+                                            to="/start-met-sendwise"
+                                            className="text-[#1a5ee5] inter-medium text-[0.95rem] transition-all duration-300 ease-out hover:text-[#0f3d9e] hover:translate-x-0.5"
+                                        >
                                             Start met Sendwise
-                                        </button>
+                                        </Link>
                                     </div>
                                 </motion.div>
                             </div>
@@ -665,7 +672,7 @@ const Prijzen = () => {
                     <Flex className="relative w-full h-[22rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
                         <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
                         <div className="absolute z-10 inset-0 rounded-2xl bg-black/55 sm:bg-black/35" />
-                        <img src="/team-foto-sendwise.webp" alt="Sendwise team" className="object-cover w-[100%] h-full rounded-2xl" />
+                        <img src="/sendwise-2.png" alt="Sendwise" className="object-cover w-[100%] h-full rounded-2xl" />
                         <Flex className="absolute z-20 inset-0 w-full h-full">
                             <Flex className="text-white items-start flex-col space-y-6 w-full h-full justify-center px-6 sm:px-10 lg:pl-20">
                                 <p className="inter-semibold lg:text-[3rem] sm:text-[2.4rem] text-[1.9rem] lg:leading-[3.4rem]">
@@ -675,13 +682,19 @@ const Prijzen = () => {
                                     Scherpe all-in tarieven, zonder contracten of vaste kosten. Ons team denkt graag met je mee.
                                 </p>
                                 <Flex className="flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
-                                    <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group">
-                                        <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                        <p className="relative z-10">Plan een kennismaking</p>
-                                    </Flex>
-                                    <Flex className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl">
-                                        <span>Start met Sendwise</span>
-                                    </Flex>
+                                    <Link
+                                        to="/contact"
+                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group inline-flex items-center"
+                                    >
+                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                                        <span className="relative z-10">Plan een kennismaking</span>
+                                    </Link>
+                                    <Link
+                                        to="/start-met-sendwise"
+                                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white hover:text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl flex isolate"
+                                    >
+                                        <span className="relative z-10 text-white group-hover:text-white">Start met Sendwise</span>
+                                    </Link>
                                 </Flex>
                                 <p className="text-white/70 inter-medium text-[0.85rem]">
                                     Geen contracten · Geen maandelijkse kosten · Eerlijke indexeringen

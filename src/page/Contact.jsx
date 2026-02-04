@@ -1,5 +1,6 @@
 import { Flex } from "antd";
 import { FiMail, FiMapPin } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -79,15 +80,7 @@ const Contact = () => {
                                 <p className="text-white font-light text-[1.25rem] sm:text-[1.1rem] md:text-[1.3rem] max-w-[42rem] leading-[1.4] text-left">
                                     Ontdek hoeveel tijd en geld je kunt besparen op iedere verzending. We denken graag mee over jouw verzendproces.
                                 </p>
-                                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-6 sm:space-y-0">
-                                    <div className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group">
-                                        <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                        <p className="relative z-10">Plan een kennismaking</p>
-                                    </div>
-                                    <div className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl w-fit">
-                                        <span>Start met Sendwise</span>
-                                    </div>
-                                </div>
+                                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-6 sm:space-y-0" />
                             </div>
                         </Flex>
                     </Flex>
@@ -172,23 +165,23 @@ const Contact = () => {
                     <Flex className="relative w-full h-[22rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
                         <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
                         <div className="absolute z-10 inset-0 rounded-2xl bg-black/55 sm:bg-black/35" />
-                        <img src="/team-foto-sendwise.webp" alt="Sendwise team" className="object-cover w-[100%] h-full rounded-2xl" />
+                        <img src="/sendwise-2.png" alt="Sendwise" className="object-cover w-[100%] h-full rounded-2xl" />
                         <Flex className="absolute z-20 inset-0 w-full h-full">
                             <Flex className="text-white items-start flex-col space-y-6 w-full h-full justify-center px-6 sm:px-10 lg:pl-20">
                                 <p className="inter-semibold lg:text-[3rem] sm:text-[2.4rem] text-[1.9rem] lg:leading-[3.4rem]">
                                     Direct aan de slag met Sendwise?
                                 </p>
                                 <p className="inter-medium lg:text-[1.15rem] text-[1.05rem] lg:w-[80%]">
-                                    Maak een account aan of plan een kennismaking om te kijken hoe Sendwise past bij jouw volumes en processen.
+                                    Maak een account om te kijken hoe Sendwise past bij jouw volumes en processen.
                                 </p>
-                                <Flex className="flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
-                                    <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group">
-                                        <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                        <p className="relative z-10">Start met Sendwise</p>
-                                    </Flex>
-                                    <Flex className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl">
-                                        <span>Plan een kennismaking</span>
-                                    </Flex>
+                                <Flex className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
+                                    <Link
+                                        to="/start-met-sendwise"
+                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group inline-flex items-center"
+                                    >
+                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                                        <span className="relative z-10">Start met Sendwise</span>
+                                    </Link>
                                 </Flex>
                                 <p className="text-white/70 inter-medium text-[0.85rem]">
                                     Geen contracten · Geen maandelijkse kosten · Eerlijke indexeringen

@@ -64,6 +64,11 @@ const Navbar = () => {
             Sendwise: "/oplossingen/sendwise",
             PRO: "/oplossingen/pro",
             CONNECT: "/oplossingen/connect",
+            WooCommerce: "/integraties/woocommerce",
+            "CCV Shop": "/integraties/ccv-shop",
+            "Voor webshops": "/voor-webshops",
+            "Voor fulfilmentcenters": "/voor-fulfilmentcenters",
+            "Account aanvragen": "/start-met-sendwise",
         };
         navigate(routes[item] || "/");
         setMobile(false);
@@ -80,15 +85,20 @@ const Navbar = () => {
         if (item === "Sendwise") return location.pathname === "/oplossingen/sendwise";
         if (item === "PRO") return location.pathname === "/oplossingen/pro";
         if (item === "CONNECT") return location.pathname === "/oplossingen/connect";
-        if (item === "Oplossingen") return location.pathname.startsWith("/oplossingen");
+        if (item === "WooCommerce") return location.pathname === "/integraties/woocommerce";
+        if (item === "CCV Shop") return location.pathname === "/integraties/ccv-shop";
+        if (item === "Voor webshops") return location.pathname === "/voor-webshops";
+        if (item === "Voor fulfilmentcenters") return location.pathname === "/voor-fulfilmentcenters";
+        if (item === "Account aanvragen") return location.pathname === "/start-met-sendwise";
+        if (item === "Oplossingen") return location.pathname.startsWith("/oplossingen") || location.pathname === "/voor-webshops" || location.pathname === "/voor-fulfilmentcenters";
         return false;
     };
 
     const getNavTextClass = (active) => {
         if (scrolled) {
-            return `${active ? "text-black inter-semibold" : "text-black/60 inter-medium"}`;
+            return `${active ? "text-black inter-semibold" : "text-black/80 inter-semibold"}`;
         }
-        return `${active ? "text-white inter-semibold" : "text-white/80 inter-medium"}`;
+        return `${active ? "text-white inter-semibold" : "text-white/80 inter-semibold"}`;
     };
 
     const getDropdownItemClass = (active) => {
@@ -103,9 +113,9 @@ const Navbar = () => {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0 }}
             className="fixed z-40 w-full"
         >
-            <Flex className={`md:flex hidden w-full transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md ' : 'bg-transparent'} ${dropdown && scrolled && 'flex-col h-screen pt-4 backdrop-blur-lg bg-gradient-to-l from-transparent to-white/80'} ${dropdown ? 'flex-col h-screen pt-4 backdrop-blur-lg bg-gradient-to-l from-transparent to-[#030302]/80' : 'py-4'}`}>
+            <Flex className={`md:flex hidden w-full transition-all duration-300 ${scrolled ? 'bg-white shadow-[0_16px_40px_rgba(15,23,42,0.16)] border-b border-black/5 backdrop-blur-md ' : 'bg-transparent'} ${dropdown && scrolled && 'flex-col h-screen pt-4 backdrop-blur-lg bg-gradient-to-l from-transparent to-white/80'} ${dropdown ? 'flex-col h-screen pt-4 backdrop-blur-lg bg-gradient-to-l from-transparent to-[#030302]/80' : 'py-4'}`}>
                 <Flex className=" justify-around w-[84%] mx-auto items-center">
-                    <Flex className="">
+                    <Flex className="cursor-pointer" onClick={() => handleNavigate('Home')}>
                         <img 
                             src={scrolled ? "/sendwise-tekst-blauw.png" : "/sendwise-tekst.png"} 
                             alt="Sendwise" 
@@ -121,7 +131,7 @@ const Navbar = () => {
                             {dropdown && navMenu === item ?
                                 <HiOutlineMinusSmall className={`${dropdown && scrolled ? 'text-black' : 'text-white'}`} />
                                 :
-                                <GoPlus className={`${scrolled ? 'text-black/60' : 'text-white'}`} />
+                                <GoPlus className={`${scrolled ? 'text-black' : 'text-white'}`} />
                             }
                         </Flex>
                     )}
@@ -135,12 +145,18 @@ const Navbar = () => {
                         <p className={getNavTextClass(isActive('Contact'))}>Contact</p>
                     </Flex>
                     <Flex className=" space-x-4">
-                        <Flex className={`${scrolled ? 'text-black border-black/30 hover:border-transparent bg-blue-100/60' : 'text-white border-white/30 hover:border-transparent bg-white/20'} inter-bold cursor-pointer text-[0.9rem] px-4 py-2 rounded-3xl transition-all duration-500 ease-in-out`}>
-                            <p>Inloggen</p>
-                        </Flex>
-                        <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[0.9rem] cursor-pointer text-white px-4 py-2 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group">
-                            <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                            <p className="relative z-10">Account aanmaken</p>
+                    <a
+                        href="https://app.sendwise.nl"
+                        className={`${scrolled ? 'text-black border-black/30 hover:border-transparent bg-blue-100/60' : 'text-white border-white/30 hover:border-transparent bg-white/20'} inter-bold cursor-pointer text-[0.9rem] px-4 py-2 rounded-3xl transition-all duration-500 ease-in-out`}
+                    >
+                        <span>Inloggen</span>
+                    </a>
+                        <Flex
+                            className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[0.9rem] cursor-pointer text-white px-4 py-2 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group"
+                            onClick={() => handleNavigate("Account aanvragen")}
+                        >
+                            <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                            <p className="relative z-10">Account aanvragen</p>
                         </Flex>
                     </Flex>
                 </Flex>
@@ -178,8 +194,20 @@ const Navbar = () => {
                                 <Flex className="flex-col space-y-8">
                                     <p className={`${dropdown && scrolled ? 'text-black/60' : 'text-white/40 '} inter-medium text-[0.8rem]`}>TOEPASSINGEN</p>
                                     <Flex className={`flex-col ${dropdown && scrolled ? 'text-black' : 'text-white '} inter-semibold text-[1rem] space-y-3 `}>
-                                        <p>Voor webshops</p>
-                                        <p>Voor fulfilmentcenters</p>
+                                        <button
+                                            type="button"
+                                            onClick={() => handleNavigate("Voor webshops")}
+                                            className={`${getDropdownItemClass(isActive("Voor webshops"))} text-left hover:text-[#1a5ee5]`}
+                                        >
+                                            Voor webshops
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => handleNavigate("Voor fulfilmentcenters")}
+                                            className={`${getDropdownItemClass(isActive("Voor fulfilmentcenters"))} text-left hover:text-[#1a5ee5]`}
+                                        >
+                                            Voor fulfilmentcenters
+                                        </button>
                                     </Flex>
                                 </Flex>
                                 <Flex className="flex-col space-y-8">
@@ -196,9 +224,21 @@ const Navbar = () => {
                                         </button>
                                         <div className={`overflow-hidden transition-all duration-300 ease-out ${integrationMenu === "webshop" ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
                                             <div className="flex flex-col space-y-2 pl-2 pt-2">
-                                                <p>WooCommerce</p>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleNavigate("WooCommerce")}
+                                                    className={`${getDropdownItemClass(isActive("WooCommerce"))} text-left hover:text-[#1a5ee5]`}
+                                                >
+                                                    WooCommerce
+                                                </button>
                                                 <p>Shopify</p>
-                                                <p>CCV Shop</p>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleNavigate("CCV Shop")}
+                                                    className={`${getDropdownItemClass(isActive("CCV Shop"))} text-left hover:text-[#1a5ee5]`}
+                                                >
+                                                    CCV Shop
+                                                </button>
                                                 <p>Lightspeed</p>
                                                 <p>Magento</p>
                                                 <p>Mijnwebwinkel</p>
@@ -239,26 +279,17 @@ const Navbar = () => {
                                     </Flex>
                                 </Flex>
                             </Flex>
-                            <div className="h-[100%] w-[1px] bg-white/10 mx-12" />
-                            <Flex className="w-[14rem] flex-col space-y-8">
-                                <p className={`${dropdown && scrolled ? 'text-black/60' : 'text-white/40 '} inter-medium text-[0.8rem]`}>SPOTLIGHT</p>
-                                <Flex className={`flex-col ${dropdown && scrolled ? 'text-black' : 'text-white '} inter-medium text-[0.9rem] space-y-3`}>
-                                    <p>Introducing Planhat's AI Deployment Program</p>
-                                    <p className="text-[0.85rem] inter-normal">A dedicated services team with deep expertise in deploying the AI capabilities around CX that the Planhat Platform powers.</p>
-                                    <img src="/img.avif" alt="" className="w-[17rem] rounded-xl h-[10rem] object-cover" />
-                                </Flex>
-                                <Flex className={`${dropdown && scrolled ? 'text-black' : 'text-white'} inter-medium text-[0.8rem]`}>
-                                    <p className="pr-3">Bulletin</p>
-                                    •
-                                    <p className="pl-3">Kaveh Rostampor</p>
-                                </Flex>
-                            </Flex>
                         </Flex>
                     </Flex>
                 }
             </Flex>
             <Flex className={`flex md:hidden justify-between w-[100%] items-center transition-all duration-300 px-4 py-3 ${mobile ? 'bg-transparent' : (scrolled ? 'bg-white/80 backdrop-blur-md' : 'bg-transparent')}`}>
-                <img src={scrolled && !mobile ? "/sendwise-tekst-blauw.png" : "/sendwise-tekst.png"} alt="Sendwise" className="h-[1.4rem] my-1" />
+                <img
+                    onClick={() => handleNavigate('Home')}
+                    src={scrolled && !mobile ? "/sendwise-tekst-blauw.png" : "/sendwise-tekst.png"}
+                    alt="Sendwise"
+                    className="h-[1.4rem] my-1 cursor-pointer"
+                />
                 <HiOutlineMenuAlt3 onClick={() => setMobile(!mobile)} className={`cursor-pointer text-[1.6rem] my-1 ${scrolled && !mobile ? 'text-black' : 'text-white/80'}`} />
             </Flex>
             <AnimatePresence>
@@ -279,7 +310,12 @@ const Navbar = () => {
                         />
                         <div className="relative h-full">
                             <Flex className="flex justify-between w-[100%] items-center px-4 py-3 pt-4 bg-transparent">
-                                <img src="/sendwise-tekst.png" alt="Sendwise" className="h-[1.4rem]" />
+                                <img
+                                    onClick={() => handleNavigate('Home')}
+                                    src="/sendwise-tekst.png"
+                                    alt="Sendwise"
+                                    className="h-[1.4rem] cursor-pointer"
+                                />
                                 <AiOutlineMinus onClick={() => setMobile(!mobile)} className="cursor-pointer text-white text-[1.6rem]" />
                             </Flex>
                             <motion.div
@@ -296,6 +332,23 @@ const Navbar = () => {
                                     <p className={`${isActive('Oplossingen') ? 'text-white inter-semibold' : 'text-gray-200 inter-medium'}`}>Oplossingen</p>
                                     <FiPlus className="text-[2rem] translate-y-[4px]" />
                                 </Flex>
+                                <Flex className="w-[90%] mx-auto flex-col space-y-3">
+                                    <p className="text-gray-400 inter-medium text-[0.95rem] tracking-[0.18em]">INTEGRATIES</p>
+                                    <button
+                                        type="button"
+                                        onClick={() => handleNavigate("WooCommerce")}
+                                        className={`${isActive("WooCommerce") ? "text-white inter-semibold" : "text-gray-200 inter-medium"} text-left text-[1.1rem]`}
+                                    >
+                                        WooCommerce
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => handleNavigate("CCV Shop")}
+                                        className={`${isActive("CCV Shop") ? "text-white inter-semibold" : "text-gray-200 inter-medium"} text-left text-[1.1rem]`}
+                                    >
+                                        CCV Shop
+                                    </button>
+                                </Flex>
                                 <Flex className=" justify-between w-[90%] mx-auto cursor-pointer" onClick={() => handleNavigate('Prijzen')}>
                                     <p className={`${isActive('Prijzen') ? 'text-white inter-semibold' : 'text-gray-200 inter-medium'}`}>Prijzen</p>
                                 </Flex>
@@ -305,9 +358,12 @@ const Navbar = () => {
                                 <Flex className=" justify-between w-[90%] mx-auto cursor-pointer" onClick={() => handleNavigate('Contact')}>
                                     <p className={`${isActive('Contact') ? 'text-white inter-semibold' : 'text-gray-200 inter-medium'}`}>Contact</p>
                                 </Flex>
-                                <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1.2rem] cursor-pointer text-white px-6 py-3 w-[90%] mx-auto rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                    <p className="text-center w-[100%] relative z-10">Account aanmaken</p>
+                                <Flex
+                                    className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1.2rem] cursor-pointer text-white px-6 py-3 w-[90%] mx-auto rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group"
+                                    onClick={() => handleNavigate("Account aanvragen")}
+                                >
+                                    <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                                    <p className="text-center w-[100%] relative z-10">Account aanvragen</p>
                                 </Flex>
                             </motion.div>
                         </div>

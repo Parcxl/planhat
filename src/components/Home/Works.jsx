@@ -1,5 +1,6 @@
 import { Flex } from "antd";
 import { GoArrowUpRight } from "react-icons/go";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectCards } from "swiper/modules";
 import "swiper/css";
@@ -123,12 +124,15 @@ const Works = () => {
                         <Flex className="text-white w-[100%] items-start flex-col space-y-6 justify-center h-full">
                             <p className="inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.5rem] text-left">Voor webshops</p>
                             <p className="text-left md:w-[90%] w-[100%] inter-medium lg:text-[1.2rem] text-[1rem]">Schaal je verzending met vaste tarieven, multi-carrier shipping en branded tracking — zonder contracten of complexiteit.</p>
-                            <Flex className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 w-[15rem] items-center space-x-4 cursor-pointer text-[0.9rem] hover:bg-white pl-4 py-1 rounded-3xl">
-                                <p className="whitespace-nowrap">Start met Sendwise</p>
-                                <Flex className="group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-full p-2 text-[1.5rem]">
+                            <Link
+                                to="/voor-webshops"
+                                className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-white/60 text-white hover:text-white inter-medium border border-white/30 w-[15rem] items-center space-x-4 cursor-pointer text-[0.9rem] pl-4 py-1 rounded-3xl flex relative overflow-hidden"
+                            >
+                                <span className="whitespace-nowrap relative z-20 text-white opacity-100 mix-blend-normal">Start met Sendwise</span>
+                                <Flex className="relative z-20 text-white mix-blend-normal group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-full p-2 text-[1.5rem]">
                                     <GoArrowUpRight />
                                 </Flex>
-                            </Flex>
+                            </Link>
                         </Flex>
                     </Flex>
                 </Flex>
@@ -139,12 +143,15 @@ const Works = () => {
                         <Flex className="text-white w-[100%] items-start flex-col space-y-6 justify-center h-full">
                             <p className="inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.5rem] text-left">Voor fulfilmentcenters</p>
                             <p className="text-left md:w-[90%] w-[100%] inter-medium lg:text-[1.2rem] text-[1rem]">Verzend goedkoper op schaal met tientallen carriers via één pickup — zonder contracten, zonder complexiteit.</p>
-                            <Flex className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 w-[15rem] items-center space-x-4 cursor-pointer text-[0.9rem] hover:bg-white pl-4 py-1 rounded-3xl">
-                                <p className="whitespace-nowrap">Start met Sendwise</p>
-                                <Flex className="group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-full p-2 text-[1.5rem]">
+                            <Link
+                                to="/voor-fulfilmentcenters"
+                                className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-white/60 text-white hover:text-white inter-medium border border-white/30 w-[15rem] items-center space-x-4 cursor-pointer text-[0.9rem] pl-4 py-1 rounded-3xl flex relative overflow-hidden"
+                            >
+                                <span className="whitespace-nowrap relative z-20 text-white opacity-100 mix-blend-normal">Start met Sendwise</span>
+                                <Flex className="relative z-20 text-white mix-blend-normal group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-full p-2 text-[1.5rem]">
                                     <GoArrowUpRight />
                                 </Flex>
-                            </Flex>
+                            </Link>
                         </Flex>
                     </Flex>
                 </Flex>
@@ -174,15 +181,21 @@ const Works = () => {
                     </div>
 
                     <Flex className="items-center space-x-6 pt-2">
-                        <Flex className="group relative overflow-hidden bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium text-[0.95rem] cursor-pointer px-5 py-2 rounded-3xl transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl items-center space-x-3">
-                            <span className="relative z-10">Direct starten</span>
-                            <Flex className="relative z-10 rounded-full p-2 transition-all duration-300 ease-in-out group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1">
+                        <Link
+                            to="/start-met-sendwise"
+                            className="group relative overflow-hidden bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] hover:backdrop-blur-md text-white hover:text-white inter-medium text-[0.95rem] cursor-pointer px-5 py-2 rounded-3xl transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl items-center space-x-3 flex isolate"
+                        >
+                            <span className="relative z-10 text-white group-hover:text-white">Direct starten</span>
+                            <Flex className="relative z-10 text-white group-hover:text-white rounded-full p-2 transition-all duration-300 ease-in-out group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1">
                                 <GoArrowUpRight />
                             </Flex>
-                        </Flex>
-                        <span className="text-[#1a5ee5] inter-medium text-[0.95rem] cursor-pointer hover:text-[#0f3d9e] transition-colors duration-300">
+                        </Link>
+                        <Link
+                            to="/contact"
+                            className="text-[#1a5ee5] inter-medium text-[0.95rem] cursor-pointer hover:text-[#0f3d9e] transition-colors duration-300"
+                        >
                             Contact opnemen
-                        </span>
+                        </Link>
                     </Flex>
                 </Flex>
                 
@@ -321,12 +334,15 @@ const Works = () => {
                 ) : null}
 
                 <div className="mt-10 flex justify-center">
-                    <Flex className="group relative overflow-hidden border border-[#1a5ee5] text-[#1a5ee5] hover:bg-[#1a5ee5]/10 inter-medium text-[0.95rem] cursor-pointer px-6 py-2 rounded-3xl transition-all duration-300 ease-in-out items-center space-x-3">
-                        <span className="relative z-10">Bekijk alle integraties</span>
-                        <Flex className="relative z-10 rounded-full p-2 transition-all duration-300 ease-in-out group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white">
+                    <Link
+                        to="/integraties"
+                        className="group relative overflow-hidden border border-[#1a5ee5] text-[#1a5ee5] hover:text-[#1a5ee5] hover:bg-[#1a5ee5]/10 inter-medium text-[0.95rem] cursor-pointer px-6 py-2 rounded-3xl transition-all duration-300 ease-in-out items-center space-x-3 flex isolate"
+                    >
+                        <span className="relative z-10 text-[#1a5ee5] group-hover:text-[#1a5ee5]">Bekijk alle integraties</span>
+                        <Flex className="relative z-10 text-[#1a5ee5] group-hover:text-white rounded-full p-2 transition-all duration-300 ease-in-out group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1">
                             <GoArrowUpRight />
                         </Flex>
-                    </Flex>
+                    </Link>
                 </div>
             </section>
             
@@ -387,12 +403,15 @@ const Works = () => {
 
             <div className="h-0 sm:h-6 hidden sm:block" />
             <Flex className="mt-3 sm:mt-32 mb-4 sm:mb-20 w-full justify-center">
-                <Flex className="group relative overflow-hidden border border-[#1a5ee5] text-[#1a5ee5] hover:bg-[#1a5ee5]/10 inter-medium text-[0.95rem] cursor-pointer px-5 py-2 rounded-3xl transition-all duration-300 ease-in-out items-center space-x-3">
-                    <span className="relative z-10">Direct starten</span>
-                    <Flex className="relative z-10 rounded-full p-2 transition-all duration-300 ease-in-out group-hover:bg-[#D44A00] group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1">
+                <Link
+                    to="/start-met-sendwise"
+                    className="group relative overflow-hidden border border-[#1a5ee5] text-[#1a5ee5] hover:text-[#1a5ee5] hover:bg-[#1a5ee5]/10 inter-medium text-[0.95rem] cursor-pointer px-5 py-2 rounded-3xl transition-all duration-300 ease-in-out items-center space-x-3 flex isolate"
+                >
+                    <span className="relative z-10 text-[#1a5ee5] group-hover:text-[#1a5ee5]">Direct starten</span>
+                    <Flex className="relative z-10 text-[#1a5ee5] group-hover:text-white rounded-full p-2 transition-all duration-300 ease-in-out group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1">
                         <GoArrowUpRight />
                     </Flex>
-                </Flex>
+                </Link>
             </Flex>
             <div className="h-2 sm:h-10" />
             {/* Intuitive yet deep + testimonial swiper section removed */}

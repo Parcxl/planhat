@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GoArrowUpRight } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,12 +77,15 @@ const Services = () => {
                                 <br className="sm:hidden" />
                                 volledige controle.
                             </p>
-                            <Flex className="group relative overflow-hidden border border-white text-white hover:bg-white/10 inter-medium text-[0.95rem] cursor-pointer px-5 py-2 rounded-3xl transition-all duration-300 ease-in-out items-center space-x-3">
-                                <span className="relative z-10">Start met Sendwise</span>
-                                <Flex className="relative z-10 rounded-full p-2 transition-all duration-300 ease-in-out group-hover:bg-[#D44A00] group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1">
+                            <Link
+                                to="/start-met-sendwise"
+                                className="group relative overflow-hidden border border-white text-white hover:text-white hover:bg-white/10 inter-medium text-[0.95rem] cursor-pointer px-5 py-2 rounded-3xl transition-all duration-300 ease-in-out items-center space-x-3 flex isolate"
+                            >
+                                <span className="relative z-10 text-white group-hover:text-white">Start met Sendwise</span>
+                                <Flex className="relative z-10 text-white group-hover:text-white rounded-full p-2 transition-all duration-300 ease-in-out group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1">
                                     <GoArrowUpRight />
                                 </Flex>
-                            </Flex>
+                            </Link>
                         </Flex>
                     </Flex>
                 </Flex>

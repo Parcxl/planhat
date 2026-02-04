@@ -8,6 +8,14 @@ import Prijzen from "./page/Prijzen"
 import SendwisePlatform from "./page/SendwisePlatform"
 import SendwisePro from "./page/SendwisePro"
 import SendwiseConnect from "./page/SendwiseConnect"
+import IntegratieWooCommerce from "./page/IntegratieWooCommerce"
+import IntegratieCCVShop from "./page/IntegratieCCVShop"
+import VoorWebshops from "./page/VoorWebshops"
+import VoorFulfilmentcenters from "./page/VoorFulfilmentcenters"
+import StartMetSendwise from "./page/StartMetSendwise"
+import AlgemeneVoorwaarden from "./page/AlgemeneVoorwaarden"
+import Privacy from "./page/Privacy"
+import Integraties from "./page/Integraties"
 
 const PageTransition = ({ children }) => (
   <motion.div
@@ -80,6 +88,70 @@ const AnimatedRoutes = () => {
             element={
               <PageTransition>
                 <SendwiseConnect />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/integraties/woocommerce"
+            element={
+              <PageTransition>
+                <IntegratieWooCommerce />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/integraties/ccv-shop"
+            element={
+              <PageTransition>
+                <IntegratieCCVShop />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/voor-webshops"
+            element={
+              <PageTransition>
+                <VoorWebshops />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/voor-fulfilmentcenters"
+            element={
+              <PageTransition>
+                <VoorFulfilmentcenters />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/start-met-sendwise"
+            element={
+              <PageTransition>
+                <StartMetSendwise />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/algemene-voorwaarden"
+            element={
+              <PageTransition>
+                <AlgemeneVoorwaarden />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/privacy"
+            element={
+              <PageTransition>
+                <Privacy />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/integraties"
+            element={
+              <PageTransition>
+                <Integraties />
               </PageTransition>
             }
           />

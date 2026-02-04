@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 import { IoIosArrowDown } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,7 +64,7 @@ const Main = () => {
             <Flex id="video-frame" className="w-[100%] mask-clip-path">
                 <img id="hero-img" src="/sendwise-hero-picture.png" alt="main" className="absolute h-screen sm:h-screen w-[100%] object-cover object-right sm:object-center" />
                 <div id="hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-screen sm:h-screen " />
-                <Flex className="z-30 sm:ml-[10%] ml-[4%] justify-start sm:justify-evenly w-[100%] h-screen sm:h-screen sm:pt-24 pt-44 sm:pb-16 pb-16 flex-col space-y-10 sm:space-y-0">
+                <Flex className="z-30 sm:ml-[10%] ml-[4%] justify-start w-[100%] h-screen sm:h-screen sm:pt-48 pt-72 sm:pb-16 pb-16 flex-col space-y-10 sm:space-y-10">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -83,7 +84,7 @@ const Main = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, ease: "easeOut", delay: 0.7 }}
-                        className=" w-full sm:-mt-6 mt-4"
+                        className=" w-full sm:-mt-10 mt-2"
                     >
                         <Flex className="flex-col pl-1 inter-semibold md:leading-[4rem] leading-[3.1rem] text-white w-fit">
                             <p className="md:text-[4rem] sm:text-[2.5rem] text-[2.85rem]">Het platform voor<br />schaalbaar verzenden</p>
@@ -93,7 +94,7 @@ const Main = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1.4, y: 0 }}
                         transition={{ duration: 1, ease: "easeOut", delay: 1.4 }}
-                        className=" w-full sm:-mt-8 mt-4"
+                        className=" w-full sm:-mt-12 mt-2"
                     >
                         <p className="text-white font-light text-[1.25rem] sm:text-[1.1rem] md:text-[1.3rem]">
                             <strong className="font-bold">Verzenden is onnodig complex geworden.</strong> Sendwise
@@ -106,12 +107,15 @@ const Main = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.8, ease: "easeOut", delay: 1.8 }}
-                        className=" w-full sm:-mt-6 mt-4"
+                        className=" w-full sm:-mt-10 mt-2"
                     >
-                        <Flex className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group">
-                            <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                            <p className="relative z-10">Account aanmaken</p>
-                        </Flex>
+                        <Link
+                            to="/start-met-sendwise"
+                            className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group inline-flex items-center isolate"
+                        >
+                            <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                            <span className="relative z-10 text-white group-hover:text-white">Account aanmaken</span>
+                        </Link>
                     </motion.div>
                     <IoIosArrowDown className="md:hidden flex text-[#D6D7D5]/60 absolute bottom-6 animate-bounce  w-[90%] mx-auto text-[3rem]"/>
                 </Flex>

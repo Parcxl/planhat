@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { GoArrowUpRight } from "react-icons/go";
 import { PalletRackShowcase } from "./pallet-rack-showcase";
+import { Link } from "react-router-dom";
 
 const ProWarehouseCard = ({ title, description, ctaLabel = "Start met Sendwise" }) => {
     const proSectionRef = useRef(null);
@@ -87,12 +88,15 @@ const ProWarehouseCard = ({ title, description, ctaLabel = "Start met Sendwise" 
                     <p className="lg:text-center sm:text-start text-center md:w-[75%] lg:mx-auto md:mx-0 mx-auto inter-medium lg:pl-0 pl-2 lg:text-[1.2rem]">
                         {description}
                     </p>
-                    <Flex className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 w-[13rem] items-center space-x-4 cursor-pointer text-[0.9rem] hover:bg-white mt-10 pl-4 py-1 rounded-3xl">
-                        <p className="whitespace-nowrap">{ctaLabel}</p>
+                    <Link
+                        to="/start-met-sendwise"
+                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 w-[14rem] items-center space-x-4 cursor-pointer text-[0.9rem] mt-10 pl-4 py-1 rounded-3xl flex relative overflow-hidden isolate"
+                    >
+                        <span className="whitespace-nowrap relative z-20 text-white group-hover:text-white">{ctaLabel}</span>
                         <Flex className="group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-full p-2 text-[1.5rem]">
                             <GoArrowUpRight />
                         </Flex>
-                    </Flex>
+                    </Link>
                 </Flex>
             </Flex>
         </Flex>

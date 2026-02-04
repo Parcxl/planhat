@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Flex, Image } from "antd";
 import { GoArrowUpRight } from "react-icons/go";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "framer-motion";
 import { Autoplay } from "swiper/modules";
@@ -319,10 +320,10 @@ export default function Journey() {
                                             Haal orders op uit tientallen integraties, maak labels aan, track zendingen en beheer alles vanuit één verzenddashboard.
                                         </p>
                                     </div>
-                                    <Flex className="text-hidden items-center space-x-1">
-                                        <p className="inter-medium text-appear bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">Bekijk platform</p>
+                                    <Link to="/oplossingen/sendwise" className="text-hidden items-center space-x-1 flex">
+                                        <span className="inter-medium text-appear bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">Bekijk platform</span>
                                         <GoArrowUpRight className="text-[#1a5ee5]" />
-                                    </Flex>
+                                    </Link>
                                 </Flex>
                             </Flex>
                             {/* bg-[#9E9D9B]/20 */}
@@ -338,10 +339,10 @@ export default function Journey() {
                                             Pick, pack en voorraadbeheer voor fulfilmentteams. Beheer je magazijn, workflows en orders op schaal.
                                         </p>
                                     </div>
-                                    <Flex className="text-hidden items-center space-x-1">
-                                        <p className="inter-medium text-appear bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">Bekijk PRO</p>
+                                    <Link to="/oplossingen/pro" className="text-hidden items-center space-x-1 flex">
+                                        <span className="inter-medium text-appear bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">Bekijk PRO</span>
                                         <GoArrowUpRight className="text-[#1a5ee5]" />
-                                    </Flex>
+                                    </Link>
                                 </Flex>
                             </Flex>
 
@@ -357,17 +358,20 @@ export default function Journey() {
                                             Eén verzendmethode met tientallen carriers in Europa. Eén pickup, vaste scherpe tarieven, altijd de beste vervoerder op de achtergrond.
                                         </p>
                                     </div>
-                                    <Flex className="text-hidden items-center space-x-1">
-                                        <p className="inter-medium text-appear bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">Bekijk CONNECT</p>
+                                    <Link to="/oplossingen/connect" className="text-hidden items-center space-x-1 flex">
+                                        <span className="inter-medium text-appear bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">Bekijk CONNECT</span>
                                         <GoArrowUpRight className="text-[#1a5ee5]" />
-                                    </Flex>
+                                    </Link>
                                 </Flex>
                             </Flex>
                         </Flex>
-                        <Flex className="ml-6 bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] hover:from-[#0f3d9e] hover:to-[#1e4fd4] inter-medium text-[0.9rem] cursor-pointer text-white px-4 py-2 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group">
-                            <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                            <p className="relative z-10">Direct starten</p>
-                        </Flex>
+                        <Link
+                            to="/start-met-sendwise"
+                            className="ml-6 bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] hover:from-[#0f3d9e] hover:to-[#1e4fd4] inter-medium text-[0.9rem] cursor-pointer text-white px-4 py-2 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group inline-flex items-center isolate"
+                        >
+                            <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                            <span className="relative z-10 text-white group-hover:text-white">Direct starten</span>
+                        </Link>
                     </Flex>
                 </Flex>
 
