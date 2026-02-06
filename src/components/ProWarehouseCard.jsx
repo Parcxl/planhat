@@ -81,7 +81,7 @@ const ProWarehouseCard = ({ title, description, ctaLabel = "Start met Sendwise" 
                 </motion.div>
             </div>
             <Flex className="absolute z-20 top-0 w-[90%] left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 lg:left-20">
-                <Flex className="text-white w-[100%] justify-center pt-7 sm:pt-9 lg:pt-10 lg:pl-0 sm:pl-7 pl-0 lg:items-center sm:items-start items-center flex-col space-y-4">
+                <Flex className="text-white w-[100%] justify-center pt-3 sm:pt-9 lg:pt-10 lg:pl-0 sm:pl-7 pl-0 lg:items-center sm:items-start items-center flex-col space-y-4">
                     <p className="inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.5rem] lg:text-center sm:text-start text-center">
                         {title}
                     </p>
@@ -90,7 +90,7 @@ const ProWarehouseCard = ({ title, description, ctaLabel = "Start met Sendwise" 
                     </p>
                     <Link
                         to="/start-met-sendwise"
-                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 w-[14rem] items-center space-x-4 cursor-pointer text-[0.9rem] mt-10 pl-4 py-1 rounded-3xl flex relative overflow-hidden isolate"
+                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 w-[14rem] items-center space-x-4 cursor-pointer text-[0.9rem] mt-4 sm:mt-10 pl-4 py-1 rounded-3xl flex relative overflow-hidden isolate"
                     >
                         <span className="whitespace-nowrap relative z-20 text-white group-hover:text-white">{ctaLabel}</span>
                         <Flex className="group-hover:bg-[#D44A00] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-full p-2 text-[1.5rem]">

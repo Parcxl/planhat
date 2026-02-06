@@ -65,9 +65,9 @@ const Contact = () => {
                     <Flex id="contact-hero-frame" className="w-[100%] mask-clip-path">
                         <img
                             id="contact-hero-img"
-                            src="/sendwise-contact.webp"
+                            src="/contact-pagina.png"
                             alt="Sendwise"
-                            className="absolute h-screen sm:h-screen w-[100%] object-cover object-right sm:object-center"
+                            className="absolute h-screen sm:h-screen w-[100%] object-cover object-[75%_center] sm:object-center"
                         />
                         <div id="contact-hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-screen sm:h-screen" />
                         <Flex className="z-30 sm:ml-[10%] ml-[4%] w-[100%] h-screen sm:h-screen flex-col justify-center items-start pt-16 sm:pt-20 pb-10 sm:pb-14">
@@ -92,9 +92,13 @@ const Contact = () => {
                     <div className="rounded-2xl border border-gray-200 bg-white/80 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
                         <div className="flex flex-col space-y-4">
                             <div className="relative w-fit">
-                                <div className="absolute -inset-x-3 bottom-1 h-3 bg-gradient-to-r from-[#1a5ee5]/25 to-transparent rounded-full" />
+                                <div className="absolute -inset-x-3 bottom-1 h-3 bg-gradient-to-r from-[#1a5ee5]/25 to-transparent rounded-full hidden sm:block" />
                                 <p className="relative inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.6rem] text-gray-900">
-                                    Meer verzenden. Minder gedoe.
+                                    Meer verzenden. Minder{" "}
+                                    <span className="relative inline-block">
+                                        <span className="absolute -inset-x-1 bottom-0.5 h-2 bg-gradient-to-r from-[#1a5ee5]/25 to-transparent rounded-full sm:hidden" />
+                                        <span className="relative">gedoe.</span>
+                                    </span>
                                 </p>
                             </div>
                             <p className="text-gray-700 inter-medium lg:text-[1.1rem] text-[1rem] max-w-[60rem]">
@@ -162,7 +166,7 @@ const Contact = () => {
 
             <section className="w-full">
                 <Flex className="lg:w-[80%] w-[95%] mx-auto">
-                    <Flex className="relative w-full h-[22rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
+                    <Flex className="relative w-full h-[26rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
                         <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
                         <div className="absolute z-10 inset-0 rounded-2xl bg-black/55 sm:bg-black/35" />
                         <img src="/sendwise-2.png" alt="Sendwise" className="object-cover w-[100%] h-full rounded-2xl" />

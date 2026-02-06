@@ -277,10 +277,10 @@ const SendwiseConnect = () => {
 
             <section className="w-full">
                 <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white/90 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[45%] w-full">
-                                <div className="w-full h-[16rem] sm:h-[20rem]">
+                    <div className="rounded-2xl border border-gray-200 bg-white/90 px-6 pt-2 pb-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full -mt-4 sm:mt-0">
+                        <div className="flex flex-col lg:flex-row lg:items-center gap-4 sm:gap-8 lg:gap-12">
+                            <div className="lg:w-[45%] w-full -mt-6 sm:mt-0">
+                                <div className="w-full h-[19rem] sm:h-[20rem]">
                                     <ConnectFlowAnimation />
                                 </div>
                             </div>
@@ -338,7 +338,7 @@ const SendwiseConnect = () => {
                     <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
                         <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
                             <div className="lg:w-[45%] w-full">
-                                <div className="w-full h-[16rem] sm:h-[20rem]">
+                                <div className="w-full h-[21rem] sm:h-[20rem]">
                                     <ConnectBrandingAnimation />
                                 </div>
                             </div>
@@ -365,7 +365,7 @@ const SendwiseConnect = () => {
 
             <section className="w-full">
                 <Flex className="lg:w-[80%] w-[95%] mx-auto">
-                    <Flex className="relative w-full h-[22rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
+                    <Flex className="relative w-full h-[30rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
                         <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
                         <div className="absolute z-10 inset-0 rounded-2xl bg-black/55 sm:bg-black/35" />
                         <img src="/sendwise-2.png" alt="Sendwise" className="object-cover w-[100%] h-full rounded-2xl" />

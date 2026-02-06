@@ -1,9 +1,9 @@
 "use client";
 import { useGSAP } from "@gsap/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Flex, Image } from "antd";
+import { Flex } from "antd";
 import { GoArrowUpRight } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,31 +14,51 @@ import "swiper/css";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Journey() {
-    const images = ["/sendwise-1.png", "/pro-1.png", "/sales.jpg"]; // sendwise, pro, connect (overlay)
+    const images = ["/sendwise-1.png", "/pro-1.png", "/connect.png"]; // sendwise, pro, connect
     const mobileItems = [
         {
             title: "Sendwise",
             full: "Haal orders op uit tientallen integraties, maak labels aan, track zendingen en beheer alles vanuit één verzenddashboard.",
             cta: "Bekijk platform",
+            href: "/oplossingen/sendwise",
         },
         {
             title: "PRO",
             full: "Pick, pack en voorraadbeheer voor fulfilmentteams. Beheer je magazijn, workflows en orders op schaal.",
             cta: "Bekijk PRO",
+            href: "/oplossingen/pro",
         },
         {
             title: "CONNECT",
-            full: "Eén verzendmethode met tientallen carriers in Europa. Eén pickup, vaste scherpe tarieven, altijd de beste vervoerder op de achtergrond.",
+            full: "Eén verzendmethode met tientallen carriers in Europa. Eén pickup, vaste scherpe tarieven, altijd de beste vervoerder.",
             cta: "Bekijk CONNECT",
+            href: "/oplossingen/connect",
         },
     ];
     const [activeMobileIndex, setActiveMobileIndex] = useState(0);
+
+    useEffect(() => {
+        const refresh = () => ScrollTrigger.refresh(true);
+        const rafId = requestAnimationFrame(refresh);
+        const timeoutId = window.setTimeout(refresh, 300);
+        const img = document.getElementById("journey-image");
+        if (img) {
+            img.addEventListener("load", refresh);
+        }
+        return () => {
+            cancelAnimationFrame(rafId);
+            window.clearTimeout(timeoutId);
+            if (img) {
+                img.removeEventListener("load", refresh);
+            }
+        };
+    }, []);
     useGSAP(() => {
         // Initial states
         gsap.set("#journey-text", { opacity: 0, x: -50, position: "absolute" });
 
         const sections = gsap.utils.toArray(".text-section");
-        const images = ["/sendwise-1.png", "/pro-1.png", "/sales.jpg"]; // sendwise, pro, connect (overlay)
+        const images = ["/sendwise-1.png", "/pro-1.png", "/connect.png"]; // sendwise, pro, connect
         const totalScroll = sections.length * 100;
         const clipImg = document.querySelector("#clip img");
         const journeyImage = document.querySelector("#journey-image img") || document.querySelector("#journey-image");
@@ -56,14 +76,15 @@ export default function Journey() {
         let currentImageIndex = 0;
 
         const tl = gsap.timeline({
-            scrollTrigger: {
+                scrollTrigger: {
                 trigger: "#journey-wrapper",
                 start: "top top",
                 endTrigger: lastSection,
-                end: "bottom+=1800% bottom",
+                end: "bottom+=2200% bottom",
                 scrub: 1,
                 pin: "#journey-wrapper",
                 pinSpacing: true,
+                invalidateOnRefresh: true,
                 onUpdate: (self) => {
                     const progress = self.progress;
                     
@@ -76,16 +97,50 @@ export default function Journey() {
                     if (imageElement && images.length > 0) {
                         // Handle CONNECT overlay (section 2)
                         if (currentSectionIndex === 2) {
-                            // CONNECT: Smooth fade to overlay
-                            const overlayOpacity = Math.min(sectionProgress / 0.5, 1); // Fade in over first 50% of section
-                            gsap.set(imageElement, { opacity: 1 - overlayOpacity });
+                            // CONNECT: same fade pattern as Sendwise -> PRO, then overlay fade-in
+                            let targetImageIndex = 1;
+                            let imageOpacity = 1;
+
+                            if (sectionProgress < 0.3) {
+                                // Still showing PRO, fade it out
+                                targetImageIndex = 1;
+                                imageOpacity = 1 - (sectionProgress / 0.3);
+                            } else {
+                                // Switch to CONNECT and fade it in
+                                targetImageIndex = 2;
+                                const fadeInProgress = (sectionProgress - 0.3) / 0.3;
+                                imageOpacity = Math.min(fadeInProgress, 1);
+                            }
+
+                            const currentSrc = imageElement.src || imageElement.getAttribute?.("src") || "";
+                            const targetSrc = images[targetImageIndex];
+                            const needsSwap = (targetImageIndex === 2 && !currentSrc.includes("connect.png")) ||
+                                (targetImageIndex === 1 && !currentSrc.includes("pro-1.png"));
+
+                            if (needsSwap) {
+                                if (imageElement.src !== undefined) {
+                                    imageElement.src = targetSrc;
+                                } else if (imageElement.setAttribute) {
+                                    imageElement.setAttribute("src", targetSrc);
+                                }
+                            }
+
+                            gsap.set(imageElement, { opacity: imageOpacity });
+
+                            const connectOpacity = targetImageIndex === 2 ? imageOpacity : 0;
                             if (connectOverlay) {
-                                gsap.set(connectOverlay, { opacity: overlayOpacity });
+                                gsap.set(connectOverlay, { opacity: connectOpacity });
+                            }
+                            if (connectMarquee) {
+                                gsap.set(connectMarquee, { opacity: connectOpacity });
                             }
                         } else {
                             // Sendwise or PRO: Handle image transitions
                             if (connectOverlay) {
                                 gsap.set(connectOverlay, { opacity: 0 });
+                            }
+                            if (connectMarquee) {
+                                gsap.set(connectMarquee, { opacity: 0 });
                             }
                             
                             let targetImageIndex = 0;
@@ -113,8 +168,8 @@ export default function Journey() {
                             // Update image source when needed
                             const currentSrc = imageElement.src || imageElement.getAttribute?.('src') || '';
                             const targetSrc = images[targetImageIndex];
-                            const needsSwap = (targetImageIndex === 1 && !currentSrc.includes('pro-1.png')) ||
-                                           (targetImageIndex === 0 && !currentSrc.includes('sendwise-1.png'));
+                            const needsSwap = (targetImageIndex === 1 && !currentSrc.includes("pro-1.png")) ||
+                                           (targetImageIndex === 0 && !currentSrc.includes("sendwise-1.png"));
                             
                             if (needsSwap) {
                                 if (imageElement.src !== undefined) {
@@ -203,8 +258,14 @@ export default function Journey() {
         // Initialize CONNECT overlay as hidden
         const connectOverlay = document.querySelector("#connect-overlay");
         if (connectOverlay) {
-            gsap.set(connectOverlay, { 
-                opacity: 0
+            gsap.set(connectOverlay, {
+                opacity: 0,
+            });
+        }
+        const connectMarquee = document.querySelector("#connect-marquee");
+        if (connectMarquee) {
+            gsap.set(connectMarquee, {
+                opacity: 0,
             });
         }
         
@@ -283,7 +344,7 @@ export default function Journey() {
     });
 
     return (
-        <Flex className="flex flex-col items-center space-y-2 pt-20 lg:pb-0 md:pb-32 sm:pb-40 pb-32 lg:mb-0 md:mb-20 sm:mb-24 mb-20 sm:mt-0 -mt-24">
+        <Flex className="flex flex-col items-center space-y-2 pt-20 lg:pb-0 md:pb-32 sm:pb-40 pb-32 lg:mb-32 md:mb-20 sm:mb-24 mb-20 sm:mt-0 -mt-24">
             {/* Heading */}
             <Flex className="flex-col inter-semibold md:text-[5rem] sm:text-[4rem] text-[1.7rem] text-center gap-4">
                 <p className="md:leading-[5.5rem] sm:leading-[4.5rem] leading-[2rem]">Van verzending tot warehouse,</p>
@@ -355,7 +416,7 @@ export default function Journey() {
                                             Eén verzendmethode met tientallen carri...
                                         </p>
                                         <p className="inter-medium subtitle-full opacity-0 max-h-0">
-                                            Eén verzendmethode met tientallen carriers in Europa. Eén pickup, vaste scherpe tarieven, altijd de beste vervoerder op de achtergrond.
+                                            Eén verzendmethode met tientallen carriers in Europa. Eén pickup, vaste scherpe tarieven, altijd de beste vervoerder.
                                         </p>
                                     </div>
                                     <Link to="/oplossingen/connect" className="text-hidden items-center space-x-1 flex">
@@ -378,19 +439,183 @@ export default function Journey() {
                 {/* Image */}
                 <Flex
                     id="clip"
-                    className="p-12 rounded-2xl md:w-[80%] w-[95%] mx-auto h-[100%] cursor-pointer relative overflow-hidden"
+                    className="p-12 rounded-2xl md:w-[80%] w-[95%] mx-auto h-full min-h-[22rem] lg:min-h-[28rem] cursor-pointer relative overflow-hidden"
                 >
                     <div id="blue-gradient-bg" className="absolute inset-0 bg-gradient-to-b from-[#9BB0D8] via-[#B8C8E8] to-[#A5A8C8] rounded-2xl" />
                     <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, mixBlendMode: 'overlay' }} />
-                    <Image
+                    <img
                         id="journey-image"
-                        preview={{ toolbarRender: () => null, mask: null }}
                         src="/sendwise-1.png"
-                        className="rounded-xl relative z-10"
+                        className="rounded-xl relative z-10 w-full h-full object-cover min-h-[16rem] lg:min-h-[22rem]"
                         alt="dashboard"
+                        loading="lazy"
                     />
-                    <div id="connect-overlay" className="absolute inset-0 bg-gradient-to-b from-[#9BB0D8] via-[#B8C8E8] to-[#A5A8C8] rounded-xl opacity-0 pointer-events-none z-20">
-                        <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, mixBlendMode: 'overlay' }} />
+                    <div
+                        id="connect-marquee"
+                        className="absolute inset-0 p-12 opacity-0 pointer-events-none z-[15]"
+                    >
+                        <div className="h-full grid grid-rows-2 grid-cols-1 lg:grid-rows-1 lg:grid-cols-[auto_auto] lg:justify-center gap-3 lg:gap-[2px]">
+                            <div className="vertical-marquee w-full lg:w-[11rem] xl:w-[12rem]">
+                                <div className="vertical-marquee-track vertical-marquee-track--slow vertical-marquee-track--down">
+                                    <div className="integration-logo-item">
+                                        <img alt="GLS integratie" className="integration-logo" src="/gls-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="DHL integratie" className="integration-logo" src="/sendwise-dhl.svg" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="DAO integratie" className="integration-logo" src="/dao-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="Colissimo integratie" className="integration-logo" src="/colissimo-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="PostNL integratie" className="integration-logo" src="/postnl-icoon.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="Sendwise integratie" className="integration-logo" src="/Sendwise zonder connect.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="Gofo integratie" className="integration-logo" src="/gofo-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="Carrier 10 integratie" className="integration-logo" src="/10.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="MRW integratie" className="integration-logo" src="/mrw-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="Correos integratie" className="integration-logo" src="/CORREOS-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="AT POST integratie" className="integration-logo" src="/AT POST-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="CTT integratie" className="integration-logo" src="/ctt-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/gls-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/sendwise-dhl.svg" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/dao-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/colissimo-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/postnl-icoon.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/Sendwise zonder connect.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/gofo-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/10.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/mrw-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/CORREOS-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/AT POST-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/ctt-logo-sendwise.png" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="vertical-marquee w-full lg:w-[11rem] xl:w-[12rem]">
+                                <div className="vertical-marquee-track vertical-marquee-track--fast">
+                                    <div className="integration-logo-item">
+                                        <img alt="PostNL integratie" className="integration-logo" src="/postnl-icoon.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="Sendwise integratie" className="integration-logo" src="/Sendwise zonder connect.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="Gofo integratie" className="integration-logo" src="/gofo-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="Carrier 10 integratie" className="integration-logo" src="/10.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="MRW integratie" className="integration-logo" src="/mrw-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="Correos integratie" className="integration-logo" src="/CORREOS-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="AT POST integratie" className="integration-logo" src="/AT POST-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="CTT integratie" className="integration-logo" src="/ctt-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="GLS integratie" className="integration-logo" src="/gls-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="DHL integratie" className="integration-logo" src="/sendwise-dhl.svg" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="DAO integratie" className="integration-logo" src="/dao-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item">
+                                        <img alt="Colissimo integratie" className="integration-logo" src="/colissimo-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/postnl-icoon.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/Sendwise zonder connect.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/gofo-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/10.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/mrw-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/CORREOS-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/AT POST-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/ctt-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/gls-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/sendwise-dhl.svg" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/dao-logo-sendwise.png" />
+                                    </div>
+                                    <div className="integration-logo-item" aria-hidden="true">
+                                        <img alt="" className="integration-logo" src="/colissimo-logo-sendwise.png" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="connect-overlay" className="absolute inset-0 p-12 opacity-0 pointer-events-none z-20">
+                        <img
+                            src="/sendwise-overlay.png"
+                            alt="overlay"
+                            className="rounded-xl w-full h-full object-cover min-h-[16rem] lg:min-h-[22rem]"
+                            loading="lazy"
+                        />
                     </div>
                 </Flex>
             </Flex>
@@ -417,20 +642,20 @@ export default function Journey() {
                         clickable: true,
                     }}
                     modules={[Autoplay]}
-                    className="w-full relative rounded-2xl  overflow-visible"
+                    className="w-full relative rounded-2xl overflow-visible h-[16rem]"
                     onSlideChange={(swiper) => setActiveMobileIndex(swiper.realIndex ?? swiper.activeIndex)}
                 >
                     {images?.map((item, index) => (
-                        <SwiperSlide key={index} className="bg-gradient-to-b from-[#9BB0D8] via-[#B8C8E8] to-[#A5A8C8] w-[100%] shadow rounded-2xl relative overflow-hidden">
+                        <SwiperSlide key={index} className="bg-gradient-to-b from-[#9BB0D8] via-[#B8C8E8] to-[#A5A8C8] w-[100%] shadow rounded-2xl relative overflow-hidden h-[16rem]">
                             <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, mixBlendMode: 'overlay' }} />
-                            <Flex className=" items-start w-[100%]  flex-col space-y-6 p-4">
-                                <Image
-                                    preview={{ toolbarRender: () => null, mask: null }}
+                            <div className="relative w-full h-full p-4">
+                                <img
                                     src={item}
-                                    className="rounded-xl w-[10rem]"
                                     alt="dashboard"
+                                    className="rounded-xl w-full h-full object-cover"
+                                    loading="lazy"
                                 />
-                            </Flex>
+                            </div>
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -455,12 +680,15 @@ export default function Journey() {
                                         {mobileItems[activeMobileIndex]?.full}
                                     </p>
                                 </div>
-                                <Flex className="text-hidden items-center space-x-1">
-                                    <p className="inter-medium text-appear bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">
+                                <Link
+                                    to={mobileItems[activeMobileIndex]?.href}
+                                    className="text-hidden items-center space-x-1 flex w-fit"
+                                >
+                                    <span className="inter-medium text-appear bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] bg-clip-text text-transparent">
                                         {mobileItems[activeMobileIndex]?.cta}
-                                    </p>
+                                    </span>
                                     <GoArrowUpRight className="text-[#1a5ee5]" />
-                                </Flex>
+                                </Link>
                             </motion.div>
                         </Flex>
                     </Flex>

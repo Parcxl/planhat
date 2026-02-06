@@ -669,7 +669,7 @@ const Prijzen = () => {
 
             <section className="w-full">
                 <Flex className="lg:w-[80%] w-[95%] mx-auto">
-                    <Flex className="relative w-full h-[22rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
+                    <Flex className="relative w-full h-[28rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
                         <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
                         <div className="absolute z-10 inset-0 rounded-2xl bg-black/55 sm:bg-black/35" />
                         <img src="/sendwise-2.png" alt="Sendwise" className="object-cover w-[100%] h-full rounded-2xl" />

@@ -218,7 +218,7 @@ const ConnectFlowAnimation = () => {
             </p>
           </div>
 
-          <div className="mt-5 grid grid-cols-[1.1fr_1fr_1.4fr] gap-4 text-[0.7rem] uppercase tracking-[0.12em] text-[#94A3B8]">
+          <div className="mt-5 grid grid-cols-[1.1fr_1fr_1.4fr] gap-4 text-[0.6rem] sm:text-[0.7rem] uppercase tracking-[0.12em] text-[#94A3B8]">
             <span>Ordernummer</span>
             <span>Bestemming</span>
             <span>Status</span>

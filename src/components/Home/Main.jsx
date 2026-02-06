@@ -64,7 +64,7 @@ const Main = () => {
             <Flex id="video-frame" className="w-[100%] mask-clip-path">
                 <img id="hero-img" src="/sendwise-hero-picture.png" alt="main" className="absolute h-screen sm:h-screen w-[100%] object-cover object-right sm:object-center" />
                 <div id="hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-screen sm:h-screen " />
-                <Flex className="z-30 sm:ml-[10%] ml-[4%] justify-start w-[100%] h-screen sm:h-screen sm:pt-48 pt-72 sm:pb-16 pb-16 flex-col space-y-10 sm:space-y-10">
+                <Flex className="z-30 sm:ml-[10%] ml-[4%] justify-start w-[100%] h-screen sm:h-screen sm:pt-48 pt-44 sm:pb-16 pb-16 flex-col space-y-10 sm:space-y-10">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ const Main = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, ease: "easeOut", delay: 0.7 }}
-                        className=" w-full sm:-mt-10 mt-2"
+                        className=" w-full sm:-mt-10 mt-0"
                     >
                         <Flex className="flex-col pl-1 inter-semibold md:leading-[4rem] leading-[3.1rem] text-white w-fit">
                             <p className="md:text-[4rem] sm:text-[2.5rem] text-[2.85rem]">Het platform voor<br />schaalbaar verzenden</p>
@@ -94,7 +94,7 @@ const Main = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1.4, y: 0 }}
                         transition={{ duration: 1, ease: "easeOut", delay: 1.4 }}
-                        className=" w-full sm:-mt-12 mt-2"
+                        className=" w-full sm:-mt-12 mt-0"
                     >
                         <p className="text-white font-light text-[1.25rem] sm:text-[1.1rem] md:text-[1.3rem]">
                             <strong className="font-bold">Verzenden is onnodig complex geworden.</strong> Sendwise
@@ -107,7 +107,7 @@ const Main = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.8, ease: "easeOut", delay: 1.8 }}
-                        className=" w-full sm:-mt-10 mt-2"
+                        className=" w-full sm:-mt-10 mt-0"
                     >
                         <Link
                             to="/start-met-sendwise"

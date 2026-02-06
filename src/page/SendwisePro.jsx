@@ -175,7 +175,7 @@ const SendwisePro = () => {
                 <Flex className="w-[95%] lg:w-[80%] mx-auto">
                     <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
                         <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left">
+                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left order-2 lg:order-1">
                                 <div className="space-y-3">
                                     <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
                                         Altijd weten waar je moet zijn
@@ -193,7 +193,7 @@ const SendwisePro = () => {
                                     ]}
                                 />
                             </div>
-                            <div className="lg:w-[45%] w-full">
+                            <div className="lg:w-[45%] w-full order-1 lg:order-2">
                                 <div className="w-full h-[14rem] sm:h-[18rem]">
                                     <WarehouseNavigationAnimation />
                                 </div>
@@ -238,7 +238,7 @@ const SendwisePro = () => {
                 <Flex className="w-[95%] lg:w-[80%] mx-auto">
                     <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
                         <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left">
+                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left order-2 lg:order-1">
                                 <div className="space-y-3">
                                     <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
                                         Volledig inzicht in je voorraad
@@ -255,7 +255,7 @@ const SendwisePro = () => {
                                     ]}
                                 />
                             </div>
-                            <div className="lg:w-[45%] w-full">
+                            <div className="lg:w-[45%] w-full order-1 lg:order-2">
                                 <div className="w-full h-[14rem] sm:h-[18rem]">
                                     <InventoryOverviewAnimation />
                                 </div>

@@ -1,9 +1,10 @@
 import { Flex } from "antd";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,9 +24,105 @@ const expectations = [
 ];
 
 const StartMetSendwise = () => {
+    const [formData, setFormData] = useState({
+        bedrijfsnaam: "",
+        kvk: "",
+        website: "",
+        voornaam: "",
+        achternaam: "",
+        email: "",
+        telefoon: "",
+    });
+    const [status, setStatus] = useState({ state: "idle", message: "" });
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    const fields = useMemo(
+        () => [
+            { name: "bedrijfsnaam", label: "Bedrijfsnaam", type: "text" },
+            { name: "kvk", label: "KVK-nummer", type: "text" },
+            { name: "website", label: "Website", type: "url" },
+            { name: "voornaam", label: "Voornaam", type: "text" },
+            { name: "achternaam", label: "Achternaam", type: "text" },
+            { name: "email", label: "E-mailadres", type: "email" },
+            { name: "telefoon", label: "Telefoonnummer", type: "tel" },
+        ],
+        []
+    );
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setStatus({ state: "idle", message: "" });
+
+        const missing = fields.filter((field) => !formData[field.name]?.trim());
+        if (missing.length > 0) {
+            setStatus({
+                state: "error",
+                message: "Vul alle velden in om je aanvraag te versturen.",
+            });
+            return;
+        }
+
+        const endpoint = "/api/accountaanvraag";
+
+        const websiteValue = formData.website.trim();
+        const normalizedWebsite =
+            websiteValue && !/^https?:\/\//i.test(websiteValue)
+                ? `https://${websiteValue}`
+                : websiteValue;
+
+        const payload = { ...formData, website: normalizedWebsite };
+
+        try {
+            setStatus({ state: "loading", message: "Aanvraag wordt verstuurd..." });
+
+            const response = await fetch(endpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok || data?.success === false) {
+                throw new Error(
+                    data?.error ||
+                        data?.message ||
+                        "Er ging iets mis bij het versturen."
+                );
+            }
+
+            setStatus({
+                state: "success",
+                message: "Account aanvraag succesvol verzonden.",
+            });
+            setFormData({
+                bedrijfsnaam: "",
+                kvk: "",
+                website: "",
+                voornaam: "",
+                achternaam: "",
+                email: "",
+                telefoon: "",
+            });
+        } catch (error) {
+            setStatus({
+                state: "error",
+                message:
+                    error?.message ||
+                    "Er ging iets mis bij het versturen. Probeer het later opnieuw.",
+            });
+        }
+    };
 
     useGSAP(() => {
         gsap.set("#start-hero-frame", {
@@ -103,9 +200,12 @@ const StartMetSendwise = () => {
                                     Vraag een account aan. Binnen 24 uur nemen we contact op om je verzendprofiel te bespreken en een passend tariefvoorstel te doen.
                                 </p>
                                 <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-6 sm:space-y-0">
-                                    <div className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl w-fit">
+                                    <Link
+                                        to="/contact"
+                                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl w-fit"
+                                    >
                                         <span>Eerst kennismaken</span>
-                                    </div>
+                                    </Link>
                                 </div>
                             </motion.div>
                         </Flex>
@@ -166,28 +266,53 @@ const StartMetSendwise = () => {
                                         Laat je gegevens achter. We nemen contact op om de mogelijkheden te bespreken.
                                     </p>
                                 </div>
-                                <form className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {[
-                                        "Bedrijfsnaam",
-                                        "Website",
-                                        "Voornaam",
-                                        "Achternaam",
-                                        "E-mailadres",
-                                        "Telefoonnummer",
-                                    ].map((label) => (
-                                        <div key={label} className="flex flex-col space-y-2 md:col-span-1">
-                                            <label className="text-gray-900 inter-medium text-[0.95rem]">{label}</label>
+                                <form
+                                    onSubmit={handleSubmit}
+                                    className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4"
+                                >
+                                    {fields.map((field) => (
+                                        <div key={field.name} className="flex flex-col space-y-2 md:col-span-1">
+                                            <label
+                                                htmlFor={field.name}
+                                                className="text-gray-900 inter-medium text-[0.95rem]"
+                                            >
+                                                {field.label}
+                                            </label>
                                             <input
-                                                type="text"
+                                                id={field.name}
+                                                name={field.name}
+                                                type={field.type}
+                                                value={formData[field.name]}
+                                                onChange={handleChange}
+                                                required
                                                 className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-700 inter-medium transition-all duration-300 ease-out focus:border-[#1a5ee5] focus:outline-none focus:ring-2 focus:ring-[#1a5ee5]/20"
                                             />
                                         </div>
                                     ))}
                                     <div className="md:col-span-2 pt-2">
-                                        <div className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group">
+                                        <button
+                                            type="submit"
+                                            disabled={status.state === "loading"}
+                                            className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group disabled:opacity-60 disabled:cursor-not-allowed"
+                                        >
                                             <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                            <p className="relative z-10">Account aanvragen</p>
-                                        </div>
+                                            <span className="relative z-10">
+                                                {status.state === "loading"
+                                                    ? "Bezig met verzenden..."
+                                                    : "Account aanvragen"}
+                                            </span>
+                                        </button>
+                                        {status.message && (
+                                            <p
+                                                className={`mt-3 inter-medium text-[0.9rem] ${
+                                                    status.state === "success"
+                                                        ? "text-emerald-600"
+                                                        : "text-red-500"
+                                                }`}
+                                            >
+                                                {status.message}
+                                            </p>
+                                        )}
                                         <p className="mt-3 text-gray-500 inter-medium text-[0.85rem]">
                                             Na je aanvraag nemen we binnen 24 uur contact met je op.
                                         </p>

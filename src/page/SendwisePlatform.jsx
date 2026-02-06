@@ -157,9 +157,13 @@ const SendwisePlatform = () => {
                     <div className="rounded-2xl border border-gray-200 bg-white/80 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
                         <div className="flex flex-col space-y-4">
                             <div className="relative w-fit">
-                                <div className="absolute -inset-x-3 bottom-1 h-3 bg-gradient-to-r from-[#1a5ee5]/25 to-transparent rounded-full" />
+                                <div className="absolute -inset-x-3 bottom-1 h-3 bg-gradient-to-r from-[#1a5ee5]/25 to-transparent rounded-full hidden sm:block" />
                                 <p className="relative inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.6rem] text-gray-900">
-                                    Eén platform voor al je verzendingen
+                                    Eén platform voor al je{" "}
+                                    <span className="relative inline-block">
+                                        <span className="absolute -inset-x-1 bottom-0.5 h-2 bg-gradient-to-r from-[#1a5ee5]/25 to-transparent rounded-full sm:hidden" />
+                                        <span className="relative">verzendingen</span>
+                                    </span>
                                 </p>
                             </div>
                             <p className="text-gray-700 inter-medium lg:text-[1.1rem] text-[1rem] max-w-[60rem] leading-relaxed">
@@ -299,7 +303,7 @@ const SendwisePlatform = () => {
                 <Flex className="w-[95%] lg:w-[80%] mx-auto">
                     <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
                         <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left">
+                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left order-2 lg:order-1">
                                 <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
                                     Volledig inzicht in elke zending
                                 </h2>
@@ -312,7 +316,7 @@ const SendwisePlatform = () => {
                                     ]}
                                 />
                             </div>
-                            <div className="lg:w-[45%] w-full">
+                            <div className="lg:w-[45%] w-full order-1 lg:order-2">
                                 <div className="w-full h-[14rem] sm:h-[18rem]">
                                     <ShipmentInsightAnimation />
                                 </div>
@@ -358,7 +362,7 @@ const SendwisePlatform = () => {
                 <Flex className="w-[95%] lg:w-[80%] mx-auto">
                     <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
                         <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left">
+                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left order-2 lg:order-1">
                                 <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
                                     Inzicht in kosten en facturen
                                 </h2>
@@ -371,7 +375,7 @@ const SendwisePlatform = () => {
                                     ]}
                                 />
                             </div>
-                            <div className="lg:w-[45%] w-full">
+                            <div className="lg:w-[45%] w-full order-1 lg:order-2">
                                 <div className="w-full h-[14rem] sm:h-[18rem]">
                                     <BillingInsightAnimation />
                                 </div>

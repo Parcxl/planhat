@@ -13,6 +13,9 @@ const Navbar = () => {
     const [mobile, setMobile] = useState(false);
     const [navMenu, setNavMenu] = useState('');
     const [integrationMenu, setIntegrationMenu] = useState('');
+    const [mobileOplossingenOpen, setMobileOplossingenOpen] = useState(false);
+    const [mobileOplossingenSection, setMobileOplossingenSection] = useState('');
+    const [mobileIntegratiesSection, setMobileIntegratiesSection] = useState('');
     const [scrolled, setScrolled] = useState(false);
     const NavList = ['Oplossingen']
     const navigate = useNavigate();
@@ -66,8 +69,19 @@ const Navbar = () => {
             CONNECT: "/oplossingen/connect",
             WooCommerce: "/integraties/woocommerce",
             "CCV Shop": "/integraties/ccv-shop",
+            Shopify: "/integraties",
+            Lightspeed: "/integraties",
+            Magento: "/integraties",
+            Mijnwebwinkel: "/integraties",
+            Ecwid: "/integraties",
+            Wix: "/integraties",
+            PrestaShop: "/integraties",
+            "Bol.com": "/integraties",
+            Lyra: "/integraties",
+            GoedGepickt: "/integraties",
             "Voor webshops": "/voor-webshops",
             "Voor fulfilmentcenters": "/voor-fulfilmentcenters",
+            Integraties: "/integraties",
             "Account aanvragen": "/start-met-sendwise",
         };
         navigate(routes[item] || "/");
@@ -75,6 +89,9 @@ const Navbar = () => {
         setDropdown(false);
         setNavMenu('');
         setIntegrationMenu('');
+        setMobileOplossingenOpen(false);
+        setMobileOplossingenSection('');
+        setMobileIntegratiesSection('');
     };
 
     const isActive = (item) => {
@@ -90,6 +107,7 @@ const Navbar = () => {
         if (item === "Voor webshops") return location.pathname === "/voor-webshops";
         if (item === "Voor fulfilmentcenters") return location.pathname === "/voor-fulfilmentcenters";
         if (item === "Account aanvragen") return location.pathname === "/start-met-sendwise";
+        if (item === "Integraties") return location.pathname === "/integraties";
         if (item === "Oplossingen") return location.pathname.startsWith("/oplossingen") || location.pathname === "/voor-webshops" || location.pathname === "/voor-fulfilmentcenters";
         return false;
     };
@@ -323,32 +341,293 @@ const Navbar = () => {
                                 animate={{ y: 0, opacity: 1, scale: 1 }}
                                 exit={{ y: -20, opacity: 0, scale: 0.995 }}
                                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                className="w-[100%] flex-col space-y-8 text-gray-200 text-[2.3rem] pt-12"
+                                className="w-[100%] flex-col space-y-8 text-gray-200 text-[2.3rem] pt-12 overflow-y-auto max-h-[calc(100vh-4.5rem)]"
                             >
                                 <Flex className=" justify-between w-[90%] mx-auto cursor-pointer" onClick={() => handleNavigate('Home')}>
                                     <p className={`${isActive('Home') ? 'text-white inter-semibold' : 'text-gray-200 inter-medium'}`}>Home</p>
                                 </Flex>
-                                <Flex className="justify-between w-[90%] mx-auto items-center">
+                                <Flex
+                                    className="justify-between w-[90%] mx-auto items-center cursor-pointer"
+                                    onClick={() => setMobileOplossingenOpen((prev) => !prev)}
+                                >
                                     <p className={`${isActive('Oplossingen') ? 'text-white inter-semibold' : 'text-gray-200 inter-medium'}`}>Oplossingen</p>
-                                    <FiPlus className="text-[2rem] translate-y-[4px]" />
+                                    {mobileOplossingenOpen ? (
+                                        <HiOutlineMinusSmall className="text-[2rem] translate-y-[2px]" />
+                                    ) : (
+                                        <FiPlus className="text-[2rem] translate-y-[2px]" />
+                                    )}
                                 </Flex>
-                                <Flex className="w-[90%] mx-auto flex-col space-y-3">
-                                    <p className="text-gray-400 inter-medium text-[0.95rem] tracking-[0.18em]">INTEGRATIES</p>
-                                    <button
-                                        type="button"
-                                        onClick={() => handleNavigate("WooCommerce")}
-                                        className={`${isActive("WooCommerce") ? "text-white inter-semibold" : "text-gray-200 inter-medium"} text-left text-[1.1rem]`}
-                                    >
-                                        WooCommerce
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => handleNavigate("CCV Shop")}
-                                        className={`${isActive("CCV Shop") ? "text-white inter-semibold" : "text-gray-200 inter-medium"} text-left text-[1.1rem]`}
-                                    >
-                                        CCV Shop
-                                    </button>
-                                </Flex>
+                                <AnimatePresence>
+                                    {mobileOplossingenOpen && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                                            className="w-[90%] mx-auto flex-col space-y-4 overflow-hidden"
+                                        >
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    setMobileOplossingenSection((prev) =>
+                                                        prev === "producten" ? "" : "producten"
+                                                    )
+                                                }
+                                                className="flex w-full items-center justify-between text-left"
+                                            >
+                                                <span className="text-gray-400 inter-medium text-[0.95rem] tracking-[0.18em]">
+                                                    PRODUCTEN
+                                                </span>
+                                                {mobileOplossingenSection === "producten" ? (
+                                                    <HiOutlineMinusSmall className="text-[1.4rem]" />
+                                                ) : (
+                                                    <FiPlus className="text-[1.4rem]" />
+                                                )}
+                                            </button>
+                                            <AnimatePresence>
+                                                {mobileOplossingenSection === "producten" && (
+                                                    <motion.div
+                                                        initial={{ height: 0, opacity: 0 }}
+                                                        animate={{ height: "auto", opacity: 1 }}
+                                                        exit={{ height: 0, opacity: 0 }}
+                                                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                                        className="flex flex-col space-y-3 pl-1 overflow-hidden"
+                                                    >
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => handleNavigate("Sendwise")}
+                                                            className="text-left text-[1.1rem] text-gray-200 inter-medium"
+                                                        >
+                                                            SENDWISE
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => handleNavigate("PRO")}
+                                                            className="text-left text-[1.1rem] text-gray-200 inter-medium"
+                                                        >
+                                                            PRO
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => handleNavigate("CONNECT")}
+                                                            className="text-left text-[1.1rem] text-gray-200 inter-medium"
+                                                        >
+                                                            CONNECT
+                                                        </button>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    setMobileOplossingenSection((prev) =>
+                                                        prev === "toepassingen" ? "" : "toepassingen"
+                                                    )
+                                                }
+                                                className="flex w-full items-center justify-between text-left"
+                                            >
+                                                <span className="text-gray-400 inter-medium text-[0.95rem] tracking-[0.18em]">
+                                                    TOEPASSINGEN
+                                                </span>
+                                                {mobileOplossingenSection === "toepassingen" ? (
+                                                    <HiOutlineMinusSmall className="text-[1.4rem]" />
+                                                ) : (
+                                                    <FiPlus className="text-[1.4rem]" />
+                                                )}
+                                            </button>
+                                            <AnimatePresence>
+                                                {mobileOplossingenSection === "toepassingen" && (
+                                                    <motion.div
+                                                        initial={{ height: 0, opacity: 0 }}
+                                                        animate={{ height: "auto", opacity: 1 }}
+                                                        exit={{ height: 0, opacity: 0 }}
+                                                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                                        className="flex flex-col space-y-3 pl-1 overflow-hidden"
+                                                    >
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => handleNavigate("Voor webshops")}
+                                                            className="text-left text-[1.1rem] text-gray-200 inter-medium"
+                                                        >
+                                                            Voor webshops
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => handleNavigate("Voor fulfilmentcenters")}
+                                                            className="text-left text-[1.1rem] text-gray-200 inter-medium"
+                                                        >
+                                                            Voor fulfilmentcenters
+                                                        </button>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    setMobileOplossingenSection((prev) =>
+                                                        prev === "integraties" ? "" : "integraties"
+                                                    )
+                                                }
+                                                className="flex w-full items-center justify-between text-left"
+                                            >
+                                                <span className="text-gray-400 inter-medium text-[0.95rem] tracking-[0.18em]">
+                                                    INTEGRATIES
+                                                </span>
+                                                {mobileOplossingenSection === "integraties" ? (
+                                                    <HiOutlineMinusSmall className="text-[1.4rem]" />
+                                                ) : (
+                                                    <FiPlus className="text-[1.4rem]" />
+                                                )}
+                                            </button>
+                                            <AnimatePresence>
+                                                {mobileOplossingenSection === "integraties" && (
+                                                    <motion.div
+                                                        initial={{ height: 0, opacity: 0 }}
+                                                        animate={{ height: "auto", opacity: 1 }}
+                                                        exit={{ height: 0, opacity: 0 }}
+                                                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                                        className="flex flex-col space-y-4 pl-1 overflow-hidden"
+                                                    >
+                                                        <button
+                                                            type="button"
+                                                            onClick={() =>
+                                                                setMobileIntegratiesSection((prev) =>
+                                                                    prev === "webshop" ? "" : "webshop"
+                                                                )
+                                                            }
+                                                            className="flex w-full items-center justify-between text-left"
+                                                        >
+                                                            <span className="text-white inter-medium text-[0.95rem] tracking-[0.18em]">
+                                                                WEBSHOP
+                                                            </span>
+                                                            {mobileIntegratiesSection === "webshop" ? (
+                                                                <HiOutlineMinusSmall className="text-[1.2rem]" />
+                                                            ) : (
+                                                                <FiPlus className="text-[1.2rem]" />
+                                                            )}
+                                                        </button>
+                                                        <AnimatePresence>
+                                                            {mobileIntegratiesSection === "webshop" && (
+                                                                <motion.div
+                                                                    initial={{ height: 0, opacity: 0 }}
+                                                                    animate={{ height: "auto", opacity: 1 }}
+                                                                    exit={{ height: 0, opacity: 0 }}
+                                                                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                                                                    className="flex flex-col space-y-2 pl-1 overflow-hidden"
+                                                                >
+                                                                    {[
+                                                                        "WooCommerce",
+                                                                        "Shopify",
+                                                                        "CCV Shop",
+                                                                        "Lightspeed",
+                                                                        "Magento",
+                                                                        "Mijnwebwinkel",
+                                                                        "Ecwid",
+                                                                        "Wix",
+                                                                        "PrestaShop",
+                                                                    ].map((label) => (
+                                                                        <button
+                                                                            key={label}
+                                                                            type="button"
+                                                                            onClick={() => handleNavigate(label)}
+                                                                            className="text-left text-[1.05rem] text-gray-200 inter-medium"
+                                                                        >
+                                                                            {label}
+                                                                        </button>
+                                                                    ))}
+                                                                </motion.div>
+                                                            )}
+                                                        </AnimatePresence>
+
+                                                        <button
+                                                            type="button"
+                                                            onClick={() =>
+                                                                setMobileIntegratiesSection((prev) =>
+                                                                    prev === "marketplace" ? "" : "marketplace"
+                                                                )
+                                                            }
+                                                            className="flex w-full items-center justify-between text-left"
+                                                        >
+                                                            <span className="text-white inter-medium text-[0.95rem] tracking-[0.18em]">
+                                                                MARKETPLACE
+                                                            </span>
+                                                            {mobileIntegratiesSection === "marketplace" ? (
+                                                                <HiOutlineMinusSmall className="text-[1.2rem]" />
+                                                            ) : (
+                                                                <FiPlus className="text-[1.2rem]" />
+                                                            )}
+                                                        </button>
+                                                        <AnimatePresence>
+                                                            {mobileIntegratiesSection === "marketplace" && (
+                                                                <motion.div
+                                                                    initial={{ height: 0, opacity: 0 }}
+                                                                    animate={{ height: "auto", opacity: 1 }}
+                                                                    exit={{ height: 0, opacity: 0 }}
+                                                                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                                                                    className="flex flex-col space-y-2 pl-1 overflow-hidden"
+                                                                >
+                                                                    {["Bol.com"].map((label) => (
+                                                                        <button
+                                                                            key={label}
+                                                                            type="button"
+                                                                            onClick={() => handleNavigate(label)}
+                                                                            className="text-left text-[1.05rem] text-gray-200 inter-medium"
+                                                                        >
+                                                                            {label}
+                                                                        </button>
+                                                                    ))}
+                                                                </motion.div>
+                                                            )}
+                                                        </AnimatePresence>
+
+                                                        <button
+                                                            type="button"
+                                                            onClick={() =>
+                                                                setMobileIntegratiesSection((prev) =>
+                                                                    prev === "wms" ? "" : "wms"
+                                                                )
+                                                            }
+                                                            className="flex w-full items-center justify-between text-left"
+                                                        >
+                                                            <span className="text-white inter-medium text-[0.95rem] tracking-[0.18em]">
+                                                                WMS
+                                                            </span>
+                                                            {mobileIntegratiesSection === "wms" ? (
+                                                                <HiOutlineMinusSmall className="text-[1.2rem]" />
+                                                            ) : (
+                                                                <FiPlus className="text-[1.2rem]" />
+                                                            )}
+                                                        </button>
+                                                        <AnimatePresence>
+                                                            {mobileIntegratiesSection === "wms" && (
+                                                                <motion.div
+                                                                    initial={{ height: 0, opacity: 0 }}
+                                                                    animate={{ height: "auto", opacity: 1 }}
+                                                                    exit={{ height: 0, opacity: 0 }}
+                                                                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                                                                    className="flex flex-col space-y-2 pl-1 overflow-hidden"
+                                                                >
+                                                                    {["Lyra", "GoedGepickt"].map((label) => (
+                                                                        <button
+                                                                            key={label}
+                                                                            type="button"
+                                                                            onClick={() => handleNavigate(label)}
+                                                                            className="text-left text-[1.05rem] text-gray-200 inter-medium"
+                                                                        >
+                                                                            {label}
+                                                                        </button>
+                                                                    ))}
+                                                                </motion.div>
+                                                            )}
+                                                        </AnimatePresence>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                                 <Flex className=" justify-between w-[90%] mx-auto cursor-pointer" onClick={() => handleNavigate('Prijzen')}>
                                     <p className={`${isActive('Prijzen') ? 'text-white inter-semibold' : 'text-gray-200 inter-medium'}`}>Prijzen</p>
                                 </Flex>
