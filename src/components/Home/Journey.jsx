@@ -611,7 +611,7 @@ export default function Journey() {
                     </div>
                     <div id="connect-overlay" className="absolute inset-0 p-12 opacity-0 pointer-events-none z-20">
                         <img
-                            src="/sendwise-overlay.png"
+                            src="/sendwise-1-2100.png"
                             alt="overlay"
                             className="rounded-xl w-full h-full object-cover min-h-[16rem] lg:min-h-[22rem]"
                             loading="lazy"
@@ -697,3 +697,4 @@ export default function Journey() {
         </Flex>
     );
 }
+
