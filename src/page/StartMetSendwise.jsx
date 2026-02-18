@@ -70,7 +70,12 @@ const StartMetSendwise = () => {
             return;
         }
 
-        const endpoint = "/api/accountaanvraag";
+        // In development: Vite proxy forwards to app.sendwise.nl. In production: call API directly.
+        const endpoint = import.meta.env.DEV
+            ? "/api/accountaanvraag"
+            : "https://app.sendwise.nl/api/accountaanvragen/create";
+        const token =
+            import.meta.env.VITE_ACCOUNTANVRAAG_TOKEN || "parcxl-accountaanvragen-2025";
 
         const websiteValue = formData.website.trim();
         const normalizedWebsite =
@@ -80,14 +85,17 @@ const StartMetSendwise = () => {
 
         const payload = { ...formData, website: normalizedWebsite };
 
+        const headers = {
+            "Content-Type": "application/json",
+            ...(import.meta.env.PROD && { Authorization: `Bearer ${token}` }),
+        };
+
         try {
             setStatus({ state: "loading", message: "Aanvraag wordt verstuurd..." });
 
             const response = await fetch(endpoint, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers,
                 body: JSON.stringify(payload),
             });
 
