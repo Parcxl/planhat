@@ -23,15 +23,25 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
+            // Op de blogpagina /blog/sendwise-goedgepickt willen we altijd de "gescrollde" header
+            if (location.pathname === "/blog/sendwise-goedgepickt") {
+                setScrolled(true);
+                return;
+            }
+
             if (window.scrollY > 50) {
                 setScrolled(true);
             } else {
                 setScrolled(false);
             }
         };
+
+        // Direct bij laden en bij route-wijziging de juiste state zetten
+        handleScroll();
+
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [location.pathname]);
 
     useEffect(() => {
         const root = document.getElementById("site-content");
@@ -78,7 +88,7 @@ const Navbar = () => {
             PrestaShop: "/integraties",
             "Bol.com": "/integraties",
             Lyra: "/integraties",
-            GoedGepickt: "/integraties",
+            GoedGepickt: "/blog/sendwise-goedgepickt",
             "Voor webshops": "/voor-webshops",
             "Voor fulfilmentcenters": "/voor-fulfilmentcenters",
             Integraties: "/integraties",
@@ -291,7 +301,13 @@ const Navbar = () => {
                                         <div className={`overflow-hidden transition-all duration-300 ease-out ${integrationMenu === "wms" ? "max-h-40 opacity-100" : "max-h-0 opacity-0"}`}>
                                             <div className="flex flex-col space-y-2 pl-2 pt-2">
                                                 <p>Lyra</p>
-                                                <p>GoedGepickt</p>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleNavigate("GoedGepickt")}
+                                                    className={`${getDropdownItemClass(false)} text-left hover:text-[#1a5ee5]`}
+                                                >
+                                                    GoedGepickt
+                                                </button>
                                             </div>
                                         </div>
                                     </Flex>

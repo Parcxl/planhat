@@ -40,7 +40,7 @@ const Footer = () => {
                                         <p>PrestaShop</p>
                                         <p>Bol.com</p>
                                         <p>Lyra</p>
-                                        <p>GoedGepickt</p>
+                                        <Link to="/blog/sendwise-goedgepickt">GoedGepickt</Link>
                                     </div>
                                 </Flex>
                             </Flex>

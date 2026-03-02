@@ -17,6 +17,7 @@ import StartMetSendwise from "./page/StartMetSendwise"
 import AlgemeneVoorwaarden from "./page/AlgemeneVoorwaarden"
 import Privacy from "./page/Privacy"
 import Integraties from "./page/Integraties"
+import BlogGoedgepickt from "./page/BlogGoedgepickt"
 
 const PageTransition = ({ children }) => (
   <motion.div
@@ -89,6 +90,11 @@ const seoMap = {
     title: "Start met Sendwise | Vraag een account aan",
     description:
       "Vraag een Sendwise account aan en ontdek hoe je slimmer en goedkoper kunt verzenden.",
+  },
+  "/blog/sendwise-goedgepickt": {
+    title: "Verbind Sendwise met Goedgepickt | Stap-voor-stap handleiding",
+    description:
+      "Leer hoe je Sendwise koppelt aan Goedgepickt via een API-key en dynamische verzendmethoden in een duidelijke stap-voor-stap gids.",
   },
 }
 
@@ -230,6 +236,14 @@ const AnimatedRoutes = () => {
             element={
               <PageTransition>
                 <Integraties />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/blog/sendwise-goedgepickt"
+            element={
+              <PageTransition>
+                <BlogGoedgepickt />
               </PageTransition>
             }
           />
