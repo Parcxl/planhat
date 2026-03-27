@@ -33,6 +33,7 @@ const StartMetSendwise = () => {
         email: "",
         telefoon: "",
     });
+    const [acceptedTerms, setAcceptedTerms] = useState(false);
     const [status, setStatus] = useState({ state: "idle", message: "" });
 
     useEffect(() => {
@@ -66,6 +67,15 @@ const StartMetSendwise = () => {
             setStatus({
                 state: "error",
                 message: "Vul alle velden in om je aanvraag te versturen.",
+            });
+            return;
+        }
+
+        if (!acceptedTerms) {
+            setStatus({
+                state: "error",
+                message:
+                    "Ga akkoord met de algemene voorwaarden om je aanvraag te versturen.",
             });
             return;
         }
@@ -113,6 +123,7 @@ const StartMetSendwise = () => {
                 email: "",
                 telefoon: "",
             });
+            setAcceptedTerms(false);
         } catch (error) {
             setStatus({
                 state: "error",
@@ -289,9 +300,31 @@ const StartMetSendwise = () => {
                                         </div>
                                     ))}
                                     <div className="md:col-span-2 pt-2">
+                                        <label className="flex items-start gap-3 text-gray-700 inter-medium text-[0.95rem] leading-snug">
+                                            <input
+                                                type="checkbox"
+                                                checked={acceptedTerms}
+                                                onChange={(event) =>
+                                                    setAcceptedTerms(event.target.checked)
+                                                }
+                                                required
+                                                className="mt-0.5 h-4 w-4 rounded border-gray-300 text-[#1a5ee5] focus:ring-[#1a5ee5]/30"
+                                            />
+                                            <span>
+                                                Ik ga akkoord met de{" "}
+                                                <Link
+                                                    to="/algemene-voorwaarden"
+                                                    className="text-[#1a5ee5] hover:underline"
+                                                >
+                                                    algemene voorwaarden
+                                                </Link>
+                                                .
+                                            </span>
+                                        </label>
+                                        <div className="h-4" />
                                         <button
                                             type="submit"
-                                            disabled={status.state === "loading"}
+                                            disabled={status.state === "loading" || !acceptedTerms}
                                             className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group disabled:opacity-60 disabled:cursor-not-allowed"
                                         >
                                             <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
