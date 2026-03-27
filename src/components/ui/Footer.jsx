@@ -59,6 +59,7 @@ const Footer = () => {
                             </Flex>
                             <Flex className="grid lg:grid-cols-2 grid-cols-2 gap-1 lg:pt-0 pt-2">
                                 <Link className="whitespace-nowrap" to="/algemene-voorwaarden">Algemene voorwaarden</Link>
+                                <Link className="whitespace-nowrap" to="/verwerkersovereenkomst">Verwerkersovereenkomst</Link>
                                 <Link className="whitespace-nowrap" to="/privacy">Privacy voorwaarden</Link>
                             </Flex>
                         </Flex>
@@ -72,6 +73,7 @@ const Footer = () => {
                             <p>2026 Sendwise</p>
                         </Flex>
                         <Link to="/algemene-voorwaarden">Algemene voorwaarden</Link>
+                        <Link to="/verwerkersovereenkomst">Verwerkersovereenkomst</Link>
                         <Link to="/privacy">Privacy voorwaarden</Link>
                     </Flex>
                 </Flex>
