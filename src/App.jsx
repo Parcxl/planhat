@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"
+import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { AnimatePresence, motion } from "framer-motion"
 import Header from "./components/ui/Header"
 import Home from "./page/Home"
@@ -85,62 +85,85 @@ const seoMap = {
   "/over-ons": {
     title: "Over Sendwise | Slimmer en goedkoper verzenden",
     description:
-      "Het verhaal achter Sendwise. Ons team, onze missie en waarom wij verzenden eenvoudiger maken.",
+      "Sendwise is het verzendplatform voor webshops en fulfilmentcenters. Eerlijk, schaalbaar en transparant.",
   },
   "/contact": {
-    title: "Contact met Sendwise | Neem contact op",
+    title: "Contact | Neem contact op met Sendwise",
     description:
-      "Vragen over Sendwise? Neem contact met ons op. We helpen je graag op weg.",
+      "Vragen over verzenden, tarieven of samenwerking? Neem contact op met Sendwise.",
   },
   "/start-met-sendwise": {
-    title: "Account aanvragen | Start met Sendwise",
+    title: "Start met Sendwise | Vraag een account aan",
     description:
-      "Vraag een account aan bij Sendwise. Binnen 24 uur nemen we contact op.",
-  },
-  "/algemene-voorwaarden": {
-    title: "Algemene voorwaarden | Sendwise",
-    description:
-      "Lees de algemene voorwaarden van Sendwise voor het gebruik van het platform.",
-  },
-  "/privacy": {
-    title: "Privacy voorwaarden | Sendwise",
-    description:
-      "Lees hoe Sendwise omgaat met persoonsgegevens en privacy.",
-  },
-  "/integraties": {
-    title: "Integraties | Sendwise koppelingen",
-    description:
-      "Bekijk alle integraties van Sendwise met webshops en systemen.",
+      "Vraag een Sendwise account aan en ontdek hoe je slimmer en goedkoper kunt verzenden.",
   },
   "/blog/sendwise-goedgepickt": {
-    title: "Sendwise x GoedGepickt | Integratie en voordelen",
+    title: "Verbind Sendwise met Goedgepickt | Stap-voor-stap handleiding",
     description:
-      "Koppel Sendwise met GoedGepickt en automatiseer je fulfilment.",
+      "Leer hoe je Sendwise koppelt aan Goedgepickt via een API-key en dynamische verzendmethoden in een duidelijke stap-voor-stap gids.",
   },
 }
 
 const AnimatedRoutes = () => {
   const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const current = seoMap[location.pathname]
-    if (!current) return
-    document.title = current.title
-    const metaDescription = document.querySelector('meta[name="description"]')
-    if (metaDescription) {
-      metaDescription.setAttribute("content", current.description)
+    const { pathname, search, hash } = location
+    if (pathname.length > 1 && pathname.endsWith("/")) {
+      const nextPath = pathname.replace(/\/+$/, "")
+      navigate(`${nextPath}${search}${hash}`, { replace: true })
     }
+  }, [location, navigate])
+
+  useEffect(() => {
+    const seo = seoMap[location.pathname] || seoMap["/"]
+    if (!seo) return
+
+    document.title = seo.title
+    let descriptionTag = document.querySelector('meta[name="description"]')
+    if (!descriptionTag) {
+      descriptionTag = document.createElement("meta")
+      descriptionTag.setAttribute("name", "description")
+      document.head.appendChild(descriptionTag)
+    }
+    descriptionTag.setAttribute("content", seo.description)
   }, [location.pathname])
 
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Header />}>
+        <Route element={<Header />}>
           <Route
             index
+            path="/"
             element={
               <PageTransition>
                 <Home />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <PageTransition>
+                <Contact />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/over-ons"
+            element={
+              <PageTransition>
+                <OverOns />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/prijzen"
+            element={
+              <PageTransition>
+                <Prijzen />
               </PageTransition>
             }
           />
@@ -245,6 +268,14 @@ const AnimatedRoutes = () => {
             element={
               <PageTransition>
                 <BlogGoedgepickt />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <PageTransition>
+                <Home />
               </PageTransition>
             }
           />
