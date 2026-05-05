@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const algemeneVoorwaardenPdf = "/sendwise-algemene-voorwaarden:15-03-2026.pdf";
+
 const steps = [
     "Je vraagt een account aan",
     "We nemen binnen 24 uur contact op",
@@ -312,12 +314,14 @@ const StartMetSendwise = () => {
                                             />
                                             <span>
                                                 Ik ga akkoord met de{" "}
-                                                <Link
-                                                    to="/algemene-voorwaarden"
+                                                <a
+                                                    href={algemeneVoorwaardenPdf}
+                                                    target="_blank"
+                                                    rel="noreferrer"
                                                     className="text-[#1a5ee5] hover:underline"
                                                 >
                                                     algemene voorwaarden
-                                                </Link>
+                                                </a>
                                                 .
                                             </span>
                                         </label>

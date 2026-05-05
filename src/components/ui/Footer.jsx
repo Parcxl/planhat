@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { FaRegCopyright } from "react-icons/fa";
 
 const Footer = () => {
+    const algemeneVoorwaardenPdf = "/sendwise-algemene-voorwaarden:15-03-2026.pdf";
+
     return (
         <Flex className="flex-col ">
             <div className="h-[0.8px] w-[80%] mx-auto bg-gray-300" />
@@ -58,7 +60,7 @@ const Footer = () => {
                                 <p>2026 Sendwise</p>
                             </Flex>
                             <Flex className="grid lg:grid-cols-2 grid-cols-2 gap-1 lg:pt-0 pt-2">
-                                <Link className="whitespace-nowrap" to="/algemene-voorwaarden">Algemene voorwaarden</Link>
+                                <a className="whitespace-nowrap" href={algemeneVoorwaardenPdf} target="_blank" rel="noreferrer">Algemene voorwaarden</a>
                                 <Link className="whitespace-nowrap" to="/verwerkersovereenkomst">Verwerkersovereenkomst</Link>
                                 <Link className="whitespace-nowrap" to="/privacy">Privacy voorwaarden</Link>
                             </Flex>
@@ -72,7 +74,7 @@ const Footer = () => {
                             <FaRegCopyright />
                             <p>2026 Sendwise</p>
                         </Flex>
-                        <Link to="/algemene-voorwaarden">Algemene voorwaarden</Link>
+                        <a href={algemeneVoorwaardenPdf} target="_blank" rel="noreferrer">Algemene voorwaarden</a>
                         <Link to="/verwerkersovereenkomst">Verwerkersovereenkomst</Link>
                         <Link to="/privacy">Privacy voorwaarden</Link>
                     </Flex>
