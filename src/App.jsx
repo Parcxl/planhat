@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-ro
 import { AnimatePresence, motion } from "framer-motion"
 import Header from "./components/ui/Header"
 import Home from "./page/Home"
+import HomePage2 from "./page/Homepage2"
+import FloatingBoxDemo from "./page/FloatingBoxDemo"
 import Contact from "./page/Contact"
 import OverOns from "./page/OverOns"
 import Prijzen from "./page/Prijzen"
@@ -36,6 +38,15 @@ const seoMap = {
     title: "Slim verzenden voor webshops — vanaf €3,50 per pakket | Sendwise",
     description:
       "Verzend pakketten vanaf €3,50 per stuk. Geen contracten, geen abonnementskosten en eerlijke all-in tarieven zonder verrassingen.",
+  },
+  "/homepage2": {
+    title: "Sendwise homepage redesign | Slim verzenden voor webshops",
+    description:
+      "Nieuwe witte homepage voor Sendwise met scherpe verzendtarieven, slimme vervoerderkeuze en fulfilmentsoftware.",
+  },
+  "/verzenddoos-animatie": {
+    title: "3D verzenddoos animatie | Sendwise",
+    description: "Losse 3D animatie van een zwevende kartonnen verzenddoos.",
   },
   "/oplossingen/sendwise": {
     title: "Sendwise verzendplatform | Labels, tracking & integraties",
@@ -133,6 +144,22 @@ const AnimatedRoutes = () => {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
+        <Route
+          path="/homepage2"
+          element={
+            <PageTransition>
+              <HomePage2 />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/verzenddoos-animatie"
+          element={
+            <PageTransition>
+              <FloatingBoxDemo />
+            </PageTransition>
+          }
+        />
         <Route element={<Header />}>
           <Route
             index
