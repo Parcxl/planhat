@@ -1,12 +1,16 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence, motion as Motion } from "framer-motion"
 import {
   FiArrowRight,
   FiCheck,
   FiChevronDown,
   FiHelpCircle,
+  FiLayers,
   FiMenu,
+  FiPackage,
+  FiShoppingBag,
+  FiTruck,
   FiX,
 } from "react-icons/fi"
 
@@ -67,8 +71,8 @@ const directLinks = [
 const trustItems = ["Pakketten vanaf €3,50", "Geen contracten", "Nederlandse support"]
 
 const utilityLinks = [
-  { label: "Kennisbank", to: "/contact" },
-  { label: "Werken bij", to: "/over-ons" },
+  { label: "Kennisbank", to: "/kennisbank" },
+  { label: "Werken bij", to: "/werken-bij" },
 ]
 
 const dropdownVariants = {
@@ -146,13 +150,13 @@ const ConnectVisual = ({ className = "" }) => (
   </div>
 )
 
-const visualMap = {
-  platform: IntegrationVisual,
-  warehouse: WarehouseVisual,
-  connect: ConnectVisual,
-  webshop: CardboardBoxVisual,
-  fulfilment: WarehouseVisual,
-  integrations: IntegrationVisual,
+const dropdownIconMap = {
+  platform: FiLayers,
+  warehouse: FiPackage,
+  connect: FiTruck,
+  webshop: FiShoppingBag,
+  fulfilment: FiPackage,
+  integrations: FiLayers,
 }
 
 const Homepage2Header = () => {
@@ -195,7 +199,7 @@ const Homepage2Header = () => {
       </div>
 
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between gap-4 px-6">
-        <Link to="/homepage2" aria-label="Sendwise homepage" onClick={closeMenus} className="shrink-0">
+        <Link to="/" aria-label="Sendwise homepage" onClick={closeMenus} className="shrink-0">
           <img src="/sendwise-tekst-blauw.png" alt="Sendwise" className="h-7 w-auto" />
         </Link>
 
@@ -218,32 +222,38 @@ const Homepage2Header = () => {
 
               <AnimatePresence>
                 {activeMenu === group.label && (
-                  <motion.div
+                  <Motion.div
                     variants={dropdownVariants}
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="absolute left-0 top-[calc(100%+16px)] w-[440px]"
+                    className="absolute left-0 top-[calc(100%+16px)] w-[285px]"
                   >
-                    <div className="grid gap-1.5">
-                      {group.items.map(({ title, to }) => {
+                    <div className="grid gap-1 rounded-[18px] border border-[#dfe7f3] bg-white p-2 shadow-[0_22px_55px_rgba(7,17,31,0.12)]">
+                      {group.items.map(({ title, to, visual }) => {
+                        const DropdownIcon = dropdownIconMap[visual] || FiArrowRight
                         return (
-                          <motion.div key={title} variants={dropdownItemVariants}>
+                          <Motion.div key={title} variants={dropdownItemVariants}>
                             <Link
                               to={to}
                               onClick={closeMenus}
-                            className="group grid min-h-[58px] grid-cols-[1fr_auto] items-center gap-4 rounded-[15px] border border-[#dce6f6] bg-[#edf3fb] px-5 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_10px_22px_rgba(15,23,42,0.08)] transition hover:-translate-y-0.5 hover:border-[#c7d9f5] hover:bg-[#f4f8ff] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.85),0_18px_34px_rgba(15,23,42,0.13)]"
+                            className="group flex min-h-[50px] items-center gap-3 rounded-[12px] px-3 py-2 transition hover:bg-[#f4f8ff]"
                           >
-                            <span className="block inter-bold text-[1.05rem] text-[#0d1321]">{title}</span>
-                            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[#8b98ad] shadow-[0_8px_18px_rgba(15,23,42,0.08)] ring-1 ring-[#dbe6f5] transition group-hover:bg-[#1a5ee5] group-hover:text-white group-hover:ring-[#1a5ee5]">
-                              <FiArrowRight aria-hidden="true" />
+                            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-[#eef5ff] text-[#1a5ee5] ring-1 ring-[#dce9ff] transition group-hover:bg-[#1a5ee5] group-hover:text-white group-hover:ring-[#1a5ee5]">
+                              <DropdownIcon className="h-4 w-4" aria-hidden="true" />
+                            </span>
+                            <span className="min-w-0 flex-1 truncate inter-semibold text-sm text-[#07115a]">
+                              {title}
+                            </span>
+                            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[#9aa4b2] opacity-0 transition group-hover:translate-x-0.5 group-hover:text-[#1a5ee5] group-hover:opacity-100">
+                              <FiArrowRight className="h-4 w-4" aria-hidden="true" />
                             </span>
                           </Link>
-                          </motion.div>
+                          </Motion.div>
                         )
                       })}
                     </div>
-                  </motion.div>
+                  </Motion.div>
                 )}
               </AnimatePresence>
             </div>

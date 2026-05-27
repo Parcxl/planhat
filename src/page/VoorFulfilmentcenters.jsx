@@ -1,343 +1,378 @@
-import { Flex } from "antd";
-import { useEffect } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FiCheck, FiCreditCard, FiFileText, FiShield, FiTrendingUp, FiX } from "react-icons/fi";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import LabelPrintAnimation from "../components/animations/LabelPrintAnimation";
-import ConnectFlowAnimation from "../components/animations/ConnectFlowAnimation";
+import { createElement, useEffect } from "react"
+import { Link } from "react-router-dom"
+import {
+  FiArrowRight,
+  FiCheck,
+  FiCreditCard,
+  FiLayers,
+  FiPackage,
+  FiPrinter,
+  FiTruck,
+  FiUsers,
+  FiZap,
+} from "react-icons/fi"
+import Homepage2Header from "../components/Homepage2/Header"
+import Homepage2Footer from "../components/Homepage2/Footer"
+import LabelPrintAnimation from "../components/animations/LabelPrintAnimation"
+import ConnectFlowAnimation from "../components/animations/ConnectFlowAnimation"
+import ShipmentInsightAnimation from "../components/animations/ShipmentInsightAnimation"
+import BillingInsightAnimation from "../components/animations/BillingInsightAnimation"
 
-gsap.registerPlugin(ScrollTrigger);
+const pillars = [
+  {
+    title: "Eén verzendlaag",
+    text: "Sluit Sendwise onder je WMS aan en verwerk zendingen voor al je klanten vanuit één laag.",
+    icon: FiLayers,
+  },
+  {
+    title: "Minder pickups",
+    text: "Bundel zendingen en voorkom losse vervoerdersprocessen per klant of carrier.",
+    icon: FiTruck,
+  },
+  {
+    title: "Betere marge",
+    text: "Werk met duidelijke tarieven en gecombineerd volume zonder vaste verplichtingen.",
+    icon: FiCreditCard,
+  },
+]
 
-const FeatureList = ({ items, tone = "dark", className = "", align = "left" }) => {
-    const isLight = tone === "light";
-    const isRight = align === "right";
-    const textClass = isLight ? "text-white/90" : "text-gray-700";
-    const iconClass = isLight ? "bg-white/15 text-white" : "bg-[#1a5ee5]/10 text-[#1a5ee5]";
+const featureSections = [
+  {
+    eyebrow: "WMS",
+    title: "Verzenden vanuit je eigen WMS",
+    text: "Sendwise werkt als verzendmotor onder je bestaande fulfilmentsoftware. Labels, tarieven en carriers worden geregeld zonder extra schermen voor je team.",
+    items: [
+      "Labels aanmaken vanuit je WMS",
+      "Eén verzendlaag voor al je klanten",
+      "Bulk, automatisch of handmatig",
+      "Ondersteuning voor packstations en printers",
+    ],
+    icon: FiPrinter,
+    visual: LabelPrintAnimation,
+  },
+  {
+    eyebrow: "CONNECT",
+    title: "Eén verzendmethode voor al je klanten",
+    text: "Met CONNECT gebruik je één vaste verzendmethode onder je WMS. Per land werkt Sendwise met vaste, betrouwbare vervoerders.",
+    items: [
+      "Eén pickup voor alle klanten",
+      "Betere tarieven door gecombineerd volume",
+      "Vaste carriers per land",
+      "Minder operationele schakels",
+    ],
+    icon: FiTruck,
+    visual: ConnectFlowAnimation,
+    reversed: true,
+  },
+  {
+    eyebrow: "Overzicht",
+    title: "Grip op iedere zending",
+    text: "Houd status, tracking en vervolgacties centraal bij elkaar. Je team hoeft minder te zoeken wanneer klanten vragen stellen.",
+    items: [
+      "Realtime status per zending",
+      "Track & trace direct beschikbaar",
+      "Problemen melden vanuit één plek",
+      "Support centraal gebundeld",
+    ],
+    icon: FiPackage,
+    visual: ShipmentInsightAnimation,
+  },
+  {
+    eyebrow: "Facturen",
+    title: "Kosten helder per klant en volume",
+    text: "Maak verzendkosten inzichtelijker en voorkom dat tarieven, toeslagen en facturen verspreid raken over losse vervoerders.",
+    items: [
+      "Duidelijke verzendkosten",
+      "Geen verborgen toeslagen",
+      "Inzicht in facturen",
+      "Geschikt voor meerdere klanten",
+    ],
+    icon: FiCreditCard,
+    visual: BillingInsightAnimation,
+    reversed: true,
+  },
+]
 
-    return (
-        <ul className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${isRight ? "text-right" : "text-left"} ${className}`}>
-            {items.map((item) => (
-                <li
-                    key={item}
-                    className={`flex items-start gap-3 inter-medium text-[0.98rem] ${textClass} ${isRight ? "flex-row-reverse justify-end" : ""}`}
-                >
-                    <span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${iconClass}`}>
-                        <FiCheck className="text-[0.9rem]" />
-                    </span>
-                    <span className="leading-relaxed">{item}</span>
-                </li>
-            ))}
-        </ul>
-    );
-};
+const CheckList = ({ items }) => (
+  <ul className="grid gap-3 sm:grid-cols-2">
+    {items.map((item) => (
+      <li key={item} className="flex items-start gap-2.5 inter-medium text-sm leading-6 text-[#445066]">
+        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e7f0ff] text-[#1a5ee5]">
+          <FiCheck className="h-3.5 w-3.5 stroke-[3]" aria-hidden="true" />
+        </span>
+        {item}
+      </li>
+    ))}
+  </ul>
+)
 
-const uspCards = [
-    { title: "Geen contracten", Icon: FiFileText },
-    { title: "Geen abonnementskosten", Icon: FiShield },
-    { title: "Eerlijke indexeringen", Icon: FiTrendingUp },
-    { title: "Scherpe fulfilmenttarieven", Icon: FiCreditCard },
-];
+const FeatureSection = ({ section }) => {
+  const Visual = section.visual
+  const Icon = section.icon
 
-const painPoints = [
-    "Verschillende pickups per dag",
-    "Onvoorspelbare verzendkosten",
-    "Versnipperde support bij problemen",
-];
+  const copy = (
+    <div className="flex flex-col justify-center">
+      <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#eef5ff] px-3.5 py-2 inter-semibold text-xs uppercase tracking-[0.08em] text-[#1a5ee5] ring-1 ring-[#dce9ff]">
+        {createElement(Icon, { className: "h-4 w-4", "aria-hidden": "true" })}
+        {section.eyebrow}
+      </span>
+      <h2 className="inter-semibold text-3xl leading-tight text-[#07115a] sm:text-4xl">
+        {section.title}
+      </h2>
+      <p className="mt-4 max-w-xl inter-medium text-base leading-8 text-[#667085]">
+        {section.text}
+      </p>
+      <div className="mt-7">
+        <CheckList items={section.items} />
+      </div>
+    </div>
+  )
+
+  const visual = (
+    <div className="relative min-h-[300px] overflow-hidden rounded-[26px] border border-[#e1eaf7] bg-[#fbfdff] p-4 shadow-[0_20px_65px_rgba(7,17,31,0.08)] sm:min-h-[340px] sm:p-5">
+      <div className="absolute right-6 top-6 h-16 w-16 rotate-45 rounded-[18px] bg-[#e8f2ff]" aria-hidden="true" />
+      <div className="relative h-[270px] sm:h-[310px]">
+        {createElement(Visual)}
+      </div>
+    </div>
+  )
+
+  return (
+    <section className="bg-white px-6 py-12 lg:py-16">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2">
+        {section.reversed ? (
+          <>
+            <div className="lg:order-1">{copy}</div>
+            <div className="lg:order-2">{visual}</div>
+          </>
+        ) : (
+          <>
+            {visual}
+            {copy}
+          </>
+        )}
+      </div>
+    </section>
+  )
+}
+
+const BoxxlCase = () => (
+  <section className="bg-white px-6 py-16 lg:py-24">
+    <div className="mx-auto max-w-7xl">
+      <div className="relative rounded-[28px] bg-[#07115a] px-8 py-10 text-white shadow-[0_24px_70px_rgba(7,17,90,0.18)] lg:px-16 lg:py-16">
+        <div className="absolute bottom-0 right-24 hidden h-44 w-44 rotate-45 rounded-[34px] bg-[#1a5ee5] lg:block" aria-hidden="true" />
+
+        <div className="relative grid items-center gap-10 lg:grid-cols-[250px_1fr]">
+          <div className="lg:-mt-32">
+            <img
+              src="/freek-blijenberg-boxxl.png"
+              alt="Freek Blijenberg van Boxxl Fulfilment"
+              className="h-[320px] w-full rounded-2xl object-cover object-top shadow-[0_18px_45px_rgba(0,0,0,0.24)] lg:h-[350px]"
+            />
+          </div>
+
+          <div className="relative z-10">
+            <p className="max-w-4xl inter-semibold text-3xl leading-tight text-white sm:text-4xl lg:text-[2.75rem] lg:leading-[1.35]">
+              “Met Sendwise houden we ons fulfilmentproces strak en schaalbaar. Labels, tarieven en vervoerders komen samen in één overzichtelijke verzendlaag.”
+            </p>
+
+            <div className="mt-7 border-l-2 border-[#1a5ee5] pl-4">
+              <p className="inter-semibold text-lg text-white">Freek Blijenberg</p>
+              <p className="mt-1 inter-medium text-sm text-white/75">Founder Boxxl Fulfilment</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+)
 
 const VoorFulfilmentcenters = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
-    useGSAP(() => {
-        gsap.set("#fulfilment-hero-frame", {
-            scale: 1,
-            transformOrigin: "center center",
-            borderBottomLeftRadius: "0%",
-            borderBottomRightRadius: "0%",
-            marginLeft: "0px",
-            marginRight: "0px",
-        });
+  return (
+    <main className="min-h-screen bg-white text-[#0d1321]">
+      <Homepage2Header />
 
-        gsap.to("#fulfilment-hero-frame", {
-            scale: 0.83,
-            borderBottomLeftRadius: "100px",
-            borderBottomRightRadius: "100px",
-            ease: "power1.inOut",
-            scrollTrigger: {
-                trigger: "#fulfilment-hero-frame",
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-            },
-        });
+      <section className="relative overflow-hidden bg-white pt-32 sm:pt-36 lg:pt-44">
+        <div className="mx-auto grid min-h-[690px] w-full max-w-7xl items-center gap-12 px-6 pb-20 lg:grid-cols-[0.95fr_1.05fr] lg:pb-24">
+          <div className="relative z-10 max-w-[690px] lg:pb-10">
+            <div className="mb-5 flex items-center gap-3 text-[#6f7694]">
+              <div className="flex -space-x-2">
+                {[FiLayers, FiTruck, FiUsers].map((Icon, index) => (
+                  <span
+                    key={index}
+                    className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#eef5ff] text-[#1a5ee5] shadow-[0_4px_12px_rgba(15,23,42,0.10)]"
+                  >
+                    {createElement(Icon, { className: "h-3.5 w-3.5", "aria-hidden": "true" })}
+                  </span>
+                ))}
+              </div>
+              <p className="inter-medium text-sm text-[#707894] sm:text-[0.95rem]">
+                Voor fulfilmentteams die schaalbaar willen verzenden
+              </p>
+            </div>
 
-        gsap.fromTo(
-            "#fulfilment-hero-img",
-            {
-                scale: 1,
-                borderBottomLeftRadius: "0%",
-                borderBottomRightRadius: "0%",
-            },
-            {
-                scale: 1,
-                ease: "power1.out",
-                borderBottomLeftRadius: "100px",
-                borderBottomRightRadius: "100px",
-                scrollTrigger: {
-                    trigger: "#fulfilment-hero-frame",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true,
-                },
-            }
-        );
-    });
+            <h1 className="inter-semibold text-5xl leading-[1.03] text-[#07115a] sm:text-6xl sm:leading-[1.02] lg:text-7xl">
+              <span className="block sm:whitespace-nowrap">Eén verzendlaag.</span>
+              <span className="block sm:whitespace-nowrap">Meer grip.</span>
+            </h1>
 
-    return (
-        <Flex className="flex-col w-[100%] overflow-hidden space-y-10 sm:space-y-12 md:space-y-14 lg:space-y-16 mb-10">
-            <section className="w-full">
-                <Flex>
-                    <Flex id="fulfilment-hero-frame" className="w-[100%] mask-clip-path">
-                        <img
-                            id="fulfilment-hero-img"
-                            src="/fulfilment.png"
-                            alt="Sendwise voor fulfilmentcenters"
-                            className="absolute h-screen sm:h-screen w-[100%] object-cover object-top"
-                        />
-                        <div id="fulfilment-hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-screen sm:h-screen" />
-                        <Flex className="z-30 sm:ml-[10%] ml-[4%] w-[100%] h-screen sm:h-screen flex-col justify-center items-start pt-16 sm:pt-20 pb-10 sm:pb-14">
-                            <div className="flex flex-col items-start space-y-8 sm:space-y-10 translate-y-4 sm:translate-y-6">
-                                <Flex className="group text-white/80 inter-semibold w-fit bg-[#514F4A]/30 border px-1 py-1 items-center space-x-4 rounded-3xl border-[#514F4A]/50 backdrop-blur-lg transition-all duration-500 ease-out hover:border-[#514F4A] hover:bg-[#514F4A]/40">
-                                    <Flex className="border border-[#514F4A] bg-gradient-to-t to-[#514F4A] from-[#514F4A]/10 px-3 py-[0.4rem] rounded-3xl transition-all duration-500 ease-out group-hover:bg-[#514F4A] group-hover:scale-[1.02]">
-                                        <p className="text-[0.85rem] tracking-[0.14em]">FULFILMENT</p>
-                                    </Flex>
-                                </Flex>
-                                <div className="flex flex-col pl-1 inter-semibold md:leading-[4rem] leading-[3.1rem] text-white w-fit text-left">
-                                    <h1 className="md:text-[4rem] sm:text-[2.5rem] text-[2.85rem]">Slim verzenden voor fulfilmentcenters</h1>
-                                </div>
-                                <p className="text-white font-light text-[1.25rem] sm:text-[1.1rem] md:text-[1.3rem] max-w-[46rem] leading-[1.4] text-left">
-                                    Sendwise is de verzendlaag onder je WMS. Verbind één keer en verzend voor al je klanten met vaste tarieven, één pickup en minder complexiteit — ongeacht volumes of vervoerders.
-                                </p>
-                                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-6 sm:space-y-0">
-                                    <Link
-                                        to="/contact"
-                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group inline-flex items-center"
-                                    >
-                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                        <span className="relative z-10">Plan een kennismaking</span>
-                                    </Link>
-                                    <Link
-                                        to="/start-met-sendwise"
-                                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white hover:text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl w-fit flex isolate"
-                                    >
-                                        <span className="relative z-10 text-white group-hover:text-white">Start met Sendwise</span>
-                                    </Link>
-                                </div>
-                            </div>
-                        </Flex>
-                    </Flex>
-                </Flex>
-            </section>
+            <p className="mt-6 max-w-2xl inter-medium text-lg leading-8 text-[#3f4965]">
+              Verzend voor al je klanten met vaste tarieven, één pickup en minder operationele complexiteit.
+            </p>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <Flex className="w-full group relative rounded-[2.25rem] overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] rounded-[2.25rem]" />
-                        <div className="absolute inset-0 opacity-40 noise-overlay" />
-                        <Flex className="relative z-20 w-full p-7 sm:p-10 lg:p-12">
-                            <Flex className="text-white w-[100%] items-center flex-col text-center space-y-4">
-                                <p className="inter-semibold lg:text-[2.2rem] sm:text-[1.9rem] text-[1.6rem]">
-                                    Één verzendlaag onder je WMS
-                                </p>
-                                <p className="inter-medium lg:text-[1.2rem] text-[1rem] leading-relaxed lg:max-w-[54rem]">
-                                    Als fulfilmentcenter werk je vanuit je eigen WMS. Sendwise sluit hierop aan als centrale verzendlaag, zodat je niet per klant of vervoerder aparte afspraken, tarieven of pickups hoeft te beheren. Je blijft werken zoals je gewend bent — wij regelen de verzending daaronder.
-                                </p>
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                </Flex>
-            </section>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link
+                to="/contact"
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-[#1a5ee5] px-6 inter-semibold text-sm text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2]"
+              >
+                Plan een kennismaking
+                <FiArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
+              </Link>
+              <Link
+                to="/start-met-sendwise"
+                className="inline-flex h-12 items-center justify-center rounded-[12px] border border-[#d4dceb] bg-white px-6 inter-semibold text-sm text-[#07115a] shadow-[0_10px_24px_rgba(7,17,31,0.04)] transition hover:border-[#b8c4d8] hover:bg-[#f8fbff]"
+              >
+                Start met Sendwise
+              </Link>
+            </div>
+          </div>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-gradient-to-br from-[#F8FAFC] to-white p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-12">
-                            <motion.div
-                                className="lg:w-[55%] w-full flex flex-col space-y-5 text-left"
-                                initial={{ opacity: 0, y: 16 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.4 }}
-                                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                            >
-                                <div className="space-y-3">
-                                    <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                        Verzenden binnen fulfilment is vaak onnodig complex
-                                    </h2>
-                                    <p className="text-gray-700 inter-medium lg:text-[1.05rem] text-[0.98rem] leading-relaxed max-w-[56rem]">
-                                        Veel fulfilmentcenters werken met meerdere vervoerders en verzendafspraken per klant. Dat zorgt voor operationele complexiteit en drukt direct op de marge.
-                                    </p>
-                                </div>
-                            </motion.div>
-                            <div className="lg:w-[45%] w-full flex flex-col space-y-4">
-                                {painPoints.map((item, index) => (
-                                    <motion.div
-                                        key={item}
-                                        className="flex items-center gap-3 rounded-xl border border-white/70 bg-white/80 px-4 py-3 shadow-[0_10px_24px_rgba(15,23,42,0.08)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-[0_16px_32px_rgba(15,23,42,0.12)]"
-                                        initial={{ opacity: 0, y: 12 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true, amount: 0.4 }}
-                                        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
-                                    >
-                                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1a5ee5]/10 text-[#94A3B8]">
-                                            <FiX className="text-[0.95rem]" />
-                                        </span>
-                                        <span className="text-sm inter-medium text-[#475569]">{item}</span>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </Flex>
-            </section>
+          <div className="relative flex items-center justify-center lg:min-h-[570px] lg:justify-end">
+            <div className="relative w-full max-w-[600px] overflow-hidden rounded-[34px] shadow-[0_34px_95px_rgba(7,17,31,0.24)]">
+              <img
+                src="/fulfilmentcenters-hero.png"
+                alt="Sendwise voor fulfilmentcenters"
+                className="aspect-[1.12/1] w-full object-cover object-center"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white/90 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[45%] w-full">
-                                <div className="w-full h-[18rem] sm:h-[18rem]">
-                                    <LabelPrintAnimation />
-                                </div>
-                            </div>
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left">
-                                <div className="space-y-3">
-                                    <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                        Verzenden vanuit je eigen WMS
-                                    </h2>
-                                    <p className="text-gray-700 inter-medium lg:text-[1.05rem] text-[0.98rem] leading-relaxed max-w-[56rem]">
-                                        Sendwise werkt als verzendmotor onder je WMS. Labels worden aangemaakt vanuit je bestaande fulfilmentsoftware, terwijl Sendwise op de achtergrond zorgt voor tarieven, carriers en afhandeling. Geen extra handelingen, geen extra schermen.
-                                    </p>
-                                </div>
-                                <FeatureList
-                                    items={[
-                                        "Labels aanmaken vanuit je WMS",
-                                        "Één verzendlaag voor al je klanten",
-                                        "Bulk, automatisch of handmatig",
-                                        "Ondersteuning voor packstations en printers",
-                                    ]}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </Flex>
-            </section>
+      <section className="bg-white px-6 pb-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-5 lg:grid-cols-3">
+            {pillars.map(({ title, text, icon: Icon }) => (
+              <article
+                key={title}
+                className="flex min-h-[250px] flex-col rounded-[24px] border border-[#e1eaf7] bg-[#fbfdff] p-7 shadow-[0_18px_55px_rgba(7,17,31,0.065)]"
+              >
+                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-[#1a5ee5] shadow-[0_12px_30px_rgba(26,94,229,0.10)] ring-1 ring-[#dce9ff]">
+                  {createElement(Icon, { className: "h-7 w-7", "aria-hidden": "true" })}
+                </span>
+                <h2 className="mt-6 inter-semibold text-2xl leading-tight text-[#07115a]">{title}</h2>
+                <p className="mt-3 inter-medium text-base leading-7 text-[#667085]">{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left order-2 lg:order-1">
-                                <div className="space-y-3">
-                                    <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                        Eén verzendmethode voor al je klanten
-                                    </h2>
-                                    <p className="text-gray-700 inter-medium lg:text-[1.05rem] text-[0.98rem] leading-relaxed max-w-[56rem]">
-                                        Met CONNECT gebruik je één vaste verzendmethode onder je WMS. Per land werkt Sendwise met vaste, betrouwbare vervoerders. Jij hoeft niets te wisselen of te beheren — elke zending volgt een voorspelbare route.
-                                    </p>
-                                </div>
-                                <FeatureList
-                                    items={[
-                                        "Eén pickup voor alle klanten",
-                                        "Betere tarieven door gecombineerd volume",
-                                        "Vaste carriers per land",
-                                        "Minder operationele schakels",
-                                    ]}
-                                />
-                            </div>
-                            <div className="lg:w-[45%] w-full order-1 lg:order-2">
-                                <p className="text-sm inter-medium text-[#475569] mb-3">
-                                    De vervoerder wordt automatisch bepaald op basis van bestemming en kwaliteit — transparant en voorspelbaar.
-                                </p>
-                                <div className="relative w-full h-[19rem] sm:h-[20rem] overflow-hidden rounded-2xl bg-[rgba(26,94,229,0.06)]">
-                                    <div className="absolute inset-0 opacity-30 noise-overlay" />
-                                    <div className="relative w-full h-full">
-                                        <ConnectFlowAnimation />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Flex>
-            </section>
+      <section className="bg-[#f7fbff] px-6 py-16 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <h2 className="inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl">
+              Sendwise als verzendlaag onder je WMS
+            </h2>
+            <p className="mt-5 max-w-2xl inter-medium text-lg leading-8 text-[#667085]">
+              Je blijft werken in je eigen fulfilmentsoftware. Sendwise regelt daaronder carriers, labels, tarieven en tracking.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {[
+              { value: "1", label: "verzendlaag" },
+              { value: "1", label: "pickupflow" },
+              { value: "alle", label: "klanten gekoppeld" },
+            ].map((stat) => (
+              <div key={stat.label} className="rounded-[20px] border border-[#e1eaf7] bg-white p-6 shadow-[0_18px_55px_rgba(7,17,31,0.06)]">
+                <p className="inter-semibold text-4xl text-[#07115a]">{stat.value}</p>
+                <p className="mt-2 inter-medium text-sm leading-6 text-[#667085]">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white/90 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col space-y-3 text-center">
-                            <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                Betere marges zonder vaste verplichtingen
-                            </h2>
-                        </div>
-                        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                            {uspCards.map(({ title, Icon }) => (
-                                <div
-                                    key={title}
-                                    className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-[0_12px_30px_rgba(15,23,42,0.08)]"
-                                >
-                                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#1a5ee5]/10 text-[#1a5ee5]">
-                                        <Icon className="text-[1.2rem]" />
-                                    </div>
-                                    <p className="mt-4 inter-semibold text-[1.05rem] text-gray-900">{title}</p>
-                                </div>
-                            ))}
-                        </div>
-                        <p className="mt-8 text-gray-700 inter-medium text-[1rem] text-center">
-                            Ontworpen voor schaal en marge
-                        </p>
-                    </div>
-                </Flex>
-            </section>
+      <section className="bg-white px-6 py-16 lg:py-20">
+        <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="rounded-[28px] bg-[#07115a] p-8 text-white shadow-[0_24px_70px_rgba(7,17,90,0.18)] lg:p-12">
+            <h2 className="inter-semibold text-4xl leading-tight sm:text-5xl">
+              Verzenden binnen fulfilment is vaak onnodig complex.
+            </h2>
+            <p className="mt-5 inter-medium text-lg leading-8 text-white/78">
+              Meerdere vervoerders, klantafspraken en pickups drukken op je marge. Sendwise brengt die complexiteit terug naar één centrale flow.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {["Verschillende pickups per dag", "Onvoorspelbare verzendkosten", "Versnipperde support bij problemen"].map((item) => (
+              <div key={item} className="rounded-[20px] border border-[#e1eaf7] bg-[#fbfdff] p-6 shadow-[0_18px_55px_rgba(7,17,31,0.06)]">
+                <p className="inter-semibold text-lg leading-tight text-[#07115a]">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <section className="w-full">
-                <Flex className="lg:w-[80%] w-[95%] mx-auto">
-                    <Flex className="relative w-full h-[26rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
-                        <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
-                        <div className="absolute z-10 inset-0 rounded-2xl bg-black/55 sm:bg-black/35" />
-                        <img src="/sendwise-2.png" alt="Sendwise" className="object-cover w-[100%] h-full rounded-2xl" />
-                        <Flex className="absolute z-20 inset-0 w-full h-full">
-                            <Flex className="text-white items-start flex-col space-y-6 w-full h-full justify-center px-6 sm:px-10 lg:pl-20">
-                                <p className="inter-semibold lg:text-[3rem] sm:text-[2.4rem] text-[1.9rem] lg:leading-[3.4rem]">
-                                    Klaar om fulfilment slimmer in te richten?
-                                </p>
-                                <p className="inter-medium lg:text-[1.15rem] text-[1.05rem] lg:w-[80%]">
-                                    Ontdek hoe Sendwise fulfilmentcenters helpt om kosten te verlagen, processen te vereenvoudigen en klanten beter te bedienen.
-                                </p>
-                                <Flex className="flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
-                                    <Link
-                                        to="/contact"
-                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group inline-flex items-center"
-                                    >
-                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                        <span className="relative z-10">Plan een kennismaking</span>
-                                    </Link>
-                                    <Link
-                                        to="/start-met-sendwise"
-                                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white hover:text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl flex isolate"
-                                    >
-                                        <span className="relative z-10 text-white group-hover:text-white">Start met Sendwise</span>
-                                    </Link>
-                                </Flex>
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                </Flex>
-            </section>
-        </Flex>
-    );
-};
+      <section className="bg-white px-6 pb-2 pt-8">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="inter-semibold text-5xl leading-tight text-[#07115a] sm:text-6xl">
+            Minder schakels, meer marge.
+          </h2>
+          <p className="mx-auto mt-5 max-w-3xl inter-medium text-lg leading-8 text-[#3f4965]">
+            Een fulfilmentcenter heeft snelheid nodig, maar vooral overzicht. Sendwise houdt de verzendlaag strak.
+          </p>
+        </div>
+      </section>
 
-export default VoorFulfilmentcenters;
+      {featureSections.map((section) => (
+        <FeatureSection key={section.title} section={section} />
+      ))}
+
+      <BoxxlCase />
+
+      <section className="bg-white px-6 pb-24 pt-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative overflow-hidden rounded-[28px] bg-[#1a5ee5] px-8 py-10 text-white shadow-[0_24px_70px_rgba(26,94,229,0.22)] lg:px-14 lg:py-14">
+            <div className="absolute -bottom-24 right-12 h-56 w-56 rotate-45 rounded-[42px] bg-white/12" aria-hidden="true" />
+            <div className="absolute -top-28 right-72 h-44 w-44 rotate-45 rounded-[36px] bg-white/10" aria-hidden="true" />
+
+            <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-3xl">
+                <h2 className="inter-semibold text-4xl leading-tight text-white sm:text-5xl">
+                  Klaar om fulfilment slimmer in te richten?
+                </h2>
+                <p className="mt-4 max-w-2xl inter-medium text-lg leading-8 text-white/82">
+                  Verlaag kosten, vereenvoudig je verzendlaag en bedien klanten vanuit één schaalbare flow.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
+                <Link
+                  to="/contact"
+                  className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 inter-semibold text-sm text-[#1a5ee5] shadow-[0_16px_34px_rgba(7,17,90,0.16)] transition hover:bg-[#f4f8ff]"
+                >
+                  Plan een kennismaking
+                  <FiArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
+                </Link>
+                <Link
+                  to="/start-met-sendwise"
+                  className="inline-flex h-12 items-center justify-center rounded-xl border border-white/35 bg-white/10 px-6 inter-semibold text-sm text-white transition hover:bg-white/16"
+                >
+                  Start met Sendwise
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Homepage2Footer />
+    </main>
+  )
+}
+
+export default VoorFulfilmentcenters

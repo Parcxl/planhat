@@ -1,3 +1,4 @@
+import { createElement } from "react"
 import { FiArrowRight, FiMail, FiMapPin, FiPhone } from "react-icons/fi"
 
 const contactCards = [
@@ -30,9 +31,9 @@ const contactCards = [
   },
 ]
 
-const ContactCards = () => {
+const ContactCards = ({ className = "" }) => {
   return (
-    <section className="bg-white px-6 pb-16">
+    <section className={`bg-white px-6 pb-16 ${className}`}>
       <div className="mx-auto max-w-7xl">
         <div className="mb-9 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -57,7 +58,7 @@ const ContactCards = () => {
               <div className="flex w-full flex-col">
                 <div className="flex items-start justify-between gap-5">
                   <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-[#1a5ee5] shadow-[0_12px_30px_rgba(26,94,229,0.10)] ring-1 ring-[#dce9ff] transition group-hover:bg-[#eef5ff]">
-                    <Icon className="h-8 w-8" aria-hidden="true" />
+                    {createElement(Icon, { className: "h-8 w-8", "aria-hidden": true })}
                   </span>
                   <span className="rounded-full bg-white px-3 py-1.5 inter-semibold text-xs uppercase tracking-[0.08em] text-[#536175] ring-1 ring-[#e1eaf7]">
                     {eyebrow}

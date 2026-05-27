@@ -1,8 +1,7 @@
 import { useEffect } from "react"
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom"
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence, motion as Motion } from "framer-motion"
 import Header from "./components/ui/Header"
-import Home from "./page/Home"
 import HomePage2 from "./page/Homepage2"
 import FloatingBoxDemo from "./page/FloatingBoxDemo"
 import Contact from "./page/Contact"
@@ -21,16 +20,19 @@ import Verwerkersovereenkomst from "./page/Verwerkersovereenkomst"
 import Privacy from "./page/Privacy"
 import Integraties from "./page/Integraties"
 import BlogGoedgepickt from "./page/BlogGoedgepickt"
+import WerkenBij from "./page/WerkenBij"
+import Kennisbank from "./page/Kennisbank"
 
 const PageTransition = ({ children }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 18 }}
+  <Motion.div
+    className="w-full"
+    initial={{ opacity: 0, y: 6 }}
     animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -14 }}
-    transition={{ duration: 0.35, ease: "easeOut" }}
+    exit={{ opacity: 0, y: -4 }}
+    transition={{ duration: 0.18, ease: "easeOut" }}
   >
     {children}
-  </motion.div>
+  </Motion.div>
 )
 
 const seoMap = {
@@ -103,6 +105,16 @@ const seoMap = {
     description:
       "Vragen over verzenden, tarieven of samenwerking? Neem contact op met Sendwise.",
   },
+  "/werken-bij": {
+    title: "Werken bij Sendwise | Vacatures en stages",
+    description:
+      "Bekijk open rollen bij Sendwise, waaronder sales medewerker en stagiair software developer.",
+  },
+  "/kennisbank": {
+    title: "Kennisbank | Sendwise artikelen en hulp",
+    description:
+      "Binnenkort vind je hier praktische artikelen over verzenden, integraties, tarieven en fulfilment workflows.",
+  },
   "/start-met-sendwise": {
     title: "Start met Sendwise | Vraag een account aan",
     description:
@@ -145,6 +157,15 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route
+          index
+          path="/"
+          element={
+            <PageTransition>
+              <HomePage2 />
+            </PageTransition>
+          }
+        />
+        <Route
           path="/homepage2"
           element={
             <PageTransition>
@@ -160,61 +181,100 @@ const AnimatedRoutes = () => {
             </PageTransition>
           }
         />
+        <Route
+          path="/oplossingen/sendwise"
+          element={
+            <PageTransition>
+              <SendwisePlatform />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/oplossingen/pro"
+          element={
+            <PageTransition>
+              <SendwisePro />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/oplossingen/connect"
+          element={
+            <PageTransition>
+              <SendwiseConnect />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/voor-webshops"
+          element={
+            <PageTransition>
+              <VoorWebshops />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/voor-fulfilmentcenters"
+          element={
+            <PageTransition>
+              <VoorFulfilmentcenters />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/prijzen"
+          element={
+            <PageTransition>
+              <Prijzen />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <PageTransition>
+              <Contact />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/integraties"
+          element={
+            <PageTransition>
+              <Integraties />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/start-met-sendwise"
+          element={
+            <PageTransition>
+              <StartMetSendwise />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/werken-bij"
+          element={
+            <PageTransition>
+              <WerkenBij />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/kennisbank"
+          element={
+            <PageTransition>
+              <Kennisbank />
+            </PageTransition>
+          }
+        />
         <Route element={<Header />}>
-          <Route
-            index
-            path="/"
-            element={
-              <PageTransition>
-                <Home />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <PageTransition>
-                <Contact />
-              </PageTransition>
-            }
-          />
           <Route
             path="/over-ons"
             element={
               <PageTransition>
                 <OverOns />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/prijzen"
-            element={
-              <PageTransition>
-                <Prijzen />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/oplossingen/sendwise"
-            element={
-              <PageTransition>
-                <SendwisePlatform />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/oplossingen/pro"
-            element={
-              <PageTransition>
-                <SendwisePro />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/oplossingen/connect"
-            element={
-              <PageTransition>
-                <SendwiseConnect />
               </PageTransition>
             }
           />
@@ -231,30 +291,6 @@ const AnimatedRoutes = () => {
             element={
               <PageTransition>
                 <IntegratieCCVShop />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/voor-webshops"
-            element={
-              <PageTransition>
-                <VoorWebshops />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/voor-fulfilmentcenters"
-            element={
-              <PageTransition>
-                <VoorFulfilmentcenters />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/start-met-sendwise"
-            element={
-              <PageTransition>
-                <StartMetSendwise />
               </PageTransition>
             }
           />
@@ -283,14 +319,6 @@ const AnimatedRoutes = () => {
             }
           />
           <Route
-            path="/integraties"
-            element={
-              <PageTransition>
-                <Integraties />
-              </PageTransition>
-            }
-          />
-          <Route
             path="/blog/sendwise-goedgepickt"
             element={
               <PageTransition>
@@ -302,7 +330,7 @@ const AnimatedRoutes = () => {
             path="*"
             element={
               <PageTransition>
-                <Home />
+                <HomePage2 />
               </PageTransition>
             }
           />

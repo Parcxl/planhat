@@ -1,202 +1,127 @@
-import { Flex } from "antd";
-import { FiMail, FiMapPin } from "react-icons/fi";
-import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { Link } from "react-router-dom";
+import { FiArrowRight, FiCheckCircle, FiClock, FiMessageCircle } from "react-icons/fi";
+import Homepage2Header from "../components/Homepage2/Header";
+import Homepage2Footer from "../components/Homepage2/Footer";
+import ContactCards from "../components/Homepage2/ContactCards";
 
 const Contact = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    useGSAP(() => {
-        gsap.set("#contact-hero-frame", {
-            scale: 1,
-            transformOrigin: "center center",
-            borderBottomLeftRadius: "0%",
-            borderBottomRightRadius: "0%",
-            marginLeft: "0px",
-            marginRight: "0px",
-        });
-
-        gsap.to("#contact-hero-frame", {
-            scale: 0.83,
-            borderBottomLeftRadius: "100px",
-            borderBottomRightRadius: "100px",
-            ease: "power1.inOut",
-            scrollTrigger: {
-                trigger: "#contact-hero-frame",
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-            },
-        });
-
-        gsap.fromTo(
-            "#contact-hero-img",
-            {
-                scale: 1,
-                borderBottomLeftRadius: "0%",
-                borderBottomRightRadius: "0%",
-            },
-            {
-                scale: 1,
-                ease: "power1.out",
-                borderBottomLeftRadius: "100px",
-                borderBottomRightRadius: "100px",
-                scrollTrigger: {
-                    trigger: "#contact-hero-frame",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true,
-                },
-            }
-        );
-    });
-
     return (
-        <Flex className="flex-col w-[100%] overflow-hidden space-y-10 sm:space-y-12 md:space-y-14 lg:space-y-16 mb-10">
-            <section className="w-full">
-                <Flex>
-                    <Flex id="contact-hero-frame" className="w-[100%] mask-clip-path">
-                        <img
-                            id="contact-hero-img"
-                            src="/contact-pagina.png"
-                            alt="Sendwise"
-                            className="absolute h-screen sm:h-screen w-[100%] object-cover object-[75%_center] sm:object-center"
-                        />
-                        <div id="contact-hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-screen sm:h-screen" />
-                        <Flex className="z-30 sm:ml-[10%] ml-[4%] w-[100%] h-screen sm:h-screen flex-col justify-center items-start pt-16 sm:pt-20 pb-10 sm:pb-14">
-                            <div className="flex flex-col items-start space-y-10 sm:space-y-12 translate-y-4 sm:translate-y-6">
-                                <div className="flex flex-col pl-1 inter-semibold md:leading-[4rem] leading-[3.1rem] text-white w-fit text-left">
-                                    <p className="md:text-[4rem] sm:text-[2.5rem] text-[2.85rem]">
-                                        Neem contact op
-                                    </p>
-                                </div>
-                                <p className="text-white font-light text-[1.25rem] sm:text-[1.1rem] md:text-[1.3rem] max-w-[42rem] leading-[1.4] text-left">
-                                    Ontdek hoeveel tijd en geld je kunt besparen op iedere verzending. We denken graag mee over jouw verzendproces.
-                                </p>
-                                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-6 sm:space-y-0" />
-                            </div>
-                        </Flex>
-                    </Flex>
-                </Flex>
-            </section>
+        <main className="min-h-screen overflow-hidden bg-white text-[#0d1321]">
+            <Homepage2Header />
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white/80 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col space-y-4">
-                            <div className="relative w-fit">
-                                <div className="absolute -inset-x-3 bottom-1 h-3 bg-gradient-to-r from-[#1a5ee5]/25 to-transparent rounded-full hidden sm:block" />
-                                <p className="relative inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.6rem] text-gray-900">
-                                    Meer verzenden. Minder{" "}
-                                    <span className="relative inline-block">
-                                        <span className="absolute -inset-x-1 bottom-0.5 h-2 bg-gradient-to-r from-[#1a5ee5]/25 to-transparent rounded-full sm:hidden" />
-                                        <span className="relative">gedoe.</span>
-                                    </span>
-                                </p>
+            <section className="relative overflow-hidden bg-white pt-32 sm:pt-36 lg:pt-44">
+                <div className="absolute left-0 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#eaf2ff] blur-3xl" />
+                <div className="mx-auto grid min-h-[650px] w-full max-w-7xl items-center gap-12 px-6 pb-20 lg:grid-cols-[0.95fr_1.05fr] lg:pb-24">
+                    <div className="relative z-10 max-w-[680px] lg:pb-10">
+                        <div className="mb-5 flex items-center gap-3 text-[#6f7694]">
+                            <div className="flex -space-x-2">
+                                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white bg-[#1a5ee5] text-white shadow-[0_10px_24px_rgba(26,94,229,0.25)]">
+                                    <FiMessageCircle />
+                                </span>
+                                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white bg-white text-[#1a5ee5] shadow-[0_10px_24px_rgba(15,23,42,0.12)]">
+                                    <FiClock />
+                                </span>
+                                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white bg-[#f2f7ff] text-[#1a5ee5] shadow-[0_10px_24px_rgba(15,23,42,0.08)]">
+                                    <FiCheckCircle />
+                                </span>
                             </div>
-                            <p className="text-gray-700 inter-medium lg:text-[1.1rem] text-[1rem] max-w-[60rem]">
-                                Sendwise biedt scherpe all-in verzendtarieven zonder contracten of maandelijkse kosten, met eerlijke indexeringen en volledige grip op je verzendingen.
-                            </p>
+                            <p className="inter-medium text-[0.95rem]">Binnen een werkdag reactie van ons team</p>
+                        </div>
+                        <h1 className="inter-semibold text-[3.2rem] leading-[0.98] tracking-[0px] text-[#0d1321] sm:text-[4.5rem] lg:text-[5.35rem]">
+                            <span className="block sm:whitespace-nowrap">Neem contact op.</span>
+                            <span className="block sm:whitespace-nowrap text-[#1a5ee5]">We denken mee.</span>
+                        </h1>
+                        <p className="mt-7 max-w-[560px] text-[1.08rem] leading-[1.75] text-[#4e5a73] sm:text-[1.2rem]">
+                            Stel je vraag over verzendtarieven, integraties of je fulfilmentproces. We kijken praktisch mee en helpen je snel de juiste volgende stap te kiezen.
+                        </p>
+                        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+                            <a
+                                href="mailto:info@sendwise.nl"
+                                className="group inline-flex w-fit items-center gap-3 rounded-full bg-[#1a5ee5] px-7 py-3.5 text-[0.98rem] font-semibold text-white shadow-[0_18px_42px_rgba(26,94,229,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#154fca]"
+                            >
+                                Mail Sendwise
+                                <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+                            </a>
+                            <a
+                                href="tel:+31619156123"
+                                className="inline-flex w-fit items-center gap-3 rounded-full border border-[#d8e3f2] bg-white px-7 py-3.5 text-[0.98rem] font-semibold text-[#0d1321] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#1a5ee5]/30 hover:text-[#1a5ee5]"
+                            >
+                                Bel direct
+                            </a>
                         </div>
                     </div>
-                </Flex>
-            </section>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-                        <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
-                            <div className="flex items-center space-x-4">
-                                <div className="h-11 w-11 rounded-full bg-[#1a5ee5]/10 text-[#1a5ee5] flex items-center justify-center text-[1.2rem]">
-                                    <FiMail />
-                                </div>
-                                <div>
-                                    <p className="text-[#1a5ee5] inter-semibold text-[0.8rem] tracking-[0.12em]">DIRECT CONTACT</p>
-                                </div>
-                            </div>
-                            <div className="mt-6 flex flex-col space-y-5">
-                                <div className="space-y-2">
-                                    <p className="text-gray-500 inter-medium text-[0.8rem]">Email</p>
-                                    <a
-                                        href="mailto:info@sendwise.nl"
-                                        className="text-gray-900 inter-semibold text-[1.3rem] sm:text-[1.4rem] hover:text-[#1a5ee5] transition-colors"
-                                    >
-                                        info@sendwise.nl
-                                    </a>
-                                </div>
-                                <div className="space-y-2">
-                                    <p className="text-gray-500 inter-medium text-[0.8rem]">Telefoon</p>
-                                    <a
-                                        href="tel:+31619156123"
-                                        className="text-gray-900 inter-semibold text-[1.3rem] sm:text-[1.4rem] hover:text-[#1a5ee5] transition-colors"
-                                    >
-                                        +31 6 19156123
-                                    </a>
-                                    <p className="text-gray-500 inter-medium text-[0.85rem]">Ma–vr, 09:00–17:00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
-                            <div className="flex items-center space-x-4">
-                                <div className="h-11 w-11 rounded-full bg-[#1a5ee5]/10 text-[#1a5ee5] flex items-center justify-center text-[1.2rem]">
-                                    <FiMapPin />
-                                </div>
-                                <div>
-                                    <p className="text-[#1a5ee5] inter-semibold text-[0.8rem] tracking-[0.12em]">ADRES</p>
-                                </div>
-                            </div>
-                            <div className="mt-6 flex flex-col space-y-4">
-                                <p className="text-gray-900 inter-semibold text-[1.2rem] sm:text-[1.3rem] leading-relaxed">
-                                    Ondernemingsweg 66
-                                    <br />
-                                    2404HN Alphen aan den Rijn
-                                </p>
-                            </div>
+                    <div className="relative z-10 flex items-center justify-center lg:min-h-[520px] lg:justify-end">
+                        <div className="absolute right-2 top-10 hidden h-24 w-24 rounded-[28px] bg-[#1a5ee5]/10 lg:block" />
+                        <div className="relative w-full max-w-[560px] overflow-hidden rounded-[34px] border border-[#dbe7f5] bg-[#f4f8ff] shadow-[0_30px_80px_rgba(15,23,42,0.14)]">
+                            <img
+                                src="/contact-hero-olivier.png"
+                                alt="Sendwise teamlid helpt met contactvraag"
+                                className="aspect-[1.02/1] w-full scale-[1.08] object-cover object-center"
+                            />
                         </div>
                     </div>
-                </Flex>
+                </div>
             </section>
 
-            <section className="w-full">
-                <Flex className="lg:w-[80%] w-[95%] mx-auto">
-                    <Flex className="relative w-full h-[26rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
-                        <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
-                        <div className="absolute z-10 inset-0 rounded-2xl bg-black/55 sm:bg-black/35" />
-                        <img src="/sendwise-2.png" alt="Sendwise" className="object-cover w-[100%] h-full rounded-2xl" />
-                        <Flex className="absolute z-20 inset-0 w-full h-full">
-                            <Flex className="text-white items-start flex-col space-y-6 w-full h-full justify-center px-6 sm:px-10 lg:pl-20">
-                                <p className="inter-semibold lg:text-[3rem] sm:text-[2.4rem] text-[1.9rem] lg:leading-[3.4rem]">
-                                    Direct aan de slag met Sendwise?
-                                </p>
-                                <p className="inter-medium lg:text-[1.15rem] text-[1.05rem] lg:w-[80%]">
-                                    Maak een account om te kijken hoe Sendwise past bij jouw volumes en processen.
-                                </p>
-                                <Flex className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
-                                    <Link
-                                        to="/start-met-sendwise"
-                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group inline-flex items-center"
-                                    >
-                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                        <span className="relative z-10">Start met Sendwise</span>
-                                    </Link>
-                                </Flex>
-                                <p className="text-white/70 inter-medium text-[0.85rem]">
-                                    Geen contracten · Geen maandelijkse kosten · Eerlijke indexeringen
-                                </p>
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                </Flex>
+            <section className="bg-[#f7fbff] px-6 py-16 lg:py-20">
+                <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
+                    <div className="rounded-[24px] border border-[#dfeaf7] bg-white p-7 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
+                        <p className="inter-semibold text-[1.1rem] text-[#0d1321]">Advies over tarieven</p>
+                        <p className="mt-3 text-[0.98rem] leading-[1.7] text-[#5a667c]">
+                            We kijken mee naar je volume, landenmix en huidige verzendkosten.
+                        </p>
+                    </div>
+                    <div className="rounded-[24px] border border-[#dfeaf7] bg-white p-7 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
+                        <p className="inter-semibold text-[1.1rem] text-[#0d1321]">Hulp bij integraties</p>
+                        <p className="mt-3 text-[0.98rem] leading-[1.7] text-[#5a667c]">
+                            Koppel je webshop, WMS of fulfilmentproces zonder onnodige complexiteit.
+                        </p>
+                    </div>
+                    <div className="rounded-[24px] border border-[#dfeaf7] bg-white p-7 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
+                        <p className="inter-semibold text-[1.1rem] text-[#0d1321]">Snelle support</p>
+                        <p className="mt-3 text-[0.98rem] leading-[1.7] text-[#5a667c]">
+                            Direct schakelen met mensen die je verzendproces begrijpen.
+                        </p>
+                    </div>
+                </div>
             </section>
 
-        </Flex>
+            <ContactCards className="pt-16 lg:pt-20" />
+
+            <section className="bg-[#f7fbff] px-6 py-16 lg:py-24">
+                <div className="mx-auto max-w-7xl">
+                    <div className="relative overflow-hidden rounded-[30px] bg-[#1a5ee5] px-7 py-10 text-white shadow-[0_28px_70px_rgba(26,94,229,0.24)] sm:px-10 lg:px-14 lg:py-14">
+                        <div className="absolute right-[-80px] top-[-120px] h-[300px] w-[300px] rounded-full bg-white/14 blur-2xl" />
+                        <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+                            <div>
+                                <p className="inter-medium text-[0.95rem] text-white/75">Direct starten</p>
+                                <h2 className="inter-semibold mt-3 max-w-2xl text-[2rem] leading-[1.12] sm:text-[3rem]">
+                                    Liever meteen een account aanmaken?
+                                </h2>
+                                <p className="mt-4 max-w-2xl text-[1.05rem] leading-[1.7] text-white/80">
+                                    Start gratis en ontdek hoe Sendwise past bij je volumes, verzendmix en dagelijkse workflow.
+                                </p>
+                            </div>
+                            <Link
+                                to="/start-met-sendwise"
+                                className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-7 py-3.5 text-[0.98rem] font-semibold text-[#1a5ee5] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f4f8ff]"
+                            >
+                                Start met Sendwise
+                                <FiArrowRight />
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <Homepage2Footer />
+        </main>
     );
 };
 

@@ -60,7 +60,7 @@ const Homepage2Footer = () => {
         <div className="p-0">
           <div className="grid gap-10 lg:grid-cols-[0.95fr_2fr]">
             <div>
-              <Link to="/homepage2" className="inline-flex">
+              <Link to="/" className="inline-flex">
                 <img src="/sendwise-tekst.png" alt="Sendwise" className="h-8 w-auto brightness-0 invert" />
               </Link>
 
