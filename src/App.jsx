@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { AnimatePresence, motion as Motion } from "framer-motion"
 import Header from "./components/ui/Header"
@@ -23,17 +23,167 @@ import BlogGoedgepickt from "./page/BlogGoedgepickt"
 import WerkenBij from "./page/WerkenBij"
 import Kennisbank from "./page/Kennisbank"
 
+const commonPreloadImages = [
+  "/sendwise-tekst-blauw.png",
+  "/sendwise-tekst.png",
+]
+
+const carrierLogoImages = [
+  "/gofo-logo-sendwise.png",
+  "/dao-logo-sendwise.png",
+  "/goedgepickt-sendwise-logo.png",
+  "/colissimo-logo-sendwise.png",
+  "/gls-logo-sendwise.png",
+  "/CORREOS-logo-sendwise.png",
+  "/AT POST-logo-sendwise.png",
+  "/mrw-logo-sendwise.png",
+  "/ctt-logo-sendwise.png",
+  "/sendwise-dhl.svg",
+]
+
+const integrationLogoImages = [
+  "/woocommerce-logo.png",
+  "/shopify-logo.png",
+  "/ccv-icon.svg",
+  "/lightspeed.png",
+  "/magento.jpg",
+  "/mijnwebwinkel.png",
+  "/ecwid-parcxl.png",
+  "/wix.png",
+  "/prestashop.png",
+  "/bol-logo.png",
+  "/lyra.png",
+  "/goedgepickt-sendwise-logo.png",
+]
+
+const homepageImages = [
+  "/sendwise-hero-delivery-van.png",
+  "/homepage2-webshop.png",
+  "/homepage2-fulfilment.png",
+  "/inpakken-afbeelding-1.png",
+  "/verzenden-afbeelding-1.png",
+  "/verzenden-afbeelding-2.png",
+  "/retour-afbeelding-1.png",
+  "/retour-afbeelding-2.png",
+  "/profile-founder-van.png",
+  "/profile-ward.png",
+  "/profile-joep.png",
+  "/freek-blijenberg-boxxl.png",
+  ...carrierLogoImages,
+]
+
+const preloadImagesByPath = {
+  "/": homepageImages,
+  "/homepage2": homepageImages,
+  "/oplossingen/sendwise": [
+    "/sendwise-platform-dashboard-hero.png",
+    "/sendwise-platform-hero.png",
+    "/sendwise-api.png",
+    ...integrationLogoImages,
+  ],
+  "/oplossingen/pro": [
+    "/sendwise-pro-dashboard-hero.png",
+    "/pro-warehouse-3d.png",
+  ],
+  "/oplossingen/connect": [
+    "/sendwise-connect-hero.jpg",
+    ...carrierLogoImages,
+  ],
+  "/voor-webshops": [
+    "/sendwise-platform-hero.png",
+    "/sendwise-api.png",
+    ...integrationLogoImages,
+  ],
+  "/voor-fulfilmentcenters": [
+    "/fulfilmentcenters-hero.png",
+    "/freek-blijenberg-boxxl.png",
+  ],
+  "/prijzen": ["/profile-olivier.png"],
+  "/contact": ["/contact-hero-olivier.png"],
+  "/integraties": integrationLogoImages,
+  "/start-met-sendwise": ["/profile-founder-van.png"],
+  "/werken-bij": ["/werken-bij-sendwise-team.png"],
+  "/blog/sendwise-goedgepickt": [
+    "/sendwise-hero-picture.png",
+    "/goedgepickt-sendwise-logo.png",
+  ],
+  "/integraties/woocommerce": [
+    "/woocommerce-logo.png",
+    "/foto-sendwise-kopie.webp",
+    "/woocommerce-step-1.png",
+    "/woocommerce-step-2.png",
+    "/woocommerce-step-3.png",
+  ],
+  "/integraties/ccv-shop": [
+    "/ccv-icon.svg",
+    "/foto-sendwise-kopie.webp",
+    "/ccv-step-1.png",
+    "/ccv-step-2.png",
+    "/ccv-step-3.png",
+    "/ccv-step-4.png",
+  ],
+  "/over-ons": [
+    "/074DAC7F-33B0-4769-B2EB-D9A7CAFA53EB.webp",
+    "/foto-sendwise-kopie.webp",
+    "/sendwise-2.png",
+  ],
+}
+
+const getPreloadImagesForPath = (pathname) => {
+  const routeImages = preloadImagesByPath[pathname] || []
+  return [...new Set([...commonPreloadImages, ...routeImages])]
+}
+
+const preloadImage = (src) => new Promise((resolve) => {
+  const image = new Image()
+  image.onload = resolve
+  image.onerror = resolve
+  image.src = src
+})
+
+const preloadRouteImages = (sources) => {
+  if (sources.length === 0) return Promise.resolve()
+
+  return Promise.race([
+    Promise.all(sources.map(preloadImage)),
+    new Promise((resolve) => window.setTimeout(resolve, 3500)),
+  ])
+}
+
 const PageTransition = ({ children }) => (
-  <Motion.div
-    className="w-full"
-    initial={{ opacity: 0, y: 6 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -4 }}
-    transition={{ duration: 0.18, ease: "easeOut" }}
-  >
-    {children}
-  </Motion.div>
+  <PreloadedPageTransition>{children}</PreloadedPageTransition>
 )
+
+const PreloadedPageTransition = ({ children }) => {
+  const location = useLocation()
+  const [imagesReady, setImagesReady] = useState(false)
+
+  useEffect(() => {
+    let active = true
+    setImagesReady(false)
+
+    preloadRouteImages(getPreloadImagesForPath(location.pathname)).then(() => {
+      if (active) setImagesReady(true)
+    })
+
+    return () => {
+      active = false
+    }
+  }, [location.pathname])
+
+  return (
+    <Motion.div
+      className="w-full"
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: imagesReady ? 1 : 0, y: imagesReady ? 0 : 6 }}
+      exit={{ opacity: 0, y: -4 }}
+      transition={{ duration: 0.18, ease: "easeOut" }}
+      aria-busy={!imagesReady}
+    >
+      {children}
+    </Motion.div>
+  )
+}
 
 const seoMap = {
   "/": {
