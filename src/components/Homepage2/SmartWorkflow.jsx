@@ -2,6 +2,17 @@ import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { FiPackage, FiRefreshCw, FiTruck } from "react-icons/fi"
 
+const workflowPreloadSources = [
+  "/inpakken-afbeelding-1.png",
+  "/verzenden-afbeelding-1.png",
+  "/verzenden-afbeelding-2.png",
+  "/retour-afbeelding-1.png",
+  "/retour-afbeelding-2.png",
+  "/profile-founder-van.webp",
+  "/profile-ward.webp",
+  "/profile-joep.webp",
+]
+
 const workflowTabs = [
   {
     key: "inpakken",
@@ -117,6 +128,22 @@ const SmartWorkflow = () => {
   const isReturnsTab = active.key === "retourneren"
   const isPackingTab = active.key === "inpakken"
   const isShippingTab = active.key === "verzenden"
+
+  useEffect(() => {
+    const preloadedImages = workflowPreloadSources.map((src) => {
+      const image = new Image()
+      image.fetchPriority = "high"
+      image.decoding = "async"
+      image.src = src
+      return image
+    })
+
+    return () => {
+      preloadedImages.forEach((image) => {
+        image.src = ""
+      })
+    }
+  }, [])
 
   useEffect(() => {
     const timer = window.setTimeout(() => {

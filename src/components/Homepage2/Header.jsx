@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { AnimatePresence, motion as Motion } from "framer-motion"
 import {
   FiArrowRight,
@@ -162,11 +162,20 @@ const Homepage2Header = () => {
   const [activeMenu, setActiveMenu] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileGroup, setMobileGroup] = useState(null)
+  const location = useLocation()
 
   const closeMenus = () => {
     setActiveMenu(null)
     setMobileOpen(false)
     setMobileGroup(null)
+  }
+
+  const handleHomeClick = () => {
+    closeMenus()
+
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+    }
   }
 
   return (
@@ -200,7 +209,7 @@ const Homepage2Header = () => {
       </div>
 
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:h-20">
-        <Link to="/" aria-label="Sendwise homepage" onClick={closeMenus} className="shrink-0">
+        <Link to="/" aria-label="Sendwise homepage" onClick={handleHomeClick} className="shrink-0">
           <img
             src="/sendwise-tekst-blauw.png"
             alt="Sendwise"

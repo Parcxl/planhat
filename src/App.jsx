@@ -25,10 +25,20 @@ const WerkenBij = lazy(() => import("./page/WerkenBij"))
 const Kennisbank = lazy(() => import("./page/Kennisbank"))
 
 const sharedCriticalImages = ["/sendwise-tekst-blauw.png", "/sendwise-tekst.png"]
+const homepageWorkflowImages = [
+  "/inpakken-afbeelding-1.png",
+  "/verzenden-afbeelding-1.png",
+  "/verzenden-afbeelding-2.png",
+  "/retour-afbeelding-1.png",
+  "/retour-afbeelding-2.png",
+  "/profile-founder-van.webp",
+  "/profile-ward.webp",
+  "/profile-joep.webp",
+]
 
 const criticalImagesByPath = {
-  "/": ["/sendwise-hero-delivery-van.jpg", "/inpakken-afbeelding-1.png", "/profile-founder-van.webp", ...sharedCriticalImages],
-  "/homepage2": ["/sendwise-hero-delivery-van.jpg", "/inpakken-afbeelding-1.png", "/profile-founder-van.webp", ...sharedCriticalImages],
+  "/": ["/sendwise-hero-delivery-van.jpg", ...homepageWorkflowImages, ...sharedCriticalImages],
+  "/homepage2": ["/sendwise-hero-delivery-van.jpg", ...homepageWorkflowImages, ...sharedCriticalImages],
   "/oplossingen/sendwise": ["/sendwise-platform-dashboard-hero.webp", ...sharedCriticalImages],
   "/oplossingen/pro": ["/sendwise-pro-dashboard-hero.webp", ...sharedCriticalImages],
   "/oplossingen/connect": ["/sendwise-connect-hero.jpg", ...sharedCriticalImages],
@@ -180,6 +190,10 @@ const AnimatedRoutes = () => {
 
   useEffect(() => {
     syncCriticalPreloadLinks(criticalImagesByPath[location.pathname] || sharedCriticalImages)
+  }, [location.pathname])
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" })
   }, [location.pathname])
 
   useEffect(() => {
