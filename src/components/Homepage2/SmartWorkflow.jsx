@@ -15,7 +15,7 @@ const workflowTabs = [
     status: "Klaar om in te pakken",
     steps: ["Order geselecteerd", "Pakbon gecontroleerd", "Verzendlabel klaar"],
     testimonial: {
-      image: "/profile-founder-van.png",
+      image: "/profile-founder-van.webp",
       alt: "Sendwise order inpakken",
       quote: "“Alle producten en ordergegevens staan direct klaar. Zo pak je sneller in en voorkom je fouten voordat het label wordt gemaakt.”",
       author: "Olivier van Sendwise",
@@ -33,7 +33,7 @@ const workflowTabs = [
     status: "Label aangemaakt",
     steps: ["Tarief gekozen", "Label geprint", "Tracking verzonden"],
     testimonial: {
-      image: "/profile-ward.png",
+      image: "/profile-ward.webp",
       alt: "Ward van Sendwise",
       quote: "“Van verzendmethode tot label: alles staat klaar om direct de juiste zending aan te maken.”",
       author: "Ward van Sendwise",
@@ -51,7 +51,7 @@ const workflowTabs = [
     status: "Retour onderweg",
     steps: ["Retour aangemeld", "Label gedeeld", "Status bijgewerkt"],
     testimonial: {
-      image: "/profile-joep.png",
+      image: "/profile-joep.webp",
       alt: "Joep van Sendwise",
       quote: "“Met het retourportaal maken klanten zelf eenvoudig een retour aan, terwijl jij overzicht houdt op iedere status.”",
       author: "Joep van Sendwise",
@@ -60,14 +60,17 @@ const workflowTabs = [
 ]
 
 const PackingPreview = ({ Icon }) => (
-  <div className="relative min-h-[520px] pt-6">
+  <div className="relative min-h-[350px] pt-4 lg:min-h-[520px] lg:pt-6">
     <img
       src="/inpakken-afbeelding-1.png"
       alt="Producten inpakken in Sendwise"
-      className="mx-auto w-[69%] -rotate-2 rounded-3xl border border-[#dfe7f4] bg-white shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
+      loading="lazy"
+      decoding="async"
+      fetchPriority="low"
+      className="mx-auto w-[92%] -rotate-2 rounded-2xl border border-[#dfe7f4] bg-white shadow-[0_18px_45px_rgba(7,17,90,0.12)] sm:w-[82%] lg:w-[69%] lg:rounded-3xl lg:shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
     />
 
-    <div className="mx-auto mt-8 flex w-fit items-center gap-3 inter-medium text-xl text-[#07115a]">
+    <div className="mx-auto mt-6 flex w-fit max-w-full items-center gap-3 px-2 inter-medium text-base leading-snug text-[#07115a] sm:text-lg lg:mt-8 lg:text-xl">
       <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#07115a] text-white">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
@@ -78,14 +81,17 @@ const PackingPreview = ({ Icon }) => (
 
 const ShippingPreview = ({ Icon }) => {
   return (
-    <div className="relative min-h-[520px] pt-2">
+    <div className="relative min-h-[390px] pt-2 lg:min-h-[520px]">
       <img
         src="/verzenden-afbeelding-1.png"
         alt="Verzendmethode kiezen in Sendwise"
-        className="w-[43%] -rotate-2 rounded-3xl border border-[#dfe7f4] bg-white shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
+        loading="lazy"
+        decoding="async"
+        fetchPriority="low"
+        className="w-[66%] -rotate-2 rounded-2xl border border-[#dfe7f4] bg-white shadow-[0_18px_45px_rgba(7,17,90,0.12)] sm:w-[54%] lg:w-[43%] lg:rounded-3xl lg:shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
       />
 
-      <div className="mx-auto mt-7 flex w-fit items-center gap-3 inter-medium text-xl text-[#07115a]">
+      <div className="mx-auto mt-6 flex w-fit max-w-full items-center gap-3 px-2 inter-medium text-base leading-snug text-[#07115a] sm:text-lg lg:mt-7 lg:text-xl">
         <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#07115a] text-white">
           <Icon className="h-5 w-5" aria-hidden="true" />
         </span>
@@ -95,7 +101,10 @@ const ShippingPreview = ({ Icon }) => {
       <img
         src="/verzenden-afbeelding-2.png"
         alt="Afleveradres kaart in Sendwise"
-        className="relative ml-auto mt-7 w-[75%] rotate-2 rounded-3xl border border-[#dfe7f4] bg-white shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
+        loading="lazy"
+        decoding="async"
+        fetchPriority="low"
+        className="relative ml-auto mt-6 w-[94%] rotate-2 rounded-2xl border border-[#dfe7f4] bg-white shadow-[0_18px_45px_rgba(7,17,90,0.12)] lg:mt-7 lg:w-[75%] lg:rounded-3xl lg:shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
       />
     </div>
   )
@@ -118,18 +127,18 @@ const SmartWorkflow = () => {
   }, [activeIndex])
 
   return (
-    <section className="overflow-hidden bg-white px-6 py-24 lg:py-32">
+    <section className="overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="inter-semibold text-5xl leading-tight text-[#07115a] sm:text-6xl">
+          <h2 className="inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl lg:text-6xl">
             Software zo slim, dat verzenden simpel voelt.
           </h2>
-          <p className="mx-auto mt-5 max-w-3xl inter-medium text-lg leading-8 text-[#3f4965]">
+          <p className="mx-auto mt-4 max-w-3xl inter-medium text-base leading-7 text-[#3f4965] sm:mt-5 sm:text-lg sm:leading-8">
             Van order tot retour: Sendwise geeft je rust met een duidelijke workflow die handwerk voorkomt.
           </p>
         </div>
 
-        <div className="mx-auto mt-12 flex w-full max-w-md items-end justify-center gap-8">
+        <div className="mx-auto mt-9 flex w-full max-w-md -translate-x-2 items-end justify-center gap-7 sm:mt-12 sm:translate-x-0 sm:gap-8">
           {workflowTabs.map((tab, index) => {
             const isActive = index === activeIndex
 
@@ -161,16 +170,16 @@ const SmartWorkflow = () => {
           })}
         </div>
 
-        <div className="relative mt-16 min-h-[520px] rounded-[34px] bg-white">
+        <div className="relative mt-10 rounded-[24px] bg-white sm:mt-16 lg:min-h-[520px] lg:rounded-[34px]">
           <style>{`
             @keyframes workflowTabProgress {
               from { width: 0%; }
               to { width: 100%; }
             }
           `}</style>
-          <div className="absolute left-0 top-24 h-52 w-48 -translate-x-20 rotate-45 rounded-[36px] bg-[#07115a]" aria-hidden="true" />
-          <div className="absolute left-[48%] top-0 h-56 w-56 rotate-45 rounded-[42px] bg-[#1a5ee5]" aria-hidden="true" />
-          <div className="absolute bottom-8 left-20 h-44 w-44 rotate-45 rounded-[34px] bg-[#e8f2ff]" aria-hidden="true" />
+          <div className="absolute left-0 top-24 hidden h-52 w-48 -translate-x-20 rotate-45 rounded-[36px] bg-[#07115a] lg:block" aria-hidden="true" />
+          <div className="absolute left-[48%] top-0 hidden h-56 w-56 rotate-45 rounded-[42px] bg-[#1a5ee5] lg:block" aria-hidden="true" />
+          <div className="absolute bottom-8 left-20 hidden h-44 w-44 rotate-45 rounded-[34px] bg-[#e8f2ff] lg:block" aria-hidden="true" />
 
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.div
@@ -179,35 +188,41 @@ const SmartWorkflow = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -56 }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="relative grid items-stretch gap-8 lg:grid-cols-[1fr_420px]"
+              className="relative grid items-stretch gap-6 lg:grid-cols-[1fr_420px] lg:gap-8"
             >
-              <div className="relative min-h-[520px]">
+              <div className="relative lg:min-h-[520px]">
                 {isPackingTab ? (
                   <PackingPreview Icon={ActiveIcon} />
                 ) : isShippingTab ? (
                   <ShippingPreview Icon={ActiveIcon} />
                 ) : isReturnsTab ? (
-                  <div className="relative min-h-[520px] pt-3">
-                    <div className="relative w-[78%] -rotate-2">
+                  <div className="relative min-h-[390px] pt-3 lg:min-h-[520px]">
+                    <div className="relative w-[94%] -rotate-2 lg:w-[78%]">
                       <img
                         src="/retour-afbeelding-1.png"
                         alt="Recente retouren overzicht"
-                        className="w-full rounded-3xl border border-[#dfe7f4] bg-white shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
+                        loading="lazy"
+                        decoding="async"
+                        fetchPriority="low"
+                        className="w-full rounded-2xl border border-[#dfe7f4] bg-white shadow-[0_18px_45px_rgba(7,17,90,0.12)] lg:rounded-3xl lg:shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
                       />
                     </div>
 
-                    <div className="mx-auto mt-6 flex w-fit items-center gap-3 inter-medium text-xl text-[#07115a]">
+                    <div className="mx-auto mt-6 flex w-fit max-w-full items-center gap-3 px-2 inter-medium text-base leading-snug text-[#07115a] sm:text-lg lg:text-xl">
                       <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#07115a] text-white">
                         <ActiveIcon className="h-5 w-5" aria-hidden="true" />
                       </span>
                       Retouren overzichtelijk verwerkt
                     </div>
 
-                    <div className="relative ml-auto mt-6 w-[70%] rotate-2">
+                    <div className="relative ml-auto mt-6 w-[90%] rotate-2 lg:w-[70%]">
                       <img
                         src="/retour-afbeelding-2.png"
                         alt="Retourportaal order controleren"
-                        className="w-full rounded-3xl border border-[#dfe7f4] bg-white shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
+                        loading="lazy"
+                        decoding="async"
+                        fetchPriority="low"
+                        className="w-full rounded-2xl border border-[#dfe7f4] bg-white shadow-[0_18px_45px_rgba(7,17,90,0.12)] lg:rounded-3xl lg:shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
                       />
                     </div>
                   </div>
@@ -216,15 +231,18 @@ const SmartWorkflow = () => {
                 )}
               </div>
 
-              <aside className="relative overflow-hidden rounded-[26px] shadow-[0_24px_70px_rgba(7,17,90,0.16)]">
+              <aside className="relative min-h-[390px] overflow-hidden rounded-[22px] shadow-[0_20px_55px_rgba(7,17,90,0.14)] lg:min-h-0 lg:rounded-[26px] lg:shadow-[0_24px_70px_rgba(7,17,90,0.16)]">
                 <img
                   src={active.testimonial.image}
                   alt={active.testimonial.alt}
-                  className="h-full min-h-[520px] w-full object-cover object-center"
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
+                  className="h-full min-h-[390px] w-full scale-110 object-cover object-center lg:min-h-[520px] lg:scale-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#07115a]/90 via-[#07115a]/15 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                  <p className="inter-semibold text-2xl leading-tight">
+                <div className="absolute bottom-0 left-0 right-0 p-5 text-white sm:p-8">
+                  <p className="inter-semibold text-xl leading-tight sm:text-2xl">
                     {active.testimonial.quote}
                   </p>
                   <p className="mt-5 inter-medium text-sm text-white/80">{active.testimonial.author}</p>
