@@ -14,7 +14,7 @@ import "swiper/css";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Journey() {
-    const images = ["/sendwise-1.png", "/pro-1.png", "/connect.png"]; // sendwise, pro, connect
+    const images = ["/sendwise-1.webp", "/pro-1.webp", "/connect.webp"]; // sendwise, pro, connect
     const mobileItems = [
         {
             title: "Sendwise",
@@ -58,7 +58,7 @@ export default function Journey() {
         gsap.set("#journey-text", { opacity: 0, x: -50, position: "absolute" });
 
         const sections = gsap.utils.toArray(".text-section");
-        const images = ["/sendwise-1.png", "/pro-1.png", "/connect.png"]; // sendwise, pro, connect
+        const images = ["/sendwise-1.webp", "/pro-1.webp", "/connect.webp"]; // sendwise, pro, connect
         const totalScroll = sections.length * 100;
         const clipImg = document.querySelector("#clip img");
         const journeyImage = document.querySelector("#journey-image img") || document.querySelector("#journey-image");
@@ -114,8 +114,8 @@ export default function Journey() {
 
                             const currentSrc = imageElement.src || imageElement.getAttribute?.("src") || "";
                             const targetSrc = images[targetImageIndex];
-                            const needsSwap = (targetImageIndex === 2 && !currentSrc.includes("connect.png")) ||
-                                (targetImageIndex === 1 && !currentSrc.includes("pro-1.png"));
+                            const needsSwap = (targetImageIndex === 2 && !currentSrc.includes("connect.webp")) ||
+                                (targetImageIndex === 1 && !currentSrc.includes("pro-1.webp"));
 
                             if (needsSwap) {
                                 if (imageElement.src !== undefined) {
@@ -168,8 +168,8 @@ export default function Journey() {
                             // Update image source when needed
                             const currentSrc = imageElement.src || imageElement.getAttribute?.('src') || '';
                             const targetSrc = images[targetImageIndex];
-                            const needsSwap = (targetImageIndex === 1 && !currentSrc.includes("pro-1.png")) ||
-                                           (targetImageIndex === 0 && !currentSrc.includes("sendwise-1.png"));
+                            const needsSwap = (targetImageIndex === 1 && !currentSrc.includes("pro-1.webp")) ||
+                                           (targetImageIndex === 0 && !currentSrc.includes("sendwise-1.webp"));
                             
                             if (needsSwap) {
                                 if (imageElement.src !== undefined) {
@@ -445,7 +445,7 @@ export default function Journey() {
                     <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, mixBlendMode: 'overlay' }} />
                     <img
                         id="journey-image"
-                        src="/sendwise-1.png"
+                        src="/sendwise-1.webp"
                         className="rounded-xl relative z-10 w-full h-full object-cover min-h-[16rem] lg:min-h-[22rem]"
                         alt="dashboard"
                         loading="lazy"
@@ -458,152 +458,152 @@ export default function Journey() {
                             <div className="vertical-marquee w-full lg:w-[11rem] xl:w-[12rem]">
                                 <div className="vertical-marquee-track vertical-marquee-track--slow vertical-marquee-track--down">
                                     <div className="integration-logo-item">
-                                        <img alt="GLS integratie" className="integration-logo" src="/gls-logo-sendwise.png" />
+                                        <img alt="GLS integratie" className="integration-logo" src="/gls-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
                                         <img alt="DHL integratie" className="integration-logo" src="/sendwise-dhl.svg" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="DAO integratie" className="integration-logo" src="/dao-logo-sendwise.png" />
+                                        <img alt="DAO integratie" className="integration-logo" src="/dao-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="Colissimo integratie" className="integration-logo" src="/colissimo-logo-sendwise.png" />
+                                        <img alt="Colissimo integratie" className="integration-logo" src="/colissimo-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="PostNL integratie" className="integration-logo" src="/postnl-icoon.png" />
+                                        <img alt="PostNL integratie" className="integration-logo" src="/postnl-icoon.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="Sendwise integratie" className="integration-logo" src="/Sendwise zonder connect.png" />
+                                        <img alt="Sendwise integratie" className="integration-logo" src="/Sendwise zonder connect.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="Gofo integratie" className="integration-logo" src="/gofo-logo-sendwise.png" />
+                                        <img alt="Gofo integratie" className="integration-logo" src="/gofo-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
                                         <img alt="Carrier 10 integratie" className="integration-logo" src="/10.png" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="MRW integratie" className="integration-logo" src="/mrw-logo-sendwise.png" />
+                                        <img alt="MRW integratie" className="integration-logo" src="/mrw-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="Correos integratie" className="integration-logo" src="/CORREOS-logo-sendwise.png" />
+                                        <img alt="Correos integratie" className="integration-logo" src="/CORREOS-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="AT POST integratie" className="integration-logo" src="/AT POST-logo-sendwise.png" />
+                                        <img alt="AT POST integratie" className="integration-logo" src="/AT POST-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="CTT integratie" className="integration-logo" src="/ctt-logo-sendwise.png" />
+                                        <img alt="CTT integratie" className="integration-logo" src="/ctt-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/gls-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/gls-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
                                         <img alt="" className="integration-logo" src="/sendwise-dhl.svg" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/dao-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/dao-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/colissimo-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/colissimo-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/postnl-icoon.png" />
+                                        <img alt="" className="integration-logo" src="/postnl-icoon.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/Sendwise zonder connect.png" />
+                                        <img alt="" className="integration-logo" src="/Sendwise zonder connect.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/gofo-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/gofo-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
                                         <img alt="" className="integration-logo" src="/10.png" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/mrw-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/mrw-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/CORREOS-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/CORREOS-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/AT POST-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/AT POST-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/ctt-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/ctt-logo-sendwise.webp" />
                                     </div>
                                 </div>
                             </div>
                             <div className="vertical-marquee w-full lg:w-[11rem] xl:w-[12rem]">
                                 <div className="vertical-marquee-track vertical-marquee-track--fast">
                                     <div className="integration-logo-item">
-                                        <img alt="PostNL integratie" className="integration-logo" src="/postnl-icoon.png" />
+                                        <img alt="PostNL integratie" className="integration-logo" src="/postnl-icoon.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="Sendwise integratie" className="integration-logo" src="/Sendwise zonder connect.png" />
+                                        <img alt="Sendwise integratie" className="integration-logo" src="/Sendwise zonder connect.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="Gofo integratie" className="integration-logo" src="/gofo-logo-sendwise.png" />
+                                        <img alt="Gofo integratie" className="integration-logo" src="/gofo-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
                                         <img alt="Carrier 10 integratie" className="integration-logo" src="/10.png" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="MRW integratie" className="integration-logo" src="/mrw-logo-sendwise.png" />
+                                        <img alt="MRW integratie" className="integration-logo" src="/mrw-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="Correos integratie" className="integration-logo" src="/CORREOS-logo-sendwise.png" />
+                                        <img alt="Correos integratie" className="integration-logo" src="/CORREOS-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="AT POST integratie" className="integration-logo" src="/AT POST-logo-sendwise.png" />
+                                        <img alt="AT POST integratie" className="integration-logo" src="/AT POST-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="CTT integratie" className="integration-logo" src="/ctt-logo-sendwise.png" />
+                                        <img alt="CTT integratie" className="integration-logo" src="/ctt-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="GLS integratie" className="integration-logo" src="/gls-logo-sendwise.png" />
+                                        <img alt="GLS integratie" className="integration-logo" src="/gls-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
                                         <img alt="DHL integratie" className="integration-logo" src="/sendwise-dhl.svg" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="DAO integratie" className="integration-logo" src="/dao-logo-sendwise.png" />
+                                        <img alt="DAO integratie" className="integration-logo" src="/dao-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item">
-                                        <img alt="Colissimo integratie" className="integration-logo" src="/colissimo-logo-sendwise.png" />
+                                        <img alt="Colissimo integratie" className="integration-logo" src="/colissimo-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/postnl-icoon.png" />
+                                        <img alt="" className="integration-logo" src="/postnl-icoon.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/Sendwise zonder connect.png" />
+                                        <img alt="" className="integration-logo" src="/Sendwise zonder connect.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/gofo-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/gofo-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
                                         <img alt="" className="integration-logo" src="/10.png" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/mrw-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/mrw-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/CORREOS-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/CORREOS-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/AT POST-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/AT POST-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/ctt-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/ctt-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/gls-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/gls-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
                                         <img alt="" className="integration-logo" src="/sendwise-dhl.svg" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/dao-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/dao-logo-sendwise.webp" />
                                     </div>
                                     <div className="integration-logo-item" aria-hidden="true">
-                                        <img alt="" className="integration-logo" src="/colissimo-logo-sendwise.png" />
+                                        <img alt="" className="integration-logo" src="/colissimo-logo-sendwise.webp" />
                                     </div>
                                 </div>
                             </div>
@@ -611,7 +611,7 @@ export default function Journey() {
                     </div>
                     <div id="connect-overlay" className="absolute inset-0 p-12 opacity-0 pointer-events-none z-20">
                         <img
-                            src="/sendwise-1-2100.png"
+                            src="/sendwise-1-2100.webp"
                             alt="overlay"
                             className="rounded-xl w-full h-full object-cover min-h-[16rem] lg:min-h-[22rem]"
                             loading="lazy"
@@ -697,6 +697,4 @@ export default function Journey() {
         </Flex>
     );
 }
-
-
 

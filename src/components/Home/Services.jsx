@@ -66,7 +66,7 @@ const Services = () => {
                 <Flex className="lg:w-[80%] w-[95%] h-[20rem] sm:h-[31rem] mx-auto group relative">
                     <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
                     <div className="absolute z-10 inset-0 rounded-2xl bg-black/40 sm:bg-transparent" />
-                    <img src="/sendwise-2.png" alt="Sendwise" className=" object-cover w-[100%] h-full rounded-2xl" />
+                    <img src="/sendwise-2.avif" alt="Sendwise" className=" object-cover w-[100%] h-full rounded-2xl" />
                     <Flex className="absolute z-20 inset-0 w-full h-full">
                         <Flex className="text-white items-start flex-col space-y-6 w-full h-full justify-center px-4 sm:px-0 lg:pl-20">
                             <p className="inter-semibold lg:text-[4rem] sm:text-[2.6rem] text-[1.8rem] lg:leading-[4.2rem] lg:w-[100%] w-full text-left">

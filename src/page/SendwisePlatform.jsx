@@ -22,19 +22,19 @@ import BillingInsightAnimation from "../components/animations/BillingInsightAnim
 import BrandingExperienceAnimation from "../components/animations/BrandingExperienceAnimation"
 
 const integrations = [
-  { name: "WooCommerce", src: "/woocommerce-logo.png" },
+  { name: "WooCommerce", src: "/woocommerce-logo.webp" },
   { name: "Wix", src: "/wix.png" },
-  { name: "Shopify", src: "/shopify-logo.png" },
-  { name: "Sendwise API", src: "/sendwise-api.png" },
-  { name: "PrestaShop", src: "/prestashop.png" },
-  { name: "Orders", src: "/orders.png" },
-  { name: "Mijnwebwinkel", src: "/mijnwebwinkel.png" },
+  { name: "Shopify", src: "/shopify-logo.webp" },
+  { name: "Sendwise API", src: "/sendwise-api.webp" },
+  { name: "PrestaShop", src: "/prestashop.webp" },
+  { name: "Orders", src: "/orders.webp" },
+  { name: "Mijnwebwinkel", src: "/mijnwebwinkel.webp" },
   { name: "Magento", src: "/magento.jpg" },
-  { name: "Lyra", src: "/lyra.png" },
-  { name: "Goedgepickt", src: "/goedgepickt-sendwise-logo.png" },
-  { name: "Ecwid", src: "/ecwid-parcxl.png" },
+  { name: "Lyra", src: "/lyra.webp" },
+  { name: "Goedgepickt", src: "/goedgepickt-sendwise-logo.webp" },
+  { name: "Ecwid", src: "/ecwid-parcxl.webp" },
   { name: "CCV", src: "/ccv-icon.svg" },
-  { name: "Lightspeed", src: "/lightspeed.png" },
+  { name: "Lightspeed", src: "/lightspeed.webp" },
   { name: "Bol.com", src: "/bol-logo.png" },
 ]
 
@@ -127,8 +127,15 @@ const featureSections = [
 ]
 
 const IntegrationLogo = ({ name, src }) => (
-  <div className="flex h-32 w-40 shrink-0 items-center justify-center">
-    <img src={src} alt={`${name} integratie`} className="max-h-28 max-w-[210px] object-contain" />
+  <div className="flex h-20 w-28 shrink-0 items-center justify-center sm:h-28 sm:w-36 lg:h-32 lg:w-40">
+    <img
+      src={src}
+      alt={`${name} integratie`}
+      loading="lazy"
+      decoding="async"
+      fetchPriority="low"
+      className="max-h-16 max-w-[130px] object-contain sm:max-h-24 sm:max-w-[180px] lg:max-h-28 lg:max-w-[210px]"
+    />
   </div>
 )
 
@@ -177,7 +184,7 @@ const FeatureSection = ({ section }) => {
   )
 
   return (
-    <section className="bg-white px-6 py-12 lg:py-16">
+    <section className="bg-white px-4 py-10 sm:px-6 sm:py-12 lg:py-16">
       <div className={`mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 ${section.reversed ? "" : ""}`}>
         {section.reversed ? (
           <>
@@ -204,7 +211,7 @@ const SendwisePlatform = () => {
     <main className="min-h-screen bg-white text-[#0d1321]">
       <Homepage2Header />
 
-      <section className="relative overflow-hidden bg-white pt-32 sm:pt-36 lg:pt-44">
+      <section className="relative overflow-hidden bg-white pt-24 sm:pt-28 lg:pt-44">
         <style>{`
           @keyframes platformHeroImageIn {
             from {
@@ -217,7 +224,7 @@ const SendwisePlatform = () => {
             }
           }
         `}</style>
-        <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-6 pb-20 lg:min-h-[600px] lg:grid-cols-[580px_1fr] lg:gap-10 lg:pb-20">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-9 px-4 pb-12 sm:px-6 sm:pb-16 lg:min-h-[600px] lg:grid-cols-[580px_1fr] lg:gap-10 lg:pb-20">
           <div className="relative z-10 max-w-[620px] lg:pb-8">
             <div className="mb-5 flex items-center gap-3 text-[#6f7694]">
               <div className="flex -space-x-2">
@@ -235,26 +242,26 @@ const SendwisePlatform = () => {
               </p>
             </div>
 
-            <h1 className="inter-semibold text-5xl leading-[1.03] text-[#07115a] sm:text-6xl sm:leading-[1.02] lg:text-7xl">
-              <span className="block whitespace-nowrap">Het Sendwise</span>
+            <h1 className="inter-semibold text-[2.65rem] leading-[1.03] text-[#07115a] sm:text-6xl sm:leading-[1.02] lg:text-7xl">
+              <span className="block sm:whitespace-nowrap">Het Sendwise</span>
               <span className="block">platform</span>
             </h1>
 
-            <p className="mt-6 max-w-2xl inter-medium text-lg leading-8 text-[#3f4965]">
+            <p className="mt-5 max-w-2xl inter-medium text-base leading-7 text-[#3f4965] sm:mt-6 sm:text-lg sm:leading-8">
               Labels, tracking en verzendkosten in één rustig dashboard.
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/start-met-sendwise"
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-[#1a5ee5] px-6 inter-semibold text-sm text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2]"
+                className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-[#1a5ee5] px-6 inter-semibold text-sm text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2] sm:w-auto"
               >
                 Start met Sendwise
                 <FiArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex h-12 items-center justify-center rounded-[12px] border border-[#d4dceb] bg-white px-6 inter-semibold text-sm text-[#07115a] shadow-[0_10px_24px_rgba(7,17,31,0.04)] transition hover:border-[#b8c4d8] hover:bg-[#f8fbff]"
+                className="inline-flex h-12 w-full items-center justify-center rounded-[12px] border border-[#d4dceb] bg-white px-6 inter-semibold text-sm text-[#07115a] shadow-[0_10px_24px_rgba(7,17,31,0.04)] transition hover:border-[#b8c4d8] hover:bg-[#f8fbff] sm:w-auto"
               >
                 Plan een kennismaking
               </Link>
@@ -266,12 +273,15 @@ const SendwisePlatform = () => {
               className="relative w-full lg:mt-2 lg:w-[900px] lg:max-w-none"
             >
               <div
-                className="overflow-hidden rounded-l-[28px] rounded-r-none border border-r-0 border-[#cfe0fb] bg-[#f7fbff] shadow-[0_34px_95px_rgba(7,17,31,0.18)]"
+                className="overflow-hidden rounded-[24px] border border-[#cfe0fb] bg-[#f7fbff] shadow-[0_24px_65px_rgba(7,17,31,0.14)] lg:rounded-l-[28px] lg:rounded-r-none lg:border-r-0 lg:shadow-[0_34px_95px_rgba(7,17,31,0.18)]"
                 style={{ animation: "platformHeroImageIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both" }}
               >
                 <img
-                  src="/sendwise-platform-dashboard-hero.png"
+                  src="/sendwise-platform-dashboard-hero.webp"
                   alt="Dashboard van het Sendwise platform"
+                  fetchPriority="high"
+                  loading="eager"
+                  decoding="async"
                   className="aspect-[1.87/1] w-full object-cover object-left-top"
                 />
               </div>
@@ -280,13 +290,13 @@ const SendwisePlatform = () => {
         </div>
       </section>
 
-      <section className="bg-white px-6 pb-12">
+      <section className="bg-white px-4 pb-10 sm:px-6 sm:pb-12">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-5 lg:grid-cols-3">
             {pillars.map(({ title, text, icon: Icon }) => (
               <article
                 key={title}
-                className="flex min-h-[250px] flex-col rounded-[24px] border border-[#e1eaf7] bg-[#fbfdff] p-7 shadow-[0_18px_55px_rgba(7,17,31,0.065)]"
+                className="flex min-h-[220px] flex-col rounded-[22px] border border-[#e1eaf7] bg-[#fbfdff] p-5 shadow-[0_18px_55px_rgba(7,17,31,0.065)] sm:min-h-[250px] sm:rounded-[24px] sm:p-7"
               >
                 <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-[#1a5ee5] shadow-[0_12px_30px_rgba(26,94,229,0.10)] ring-1 ring-[#dce9ff]">
                   {createElement(Icon, { className: "h-7 w-7", "aria-hidden": "true" })}
@@ -299,7 +309,7 @@ const SendwisePlatform = () => {
         </div>
       </section>
 
-      <section className="overflow-hidden bg-[#f7fbff] px-6 py-16 lg:py-20">
+      <section className="overflow-hidden bg-[#f7fbff] px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
         <style>{`
           @keyframes platformIntegrations {
             from { transform: translateX(0); }
@@ -309,10 +319,10 @@ const SendwisePlatform = () => {
 
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
-            <h2 className="inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl">
+              <h2 className="inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl">
               Orders automatisch binnen vanuit je systemen
             </h2>
-            <p className="mt-5 max-w-xl inter-medium text-lg leading-8 text-[#667085]">
+            <p className="mt-4 max-w-xl inter-medium text-base leading-7 text-[#667085] sm:mt-5 sm:text-lg sm:leading-8">
               Sendwise sluit aan op de tools die je al gebruikt. Daardoor staat elke order klaar zonder handmatig overtypen.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
@@ -326,8 +336,8 @@ const SendwisePlatform = () => {
           </div>
 
           <div className="relative overflow-hidden py-2">
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-[#f7fbff] to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-[#f7fbff] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[#f7fbff] to-transparent sm:w-20" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[#f7fbff] to-transparent sm:w-20" />
 
             <div className="flex w-max" style={{ animation: "platformIntegrations 34s linear infinite" }}>
               {[...integrations, ...integrations].map((integration, index) => (
@@ -343,12 +353,12 @@ const SendwisePlatform = () => {
         </div>
       </section>
 
-      <section className="bg-white px-6 pb-2 pt-20">
+      <section className="bg-white px-4 pb-2 pt-14 sm:px-6 sm:pt-20">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="inter-semibold text-5xl leading-tight text-[#07115a] sm:text-6xl">
+          <h2 className="inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl lg:text-6xl">
             Alles wat je dagelijks nodig hebt om te verzenden.
           </h2>
-          <p className="mx-auto mt-5 max-w-3xl inter-medium text-lg leading-8 text-[#3f4965]">
+          <p className="mx-auto mt-4 max-w-3xl inter-medium text-base leading-7 text-[#3f4965] sm:mt-5 sm:text-lg sm:leading-8">
             De belangrijkste verzendacties blijven dicht bij elkaar, zodat je team minder hoeft te zoeken en sneller kan werken.
           </p>
         </div>
@@ -358,7 +368,7 @@ const SendwisePlatform = () => {
         <FeatureSection key={section.title} section={section} />
       ))}
 
-      <section className="bg-white px-6 py-16 lg:py-20">
+      <section className="bg-white px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
         <div className="mx-auto grid max-w-7xl items-center gap-8 rounded-[28px] bg-[#07115a] p-8 text-white shadow-[0_24px_70px_rgba(7,17,90,0.18)] lg:grid-cols-[0.9fr_1.1fr] lg:p-12">
           <div>
             <h2 className="inter-semibold text-4xl leading-tight sm:text-5xl">

@@ -54,7 +54,7 @@ const WooCommerceHeroCard = () => (
                 <div className="relative flex items-center justify-center" style={{ perspective: "900px" }}>
                     <div className="absolute -bottom-6 left-1/2 h-6 w-40 -translate-x-1/2 rounded-full bg-black/30 blur-xl" />
                     <motion.img
-                        src="/woocommerce-logo.png"
+                        src="/woocommerce-logo.webp"
                         alt="WooCommerce"
                         className="w-[11rem] sm:w-[14rem] lg:w-[18rem] h-auto object-contain drop-shadow-[0_36px_80px_rgba(15,23,42,0.5)] transform-gpu"
                         style={{ transformPerspective: 900, rotateY: -24, rotateX: 6, transformStyle: "preserve-3d" }}

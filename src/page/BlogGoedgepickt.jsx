@@ -100,8 +100,10 @@ export default function BlogGoedgepickt() {
             <div className="relative hidden sm:block">
               <div className="relative rounded-3xl border border-slate-100 bg-white/80 shadow-[0_18px_50px_rgba(15,23,42,0.16)] overflow-hidden">
                 <img
-                  src="/sendwise-hero-picture.png"
+                  src="/sendwise-hero-picture.avif"
                   alt="Integratie tussen Sendwise en Goedgepickt"
+                  loading="lazy"
+                  decoding="async"
                   className="h-56 w-full object-cover"
                 />
                 <div className="p-4 flex items-center justify-between gap-4">
@@ -487,4 +489,3 @@ export default function BlogGoedgepickt() {
     </main>
   )
 }
-
