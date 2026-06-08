@@ -1,294 +1,381 @@
-import { Flex } from "antd";
-import { useEffect } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FiCheck, FiFileText, FiTrendingUp, FiCreditCard, FiShield } from "react-icons/fi";
-import LabelPrintAnimation from "../components/animations/LabelPrintAnimation";
-import ConnectFlowAnimation from "../components/animations/ConnectFlowAnimation";
-import ProWarehouseCard from "../components/ProWarehouseCard";
-import { Link } from "react-router-dom";
+import { createElement, useEffect } from "react"
+import { Link } from "react-router-dom"
+import {
+  FiArrowRight,
+  FiCheck,
+  FiCreditCard,
+  FiFileText,
+  FiPackage,
+  FiShield,
+  FiShoppingBag,
+  FiTruck,
+  FiZap,
+} from "react-icons/fi"
+import Homepage2Header from "../components/Homepage2/Header"
+import Homepage2Footer from "../components/Homepage2/Footer"
+import LabelPrintAnimation from "../components/animations/LabelPrintAnimation"
+import ConnectFlowAnimation from "../components/animations/ConnectFlowAnimation"
+import OrderPickingAnimation from "../components/animations/OrderPickingAnimation"
+import PackingControlAnimation from "../components/animations/PackingControlAnimation"
 
-gsap.registerPlugin(ScrollTrigger);
+const integrations = [
+  { name: "WooCommerce", src: "/woocommerce-logo.png" },
+  { name: "Wix", src: "/wix.png" },
+  { name: "Shopify", src: "/shopify-logo.png" },
+  { name: "Sendwise API", src: "/sendwise-api.png" },
+  { name: "PrestaShop", src: "/prestashop.png" },
+  { name: "Mijnwebwinkel", src: "/mijnwebwinkel.png" },
+  { name: "Magento", src: "/magento.jpg" },
+  { name: "Goedgepickt", src: "/goedgepickt-sendwise-logo.png" },
+  { name: "CCV", src: "/ccv-icon.svg" },
+  { name: "Lightspeed", src: "/lightspeed.png" },
+  { name: "Bol.com", src: "/bol-logo.png" },
+]
 
-const FeatureList = ({ items, tone = "dark", className = "", align = "left" }) => {
-    const isLight = tone === "light";
-    const isRight = align === "right";
-    const textClass = isLight ? "text-white/90" : "text-gray-700";
-    const iconClass = isLight ? "bg-white/15 text-white" : "bg-[#1a5ee5]/10 text-[#1a5ee5]";
+const pillars = [
+  {
+    title: "Geen contracten",
+    text: "Start zonder vaste verplichtingen en verzend wanneer het jou uitkomt.",
+    icon: FiFileText,
+  },
+  {
+    title: "Scherpe tarieven",
+    text: "Profiteer van duidelijke all-in tarieven zonder losse labelbijdrages.",
+    icon: FiCreditCard,
+  },
+  {
+    title: "Alles gekoppeld",
+    text: "Orders uit je webshop staan automatisch klaar om te verwerken.",
+    icon: FiZap,
+  },
+]
 
-    return (
-        <ul className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${isRight ? "text-right" : "text-left"} ${className}`}>
-            {items.map((item) => (
-                <li
-                    key={item}
-                    className={`flex items-start gap-3 inter-medium text-[0.98rem] ${textClass} ${isRight ? "flex-row-reverse justify-end" : ""}`}
-                >
-                    <span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${iconClass}`}>
-                        <FiCheck className="text-[0.9rem]" />
-                    </span>
-                    <span className="leading-relaxed">{item}</span>
-                </li>
-            ))}
-        </ul>
-    );
-};
+const featureSections = [
+  {
+    eyebrow: "Labels",
+    title: "Labels aanmaken en printen in seconden",
+    text: "Orders komen automatisch binnen vanuit je webshop. Vanuit één dashboard maak je labels aan, print je ze direct en stuur je tracking naar je klant.",
+    items: [
+      "Orders automatisch binnen",
+      "Labels per order of in bulk",
+      "Handmatig verzenden of via Excel",
+      "Tracking direct naar je klant",
+    ],
+    icon: FiPackage,
+    visual: LabelPrintAnimation,
+  },
+  {
+    eyebrow: "CONNECT",
+    title: "Goedkoper verzenden met CONNECT",
+    text: "Verzend via Sendwise met vaste, betrouwbare vervoerders in Nederland en Europa. Eén pickup, scherpe tarieven en geen losse vervoerderscontracten.",
+    items: [
+      "Eén pickup voor al je zendingen",
+      "Scherpe all-in tarieven",
+      "Geen contracten of abonnementskosten",
+      "De juiste vervoerder per land",
+    ],
+    icon: FiTruck,
+    visual: ConnectFlowAnimation,
+    reversed: true,
+  },
+  {
+    eyebrow: "Fulfilment",
+    title: "Groei door met Sendwise PRO",
+    text: "Wanneer je volume groeit, helpt PRO je om picken, packen en voorraadbeheer strak te organiseren.",
+    items: [
+      "Picklijsten voor je magazijn",
+      "Packcontrole aan de inpaktafel",
+      "Minder fouten en retouren",
+      "Voorraad beter in beeld",
+    ],
+    icon: FiShoppingBag,
+    visual: OrderPickingAnimation,
+  },
+  {
+    eyebrow: "Inpakken",
+    title: "Minder fouten voor de deur uit",
+    text: "Controleer orders voordat ze verzonden worden en houd je proces rustig, ook wanneer het drukker wordt.",
+    items: [
+      "Controle per order",
+      "Duidelijke status per stap",
+      "Sneller verwerken op piekmomenten",
+      "Minder support achteraf",
+    ],
+    icon: FiShield,
+    visual: PackingControlAnimation,
+    reversed: true,
+  },
+]
 
-const uspCards = [
-    { title: "Geen contracten", Icon: FiFileText },
-    { title: "Geen abonnementskosten", Icon: FiShield },
-    { title: "Eerlijke indexeringen", Icon: FiTrendingUp },
-    { title: "Duidelijke tarieven per zending", Icon: FiCreditCard },
-];
+const IntegrationLogo = ({ name, src }) => (
+  <div className="flex h-28 w-40 shrink-0 items-center justify-center">
+    <img src={src} alt={`${name} integratie`} className="max-h-24 max-w-[190px] object-contain" />
+  </div>
+)
+
+const CheckList = ({ items }) => (
+  <ul className="grid gap-3 sm:grid-cols-2">
+    {items.map((item) => (
+      <li key={item} className="flex items-start gap-2.5 inter-medium text-sm leading-6 text-[#445066]">
+        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e7f0ff] text-[#1a5ee5]">
+          <FiCheck className="h-3.5 w-3.5 stroke-[3]" aria-hidden="true" />
+        </span>
+        {item}
+      </li>
+    ))}
+  </ul>
+)
+
+const FeatureSection = ({ section }) => {
+  const Visual = section.visual
+  const Icon = section.icon
+
+  const copy = (
+    <div className="flex flex-col justify-center">
+      <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#eef5ff] px-3.5 py-2 inter-semibold text-xs uppercase tracking-[0.08em] text-[#1a5ee5] ring-1 ring-[#dce9ff]">
+        {createElement(Icon, { className: "h-4 w-4", "aria-hidden": "true" })}
+        {section.eyebrow}
+      </span>
+      <h2 className="inter-semibold text-3xl leading-tight text-[#07115a] sm:text-4xl">
+        {section.title}
+      </h2>
+      <p className="mt-4 max-w-xl inter-medium text-base leading-8 text-[#667085]">
+        {section.text}
+      </p>
+      <div className="mt-7">
+        <CheckList items={section.items} />
+      </div>
+    </div>
+  )
+
+  const visual = (
+    <div className="relative min-h-[300px] overflow-hidden rounded-[26px] border border-[#e1eaf7] bg-[#fbfdff] p-4 shadow-[0_20px_65px_rgba(7,17,31,0.08)] sm:min-h-[340px] sm:p-5">
+      <div className="absolute right-6 top-6 h-16 w-16 rotate-45 rounded-[18px] bg-[#e8f2ff]" aria-hidden="true" />
+      <div className="relative h-[270px] sm:h-[310px]">
+        {createElement(Visual)}
+      </div>
+    </div>
+  )
+
+  return (
+    <section className="bg-white px-6 py-12 lg:py-16">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2">
+        {section.reversed ? (
+          <>
+            <div className="lg:order-1">{copy}</div>
+            <div className="lg:order-2">{visual}</div>
+          </>
+        ) : (
+          <>
+            {visual}
+            {copy}
+          </>
+        )}
+      </div>
+    </section>
+  )
+}
 
 const VoorWebshops = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
-    useGSAP(() => {
-        gsap.set("#webshops-hero-frame", {
-            scale: 1,
-            transformOrigin: "center center",
-            borderBottomLeftRadius: "0%",
-            borderBottomRightRadius: "0%",
-            marginLeft: "0px",
-            marginRight: "0px",
-        });
+  return (
+    <main className="min-h-screen bg-white text-[#0d1321]">
+      <Homepage2Header />
 
-        gsap.to("#webshops-hero-frame", {
-            scale: 0.83,
-            borderBottomLeftRadius: "100px",
-            borderBottomRightRadius: "100px",
-            ease: "power1.inOut",
-            scrollTrigger: {
-                trigger: "#webshops-hero-frame",
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-            },
-        });
+      <section className="relative overflow-hidden bg-white pt-32 sm:pt-36 lg:pt-44">
+        <div className="mx-auto grid min-h-[690px] w-full max-w-7xl items-center gap-12 px-6 pb-20 lg:grid-cols-[0.95fr_1.05fr] lg:pb-24">
+          <div className="relative z-10 max-w-[690px] lg:pb-10">
+            <div className="mb-5 flex items-center gap-3 text-[#6f7694]">
+              <div className="flex -space-x-2">
+                {[FiShoppingBag, FiPackage, FiTruck].map((Icon, index) => (
+                  <span
+                    key={index}
+                    className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#eef5ff] text-[#1a5ee5] shadow-[0_4px_12px_rgba(15,23,42,0.10)]"
+                  >
+                    {createElement(Icon, { className: "h-3.5 w-3.5", "aria-hidden": "true" })}
+                  </span>
+                ))}
+              </div>
+              <p className="inter-medium text-sm text-[#707894] sm:text-[0.95rem]">
+                Voor webshops die slimmer willen verzenden
+              </p>
+            </div>
 
-        gsap.fromTo(
-            "#webshops-hero-img",
-            {
-                scale: 1,
-                borderBottomLeftRadius: "0%",
-                borderBottomRightRadius: "0%",
-            },
-            {
-                scale: 1,
-                ease: "power1.out",
-                borderBottomLeftRadius: "100px",
-                borderBottomRightRadius: "100px",
-                scrollTrigger: {
-                    trigger: "#webshops-hero-frame",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true,
-                },
-            }
-        );
-    });
+            <h1 className="inter-semibold text-5xl leading-[1.03] text-[#07115a] sm:text-6xl sm:leading-[1.02] lg:text-7xl">
+              <span className="block sm:whitespace-nowrap">Verzend slimmer.</span>
+              <span className="block sm:whitespace-nowrap">Betaal minder.</span>
+            </h1>
 
-    return (
-        <Flex className="flex-col w-[100%] overflow-hidden space-y-10 sm:space-y-12 md:space-y-14 lg:space-y-16 mb-10">
-            <section className="w-full">
-                <Flex>
-                    <Flex id="webshops-hero-frame" className="w-[100%] mask-clip-path">
-                        <img
-                            id="webshops-hero-img"
-                            src="/sendwise-2.png"
-                            alt="Sendwise voor webshops"
-                            className="absolute h-screen sm:h-screen w-[100%] object-cover object-top"
-                        />
-                        <div id="webshops-hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-screen sm:h-screen" />
-                        <Flex className="z-30 sm:ml-[10%] ml-[4%] w-[100%] h-screen sm:h-screen flex-col justify-center items-start pt-16 sm:pt-20 pb-10 sm:pb-14">
-                            <div className="flex flex-col items-start space-y-8 sm:space-y-10 translate-y-4 sm:translate-y-6">
-                                <Flex className="group text-white/80 inter-semibold w-fit bg-[#514F4A]/30 border px-1 py-1 items-center space-x-4 rounded-3xl border-[#514F4A]/50 backdrop-blur-lg transition-all duration-500 ease-out hover:border-[#514F4A] hover:bg-[#514F4A]/40">
-                                    <Flex className="border border-[#514F4A] bg-gradient-to-t to-[#514F4A] from-[#514F4A]/10 px-3 py-[0.4rem] rounded-3xl transition-all duration-500 ease-out group-hover:bg-[#514F4A] group-hover:scale-[1.02]">
-                                        <p className="text-[0.85rem] tracking-[0.14em]">WEBSHOPS</p>
-                                    </Flex>
-                                </Flex>
-                                <div className="flex flex-col pl-1 inter-semibold md:leading-[4rem] leading-[3.1rem] text-white w-fit text-left">
-                                    <h1 className="md:text-[4rem] sm:text-[2.5rem] text-[2.85rem]">Slim verzenden voor webshops</h1>
-                                </div>
-                                <p className="text-white font-light text-[1.25rem] sm:text-[1.1rem] md:text-[1.3rem] max-w-[44rem] leading-[1.4] text-left">
-                                    Sendwise helpt webshops om sneller, goedkoper en zonder gedoe te verzenden. Van labels en tracking tot fulfilment en internationale verzending — alles via één platform.
-                                </p>
-                                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-6 sm:space-y-0">
-                                    <Link
-                                        to="/start-met-sendwise"
-                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group inline-flex items-center"
-                                    >
-                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                        <span className="relative z-10">Start met Sendwise</span>
-                                    </Link>
-                                    <Link
-                                        to="/contact"
-                                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white hover:text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl w-fit flex isolate"
-                                    >
-                                        <span className="relative z-10 text-white group-hover:text-white">Plan een kennismaking</span>
-                                    </Link>
-                                </div>
-                            </div>
-                        </Flex>
-                    </Flex>
-                </Flex>
-            </section>
+            <p className="mt-6 max-w-2xl inter-medium text-lg leading-8 text-[#3f4965]">
+              Alles voor labels, tracking, tarieven en fulfilment in één platform voor je webshop.
+            </p>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <Flex className="w-full group relative rounded-[2.25rem] overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] rounded-[2.25rem]" />
-                        <div className="absolute inset-0 opacity-40 noise-overlay" />
-                        <Flex className="relative z-20 w-full p-7 sm:p-10 lg:p-12">
-                            <Flex className="text-white w-[100%] items-center flex-col text-center space-y-4">
-                                <p className="inter-semibold lg:text-[2.2rem] sm:text-[1.9rem] text-[1.6rem]">
-                                    Alles wat je als webshop nodig hebt om te verzenden
-                                </p>
-                                <p className="inter-medium lg:text-[1.2rem] text-[1rem] leading-relaxed lg:max-w-[52rem]">
-                                    Of je nu 5 of 5.000 orders per dag verzendt — verzenden moet simpel, betaalbaar en betrouwbaar zijn. Sendwise is gebouwd voor webshops die willen groeien, zonder vast te zitten aan contracten, ingewikkelde tarieven of meerdere vervoerders.
-                                </p>
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                </Flex>
-            </section>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link
+                to="/start-met-sendwise"
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-[#1a5ee5] px-6 inter-semibold text-sm text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2]"
+              >
+                Start met Sendwise
+                <FiArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
+              </Link>
+              <Link
+                to="/prijzen"
+                className="inline-flex h-12 items-center justify-center rounded-[12px] border border-[#d4dceb] bg-white px-6 inter-semibold text-sm text-[#07115a] shadow-[0_10px_24px_rgba(7,17,31,0.04)] transition hover:border-[#b8c4d8] hover:bg-[#f8fbff]"
+              >
+                Bekijk tarieven
+              </Link>
+            </div>
+          </div>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white/90 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[45%] w-full">
-                                <div className="w-full h-[17rem] sm:h-[18rem]">
-                                    <LabelPrintAnimation />
-                                </div>
-                            </div>
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left">
-                                <div className="space-y-3">
-                                    <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                        Labels aanmaken en printen in seconden
-                                    </h2>
-                                </div>
-                                <FeatureList
-                                    items={[
-                                        "Orders komen automatisch binnen vanuit je webshop",
-                                        "Handmatig verzenden of via Excel import",
-                                    ]}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </Flex>
-            </section>
+          <div className="relative flex items-center justify-center lg:min-h-[570px] lg:justify-end">
+            <div className="relative w-full max-w-[600px] overflow-hidden rounded-[34px] shadow-[0_34px_95px_rgba(7,17,31,0.24)]">
+              <img
+                src="/sendwise-platform-hero.png"
+                alt="Webshop order verwerken met Sendwise"
+                className="aspect-[1.12/1] w-full object-cover object-center"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left order-2 lg:order-1">
-                                <div className="space-y-3">
-                                    <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                        Goedkoper verzenden met CONNECT
-                                    </h2>
-                                    <p className="text-gray-700 inter-medium lg:text-[1.05rem] text-[0.98rem] leading-relaxed max-w-[56rem]">
-                                        Met CONNECT verzend je via Sendwise met vaste, betrouwbare vervoerders — in Nederland én Europa. Geen losse contracten, geen meerdere pickups en geen verrassingen achteraf. Je verzendt per land altijd met de beste optie voor prijs en kwaliteit.
-                                    </p>
-                                </div>
-                                <FeatureList
-                                    items={[
-                                        "Eén pickup voor al je zendingen",
-                                        "Scherpe all-in tarieven",
-                                        "Geen contracten of abonnementskosten",
-                                        "Altijd de juiste vervoerder per land",
-                                    ]}
-                                />
-                            </div>
-                            <div className="lg:w-[45%] w-full order-1 lg:order-2">
-                                <div className="relative w-full h-[19rem] sm:h-[20rem] overflow-hidden rounded-2xl bg-[rgba(26,94,229,0.06)]">
-                                    <div className="absolute inset-0 opacity-30 noise-overlay" />
-                                    <div className="relative w-full h-full">
-                                        <ConnectFlowAnimation />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Flex>
-            </section>
+      <section className="bg-white px-6 pb-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-5 lg:grid-cols-3">
+            {pillars.map(({ title, text, icon: Icon }) => (
+              <article
+                key={title}
+                className="flex min-h-[250px] flex-col rounded-[24px] border border-[#e1eaf7] bg-[#fbfdff] p-7 shadow-[0_18px_55px_rgba(7,17,31,0.065)]"
+              >
+                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-[#1a5ee5] shadow-[0_12px_30px_rgba(26,94,229,0.10)] ring-1 ring-[#dce9ff]">
+                  {createElement(Icon, { className: "h-7 w-7", "aria-hidden": "true" })}
+                </span>
+                <h2 className="mt-6 inter-semibold text-2xl leading-tight text-[#07115a]">{title}</h2>
+                <p className="mt-3 inter-medium text-base leading-7 text-[#667085]">{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <section className="w-full">
-                <ProWarehouseCard
-                    title="Fulfilmentsoftware voor webshops"
-                    description="Met Sendwise PRO stroomlijn je het fulfilmentproces binnen je webshop. Van orderinname en picklijsten tot voorraadbeheer en magazijninrichting — alles is ontworpen om sneller te werken en fouten te voorkomen."
-                />
-            </section>
+      <section className="overflow-hidden bg-[#f7fbff] px-6 py-16 lg:py-20">
+        <style>{`
+          @keyframes webshopIntegrations {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+          }
+        `}</style>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white/90 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col space-y-3 text-center">
-                            <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                Geen verrassingen. Geen verplichtingen.
-                            </h2>
-                        </div>
-                        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                            {uspCards.map(({ title, Icon }) => (
-                                <div
-                                    key={title}
-                                    className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-[0_12px_30px_rgba(15,23,42,0.08)]"
-                                >
-                                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#1a5ee5]/10 text-[#1a5ee5]">
-                                        <Icon className="text-[1.2rem]" />
-                                    </div>
-                                    <p className="mt-4 inter-semibold text-[1.05rem] text-gray-900">{title}</p>
-                                </div>
-                            ))}
-                        </div>
-                        <p className="mt-8 text-gray-700 inter-medium text-[1rem] text-center">
-                            Je betaalt alleen voor wat je verzendt. Niet meer, niet minder.
-                        </p>
-                    </div>
-                </Flex>
-            </section>
+        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+          <div>
+            <h2 className="inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl">
+              Koppel je webshop en verzend direct
+            </h2>
+            <p className="mt-5 max-w-xl inter-medium text-lg leading-8 text-[#667085]">
+              Sendwise sluit aan op je webshop, marketplace en fulfilmentflow. Orders staan automatisch klaar om te verwerken.
+            </p>
+          </div>
 
-            <section className="w-full">
-                <Flex className="lg:w-[80%] w-[95%] mx-auto">
-                    <Flex className="relative w-full h-[28rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
-                        <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
-                        <div className="absolute z-10 inset-0 rounded-2xl bg-black/55 sm:bg-black/35" />
-                        <img src="/sendwise-2.png" alt="Sendwise" className="object-cover w-[100%] h-full rounded-2xl" />
-                        <Flex className="absolute z-20 inset-0 w-full h-full">
-                            <Flex className="text-white items-start flex-col space-y-6 w-full h-full justify-center px-6 sm:px-10 lg:pl-20">
-                                <p className="inter-semibold lg:text-[3rem] sm:text-[2.4rem] text-[1.9rem] lg:leading-[3.4rem]">
-                                    Klaar om slimmer te verzenden met je webshop?
-                                </p>
-                                <p className="inter-medium lg:text-[1.15rem] text-[1.05rem] lg:w-[80%]">
-                                    Ontdek hoe Sendwise webshops helpt om verzendkosten te verlagen en processen te vereenvoudigen — zonder overstapstress.
-                                </p>
-                                <Flex className="flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
-                                    <Link
-                                        to="/start-met-sendwise"
-                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group inline-flex items-center"
-                                    >
-                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                        <span className="relative z-10">Start met Sendwise</span>
-                                    </Link>
-                                    <Link
-                                        to="/contact"
-                                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white hover:text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl flex isolate"
-                                    >
-                                        <span className="relative z-10 text-white group-hover:text-white">Plan een kennismaking</span>
-                                    </Link>
-                                </Flex>
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                </Flex>
-            </section>
-        </Flex>
-    );
-};
+          <div className="relative overflow-hidden py-2">
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-[#f7fbff] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-[#f7fbff] to-transparent" />
 
-export default VoorWebshops;
+            <div className="flex w-max" style={{ animation: "webshopIntegrations 34s linear infinite" }}>
+              {[...integrations, ...integrations].map((integration, index) => (
+                <IntegrationLogo key={`${integration.name}-${index}`} {...integration} />
+              ))}
+            </div>
+            <div className="mt-2 flex w-max" style={{ animation: "webshopIntegrations 38s linear infinite reverse" }}>
+              {[...integrations.slice(5), ...integrations.slice(0, 5), ...integrations.slice(5), ...integrations.slice(0, 5)].map((integration, index) => (
+                <IntegrationLogo key={`${integration.name}-reverse-${index}`} {...integration} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-16 lg:py-20">
+        <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="rounded-[28px] bg-[#07115a] p-8 text-white shadow-[0_24px_70px_rgba(7,17,90,0.18)] lg:p-12">
+            <h2 className="inter-semibold text-4xl leading-tight sm:text-5xl">
+              Geen verrassingen. Geen verplichtingen.
+            </h2>
+            <p className="mt-5 inter-medium text-lg leading-8 text-white/78">
+              Je betaalt voor wat je verzendt. Geen abonnementskosten, geen contracten en geen onduidelijke toeslagen.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              "Geen contracten",
+              "Geen abonnementskosten",
+              "Eerlijke indexeringen",
+              "Duidelijke tarieven per zending",
+            ].map((item) => (
+              <div key={item} className="rounded-[20px] border border-[#e1eaf7] bg-[#fbfdff] p-6 shadow-[0_18px_55px_rgba(7,17,31,0.06)]">
+                <p className="inter-semibold text-lg leading-tight text-[#07115a]">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-6 pb-2 pt-8">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="inter-semibold text-5xl leading-tight text-[#07115a] sm:text-6xl">
+            Van eerste order tot groeiend magazijn.
+          </h2>
+          <p className="mx-auto mt-5 max-w-3xl inter-medium text-lg leading-8 text-[#3f4965]">
+            Start met eenvoudig verzenden en breid uit met CONNECT of PRO wanneer je volume groeit.
+          </p>
+        </div>
+      </section>
+
+      {featureSections.map((section) => (
+        <FeatureSection key={section.title} section={section} />
+      ))}
+
+      <section className="bg-white px-6 pb-24 pt-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative overflow-hidden rounded-[28px] bg-[#1a5ee5] px-8 py-10 text-white shadow-[0_24px_70px_rgba(26,94,229,0.22)] lg:px-14 lg:py-14">
+            <div className="absolute -bottom-24 right-12 h-56 w-56 rotate-45 rounded-[42px] bg-white/12" aria-hidden="true" />
+            <div className="absolute -top-28 right-72 h-44 w-44 rotate-45 rounded-[36px] bg-white/10" aria-hidden="true" />
+
+            <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-3xl">
+                <h2 className="inter-semibold text-4xl leading-tight text-white sm:text-5xl">
+                  Klaar om slimmer te verzenden met je webshop?
+                </h2>
+                <p className="mt-4 max-w-2xl inter-medium text-lg leading-8 text-white/82">
+                  Verlaag verzendkosten en maak je proces eenvoudiger zonder overstapstress.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
+                <Link
+                  to="/start-met-sendwise"
+                  className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 inter-semibold text-sm text-[#1a5ee5] shadow-[0_16px_34px_rgba(7,17,90,0.16)] transition hover:bg-[#f4f8ff]"
+                >
+                  Start met Sendwise
+                  <FiArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
+                </Link>
+                <Link
+                  to="/contact"
+                  className="inline-flex h-12 items-center justify-center rounded-xl border border-white/35 bg-white/10 px-6 inter-semibold text-sm text-white transition hover:bg-white/16"
+                >
+                  Plan een kennismaking
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Homepage2Footer />
+    </main>
+  )
+}
+
+export default VoorWebshops

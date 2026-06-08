@@ -1,13 +1,10 @@
-import { Flex } from "antd";
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { IoIosArrowDown, IoIosInformationCircleOutline } from "react-icons/io";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { Link } from "react-router-dom";
-
-gsap.registerPlugin(ScrollTrigger);
+import { FiArrowRight, FiCheck, FiCreditCard, FiFileText, FiShield, FiTrendingDown } from "react-icons/fi";
+import Homepage2Header from "../components/Homepage2/Header";
+import Homepage2Footer from "../components/Homepage2/Footer";
 
 const Prijzen = () => {
     const [shipments, setShipments] = useState(50);
@@ -325,386 +322,399 @@ const Prijzen = () => {
         }
     };
 
-    useGSAP(() => {
-        gsap.set("#pricing-hero-frame", {
-            scale: 1,
-            transformOrigin: "center center",
-            borderBottomLeftRadius: "0%",
-            borderBottomRightRadius: "0%",
-            marginLeft: "0px",
-            marginRight: "0px",
-        });
-
-        gsap.to("#pricing-hero-frame", {
-            scale: 0.83,
-            borderBottomLeftRadius: "100px",
-            borderBottomRightRadius: "100px",
-            ease: "power1.inOut",
-            scrollTrigger: {
-                trigger: "#pricing-hero-frame",
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-            },
-        });
-
-        gsap.fromTo(
-            "#pricing-hero-img",
-            {
-                scale: 1,
-                borderBottomLeftRadius: "0%",
-                borderBottomRightRadius: "0%",
-            },
-            {
-                scale: 1,
-                ease: "power1.out",
-                borderBottomLeftRadius: "100px",
-                borderBottomRightRadius: "100px",
-                scrollTrigger: {
-                    trigger: "#pricing-hero-frame",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true,
-                },
-            }
-        );
-    });
-
     return (
-        <Flex className="flex-col w-[100%] overflow-hidden space-y-10 sm:space-y-12 md:space-y-14 lg:space-y-16 mb-10">
-            <section className="w-full">
-                <Flex>
-                    <Flex id="pricing-hero-frame" className="w-[100%] mask-clip-path">
-                        <img
-                            id="pricing-hero-img"
-                            src="/EB911CA2-5E9A-4217-964C-70DA1B3436B5.png"
-                            alt="Sendwise"
-                            className="absolute h-screen sm:h-screen w-[100%] object-cover object-right sm:object-center"
-                        />
-                        <div id="pricing-hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-screen sm:h-screen" />
-                        <Flex className="z-30 sm:ml-[10%] ml-[4%] w-[100%] h-screen sm:h-screen flex-col justify-center items-start pt-16 sm:pt-20 pb-10 sm:pb-14">
-                            <div className="flex flex-col items-start space-y-8 sm:space-y-10 translate-y-4 sm:translate-y-6">
-                                <Flex className="group text-white/80 inter-semibold w-fit bg-[#514F4A]/30 border px-1 py-1 items-center space-x-4 rounded-3xl border-[#514F4A]/50 backdrop-blur-lg transition-all duration-500 ease-out hover:border-[#514F4A] hover:bg-[#514F4A]/40">
-                                    <Flex className="border border-[#514F4A] bg-gradient-to-t to-[#514F4A] from-[#514F4A]/10 px-3 py-[0.4rem] rounded-3xl transition-all duration-500 ease-out group-hover:bg-[#514F4A] group-hover:scale-[1.02]">
-                                        <p className="text-[0.85rem] tracking-[0.14em]">PRIJZEN</p>
-                                    </Flex>
-                                </Flex>
-                                <div className="flex flex-col pl-1 inter-semibold md:leading-[4rem] leading-[3.1rem] text-white w-fit text-left">
-                                    <h1 className="md:text-[4rem] sm:text-[2.5rem] text-[2.85rem]">Eerlijke verzendprijzen, zonder verrassingen</h1>
-                                </div>
-                                <p className="text-white font-light text-[1.25rem] sm:text-[1.1rem] md:text-[1.3rem] max-w-[42rem] leading-[1.4] text-left">
-                                    All-in tarieven zonder contracten, abonnementskosten of verborgen fees.
-                                </p>
-                                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-6 sm:space-y-0">
-                                    <button
-                                        type="button"
-                                        onClick={handleScrollToCalculator}
-                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden group"
-                                    >
-                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                        <p className="relative z-10">Bereken je tarief</p>
-                                    </button>
-                                    <div className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl w-fit">
-                                        <span>Plan een kennismaking</span>
-                                    </div>
-                                </div>
+        <main className="min-h-screen overflow-hidden bg-white text-[#0d1321]">
+            <Homepage2Header />
+
+            <section className="relative overflow-hidden bg-white pt-32 sm:pt-36 lg:pt-44">
+                <div className="absolute left-0 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#eaf2ff] blur-3xl" />
+                <div className="mx-auto grid min-h-[650px] w-full max-w-7xl items-center gap-12 px-6 pb-20 lg:grid-cols-[0.95fr_1.05fr] lg:pb-24">
+                    <div className="relative z-10 max-w-[690px] lg:pb-10">
+                        <div className="mb-5 flex items-center gap-3 text-[#6f7694]">
+                            <div className="flex -space-x-2">
+                                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white bg-[#1a5ee5] text-white shadow-[0_10px_24px_rgba(26,94,229,0.25)]">
+                                    <FiCreditCard />
+                                </span>
+                                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white bg-white text-[#1a5ee5] shadow-[0_10px_24px_rgba(15,23,42,0.12)]">
+                                    <FiShield />
+                                </span>
+                                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white bg-[#f2f7ff] text-[#1a5ee5] shadow-[0_10px_24px_rgba(15,23,42,0.08)]">
+                                    <FiTrendingDown />
+                                </span>
                             </div>
-                        </Flex>
-                    </Flex>
-                </Flex>
+                            <p className="inter-medium text-[0.95rem]">Olivier denkt mee over je verzendtarieven</p>
+                        </div>
+                        <h1 className="inter-semibold text-[3rem] leading-[0.98] tracking-[0px] text-[#0d1321] sm:text-[4.2rem] lg:text-[5.2rem]">
+                            <span className="block sm:whitespace-nowrap">Eerlijke tarieven.</span>
+                            <span className="block sm:whitespace-nowrap text-[#1a5ee5]">Geen verrassingen.</span>
+                        </h1>
+                        <p className="mt-7 max-w-[560px] text-[1.08rem] leading-[1.75] text-[#4e5a73] sm:text-[1.2rem]">
+                            Bereken direct je indicatieve verzendtarief. Zonder contracten, zonder vaste maandkosten en met duidelijke all-in prijzen per zending.
+                        </p>
+                        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+                            <button
+                                type="button"
+                                onClick={handleScrollToCalculator}
+                                className="group inline-flex w-fit items-center gap-3 rounded-full bg-[#1a5ee5] px-7 py-3.5 text-[0.98rem] font-semibold text-white shadow-[0_18px_42px_rgba(26,94,229,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#154fca]"
+                            >
+                                Bereken je tarief
+                                <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+                            </button>
+                            <Link
+                                to="/contact"
+                                className="inline-flex w-fit items-center gap-3 rounded-full border border-[#d8e3f2] bg-white px-7 py-3.5 text-[0.98rem] font-semibold text-[#0d1321] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#1a5ee5]/30 hover:text-[#1a5ee5]"
+                            >
+                                Plan een kennismaking
+                            </Link>
+                        </div>
+                    </div>
+
+                    <div className="relative z-10 flex items-center justify-center lg:min-h-[520px] lg:justify-end">
+                        <div className="absolute right-2 top-10 hidden h-24 w-24 rounded-[28px] bg-[#1a5ee5]/10 lg:block" />
+                        <div className="relative w-full max-w-[560px] overflow-hidden rounded-[34px] border border-[#dbe7f5] bg-[#f4f8ff] shadow-[0_30px_80px_rgba(15,23,42,0.14)]">
+                            <img
+                                src="/profile-olivier.png"
+                                alt="Olivier van Sendwise"
+                                className="aspect-[1.02/1] w-full scale-[1.12] object-cover object-center"
+                            />
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <Flex className="w-full group relative rounded-[2.25rem] overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#1a5ee5] to-[#3b82f6] rounded-[2.25rem]" />
-                        <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, mixBlendMode: "overlay" }} />
-                        <Flex className="relative z-20 w-full p-7 sm:p-10 lg:p-12">
-                            <Flex className="text-white w-[100%] items-center text-center flex-col space-y-4">
-                                <p className="inter-semibold lg:text-[2.2rem] sm:text-[1.9rem] text-[1.6rem]">
-                                    Zo betaal je minder per zending
-                                </p>
-                                <p className="inter-medium lg:text-[1.2rem] text-[1rem] leading-relaxed lg:w-[80%]">
-                                    Sendwise hanteert scherpe all-in verzendtarieven op basis van volume. Zonder contracten, zonder maandelijkse kosten en met eerlijke indexeringen. Zo weet je altijd waar je aan toe bent, terwijl je profiteert van schaalvoordeel.
-                                </p>
-                                <button
-                                    type="button"
-                                    onClick={handleScrollToCalculator}
-                                    className="pt-2 group"
-                                >
-                                    <Flex className="items-center space-x-2 text-white inter-medium text-[0.95rem] cursor-pointer transition-colors duration-300 group-hover:text-white/80">
-                                        <span>Prijs berekenen</span>
-                                        <IoIosArrowDown className="text-[1.1rem]" />
-                                    </Flex>
-                                </button>
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                </Flex>
+            <section className="bg-[#f7fbff] px-6 py-16 lg:py-20">
+                <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
+                    <article className="rounded-[24px] border border-[#dfeaf7] bg-white p-7 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
+                        <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef5ff] text-[#1a5ee5]">
+                            <FiFileText className="text-[1.25rem]" />
+                        </div>
+                        <h2 className="inter-semibold text-[1.25rem] text-[#0d1321]">Geen contracten</h2>
+                        <p className="mt-3 text-[0.98rem] leading-[1.7] text-[#5a667c]">
+                            Je zit nergens lang aan vast. Tarieven blijven helder en passen mee met je volume.
+                        </p>
+                    </article>
+                    <article className="rounded-[24px] border border-[#dfeaf7] bg-white p-7 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
+                        <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef5ff] text-[#1a5ee5]">
+                            <FiShield className="text-[1.25rem]" />
+                        </div>
+                        <h2 className="inter-semibold text-[1.25rem] text-[#0d1321]">Geen vaste kosten</h2>
+                        <p className="mt-3 text-[0.98rem] leading-[1.7] text-[#5a667c]">
+                            Geen abonnementskosten of verborgen toeslagen. Je betaalt voor wat je verzendt.
+                        </p>
+                    </article>
+                    <article className="rounded-[24px] border border-[#dfeaf7] bg-white p-7 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
+                        <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef5ff] text-[#1a5ee5]">
+                            <FiTrendingDown className="text-[1.25rem]" />
+                        </div>
+                        <h2 className="inter-semibold text-[1.25rem] text-[#0d1321]">Schaalvoordeel</h2>
+                        <p className="mt-3 text-[0.98rem] leading-[1.7] text-[#5a667c]">
+                            Meer zendingen betekent scherpere staffels. De calculator laat direct de impact zien.
+                        </p>
+                    </article>
+                </div>
             </section>
 
-            <section className="w-full" id="pricing-calculator">
-                <Flex className="flex-col items-center text-center w-[95%] lg:w-[80%] mx-auto">
-                    <p className="inter-medium lg:text-[3rem] md:text-[2.6rem] sm:text-[2.2rem] text-[2rem] text-gray-900">
-                        Bereken je verzendkosten met Sendwise
-                    </p>
-                    <p className="mt-3 text-gray-600 inter-medium lg:text-[1.05rem] text-[0.95rem]">
-                        Krijg direct inzicht in wat je per zending betaalt met Sendwise.
-                    </p>
-                </Flex>
-                <Flex className="w-[95%] lg:w-[80%] mx-auto mt-8 sm:mt-10">
-                    <div className="rounded-2xl border border-gray-200 bg-white/90 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.12)]">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="flex flex-col space-y-4 md:col-span-2">
-                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
-                                    <div className="flex items-center space-x-2">
-                                        <p className="text-gray-900 inter-medium text-[0.95rem]">Aantal zendingen</p>
-                                        <button
-                                            type="button"
-                                            onClick={() => setShowVolumeInfo((prev) => !prev)}
-                                            className="text-gray-400 hover:text-[#1a5ee5] transition-colors duration-200"
-                                            aria-label="Uitleg over totaalvolume"
-                                        >
-                                            <IoIosInformationCircleOutline className="text-[1rem]" />
-                                        </button>
+            <section className="bg-white px-6 py-16 lg:py-24" id="pricing-calculator">
+                <div className="mx-auto max-w-7xl">
+                    <div className="mb-10 max-w-3xl">
+                        <p className="inter-medium text-[0.95rem] text-[#1a5ee5]">Prijscalculator</p>
+                        <h2 className="inter-semibold mt-3 text-[2.4rem] leading-[1.08] text-[#0d1321] sm:text-[3.2rem]">
+                            Bereken je verzendkosten
+                        </h2>
+                        <p className="mt-4 max-w-2xl text-[1.05rem] leading-[1.7] text-[#5a667c]">
+                            Krijg direct inzicht in wat je per zending betaalt met Sendwise. De uitkomst is indicatief en gebaseerd op volume, bestemming en type zending.
+                        </p>
+                    </div>
+
+                    <div className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr]">
+                        <aside className="rounded-[28px] border border-[#dfeaf7] bg-[#f7fbff] p-7 lg:p-8">
+                            <p className="inter-semibold text-[1.35rem] text-[#0d1321]">Zo werkt het</p>
+                            <div className="mt-6 space-y-5">
+                                {[
+                                    "Kies je gemiddelde verzendvolume.",
+                                    "Selecteer bestemming en type zending.",
+                                    "Bekijk direct het indicatieve tarief.",
+                                ].map((item) => (
+                                    <div key={item} className="flex gap-3">
+                                        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1a5ee5] text-white">
+                                            <FiCheck className="text-[0.85rem]" />
+                                        </span>
+                                        <p className="text-[0.98rem] leading-[1.55] text-[#4e5a73]">{item}</p>
                                     </div>
-                                    <div className="flex items-center rounded-full border border-gray-200 bg-white/80 p-1 shadow-sm transition-all duration-300 ease-out">
-                                        <button
-                                            type="button"
-                                            onClick={() => handlePeriodChange("day")}
-                                            className={`px-4 py-1.5 rounded-full text-[0.85rem] inter-medium transition-all duration-300 ease-out ${period === "day" ? "bg-[#1a5ee5] text-white shadow" : "text-gray-500 hover:text-gray-700"}`}
-                                        >
-                                            Per werkdag
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => handlePeriodChange("month")}
-                                            className={`px-4 py-1.5 rounded-full text-[0.85rem] inter-medium transition-all duration-300 ease-out ${period === "month" ? "bg-[#1a5ee5] text-white shadow" : "text-gray-500 hover:text-gray-700"}`}
-                                        >
-                                            Per maand
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => handlePeriodChange("year")}
-                                            className={`px-4 py-1.5 rounded-full text-[0.85rem] inter-medium transition-all duration-300 ease-out ${period === "year" ? "bg-[#1a5ee5] text-white shadow" : "text-gray-500 hover:text-gray-700"}`}
-                                        >
-                                            Per jaar
-                                        </button>
-                                    </div>
-                                </div>
-                                {showVolumeInfo && (
-                                    <p className="text-[0.8rem] text-gray-500 inter-medium leading-relaxed">
-                                        Dit is het totale aantal zendingen dat je gemiddeld verstuurt.
-                                        Het volume geldt voor alle bestemmingen en verzendmethodes samen, niet per land.
-                                    </p>
-                                )}
-                                <motion.div
-                                    key={period}
-                                    initial={{ opacity: 0, y: 6 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.25, ease: "easeOut" }}
-                                    className="flex items-baseline space-x-3"
-                                >
-                                    <p className="text-gray-900 inter-semibold text-[1.6rem] sm:text-[1.9rem]">
-                                        {formattedShipments} zendingen
-                                    </p>
-                                    <span className="text-gray-500 inter-medium text-[0.95rem]">{range.label}</span>
-                                </motion.div>
-                                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-3 sm:space-y-0">
-                                    <input
-                                        type="range"
-                                        min={range.min}
-                                        max={range.max}
-                                        step={sliderStep}
-                                        value={shipments}
-                                        onChange={(event) => handleShipmentsChange(Number(event.target.value))}
-                                        className="w-full accent-[#1a5ee5] transition-all duration-300 ease-out"
-                                    />
-                                    <input
-                                        type="number"
-                                        min={range.min}
-                                        max={range.max}
-                                        step="1"
-                                        value={shipments}
-                                        onChange={(event) => handleShipmentsChange(Number(event.target.value))}
-                                        className="w-full sm:w-[150px] rounded-2xl border border-gray-200 bg-white px-4 py-2 text-gray-700 inter-medium focus:border-[#1a5ee5] focus:outline-none focus:ring-2 focus:ring-[#1a5ee5]/20 transition-all duration-300 ease-out"
-                                    />
-                                </div>
-                                <div className="flex justify-between text-[0.8rem] text-gray-500 inter-medium">
-                                    <span>{range.min.toLocaleString("nl-NL")}</span>
-                                    <span>{range.max.toLocaleString("nl-NL")}</span>
-                                </div>
+                                ))}
                             </div>
-                            <div className="flex flex-col space-y-3 md:col-span-2">
-                                <label className="text-gray-900 inter-medium text-[0.95rem]">Type zending</label>
-                                <div ref={typeDropdownRef} className="relative">
-                                    <button
-                                        type="button"
-                                        onClick={() => setOpenDropdown(openDropdown === "type" ? null : "type")}
-                                        className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-700 inter-medium flex items-center justify-between focus:border-[#1a5ee5] focus:outline-none focus:ring-2 focus:ring-[#1a5ee5]/20 transition-all duration-300 ease-out"
-                                    >
-                                        <span>{shipmentType}</span>
-                                        <IoIosArrowDown className={`text-[1rem] transition-transform duration-200 ${openDropdown === "type" ? "rotate-180" : ""}`} />
-                                    </button>
-                                    {openDropdown === "type" && (
-                                        <div className="absolute z-30 mt-2 w-full rounded-2xl border border-gray-200 bg-white shadow-[0_16px_40px_rgba(15,23,42,0.12)] overflow-hidden">
-                                            {shipmentTypeOptions.map((option) => {
-                                                const isDisabled = option === "Brievenbus" && !isNederland;
-                                                const isSelected = option === shipmentType;
-                                                return (
-                                                    <button
-                                                        key={option}
-                                                        type="button"
-                                                        disabled={isDisabled}
-                                                        onClick={() => {
-                                                            if (isDisabled) return;
-                                                            setShipmentType(option);
-                                                            setOpenDropdown(null);
-                                                        }}
-                                                        className={`w-full text-left px-4 py-3 text-[0.95rem] inter-medium transition-colors ${isDisabled ? "text-gray-400 cursor-not-allowed" : "text-gray-700 hover:bg-[#1a5ee5]/10 hover:text-[#1a5ee5]"} ${isSelected ? "bg-[#1a5ee5]/10 text-[#1a5ee5]" : ""}`}
-                                                    >
-                                                        {option}
-                                                    </button>
-                                                );
-                                            })}
+                            <div className="mt-8 rounded-[22px] bg-white p-5 shadow-[0_18px_45px_rgba(15,23,42,0.06)]">
+                                <p className="inter-semibold text-[1rem] text-[#0d1321]">Liever persoonlijk advies?</p>
+                                <p className="mt-2 text-[0.92rem] leading-[1.65] text-[#5a667c]">
+                                    Olivier kijkt graag met je mee naar je huidige tarieven en verzendmix.
+                                </p>
+                                <Link
+                                    to="/contact"
+                                    className="mt-4 inline-flex items-center gap-2 text-[0.95rem] font-semibold text-[#1a5ee5] transition-colors duration-300 hover:text-[#154fca]"
+                                >
+                                    Neem contact op
+                                    <FiArrowRight />
+                                </Link>
+                            </div>
+                        </aside>
+
+                        <div className="rounded-[28px] border border-[#dfeaf7] bg-white p-6 shadow-[0_25px_70px_rgba(15,23,42,0.08)] sm:p-8 lg:p-10">
+                            <div className="space-y-8">
+                                <div className="space-y-4">
+                                    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                                        <div className="flex items-center gap-2">
+                                            <p className="inter-semibold text-[1rem] text-[#0d1321]">Aantal zendingen</p>
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowVolumeInfo((prev) => !prev)}
+                                                className="text-[#8b96aa] transition-colors duration-200 hover:text-[#1a5ee5]"
+                                                aria-label="Uitleg over totaalvolume"
+                                            >
+                                                <IoIosInformationCircleOutline className="text-[1.1rem]" />
+                                            </button>
                                         </div>
+                                        <div className="grid grid-cols-3 rounded-full border border-[#d8e3f2] bg-[#f7fbff] p-1 shadow-sm">
+                                            <button
+                                                type="button"
+                                                onClick={() => handlePeriodChange("day")}
+                                                className={`rounded-full px-3 py-2 text-[0.82rem] font-semibold transition-all duration-300 sm:px-4 ${period === "day" ? "bg-[#1a5ee5] text-white shadow" : "text-[#5a667c] hover:text-[#0d1321]"}`}
+                                            >
+                                                Werkdag
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => handlePeriodChange("month")}
+                                                className={`rounded-full px-3 py-2 text-[0.82rem] font-semibold transition-all duration-300 sm:px-4 ${period === "month" ? "bg-[#1a5ee5] text-white shadow" : "text-[#5a667c] hover:text-[#0d1321]"}`}
+                                            >
+                                                Maand
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => handlePeriodChange("year")}
+                                                className={`rounded-full px-3 py-2 text-[0.82rem] font-semibold transition-all duration-300 sm:px-4 ${period === "year" ? "bg-[#1a5ee5] text-white shadow" : "text-[#5a667c] hover:text-[#0d1321]"}`}
+                                            >
+                                                Jaar
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {showVolumeInfo && (
+                                        <p className="rounded-2xl bg-[#f7fbff] px-4 py-3 text-[0.86rem] leading-relaxed text-[#5a667c]">
+                                            Dit is het totale aantal zendingen dat je gemiddeld verstuurt. Het volume geldt voor alle bestemmingen en verzendmethodes samen, niet per land.
+                                        </p>
                                     )}
+
+                                    <Motion.div
+                                        key={period}
+                                        initial={{ opacity: 0, y: 6 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.25, ease: "easeOut" }}
+                                        className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3"
+                                    >
+                                        <p className="inter-semibold text-[2rem] leading-none text-[#0d1321] sm:text-[2.35rem]">
+                                            {formattedShipments} zendingen
+                                        </p>
+                                        <span className="text-[0.98rem] font-medium text-[#6f7694]">{range.label}</span>
+                                    </Motion.div>
+
+                                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                                        <input
+                                            type="range"
+                                            min={range.min}
+                                            max={range.max}
+                                            step={sliderStep}
+                                            value={shipments}
+                                            onChange={(event) => handleShipmentsChange(Number(event.target.value))}
+                                            className="w-full accent-[#1a5ee5]"
+                                        />
+                                        <input
+                                            type="number"
+                                            min={range.min}
+                                            max={range.max}
+                                            step="1"
+                                            value={shipments}
+                                            onChange={(event) => handleShipmentsChange(Number(event.target.value))}
+                                            className="w-full rounded-2xl border border-[#d8e3f2] bg-white px-4 py-2.5 text-[#0d1321] outline-none transition-all duration-300 focus:border-[#1a5ee5] focus:ring-4 focus:ring-[#1a5ee5]/10 sm:w-[160px]"
+                                        />
+                                    </div>
+                                    <div className="flex justify-between text-[0.82rem] font-medium text-[#8b96aa]">
+                                        <span>{range.min.toLocaleString("nl-NL")}</span>
+                                        <span>{range.max.toLocaleString("nl-NL")}</span>
+                                    </div>
                                 </div>
-                                {!isNederland && (
-                                    <p className="text-[0.8rem] text-gray-500 inter-medium">
-                                        Brievenbuszendingen zijn alleen beschikbaar binnen Nederland.
-                                    </p>
-                                )}
-                            </div>
-                            <div className="md:col-span-2">
-                                <motion.div
+
+                                <div className="grid gap-4 sm:grid-cols-2">
+                                    <div className="space-y-3">
+                                        <label className="inter-semibold text-[0.95rem] text-[#0d1321]">Type zending</label>
+                                        <div ref={typeDropdownRef} className="relative">
+                                            <button
+                                                type="button"
+                                                onClick={() => setOpenDropdown(openDropdown === "type" ? null : "type")}
+                                                className="flex w-full items-center justify-between rounded-2xl border border-[#d8e3f2] bg-white px-4 py-3 text-left font-medium text-[#0d1321] outline-none transition-all duration-300 focus:border-[#1a5ee5] focus:ring-4 focus:ring-[#1a5ee5]/10"
+                                            >
+                                                <span>{shipmentType}</span>
+                                                <IoIosArrowDown className={`text-[1rem] transition-transform duration-200 ${openDropdown === "type" ? "rotate-180" : ""}`} />
+                                            </button>
+                                            {openDropdown === "type" && (
+                                                <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-2xl border border-[#d8e3f2] bg-white shadow-[0_18px_45px_rgba(15,23,42,0.12)]">
+                                                    {shipmentTypeOptions.map((option) => {
+                                                        const isDisabled = option === "Brievenbus" && !isNederland;
+                                                        const isSelected = option === shipmentType;
+                                                        return (
+                                                            <button
+                                                                key={option}
+                                                                type="button"
+                                                                disabled={isDisabled}
+                                                                onClick={() => {
+                                                                    if (isDisabled) return;
+                                                                    setShipmentType(option);
+                                                                    setOpenDropdown(null);
+                                                                }}
+                                                                className={`w-full px-4 py-3 text-left text-[0.95rem] font-medium transition-colors ${isDisabled ? "cursor-not-allowed text-[#a8b2c3]" : "text-[#0d1321] hover:bg-[#eef5ff] hover:text-[#1a5ee5]"} ${isSelected ? "bg-[#eef5ff] text-[#1a5ee5]" : ""}`}
+                                                            >
+                                                                {option}
+                                                            </button>
+                                                        );
+                                                    })}
+                                                </div>
+                                            )}
+                                        </div>
+                                        {!isNederland && (
+                                            <p className="text-[0.82rem] font-medium text-[#6f7694]">
+                                                Brievenbuszendingen zijn alleen beschikbaar binnen Nederland.
+                                            </p>
+                                        )}
+                                    </div>
+
+                                    <div className="space-y-3">
+                                        <label className="inter-semibold text-[0.95rem] text-[#0d1321]">Bestemming</label>
+                                        <div ref={destinationDropdownRef} className="relative">
+                                            <button
+                                                type="button"
+                                                onClick={() => setOpenDropdown(openDropdown === "destination" ? null : "destination")}
+                                                className="flex w-full items-center justify-between rounded-2xl border border-[#d8e3f2] bg-white px-4 py-3 text-left font-medium text-[#0d1321] outline-none transition-all duration-300 focus:border-[#1a5ee5] focus:ring-4 focus:ring-[#1a5ee5]/10"
+                                            >
+                                                <span>{destination}</span>
+                                                <IoIosArrowDown className={`text-[1rem] transition-transform duration-200 ${openDropdown === "destination" ? "rotate-180" : ""}`} />
+                                            </button>
+                                            {openDropdown === "destination" && (
+                                                <div className="absolute z-30 mt-2 max-h-[220px] w-full overflow-y-auto rounded-2xl border border-[#d8e3f2] bg-white shadow-[0_18px_45px_rgba(15,23,42,0.12)]">
+                                                    {destinationOptions.map((option) => (
+                                                        <button
+                                                            key={option}
+                                                            type="button"
+                                                            onClick={() => {
+                                                                setDestination(option);
+                                                                setOpenDropdown(null);
+                                                            }}
+                                                            className={`w-full px-4 py-3 text-left text-[0.95rem] font-medium transition-colors ${option === destination ? "bg-[#eef5ff] text-[#1a5ee5]" : "text-[#0d1321] hover:bg-[#eef5ff] hover:text-[#1a5ee5]"}`}
+                                                        >
+                                                            {option}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <Motion.div
                                     key={resultKey}
                                     initial={{ opacity: 0, y: 8 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.3, ease: "easeOut" }}
-                                    className="flex flex-col justify-between rounded-2xl border border-[#1a5ee5]/30 bg-[#1a5ee5]/5 p-6 shadow-[0_10px_30px_rgba(26,94,229,0.12)]"
+                                    className="rounded-[24px] border border-[#bcd3f7] bg-[#eef5ff] p-6 shadow-[0_18px_45px_rgba(26,94,229,0.12)]"
                                 >
-                                    <div className="flex flex-col space-y-4">
-                                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                                            <div className="space-y-2">
-                                                <p className="text-[#1a5ee5] inter-medium text-[0.95rem]">Indicatief tarief vanaf</p>
-                                            <p className="text-gray-900 inter-semibold text-[1.8rem] sm:text-[2rem]">
+                                    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                                        <div>
+                                            <p className="inter-semibold text-[0.95rem] text-[#1a5ee5]">Indicatief tarief vanaf</p>
+                                            <p className="inter-semibold mt-2 text-[2rem] leading-tight text-[#0d1321] sm:text-[2.35rem]">
                                                 {priceText}
                                             </p>
-                                            </div>
-                                            <div className="w-full sm:w-[220px]">
-                                                <p className="text-gray-500 inter-medium text-[0.8rem]">Bestemming</p>
-                                                <div ref={destinationDropdownRef} className="relative mt-2">
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setOpenDropdown(openDropdown === "destination" ? null : "destination")}
-                                                        className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-2 text-gray-700 inter-medium flex items-center justify-between focus:border-[#1a5ee5] focus:outline-none focus:ring-2 focus:ring-[#1a5ee5]/20 transition-all duration-300 ease-out"
-                                                    >
-                                                        <span>{destination}</span>
-                                                        <IoIosArrowDown className={`text-[1rem] transition-transform duration-200 ${openDropdown === "destination" ? "rotate-180" : ""}`} />
-                                                    </button>
-                                                    {openDropdown === "destination" && (
-                                                        <div className="absolute z-30 mt-2 w-full rounded-2xl border border-gray-200 bg-white shadow-[0_16px_40px_rgba(15,23,42,0.12)] overflow-hidden max-h-[200px] overflow-y-auto">
-                                                            {destinationOptions.map((option) => (
-                                                                <button
-                                                                    key={option}
-                                                                    type="button"
-                                                                    onClick={() => {
-                                                                        setDestination(option);
-                                                                        setOpenDropdown(null);
-                                                                    }}
-                                                                    className={`w-full text-left px-4 py-3 text-[0.95rem] inter-medium transition-colors ${option === destination ? "bg-[#1a5ee5]/10 text-[#1a5ee5]" : "text-gray-700 hover:bg-[#1a5ee5]/10 hover:text-[#1a5ee5]"}`}
-                                                                >
-                                                                    {option}
-                                                                </button>
-                                                            ))}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
                                         </div>
-                                        {isCustomQuote ? (
-                                            <p className="text-gray-600 inter-medium text-[0.85rem]">
-                                                Neem contact met ons op zodat we samen kunnen kijken naar de beste service en tarieven voor jouw volumes.
-                                            </p>
-                                        ) : isPricingSupported ? (
-                                            <div className="space-y-2 text-gray-600 inter-medium text-[0.85rem]">
-                                                <p>
-                                                    Indicatief tarief per zending naar dit land, gebaseerd op volume en de laagste gewichtsklasse.
-                                                </p>
-                                                {!isWorkdayUnit && (
-                                                    <p>Omgerekend naar gemiddeld aantal werkdagzendingen.</p>
-                                                )}
-                                                {isOverCap && (
-                                                    <p>Voor hogere volumes gelden maatwerktarieven.</p>
-                                                )}
-                                            </div>
-                                        ) : (
-                                            <p className="text-gray-600 inter-medium text-[0.85rem]">
-                                                Indicatieve berekening is momenteel alleen beschikbaar voor Nederland, België, Duitsland, Frankrijk, Italië, Polen, Spanje, Portugal en Denemarken.
-                                            </p>
-                                        )}
+                                        <div className="rounded-2xl bg-white px-4 py-3 text-[0.9rem] font-semibold text-[#4e5a73] shadow-sm">
+                                            {shipmentType} naar {destination}
+                                        </div>
                                     </div>
-                                    <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
+
+                                    {isCustomQuote ? (
+                                        <p className="mt-5 text-[0.95rem] leading-[1.7] text-[#5a667c]">
+                                            Neem contact met ons op zodat we samen kunnen kijken naar de beste service en tarieven voor jouw volumes.
+                                        </p>
+                                    ) : isPricingSupported ? (
+                                        <div className="mt-5 space-y-2 text-[0.92rem] leading-[1.65] text-[#5a667c]">
+                                            <p>Indicatief tarief per zending naar dit land, gebaseerd op volume en de laagste gewichtsklasse.</p>
+                                            {!isWorkdayUnit && (
+                                                <p>Omgerekend naar gemiddeld aantal werkdagzendingen.</p>
+                                            )}
+                                            {isOverCap && (
+                                                <p>Voor hogere volumes gelden maatwerktarieven.</p>
+                                            )}
+                                        </div>
+                                    ) : (
+                                        <p className="mt-5 text-[0.95rem] leading-[1.7] text-[#5a667c]">
+                                            Indicatieve berekening is momenteel alleen beschikbaar voor Nederland, België, Duitsland, Frankrijk, Italië, Polen, Spanje, Portugal en Denemarken.
+                                        </p>
+                                    )}
+
+                                    <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                                         <Link
                                             to="/contact"
-                                            className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[0.95rem] cursor-pointer text-white hover:text-white px-6 py-2 rounded-3xl transition-all duration-300 ease-out shadow-lg hover:shadow-xl hover:-translate-y-0.5 w-fit relative overflow-hidden group inline-flex items-center isolate"
+                                            className="inline-flex w-fit items-center gap-3 rounded-full bg-[#1a5ee5] px-6 py-3 text-[0.95rem] font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#154fca]"
                                         >
-                                            <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                            <span className="relative z-10 text-white group-hover:text-white">Plan een kennismaking</span>
+                                            Plan een kennismaking
+                                            <FiArrowRight />
                                         </Link>
                                         <Link
                                             to="/start-met-sendwise"
-                                            className="text-[#1a5ee5] inter-medium text-[0.95rem] transition-all duration-300 ease-out hover:text-[#0f3d9e] hover:translate-x-0.5"
+                                            className="inline-flex w-fit items-center gap-2 px-2 py-3 text-[0.95rem] font-semibold text-[#1a5ee5] transition-colors duration-300 hover:text-[#154fca]"
                                         >
                                             Start met Sendwise
                                         </Link>
                                     </div>
-                                </motion.div>
+                                </Motion.div>
                             </div>
                         </div>
                     </div>
-                </Flex>
+                </div>
             </section>
 
-            <section className="w-full">
-                <Flex className="lg:w-[80%] w-[95%] mx-auto">
-                    <Flex className="relative w-full h-[28rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
-                        <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
-                        <div className="absolute z-10 inset-0 rounded-2xl bg-black/55 sm:bg-black/35" />
-                        <img src="/sendwise-2.png" alt="Sendwise" className="object-cover w-[100%] h-full rounded-2xl" />
-                        <Flex className="absolute z-20 inset-0 w-full h-full">
-                            <Flex className="text-white items-start flex-col space-y-6 w-full h-full justify-center px-6 sm:px-10 lg:pl-20">
-                                <p className="inter-semibold lg:text-[3rem] sm:text-[2.4rem] text-[1.9rem] lg:leading-[3.4rem]">
-                                    Klaar om te besparen op je verzending?
+            <section className="bg-[#f7fbff] px-6 py-16 lg:py-24">
+                <div className="mx-auto max-w-7xl">
+                    <div className="relative overflow-hidden rounded-[30px] bg-[#1a5ee5] px-7 py-10 text-white shadow-[0_28px_70px_rgba(26,94,229,0.24)] sm:px-10 lg:px-14 lg:py-14">
+                        <div className="absolute right-[-80px] top-[-120px] h-[300px] w-[300px] rounded-full bg-white/14 blur-2xl" />
+                        <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+                            <div>
+                                <p className="inter-medium text-[0.95rem] text-white/75">Samen besparen</p>
+                                <h2 className="inter-semibold mt-3 max-w-2xl text-[2rem] leading-[1.12] sm:text-[3rem]">
+                                    Klaar om je verzendkosten scherper te krijgen?
+                                </h2>
+                                <p className="mt-4 max-w-2xl text-[1.05rem] leading-[1.7] text-white/80">
+                                    Deel je huidige verzendmix en Olivier kijkt met je mee waar je direct kunt besparen.
                                 </p>
-                                <p className="inter-medium lg:text-[1.15rem] text-[1.05rem] lg:w-[80%]">
-                                    Scherpe all-in tarieven, zonder contracten of vaste kosten. Ons team denkt graag met je mee.
-                                </p>
-                                <Flex className="flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
-                                    <Link
-                                        to="/contact"
-                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden group inline-flex items-center"
-                                    >
-                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0f3d9e] to-[#1e4fd4] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                                        <span className="relative z-10">Plan een kennismaking</span>
-                                    </Link>
-                                    <Link
-                                        to="/start-met-sendwise"
-                                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white hover:text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl flex isolate"
-                                    >
-                                        <span className="relative z-10 text-white group-hover:text-white">Start met Sendwise</span>
-                                    </Link>
-                                </Flex>
-                                <p className="text-white/70 inter-medium text-[0.85rem]">
-                                    Geen contracten · Geen maandelijkse kosten · Eerlijke indexeringen
-                                </p>
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                </Flex>
+                            </div>
+                            <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+                                <Link
+                                    to="/contact"
+                                    className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-7 py-3.5 text-[0.98rem] font-semibold text-[#1a5ee5] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f4f8ff]"
+                                >
+                                    Plan een kennismaking
+                                    <FiArrowRight />
+                                </Link>
+                                <Link
+                                    to="/start-met-sendwise"
+                                    className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 text-[0.98rem] font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10"
+                                >
+                                    Start met Sendwise
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
-        </Flex>
+
+            <Homepage2Footer />
+        </main>
     );
 };
 

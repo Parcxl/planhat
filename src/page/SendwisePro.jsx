@@ -1,400 +1,375 @@
-import { Flex } from "antd";
-import { useEffect } from "react";
-import { motion } from "framer-motion";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FiCheck } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import OrderPickingAnimation from "../components/animations/OrderPickingAnimation";
-import WarehouseNavigationAnimation from "../components/animations/WarehouseNavigationAnimation";
-import PackingControlAnimation from "../components/animations/PackingControlAnimation";
-import InventoryOverviewAnimation from "../components/animations/InventoryOverviewAnimation";
-import ProWarehouseCard from "../components/ProWarehouseCard";
+import { createElement, useEffect } from "react"
+import { Link } from "react-router-dom"
+import {
+  FiArrowRight,
+  FiBox,
+  FiCheck,
+  FiClipboard,
+  FiGrid,
+  FiMap,
+  FiPackage,
+  FiTruck,
+} from "react-icons/fi"
+import Homepage2Header from "../components/Homepage2/Header"
+import Homepage2Footer from "../components/Homepage2/Footer"
+import OrderPickingAnimation from "../components/animations/OrderPickingAnimation"
+import WarehouseNavigationAnimation from "../components/animations/WarehouseNavigationAnimation"
+import PackingControlAnimation from "../components/animations/PackingControlAnimation"
+import InventoryOverviewAnimation from "../components/animations/InventoryOverviewAnimation"
 
-gsap.registerPlugin(ScrollTrigger);
+const pillars = [
+  {
+    title: "Orders klaarzetten",
+    text: "Nieuwe orders staan direct in je magazijnflow, klaar om te picken en te verwerken.",
+    icon: FiClipboard,
+  },
+  {
+    title: "Picken en inpakken",
+    text: "Werk stap voor stap door picklijsten en voorkom fouten aan de inpaktafel.",
+    icon: FiPackage,
+  },
+  {
+    title: "Voorraad in beeld",
+    text: "Houd producten, locaties en voorraad centraal bij zonder losse spreadsheets.",
+    icon: FiGrid,
+  },
+]
 
-const FeatureList = ({ items, tone = "dark", className = "", align = "left" }) => {
-    const isLight = tone === "light";
-    const isRight = align === "right";
-    const textClass = isLight ? "text-white/90" : "text-gray-700";
-    const iconClass = isLight ? "bg-white/15 text-white" : "bg-[#1a5ee5]/10 text-[#1a5ee5]";
+const featureSections = [
+  {
+    eyebrow: "Picken",
+    title: "Slim picken, sneller door je magazijn",
+    text: "Orders worden automatisch omgezet in duidelijke picklijsten. Zo verzamelt je team sneller producten met minder fouten en minder zoekwerk.",
+    items: [
+      "Automatische picklijsten",
+      "Batch & single picking",
+      "Route-optimalisatie",
+      "Ondersteuning voor scanners en mobiel",
+    ],
+    icon: FiClipboard,
+    visual: OrderPickingAnimation,
+  },
+  {
+    eyebrow: "Locaties",
+    title: "Altijd weten waar je moet zijn",
+    text: "Tijdens het picken begeleidt Sendwise PRO je stap voor stap door het magazijn, in de juiste volgorde en met duidelijke locaties.",
+    items: [
+      "Locatiegestuurd picken",
+      "Smartphone als scanner",
+      "Handheld scanners",
+      "Realtime foutdetectie",
+    ],
+    icon: FiMap,
+    visual: WarehouseNavigationAnimation,
+    reversed: true,
+  },
+  {
+    eyebrow: "Inpakken",
+    title: "Efficiënt en foutloos inpakken",
+    text: "Aan de inpaktafel controleert Sendwise PRO of de juiste producten worden verwerkt voordat de order naar verzending gaat.",
+    items: [
+      "Packcontrole per order",
+      "Sneller werken aan de inpaktafel",
+      "Minder fouten en retouren",
+      "Duidelijke status per order",
+    ],
+    icon: FiBox,
+    visual: PackingControlAnimation,
+  },
+  {
+    eyebrow: "Voorraad",
+    title: "Volledig inzicht in je voorraad",
+    text: "Beheer producten, locaties en voorraad vanuit een overzichtelijk dashboard dat meegroeit met je magazijn.",
+    items: [
+      "Realtime voorraad per locatie",
+      "Producten beheren en bewerken",
+      "Minder out-of-stock situaties",
+      "Overzicht per webshop",
+    ],
+    icon: FiGrid,
+    visual: InventoryOverviewAnimation,
+    reversed: true,
+  },
+]
 
-    return (
-        <ul className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${isRight ? "text-right" : "text-left"} ${className}`}>
-            {items.map((item) => (
-                <li
-                    key={item}
-                    className={`flex items-start gap-3 inter-medium text-[0.98rem] ${textClass} ${isRight ? "flex-row-reverse justify-end" : ""}`}
-                >
-                    <span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${iconClass}`}>
-                        <FiCheck className="text-[0.9rem]" />
-                    </span>
-                    <span className="leading-relaxed">{item}</span>
-                </li>
-            ))}
-        </ul>
-    );
-};
+const CheckList = ({ items }) => (
+  <ul className="grid gap-3 sm:grid-cols-2">
+    {items.map((item) => (
+      <li key={item} className="flex items-start gap-2.5 inter-medium text-sm leading-6 text-[#445066]">
+        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e7f0ff] text-[#1a5ee5]">
+          <FiCheck className="h-3.5 w-3.5 stroke-[3]" aria-hidden="true" />
+        </span>
+        {item}
+      </li>
+    ))}
+  </ul>
+)
+
+const FeatureSection = ({ section }) => {
+  const Visual = section.visual
+  const Icon = section.icon
+
+  const copy = (
+    <div className="flex flex-col justify-center">
+      <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#eef5ff] px-3.5 py-2 inter-semibold text-xs uppercase tracking-[0.08em] text-[#1a5ee5] ring-1 ring-[#dce9ff]">
+        {createElement(Icon, { className: "h-4 w-4", "aria-hidden": "true" })}
+        {section.eyebrow}
+      </span>
+      <h2 className="inter-semibold text-3xl leading-tight text-[#07115a] sm:text-4xl">
+        {section.title}
+      </h2>
+      <p className="mt-4 max-w-xl inter-medium text-base leading-8 text-[#667085]">
+        {section.text}
+      </p>
+      <div className="mt-7">
+        <CheckList items={section.items} />
+      </div>
+    </div>
+  )
+
+  const visual = (
+    <div className="relative min-h-[300px] overflow-hidden rounded-[26px] border border-[#e1eaf7] bg-[#fbfdff] p-4 shadow-[0_20px_65px_rgba(7,17,31,0.08)] sm:min-h-[340px] sm:p-5">
+      <div className="absolute right-6 top-6 h-16 w-16 rotate-45 rounded-[18px] bg-[#e8f2ff]" aria-hidden="true" />
+      <div className="relative h-[270px] sm:h-[310px]">
+        {createElement(Visual)}
+      </div>
+    </div>
+  )
+
+  return (
+    <section className="bg-white px-6 py-12 lg:py-16">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2">
+        {section.reversed ? (
+          <>
+            <div className="lg:order-1">{copy}</div>
+            <div className="lg:order-2">{visual}</div>
+          </>
+        ) : (
+          <>
+            {visual}
+            {copy}
+          </>
+        )}
+      </div>
+    </section>
+  )
+}
 
 const SendwisePro = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
-    useGSAP(() => {
-        gsap.set("#pro-hero-frame", {
-            scale: 1,
-            transformOrigin: "center center",
-            borderBottomLeftRadius: "0%",
-            borderBottomRightRadius: "0%",
-            marginLeft: "0px",
-            marginRight: "0px",
-        });
+  return (
+    <main className="min-h-screen bg-white text-[#0d1321]">
+      <Homepage2Header />
 
-        gsap.to("#pro-hero-frame", {
-            scale: 0.83,
-            borderBottomLeftRadius: "100px",
-            borderBottomRightRadius: "100px",
-            ease: "power1.inOut",
-            scrollTrigger: {
-                trigger: "#pro-hero-frame",
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-            },
-        });
-
-        gsap.fromTo(
-            "#pro-hero-img",
-            {
-                scale: 1,
-                borderBottomLeftRadius: "0%",
-                borderBottomRightRadius: "0%",
-            },
-            {
-                scale: 1,
-                ease: "power1.out",
-                borderBottomLeftRadius: "100px",
-                borderBottomRightRadius: "100px",
-                scrollTrigger: {
-                    trigger: "#pro-hero-frame",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true,
-                },
+      <section className="relative overflow-hidden bg-white pt-32 sm:pt-36 lg:pt-44">
+        <style>{`
+          @keyframes proHeroImageIn {
+            from {
+              opacity: 0;
+              transform: translateX(70px) scale(0.985);
             }
-        );
-    });
+            to {
+              opacity: 1;
+              transform: translateX(0) scale(1);
+            }
+          }
+        `}</style>
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-6 pb-20 lg:min-h-[600px] lg:grid-cols-[580px_1fr] lg:gap-10 lg:pb-20">
+          <div className="relative z-10 max-w-[620px] lg:pb-8">
+            <div className="mb-5 flex items-center gap-3 text-[#6f7694]">
+              <div className="flex -space-x-2">
+                {[FiClipboard, FiPackage, FiTruck].map((Icon, index) => (
+                  <span
+                    key={index}
+                    className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#eef5ff] text-[#1a5ee5] shadow-[0_4px_12px_rgba(15,23,42,0.10)]"
+                  >
+                    {createElement(Icon, { className: "h-3.5 w-3.5", "aria-hidden": "true" })}
+                  </span>
+                ))}
+              </div>
+              <p className="inter-medium text-sm text-[#707894] sm:text-[0.95rem]">
+                Picken, inpakken en voorraad beheren
+              </p>
+            </div>
 
-    return (
-        <Flex className="flex-col w-[100%] overflow-hidden space-y-10 sm:space-y-12 md:space-y-14 lg:space-y-16 mb-10">
-            <section className="w-full">
-                <Flex>
-                    <Flex id="pro-hero-frame" className="w-[100%] mask-clip-path">
-                        <img
-                            id="pro-hero-img"
-                            src="/sendwise-pro.png"
-                            alt="Sendwise PRO"
-                            className="absolute h-screen sm:h-screen w-[100%] object-cover object-top"
-                        />
-                        <div id="pro-hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-screen sm:h-screen" />
-                        <Flex className="z-30 sm:ml-[10%] ml-[4%] w-[100%] h-screen sm:h-screen flex-col justify-center items-start pt-16 sm:pt-20 pb-10 sm:pb-14">
-                            <div className="flex flex-col items-start space-y-8 sm:space-y-10 translate-y-4 sm:translate-y-6">
-                                <Flex className="group text-white/80 inter-semibold w-fit bg-[#514F4A]/30 border px-1 py-1 items-center space-x-4 rounded-3xl border-[#514F4A]/50 backdrop-blur-lg transition-all duration-500 ease-out hover:border-[#514F4A] hover:bg-[#514F4A]/40">
-                                    <Flex className="border border-[#514F4A] bg-gradient-to-t to-[#514F4A] from-[#514F4A]/10 px-3 py-[0.4rem] rounded-3xl transition-all duration-500 ease-out group-hover:bg-[#514F4A] group-hover:scale-[1.02]">
-                                        <p className="text-[0.85rem] tracking-[0.14em]">PRO</p>
-                                    </Flex>
-                                </Flex>
-                                <div className="flex flex-col pl-1 inter-semibold md:leading-[4rem] leading-[3.1rem] text-white w-fit text-left">
-                                    <h1 className="md:text-[4rem] sm:text-[2.5rem] text-[2.85rem]">Sendwise PRO</h1>
-                                </div>
-                                <p className="text-white font-light text-[1.25rem] sm:text-[1.1rem] md:text-[1.3rem] max-w-[42rem] leading-[1.4] text-left">
-                                    Fulfilmentsoftware voor webshops die sneller, foutloos en schaalbaar willen werken.
-                                </p>
-                                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-6 sm:space-y-0">
-                                    <Link
-                                        to="/start-met-sendwise"
-                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white hover:text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden inline-flex items-center"
-                                    >
-                                        <p className="relative z-10 text-white transition-none" style={{ color: "#ffffff" }}>Start met Sendwise PRO</p>
-                                    </Link>
-                                    <Link
-                                        to="/contact"
-                                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white hover:text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl w-fit flex isolate"
-                                    >
-                                        <span className="relative z-10 text-white group-hover:text-white">Plan een demo</span>
-                                    </Link>
-                                </div>
-                            </div>
-                        </Flex>
-                    </Flex>
-                </Flex>
-            </section>
+            <h1 className="inter-semibold text-5xl leading-[1.03] text-[#07115a] sm:text-6xl sm:leading-[1.02] lg:text-7xl">
+              <span className="block whitespace-nowrap">Sendwise PRO</span>
+              <span className="block">voor fulfilment</span>
+            </h1>
 
-            <section className="w-full">
-                <ProWarehouseCard
-                    title="Alles voor fulfilment, op één plek"
-                    description="Sendwise PRO is het fulfilmentdashboard voor webshops. Van orderinname tot picken, packen en voorraadbeheer — alles is ingericht om sneller te werken, fouten te verminderen en mee te schalen met je volume."
+            <p className="mt-6 max-w-2xl inter-medium text-lg leading-8 text-[#3f4965]">
+              Fulfilmentsoftware voor webshops die sneller en foutloos willen werken.
+            </p>
+
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link
+                to="/start-met-sendwise"
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-[#1a5ee5] px-6 inter-semibold text-sm text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2]"
+              >
+                Start met PRO
+                <FiArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex h-12 items-center justify-center rounded-[12px] border border-[#d4dceb] bg-white px-6 inter-semibold text-sm text-[#07115a] shadow-[0_10px_24px_rgba(7,17,31,0.04)] transition hover:border-[#b8c4d8] hover:bg-[#f8fbff]"
+              >
+                Plan een demo
+              </Link>
+            </div>
+          </div>
+
+          <div className="relative flex items-center justify-center lg:min-h-[440px] lg:items-start lg:justify-start">
+            <div className="relative w-full lg:mt-2 lg:w-[900px] lg:max-w-none">
+              <div
+                className="overflow-hidden rounded-l-[28px] rounded-r-none border border-r-0 border-[#cfe0fb] bg-[#f7fbff] shadow-[0_34px_95px_rgba(7,17,31,0.18)]"
+                style={{ animation: "proHeroImageIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both" }}
+              >
+                <img
+                  src="/sendwise-pro-dashboard-hero.png"
+                  alt="Dashboard van Sendwise PRO"
+                  className="aspect-[1.87/1] w-full object-cover object-left-top"
                 />
-            </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white/90 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[45%] w-full">
-                                <div className="w-full h-[14rem] sm:h-[18rem]">
-                                    <OrderPickingAnimation />
-                                </div>
-                            </div>
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left">
-                                <div className="space-y-3">
-                                    <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                        Slim picken, sneller door je magazijn
-                                    </h2>
-                                    <p className="text-gray-700 inter-medium lg:text-[1.05rem] text-[0.98rem] leading-relaxed max-w-[56rem]">
-                                        Orders komen automatisch binnen en worden omgezet in slimme picklijsten. Sendwise PRO helpt je met het efficiënt verzamelen van producten, met minder loopmeters en minder fouten.
-                                    </p>
-                                </div>
-                                <FeatureList
-                                    items={[
-                                        "Automatische picklijsten",
-                                        "Batch & single picking",
-                                        "Route-optimalisatie",
-                                        "Ondersteuning voor scanners en mobiel",
-                                    ]}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </Flex>
-            </section>
+      <section className="bg-white px-6 pb-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-5 lg:grid-cols-3">
+            {pillars.map(({ title, text, icon: Icon }) => (
+              <article
+                key={title}
+                className="flex min-h-[250px] flex-col rounded-[24px] border border-[#e1eaf7] bg-[#fbfdff] p-7 shadow-[0_18px_55px_rgba(7,17,31,0.065)]"
+              >
+                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-[#1a5ee5] shadow-[0_12px_30px_rgba(26,94,229,0.10)] ring-1 ring-[#dce9ff]">
+                  {createElement(Icon, { className: "h-7 w-7", "aria-hidden": "true" })}
+                </span>
+                <h2 className="mt-6 inter-semibold text-2xl leading-tight text-[#07115a]">{title}</h2>
+                <p className="mt-3 inter-medium text-base leading-7 text-[#667085]">{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left order-2 lg:order-1">
-                                <div className="space-y-3">
-                                    <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                        Altijd weten waar je moet zijn
-                                    </h2>
-                                    <p className="text-gray-700 inter-medium lg:text-[1.05rem] text-[0.98rem] leading-relaxed max-w-[56rem]">
-                                        Tijdens het picken begeleidt Sendwise PRO je stap voor stap door het magazijn. Je ziet precies welke locatie je nodig hebt, in de juiste volgorde.
-                                    </p>
-                                </div>
-                                <FeatureList
-                                    items={[
-                                        "Locatiegestuurd picken",
-                                        "Smartphone als scanner",
-                                        "Handheld scanners",
-                                        "Realtime foutdetectie",
-                                    ]}
-                                />
-                            </div>
-                            <div className="lg:w-[45%] w-full order-1 lg:order-2">
-                                <div className="w-full h-[14rem] sm:h-[18rem]">
-                                    <WarehouseNavigationAnimation />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Flex>
-            </section>
+      <section className="bg-[#f7fbff] px-6 py-16 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <h2 className="inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl">
+              Alles voor fulfilment, op één plek
+            </h2>
+            <p className="mt-5 max-w-2xl inter-medium text-lg leading-8 text-[#667085]">
+              Van orderinname tot picken, packen en voorraadbeheer: Sendwise PRO is ingericht om sneller te werken, fouten te verminderen en mee te schalen met je volume.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {[
+              { value: "102", label: "orders te picken" },
+              { value: "7", label: "klaar om in te pakken" },
+              { value: "0", label: "klaar voor verzending" },
+            ].map((stat) => (
+              <div key={stat.label} className="rounded-[20px] border border-[#e1eaf7] bg-white p-6 shadow-[0_18px_55px_rgba(7,17,31,0.06)]">
+                <p className="inter-semibold text-4xl text-[#07115a]">{stat.value}</p>
+                <p className="mt-2 inter-medium text-sm leading-6 text-[#667085]">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white/90 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[45%] w-full">
-                                <div className="w-full h-[14rem] sm:h-[18rem]">
-                                    <PackingControlAnimation />
-                                </div>
-                            </div>
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left">
-                                <div className="space-y-3">
-                                    <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                        Efficiënt en foutloos inpakken
-                                    </h2>
-                                    <p className="text-gray-700 inter-medium lg:text-[1.05rem] text-[0.98rem] leading-relaxed max-w-[56rem]">
-                                        Bij het inpakken controleert Sendwise PRO automatisch of de juiste producten worden verwerkt, zodat fouten direct worden voorkomen.
-                                    </p>
-                                </div>
-                                <FeatureList
-                                    items={[
-                                        "Packcontrole per order",
-                                        "Sneller werken aan de inpaktafel",
-                                        "Minder fouten en retouren",
-                                    ]}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </Flex>
-            </section>
+      <section className="bg-white px-6 pb-2 pt-20">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="inter-semibold text-5xl leading-tight text-[#07115a] sm:text-6xl">
+            Een rustige workflow voor drukke magazijnen.
+          </h2>
+          <p className="mx-auto mt-5 max-w-3xl inter-medium text-lg leading-8 text-[#3f4965]">
+            PRO houdt iedere stap overzichtelijk, van binnengekomen order tot ingepakt pakket.
+          </p>
+        </div>
+      </section>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left order-2 lg:order-1">
-                                <div className="space-y-3">
-                                    <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                        Volledig inzicht in je voorraad
-                                    </h2>
-                                    <p className="text-gray-700 inter-medium lg:text-[1.05rem] text-[0.98rem] leading-relaxed max-w-[56rem]">
-                                        Beheer producten, locaties en voorraad vanuit één overzichtelijk dashboard.
-                                    </p>
-                                </div>
-                                <FeatureList
-                                    items={[
-                                        "Realtime voorraad per locatie",
-                                        "Producten beheren en bewerken",
-                                        "Minder out-of-stock situaties",
-                                    ]}
-                                />
-                            </div>
-                            <div className="lg:w-[45%] w-full order-1 lg:order-2">
-                                <div className="w-full h-[14rem] sm:h-[18rem]">
-                                    <InventoryOverviewAnimation />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Flex>
-            </section>
+      {featureSections.map((section) => (
+        <FeatureSection key={section.title} section={section} />
+      ))}
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white/90 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-                            <div className="lg:w-[45%] w-full">
-                                <div className="w-full h-[14rem] sm:h-[18rem]">
-                                    <div className="relative w-full h-full">
-                                        <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-[26px] bg-[#1a5ee5]/10" />
-                                        <div className="relative h-full w-full rounded-[26px] overflow-hidden border border-white/60 bg-white shadow-[0_26px_60px_rgba(15,23,42,0.18)]">
-                                            <img
-                                                src="/pro-warehouse-3d.png"
-                                                alt="Sendwise PRO magazijnweergave"
-                                                className="h-full w-full object-cover object-center"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="lg:w-[55%] w-full flex flex-col space-y-6 text-left">
-                                <div className="space-y-3">
-                                    <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                        Je magazijn in 3D
-                                    </h2>
-                                    <p className="text-gray-700 inter-medium lg:text-[1.05rem] text-[0.98rem] leading-relaxed max-w-[56rem]">
-                                        Ontwerp en visualiseer je magazijn in 3D. Zie direct waar producten liggen en hoeveel voorraad er beschikbaar is.
-                                    </p>
-                                </div>
-                                <FeatureList
-                                    items={[
-                                        "3D weergave van stellingen",
-                                        "Overzicht per zone of gang",
-                                        "Direct inzicht in voorraadverdeling",
-                                    ]}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </Flex>
-            </section>
+      <section className="bg-white px-6 py-16 lg:py-20">
+        <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="rounded-[28px] bg-[#07115a] p-8 text-white shadow-[0_24px_70px_rgba(7,17,90,0.18)] lg:p-12">
+            <h2 className="inter-semibold text-4xl leading-tight sm:text-5xl">
+              Transparante prijzen voor je fulfilmentflow.
+            </h2>
+            <p className="mt-5 inter-medium text-lg leading-8 text-white/78">
+              Gebruik Sendwise zonder vaste kosten, of voeg PRO toe per webshop wanneer je fulfilmentproces meer grip nodig heeft.
+            </p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="rounded-[24px] border border-[#e1eaf7] bg-white p-7 shadow-[0_18px_55px_rgba(7,17,31,0.065)]">
+              <p className="inter-semibold text-xl text-[#07115a]">Sendwise</p>
+              <p className="mt-5 inter-semibold text-5xl text-[#07115a]">€0</p>
+              <p className="mt-3 inter-medium text-base text-[#667085]">Geen maandelijkse kosten</p>
+            </div>
+            <div className="rounded-[24px] border border-[#bcd2fb] bg-[#f7fbff] p-7 shadow-[0_20px_65px_rgba(26,94,229,0.10)]">
+              <p className="inter-semibold text-xl text-[#07115a]">Sendwise PRO</p>
+              <p className="mt-5 inter-semibold text-5xl text-[#07115a]">
+                €20 <span className="text-base text-[#667085]">/ maand</span>
+              </p>
+              <p className="mt-3 inter-medium text-base text-[#667085]">Per webshop</p>
+              <Link
+                to="/start-met-sendwise"
+                className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#1a5ee5] px-5 inter-semibold text-sm text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2]"
+              >
+                Start met PRO
+                <FiArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <section className="w-full">
-                <Flex className="w-[95%] lg:w-[80%] mx-auto">
-                    <div className="rounded-2xl border border-gray-200 bg-white/90 p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] w-full">
-                        <div className="flex flex-col space-y-3">
-                            <h2 className="inter-medium lg:text-[2.7rem] md:text-[2.3rem] sm:text-[2rem] text-[1.8rem] text-gray-900">
-                                Transparante prijzen, zonder verrassingen
-                            </h2>
-                            <p className="text-gray-700 inter-medium lg:text-[1.05rem] text-[0.98rem] leading-relaxed max-w-[56rem]">
-                                Eenvoudig en duidelijk, per webshop gefactureerd.
-                            </p>
-                        </div>
-                        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.4 }}
-                                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                                whileHover={{ scale: 1.02 }}
-                                className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition-shadow duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-[0_20px_50px_rgba(15,23,42,0.12)]"
-                            >
-                                <div className="flex flex-col space-y-2">
-                                    <p className="inter-semibold text-[1.2rem] text-gray-900">Sendwise</p>
-                                    <p className="inter-semibold text-[2.3rem] text-gray-900">€0</p>
-                                    <p className="text-sm inter-normal text-[#475569]">Geen maandelijkse kosten</p>
-                                </div>
-                            </motion.div>
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.4 }}
-                                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
-                                whileHover={{ scale: 1.02 }}
-                                className="rounded-2xl border border-[#1a5ee5]/30 bg-[#F8FAFC] p-6 sm:p-8 shadow-[0_16px_40px_rgba(26,94,229,0.16)] transition-shadow duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-[0_24px_60px_rgba(26,94,229,0.18)]"
-                            >
-                                <div className="flex flex-col space-y-2">
-                                    <p className="inter-semibold text-[1.2rem] text-gray-900">Sendwise PRO</p>
-                                    <p className="inter-semibold text-[2.3rem] text-gray-900">
-                                        €20 <span className="text-base text-[#475569] inter-normal">/ maand</span>
-                                    </p>
-                                    <p className="text-sm inter-normal text-[#475569]">Per webshop</p>
-                                </div>
-                                <div className="mt-6">
-                                    <Link
-                                        to="/start-met-sendwise"
-                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[0.95rem] cursor-pointer text-white hover:text-white px-6 py-2.5 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl w-fit relative overflow-hidden inline-flex items-center"
-                                    >
-                                        <p className="relative z-10 text-white transition-none" style={{ color: "#ffffff" }}>Start met Sendwise PRO</p>
-                                    </Link>
-                                </div>
-                            </motion.div>
-                        </div>
-                    </div>
-                </Flex>
-            </section>
+      <section className="bg-white px-6 pb-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative overflow-hidden rounded-[28px] bg-[#1a5ee5] px-8 py-10 text-white shadow-[0_24px_70px_rgba(26,94,229,0.22)] lg:px-14 lg:py-14">
+            <div className="absolute -bottom-24 right-12 h-56 w-56 rotate-45 rounded-[42px] bg-white/12" aria-hidden="true" />
+            <div className="absolute -top-28 right-72 h-44 w-44 rotate-45 rounded-[36px] bg-white/10" aria-hidden="true" />
 
-            <section className="w-full">
-                <Flex className="lg:w-[80%] w-[95%] mx-auto">
-                    <Flex className="relative w-full h-[22rem] sm:h-[31rem] lg:h-[34rem] overflow-hidden rounded-2xl">
-                        <div className="absolute z-10 bg-gradient-to-b from-transparent to-[#030302]/80 w-[100%] h-full rounded-2xl" />
-                        <div className="absolute z-10 inset-0 rounded-2xl bg-black/55 sm:bg-black/35" />
-                        <img src="/sendwise-2.png" alt="Sendwise" className="object-cover w-[100%] h-full rounded-2xl" />
-                        <Flex className="absolute z-20 inset-0 w-full h-full">
-                            <Flex className="text-white items-start flex-col space-y-6 w-full h-full justify-center px-6 sm:px-10 lg:pl-20">
-                                <p className="inter-semibold lg:text-[3rem] sm:text-[2.4rem] text-[1.9rem] lg:leading-[3.4rem]">
-                                    Klaar om fulfilment slimmer aan te pakken?
-                                </p>
-                                <p className="inter-medium lg:text-[1.15rem] text-[1.05rem] lg:w-[80%]">
-                                    Ontdek hoe Sendwise PRO je helpt sneller te picken, foutloos te verpakken en overzicht te houden.
-                                </p>
-                                <Flex className="flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
-                                    <Link
-                                        to="/start-met-sendwise"
-                                        className="bg-gradient-to-r from-[#1a5ee5] to-[#3b82f6] inter-medium text-[1rem] cursor-pointer text-white hover:text-white px-7 py-3 rounded-3xl transition-all duration-500 ease-in-out shadow-lg hover:shadow-xl relative overflow-hidden inline-flex items-center"
-                                    >
-                                        <p className="relative z-10 text-white transition-none" style={{ color: "#ffffff" }}>Start met Sendwise PRO</p>
-                                    </Link>
-                                    <Link
-                                        to="/contact"
-                                        className="group transition-all duration-300 ease-in-out hover:backdrop-blur-md hover:bg-white/10 hover:border-transparent text-white hover:text-white inter-medium border border-white/30 items-center space-x-3 cursor-pointer text-[0.95rem] px-7 py-3 rounded-3xl flex isolate"
-                                    >
-                                        <span className="relative z-10 text-white group-hover:text-white">Plan een demo</span>
-                                    </Link>
-                                </Flex>
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                </Flex>
-            </section>
-        </Flex>
-    );
-};
+            <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-3xl">
+                <h2 className="inter-semibold text-4xl leading-tight text-white sm:text-5xl">
+                  Klaar om fulfilment slimmer aan te pakken?
+                </h2>
+                <p className="mt-4 max-w-2xl inter-medium text-lg leading-8 text-white/82">
+                  Ontdek hoe Sendwise PRO je helpt sneller te picken, foutloos te verpakken en overzicht te houden.
+                </p>
+              </div>
 
-export default SendwisePro;
+              <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
+                <Link
+                  to="/start-met-sendwise"
+                  className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 inter-semibold text-sm text-[#1a5ee5] shadow-[0_16px_34px_rgba(7,17,90,0.16)] transition hover:bg-[#f4f8ff]"
+                >
+                  Start met PRO
+                  <FiArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
+                </Link>
+                <Link
+                  to="/contact"
+                  className="inline-flex h-12 items-center justify-center rounded-xl border border-white/35 bg-white/10 px-6 inter-semibold text-sm text-white transition hover:bg-white/16"
+                >
+                  Plan een demo
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Homepage2Footer />
+    </main>
+  )
+}
+
+export default SendwisePro
