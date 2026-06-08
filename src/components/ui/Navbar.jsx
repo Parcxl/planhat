@@ -147,6 +147,11 @@ const Navbar = () => {
                         <img 
                             src={scrolled ? "/sendwise-tekst-blauw.png" : "/sendwise-tekst.png"} 
                             alt="Sendwise" 
+                            width="465"
+                            height="84"
+                            fetchPriority="high"
+                            loading="eager"
+                            decoding="async"
                             className="h-[1.5rem] object-contain -mt-1"
                         />
                     </Flex>
@@ -322,6 +327,11 @@ const Navbar = () => {
                     onClick={() => handleNavigate('Home')}
                     src={scrolled && !mobile ? "/sendwise-tekst-blauw.png" : "/sendwise-tekst.png"}
                     alt="Sendwise"
+                    width="465"
+                    height="84"
+                    fetchPriority="high"
+                    loading="eager"
+                    decoding="async"
                     className="h-[1.4rem] my-1 cursor-pointer"
                 />
                 <HiOutlineMenuAlt3 onClick={() => setMobile(!mobile)} className={`cursor-pointer text-[1.6rem] my-1 ${scrolled && !mobile ? 'text-black' : 'text-white/80'}`} />
@@ -348,6 +358,11 @@ const Navbar = () => {
                                     onClick={() => handleNavigate('Home')}
                                     src="/sendwise-tekst.png"
                                     alt="Sendwise"
+                                    width="465"
+                                    height="84"
+                                    fetchPriority="high"
+                                    loading="eager"
+                                    decoding="async"
                                     className="h-[1.4rem] cursor-pointer"
                                 />
                                 <AiOutlineMinus onClick={() => setMobile(!mobile)} className="cursor-pointer text-white text-[1.6rem]" />
