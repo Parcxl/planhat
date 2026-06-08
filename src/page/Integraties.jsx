@@ -10,13 +10,13 @@ const tabs = ["Alle", "Webshop", "Marketplace", "WMS"];
 const integrations = [
     {
         name: "WooCommerce",
-        src: "/woocommerce-logo.png",
+        src: "/woocommerce-logo.webp",
         category: "Webshop",
         description: "Open-source webshopplatform voor WordPress. Haal orders automatisch op en maak verzendlabels direct vanuit Sendwise.",
     },
     {
         name: "Shopify",
-        src: "/shopify-logo.png",
+        src: "/shopify-logo.webp",
         category: "Webshop",
         description: "Populair e-commerceplatform voor snelgroeiende webshops. Synchroniseer orders, adressen en tracking zonder handmatig werk.",
     },
@@ -28,7 +28,7 @@ const integrations = [
     },
     {
         name: "Lightspeed",
-        src: "/lightspeed.png",
+        src: "/lightspeed.webp",
         category: "Webshop",
         description: "Retail- en webshopplatform voor voorraad, verkoop en online orders. Koppel je orderstroom aan Sendwise.",
     },
@@ -40,13 +40,13 @@ const integrations = [
     },
     {
         name: "Mijnwebwinkel",
-        src: "/mijnwebwinkel.png",
+        src: "/mijnwebwinkel.webp",
         category: "Webshop",
         description: "Toegankelijk webshopplatform voor ondernemers. Zet binnenkomende orders snel om naar verzendklare zendingen.",
     },
     {
         name: "Ecwid",
-        src: "/ecwid-parcxl.png",
+        src: "/ecwid-parcxl.webp",
         category: "Webshop",
         description: "Webshopoplossing voor verkoop via websites, social en marketplaces. Breng je verzending samen in Sendwise.",
     },
@@ -58,7 +58,7 @@ const integrations = [
     },
     {
         name: "PrestaShop",
-        src: "/prestashop.png",
+        src: "/prestashop.webp",
         category: "Webshop",
         description: "Open-source webshopplatform met veel configuratiemogelijkheden. Automatiseer labels, tracking en orderverwerking.",
     },
@@ -70,13 +70,13 @@ const integrations = [
     },
     {
         name: "Lyra",
-        src: "/lyra.png",
+        src: "/lyra.webp",
         category: "WMS",
         description: "WMS voor fulfilment en magazijnprocessen. Verbind pick, pack en verzending met je Sendwise labelproces.",
     },
     {
         name: "GoedGepickt",
-        src: "/goedgepickt-sendwise-logo.png",
+        src: "/goedgepickt-sendwise-logo.webp",
         category: "WMS",
         description: "WMS voor voorraadbeheer, orderpicking en fulfilment. Stuur orders soepel door naar Sendwise voor verzending.",
     },
@@ -113,9 +113,9 @@ const Integraties = () => {
         <main className="min-h-screen overflow-hidden bg-white text-[#0d1321]">
             <Homepage2Header />
 
-            <section className="relative overflow-hidden bg-white pt-32 sm:pt-36 lg:pt-44">
-                <div className="absolute left-0 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#eaf2ff] blur-3xl" />
-                <div className="mx-auto grid min-h-[650px] w-full max-w-7xl items-center gap-12 px-6 pb-20 lg:grid-cols-[0.92fr_1.08fr] lg:pb-24">
+            <section className="relative overflow-hidden bg-white pt-24 sm:pt-28 lg:pt-44">
+                <div className="absolute left-0 top-0 h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-[#eaf2ff] blur-3xl sm:h-[520px] sm:w-[520px]" />
+                <div className="mx-auto grid w-full max-w-7xl items-center gap-9 px-4 pb-12 sm:px-6 sm:pb-16 lg:min-h-[650px] lg:grid-cols-[0.92fr_1.08fr] lg:gap-12 lg:pb-24">
                     <div className="relative z-10 max-w-[690px] lg:pb-10">
                         <div className="mb-5 flex items-center gap-3 text-[#6f7694]">
                             <div className="flex -space-x-2">
@@ -131,25 +131,25 @@ const Integraties = () => {
                             </div>
                             <p className="inter-medium text-[0.95rem]">Koppel Sendwise aan je bestaande systemen</p>
                         </div>
-                        <h1 className="inter-semibold text-[3rem] leading-[0.98] tracking-[0px] text-[#0d1321] sm:text-[4.2rem] lg:text-[5.2rem]">
+                        <h1 className="inter-semibold text-[2.7rem] leading-[1.02] tracking-[0px] text-[#0d1321] sm:text-[4.2rem] sm:leading-[0.98] lg:text-[5.2rem]">
                             <span className="block sm:whitespace-nowrap">Alles gekoppeld.</span>
                             <span className="block sm:whitespace-nowrap text-[#1a5ee5]">Meteen verzenden.</span>
                         </h1>
-                        <p className="mt-7 max-w-[570px] text-[1.08rem] leading-[1.75] text-[#4e5a73] sm:text-[1.2rem]">
+                        <p className="mt-5 max-w-[570px] text-base leading-7 text-[#4e5a73] sm:mt-7 sm:text-[1.2rem] sm:leading-[1.75]">
                             Verbind je webshop, marketplace of WMS met Sendwise. Orders komen automatisch binnen, labels zijn direct klaar en je houdt grip op elke zending.
                         </p>
                         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
                             <a
                                 href="#integratie-overzicht"
                                 onClick={handleScrollToIntegrations}
-                                className="group inline-flex w-fit items-center gap-3 rounded-full bg-[#1a5ee5] px-7 py-3.5 text-[0.98rem] font-semibold text-white shadow-[0_18px_42px_rgba(26,94,229,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#154fca]"
+                                className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1a5ee5] px-7 py-3.5 text-[0.98rem] font-semibold text-white shadow-[0_18px_42px_rgba(26,94,229,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#154fca] sm:w-fit"
                             >
                                 Bekijk integraties
                                 <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
                             </a>
                             <Link
                                 to="/contact"
-                                className="inline-flex w-fit items-center gap-3 rounded-full border border-[#d8e3f2] bg-white px-7 py-3.5 text-[0.98rem] font-semibold text-[#0d1321] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#1a5ee5]/30 hover:text-[#1a5ee5]"
+                                className="inline-flex w-full items-center justify-center gap-3 rounded-full border border-[#d8e3f2] bg-white px-7 py-3.5 text-[0.98rem] font-semibold text-[#0d1321] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#1a5ee5]/30 hover:text-[#1a5ee5] sm:w-fit"
                             >
                                 Integratie aanvragen
                             </Link>
@@ -157,7 +157,7 @@ const Integraties = () => {
                     </div>
 
                     <div className="relative z-10 lg:min-h-[520px]">
-                        <div className="relative mx-auto w-full max-w-[600px] rounded-[34px] border border-[#dbe7f5] bg-[#f7fbff] p-5 shadow-[0_30px_80px_rgba(15,23,42,0.12)] sm:p-7">
+                        <div className="relative mx-auto w-full max-w-[600px] rounded-[24px] border border-[#dbe7f5] bg-[#f7fbff] p-4 shadow-[0_24px_65px_rgba(15,23,42,0.10)] sm:rounded-[34px] sm:p-7 lg:shadow-[0_30px_80px_rgba(15,23,42,0.12)]">
                             <div className="rounded-[26px] border border-[#e1eaf7] bg-white p-5 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
                                 <div className="flex items-center justify-between gap-4">
                                     <div>
@@ -171,7 +171,14 @@ const Integraties = () => {
                                 <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
                                     {featuredLogos.map((item) => (
                                         <div key={item.name} className="flex aspect-[1.25/1] items-center justify-center rounded-2xl border border-[#e1eaf7] bg-[#fbfdff] p-4">
-                                            <img src={item.src} alt={item.name} className="max-h-12 max-w-[110px] object-contain" />
+                                            <img
+                                                src={item.src}
+                                                alt={item.name}
+                                                loading="lazy"
+                                                decoding="async"
+                                                fetchPriority="low"
+                                                className="max-h-12 max-w-[110px] object-contain"
+                                            />
                                         </div>
                                     ))}
                                 </div>
@@ -195,7 +202,7 @@ const Integraties = () => {
                 </div>
             </section>
 
-            <section className="bg-[#f7fbff] px-6 py-16 lg:py-20">
+            <section className="bg-[#f7fbff] px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
                 <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
                     <article className="rounded-[24px] border border-[#dfeaf7] bg-white p-7 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
                         <h2 className="inter-semibold text-[1.2rem] text-[#0d1321]">Orders automatisch binnen</h2>
@@ -218,7 +225,7 @@ const Integraties = () => {
                 </div>
             </section>
 
-            <section id="integratie-overzicht" className="bg-white px-6 py-16 lg:py-24">
+            <section id="integratie-overzicht" className="bg-white px-4 py-14 sm:px-6 sm:py-16 lg:py-24">
                 <div className="mx-auto max-w-7xl">
                     <div className="mb-9 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                         <div>
@@ -244,7 +251,7 @@ const Integraties = () => {
                         </div>
                     </div>
 
-                    <div className="mb-8 flex flex-wrap gap-2">
+                    <div className="mb-8 flex flex-wrap gap-2 pb-1">
                         {tabs.map((tab) => {
                             const active = activeTab === tab;
                             return (
@@ -252,7 +259,7 @@ const Integraties = () => {
                                     key={tab}
                                     type="button"
                                     onClick={() => setActiveTab(tab)}
-                                    className={`rounded-full px-5 py-2.5 text-[0.92rem] font-semibold transition-all duration-300 ${
+                                    className={`shrink-0 rounded-full px-4 py-2.5 text-[0.86rem] font-semibold transition-all duration-300 sm:px-5 sm:text-[0.92rem] ${
                                         active
                                             ? "bg-[#1a5ee5] text-white shadow-[0_12px_28px_rgba(26,94,229,0.22)]"
                                             : "border border-[#d8e3f2] bg-white text-[#5a667c] hover:border-[#bfd4f8] hover:text-[#1a5ee5]"
@@ -272,7 +279,7 @@ const Integraties = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1], delay: index * 0.03 }}
                             >
-                                <article className="group flex min-h-[245px] rounded-[24px] border border-[#e1eaf7] bg-[#fbfdff] p-7 shadow-[0_18px_55px_rgba(7,17,31,0.055)] transition duration-300 hover:-translate-y-1 hover:border-[#bfd4f8] hover:bg-white hover:shadow-[0_26px_75px_rgba(7,17,31,0.10)]">
+                                <article className="group flex min-h-[230px] rounded-[22px] border border-[#e1eaf7] bg-[#fbfdff] p-5 shadow-[0_18px_55px_rgba(7,17,31,0.055)] transition duration-300 hover:-translate-y-1 hover:border-[#bfd4f8] hover:bg-white hover:shadow-[0_26px_75px_rgba(7,17,31,0.10)] sm:min-h-[245px] sm:rounded-[24px] sm:p-7">
                                     <div className="flex w-full flex-col">
                                         <div className="flex items-start justify-between gap-4">
                                             <img src={item.src} alt={item.name} className="h-16 max-w-[170px] object-contain object-left" />
@@ -301,9 +308,9 @@ const Integraties = () => {
                 </div>
             </section>
 
-            <section className="bg-[#f7fbff] px-6 py-16 lg:py-24">
+            <section className="bg-[#f7fbff] px-4 py-14 sm:px-6 sm:py-16 lg:py-24">
                 <div className="mx-auto max-w-7xl">
-                    <div className="relative overflow-hidden rounded-[30px] bg-[#1a5ee5] px-7 py-10 text-white shadow-[0_28px_70px_rgba(26,94,229,0.24)] sm:px-10 lg:px-14 lg:py-14">
+                    <div className="relative overflow-hidden rounded-[24px] bg-[#1a5ee5] px-5 py-7 text-white shadow-[0_28px_70px_rgba(26,94,229,0.24)] sm:rounded-[30px] sm:px-10 sm:py-10 lg:px-14 lg:py-14">
                         <div className="absolute right-[-80px] top-[-120px] h-[300px] w-[300px] rounded-full bg-white/14 blur-2xl" />
                         <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
                             <div>

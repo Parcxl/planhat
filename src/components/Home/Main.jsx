@@ -62,7 +62,7 @@ const Main = () => {
     return (
         <Flex >
             <Flex id="video-frame" className="w-[100%] mask-clip-path">
-                <img id="hero-img" src="/sendwise-hero-picture.png" alt="main" className="absolute h-screen sm:h-screen w-[100%] object-cover object-right sm:object-center" />
+                <img id="hero-img" src="/sendwise-hero-picture.avif" alt="main" className="absolute h-screen sm:h-screen w-[100%] object-cover object-right sm:object-center" />
                 <div id="hero-img" className="absolute z-10 bg-gradient-to-l from-transparent to-[#030302] w-[100%] h-screen sm:h-screen " />
                 <Flex className="z-30 sm:ml-[10%] ml-[4%] justify-start w-[100%] h-screen sm:h-screen sm:pt-48 pt-44 sm:pb-16 pb-16 flex-col space-y-10 sm:space-y-10">
                     <motion.div

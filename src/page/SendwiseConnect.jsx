@@ -17,16 +17,16 @@ import ConnectUSPCardAnimation from "../components/animations/ConnectUSPCardAnim
 import ConnectBrandingAnimation from "../components/animations/ConnectBrandingAnimation"
 
 const carrierLogos = [
-  { name: "GLS", src: "/gls-logo-sendwise.png" },
+  { name: "GLS", src: "/gls-logo-sendwise.webp" },
   { name: "DHL", src: "/sendwise-dhl.svg" },
-  { name: "DAO", src: "/dao-logo-sendwise.png" },
-  { name: "Colissimo", src: "/colissimo-logo-sendwise.png" },
-  { name: "PostNL", src: "/postnl-icoon.png" },
-  { name: "Gofo", src: "/gofo-logo-sendwise.png" },
-  { name: "MRW", src: "/mrw-logo-sendwise.png" },
-  { name: "Correos", src: "/CORREOS-logo-sendwise.png" },
-  { name: "AT POST", src: "/AT POST-logo-sendwise.png" },
-  { name: "CTT", src: "/ctt-logo-sendwise.png" },
+  { name: "DAO", src: "/dao-logo-sendwise.webp" },
+  { name: "Colissimo", src: "/colissimo-logo-sendwise.webp" },
+  { name: "PostNL", src: "/postnl-icoon.webp" },
+  { name: "Gofo", src: "/gofo-logo-sendwise.webp" },
+  { name: "MRW", src: "/mrw-logo-sendwise.webp" },
+  { name: "Correos", src: "/CORREOS-logo-sendwise.webp" },
+  { name: "AT POST", src: "/AT POST-logo-sendwise.webp" },
+  { name: "CTT", src: "/ctt-logo-sendwise.webp" },
 ]
 
 const pillars = [
@@ -91,8 +91,15 @@ const featureSections = [
 ]
 
 const CarrierLogo = ({ name, src }) => (
-  <div className="flex h-28 w-40 shrink-0 items-center justify-center">
-    <img src={src} alt={`${name} vervoerder`} className="max-h-24 max-w-[190px] object-contain" />
+  <div className="flex h-20 w-28 shrink-0 items-center justify-center sm:h-24 sm:w-36 lg:h-28 lg:w-40">
+    <img
+      src={src}
+      alt={`${name} vervoerder`}
+      loading="lazy"
+      decoding="async"
+      fetchPriority="low"
+      className="max-h-16 max-w-[130px] object-contain sm:max-h-20 sm:max-w-[170px] lg:max-h-24 lg:max-w-[190px]"
+    />
   </div>
 )
 
@@ -141,7 +148,7 @@ const FeatureSection = ({ section }) => {
   )
 
   return (
-    <section className="bg-white px-6 py-12 lg:py-16">
+    <section className="bg-white px-4 py-10 sm:px-6 sm:py-12 lg:py-16">
       <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2">
         {section.reversed ? (
           <>
@@ -168,8 +175,8 @@ const SendwiseConnect = () => {
     <main className="min-h-screen bg-white text-[#0d1321]">
       <Homepage2Header />
 
-      <section className="relative overflow-hidden bg-white pt-32 sm:pt-36 lg:pt-44">
-        <div className="mx-auto grid min-h-[690px] w-full max-w-7xl items-center gap-12 px-6 pb-20 lg:grid-cols-[0.95fr_1.05fr] lg:pb-24">
+      <section className="relative overflow-hidden bg-white pt-24 sm:pt-28 lg:pt-44">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-9 px-4 pb-12 sm:px-6 sm:pb-16 lg:min-h-[690px] lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 lg:pb-24">
           <div className="relative z-10 max-w-[690px] lg:pb-10">
             <div className="mb-5 flex items-center gap-3 text-[#6f7694]">
               <div className="flex -space-x-2">
@@ -187,26 +194,26 @@ const SendwiseConnect = () => {
               </p>
             </div>
 
-            <h1 className="inter-semibold text-5xl leading-[1.03] text-[#07115a] sm:text-6xl sm:leading-[1.02] lg:text-7xl">
+            <h1 className="inter-semibold text-[2.75rem] leading-[1.03] text-[#07115a] sm:text-6xl sm:leading-[1.02] lg:text-7xl">
               <span className="block sm:whitespace-nowrap">CONNECT.</span>
               <span className="block sm:whitespace-nowrap">Minder gedoe.</span>
             </h1>
 
-            <p className="mt-6 max-w-2xl inter-medium text-lg leading-8 text-[#3f4965]">
+            <p className="mt-5 max-w-2xl inter-medium text-base leading-7 text-[#3f4965] sm:mt-6 sm:text-lg sm:leading-8">
               Verzend via één methode met de juiste vervoerder per land, zonder losse contracten of meerdere pickups.
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/start-met-sendwise"
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-[#1a5ee5] px-6 inter-semibold text-sm text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2]"
+                className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-[#1a5ee5] px-6 inter-semibold text-sm text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2] sm:w-auto"
               >
                 Start met CONNECT
                 <FiArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
               </Link>
               <Link
                 to="/prijzen"
-                className="inline-flex h-12 items-center justify-center rounded-[12px] border border-[#d4dceb] bg-white px-6 inter-semibold text-sm text-[#07115a] shadow-[0_10px_24px_rgba(7,17,31,0.04)] transition hover:border-[#b8c4d8] hover:bg-[#f8fbff]"
+                className="inline-flex h-12 w-full items-center justify-center rounded-[12px] border border-[#d4dceb] bg-white px-6 inter-semibold text-sm text-[#07115a] shadow-[0_10px_24px_rgba(7,17,31,0.04)] transition hover:border-[#b8c4d8] hover:bg-[#f8fbff] sm:w-auto"
               >
                 Bekijk tarieven
               </Link>
@@ -214,10 +221,13 @@ const SendwiseConnect = () => {
           </div>
 
           <div className="relative flex items-center justify-center lg:min-h-[570px] lg:justify-end">
-            <div className="relative w-full max-w-[600px] overflow-hidden rounded-[34px] shadow-[0_34px_95px_rgba(7,17,31,0.24)]">
+            <div className="relative w-full max-w-[600px] overflow-hidden rounded-[24px] shadow-[0_24px_65px_rgba(7,17,31,0.20)] sm:rounded-[30px] lg:rounded-[34px] lg:shadow-[0_34px_95px_rgba(7,17,31,0.24)]">
               <img
                 src="/sendwise-connect-hero.jpg"
                 alt="Sendwise CONNECT bezorgbus"
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
                 className="aspect-[1.12/1] w-full object-cover object-center"
               />
             </div>
@@ -225,13 +235,13 @@ const SendwiseConnect = () => {
         </div>
       </section>
 
-      <section className="bg-white px-6 pb-12">
+      <section className="bg-white px-4 pb-10 sm:px-6 sm:pb-12">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-5 lg:grid-cols-3">
             {pillars.map(({ title, text, icon: Icon }) => (
               <article
                 key={title}
-                className="flex min-h-[250px] flex-col rounded-[24px] border border-[#e1eaf7] bg-[#fbfdff] p-7 shadow-[0_18px_55px_rgba(7,17,31,0.065)]"
+                className="flex min-h-[220px] flex-col rounded-[22px] border border-[#e1eaf7] bg-[#fbfdff] p-5 shadow-[0_18px_55px_rgba(7,17,31,0.065)] sm:min-h-[250px] sm:rounded-[24px] sm:p-7"
               >
                 <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-[#1a5ee5] shadow-[0_12px_30px_rgba(26,94,229,0.10)] ring-1 ring-[#dce9ff]">
                   {createElement(Icon, { className: "h-7 w-7", "aria-hidden": "true" })}
@@ -244,7 +254,7 @@ const SendwiseConnect = () => {
         </div>
       </section>
 
-      <section className="overflow-hidden bg-[#f7fbff] px-6 py-16 lg:py-20">
+      <section className="overflow-hidden bg-[#f7fbff] px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
         <style>{`
           @keyframes connectCarriers {
             from { transform: translateX(0); }
@@ -257,14 +267,14 @@ const SendwiseConnect = () => {
             <h2 className="inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl">
               De slimme standaard voor Nederland en Europa
             </h2>
-            <p className="mt-5 max-w-xl inter-medium text-lg leading-8 text-[#667085]">
+            <p className="mt-4 max-w-xl inter-medium text-base leading-7 text-[#667085] sm:mt-5 sm:text-lg sm:leading-8">
               CONNECT haalt complexiteit uit je verzendproces. Eén methode, één pickup en de juiste vervoerder per bestemming.
             </p>
           </div>
 
           <div className="relative overflow-hidden py-2">
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-[#f7fbff] to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-[#f7fbff] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[#f7fbff] to-transparent sm:w-20" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[#f7fbff] to-transparent sm:w-20" />
 
             <div className="flex w-max" style={{ animation: "connectCarriers 32s linear infinite" }}>
               {[...carrierLogos, ...carrierLogos].map((carrier, index) => (
@@ -280,13 +290,13 @@ const SendwiseConnect = () => {
         </div>
       </section>
 
-      <section className="bg-white px-6 py-16 lg:py-20">
+      <section className="bg-white px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="rounded-[28px] bg-[#07115a] p-8 text-white shadow-[0_24px_70px_rgba(7,17,90,0.18)] lg:p-12">
-            <h2 className="inter-semibold text-4xl leading-tight sm:text-5xl">
+            <h2 className="inter-semibold text-3xl leading-tight sm:text-5xl">
               Waarom verzenden vaak onnodig ingewikkeld is.
             </h2>
-            <p className="mt-5 inter-medium text-lg leading-8 text-white/78">
+            <p className="mt-4 inter-medium text-base leading-7 text-white/78 sm:mt-5 sm:text-lg sm:leading-8">
               Veel webshops werken met losse vervoerders, verschillende afspraken en versnipperde support. CONNECT brengt dat terug naar één heldere flow.
             </p>
           </div>
@@ -305,12 +315,12 @@ const SendwiseConnect = () => {
         </div>
       </section>
 
-      <section className="bg-white px-6 pb-2 pt-8">
+      <section className="bg-white px-4 pb-2 pt-8 sm:px-6">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="inter-semibold text-5xl leading-tight text-[#07115a] sm:text-6xl">
+          <h2 className="inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl lg:text-6xl">
             Eén verzendmethode voor iedere bestemming.
           </h2>
-          <p className="mx-auto mt-5 max-w-3xl inter-medium text-lg leading-8 text-[#3f4965]">
+          <p className="mx-auto mt-4 max-w-3xl inter-medium text-base leading-7 text-[#3f4965] sm:mt-5 sm:text-lg sm:leading-8">
             Van carrierselectie tot tracking: CONNECT houdt de verzendlaag eenvoudig en voorspelbaar.
           </p>
         </div>
@@ -320,18 +330,18 @@ const SendwiseConnect = () => {
         <FeatureSection key={section.title} section={section} />
       ))}
 
-      <section className="bg-white px-6 pb-24 pt-8">
+      <section className="bg-white px-4 pb-16 pt-8 sm:px-6 sm:pb-24">
         <div className="mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-[28px] bg-[#1a5ee5] px-8 py-10 text-white shadow-[0_24px_70px_rgba(26,94,229,0.22)] lg:px-14 lg:py-14">
+          <div className="relative overflow-hidden rounded-[24px] bg-[#1a5ee5] px-5 py-7 text-white shadow-[0_24px_70px_rgba(26,94,229,0.22)] sm:rounded-[28px] sm:px-8 sm:py-10 lg:px-14 lg:py-14">
             <div className="absolute -bottom-24 right-12 h-56 w-56 rotate-45 rounded-[42px] bg-white/12" aria-hidden="true" />
             <div className="absolute -top-28 right-72 h-44 w-44 rotate-45 rounded-[36px] bg-white/10" aria-hidden="true" />
 
             <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-3xl">
-                <h2 className="inter-semibold text-4xl leading-tight text-white sm:text-5xl">
+                <h2 className="inter-semibold text-3xl leading-tight text-white sm:text-5xl">
                   Maak verzenden eenvoudiger en goedkoper.
                 </h2>
-                <p className="mt-4 max-w-2xl inter-medium text-lg leading-8 text-white/82">
+                <p className="mt-4 max-w-2xl inter-medium text-base leading-7 text-white/82 sm:text-lg sm:leading-8">
                   Met CONNECT werk je met vaste tarieven, één pickup en de juiste vervoerder per land.
                 </p>
               </div>

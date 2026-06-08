@@ -137,7 +137,7 @@ const FeatureSection = ({ section }) => {
   )
 
   return (
-    <section className="bg-white px-6 py-12 lg:py-16">
+    <section className="bg-white px-4 py-10 sm:px-6 sm:py-12 lg:py-16">
       <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2">
         {section.reversed ? (
           <>
@@ -164,7 +164,7 @@ const SendwisePro = () => {
     <main className="min-h-screen bg-white text-[#0d1321]">
       <Homepage2Header />
 
-      <section className="relative overflow-hidden bg-white pt-32 sm:pt-36 lg:pt-44">
+      <section className="relative overflow-hidden bg-white pt-24 sm:pt-28 lg:pt-44">
         <style>{`
           @keyframes proHeroImageIn {
             from {
@@ -177,7 +177,7 @@ const SendwisePro = () => {
             }
           }
         `}</style>
-        <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-6 pb-20 lg:min-h-[600px] lg:grid-cols-[580px_1fr] lg:gap-10 lg:pb-20">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-9 px-4 pb-12 sm:px-6 sm:pb-16 lg:min-h-[600px] lg:grid-cols-[580px_1fr] lg:gap-10 lg:pb-20">
           <div className="relative z-10 max-w-[620px] lg:pb-8">
             <div className="mb-5 flex items-center gap-3 text-[#6f7694]">
               <div className="flex -space-x-2">
@@ -195,26 +195,26 @@ const SendwisePro = () => {
               </p>
             </div>
 
-            <h1 className="inter-semibold text-5xl leading-[1.03] text-[#07115a] sm:text-6xl sm:leading-[1.02] lg:text-7xl">
+            <h1 className="inter-semibold text-[2.55rem] leading-[1.03] text-[#07115a] sm:text-6xl sm:leading-[1.02] lg:text-7xl">
               <span className="block whitespace-nowrap">Sendwise PRO</span>
               <span className="block">voor fulfilment</span>
             </h1>
 
-            <p className="mt-6 max-w-2xl inter-medium text-lg leading-8 text-[#3f4965]">
+            <p className="mt-5 max-w-2xl inter-medium text-base leading-7 text-[#3f4965] sm:mt-6 sm:text-lg sm:leading-8">
               Fulfilmentsoftware voor webshops die sneller en foutloos willen werken.
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/start-met-sendwise"
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-[#1a5ee5] px-6 inter-semibold text-sm text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2]"
+                className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-[#1a5ee5] px-6 inter-semibold text-sm text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2] sm:w-auto"
               >
                 Start met PRO
                 <FiArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex h-12 items-center justify-center rounded-[12px] border border-[#d4dceb] bg-white px-6 inter-semibold text-sm text-[#07115a] shadow-[0_10px_24px_rgba(7,17,31,0.04)] transition hover:border-[#b8c4d8] hover:bg-[#f8fbff]"
+                className="inline-flex h-12 w-full items-center justify-center rounded-[12px] border border-[#d4dceb] bg-white px-6 inter-semibold text-sm text-[#07115a] shadow-[0_10px_24px_rgba(7,17,31,0.04)] transition hover:border-[#b8c4d8] hover:bg-[#f8fbff] sm:w-auto"
               >
                 Plan een demo
               </Link>
@@ -224,12 +224,15 @@ const SendwisePro = () => {
           <div className="relative flex items-center justify-center lg:min-h-[440px] lg:items-start lg:justify-start">
             <div className="relative w-full lg:mt-2 lg:w-[900px] lg:max-w-none">
               <div
-                className="overflow-hidden rounded-l-[28px] rounded-r-none border border-r-0 border-[#cfe0fb] bg-[#f7fbff] shadow-[0_34px_95px_rgba(7,17,31,0.18)]"
+                className="overflow-hidden rounded-[24px] border border-[#cfe0fb] bg-[#f7fbff] shadow-[0_24px_65px_rgba(7,17,31,0.14)] lg:rounded-l-[28px] lg:rounded-r-none lg:border-r-0 lg:shadow-[0_34px_95px_rgba(7,17,31,0.18)]"
                 style={{ animation: "proHeroImageIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both" }}
               >
                 <img
-                  src="/sendwise-pro-dashboard-hero.png"
+                  src="/sendwise-pro-dashboard-hero.webp"
                   alt="Dashboard van Sendwise PRO"
+                  fetchPriority="high"
+                  loading="eager"
+                  decoding="async"
                   className="aspect-[1.87/1] w-full object-cover object-left-top"
                 />
               </div>
@@ -238,13 +241,13 @@ const SendwisePro = () => {
         </div>
       </section>
 
-      <section className="bg-white px-6 pb-12">
+      <section className="bg-white px-4 pb-10 sm:px-6 sm:pb-12">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-5 lg:grid-cols-3">
             {pillars.map(({ title, text, icon: Icon }) => (
               <article
                 key={title}
-                className="flex min-h-[250px] flex-col rounded-[24px] border border-[#e1eaf7] bg-[#fbfdff] p-7 shadow-[0_18px_55px_rgba(7,17,31,0.065)]"
+                className="flex min-h-[220px] flex-col rounded-[22px] border border-[#e1eaf7] bg-[#fbfdff] p-5 shadow-[0_18px_55px_rgba(7,17,31,0.065)] sm:min-h-[250px] sm:rounded-[24px] sm:p-7"
               >
                 <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-[#1a5ee5] shadow-[0_12px_30px_rgba(26,94,229,0.10)] ring-1 ring-[#dce9ff]">
                   {createElement(Icon, { className: "h-7 w-7", "aria-hidden": "true" })}
@@ -257,13 +260,13 @@ const SendwisePro = () => {
         </div>
       </section>
 
-      <section className="bg-[#f7fbff] px-6 py-16 lg:py-20">
+      <section className="bg-[#f7fbff] px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
         <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <h2 className="inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl">
               Alles voor fulfilment, op één plek
             </h2>
-            <p className="mt-5 max-w-2xl inter-medium text-lg leading-8 text-[#667085]">
+            <p className="mt-4 max-w-2xl inter-medium text-base leading-7 text-[#667085] sm:mt-5 sm:text-lg sm:leading-8">
               Van orderinname tot picken, packen en voorraadbeheer: Sendwise PRO is ingericht om sneller te werken, fouten te verminderen en mee te schalen met je volume.
             </p>
           </div>
@@ -282,12 +285,12 @@ const SendwisePro = () => {
         </div>
       </section>
 
-      <section className="bg-white px-6 pb-2 pt-20">
+      <section className="bg-white px-4 pb-2 pt-14 sm:px-6 sm:pt-20">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="inter-semibold text-5xl leading-tight text-[#07115a] sm:text-6xl">
+          <h2 className="inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl lg:text-6xl">
             Een rustige workflow voor drukke magazijnen.
           </h2>
-          <p className="mx-auto mt-5 max-w-3xl inter-medium text-lg leading-8 text-[#3f4965]">
+          <p className="mx-auto mt-4 max-w-3xl inter-medium text-base leading-7 text-[#3f4965] sm:mt-5 sm:text-lg sm:leading-8">
             PRO houdt iedere stap overzichtelijk, van binnengekomen order tot ingepakt pakket.
           </p>
         </div>
@@ -297,13 +300,13 @@ const SendwisePro = () => {
         <FeatureSection key={section.title} section={section} />
       ))}
 
-      <section className="bg-white px-6 py-16 lg:py-20">
+      <section className="bg-white px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="rounded-[28px] bg-[#07115a] p-8 text-white shadow-[0_24px_70px_rgba(7,17,90,0.18)] lg:p-12">
-            <h2 className="inter-semibold text-4xl leading-tight sm:text-5xl">
+            <h2 className="inter-semibold text-3xl leading-tight sm:text-5xl">
               Transparante prijzen voor je fulfilmentflow.
             </h2>
-            <p className="mt-5 inter-medium text-lg leading-8 text-white/78">
+            <p className="mt-4 inter-medium text-base leading-7 text-white/78 sm:mt-5 sm:text-lg sm:leading-8">
               Gebruik Sendwise zonder vaste kosten, of voeg PRO toe per webshop wanneer je fulfilmentproces meer grip nodig heeft.
             </p>
           </div>
@@ -331,18 +334,18 @@ const SendwisePro = () => {
         </div>
       </section>
 
-      <section className="bg-white px-6 pb-24">
+      <section className="bg-white px-4 pb-16 sm:px-6 sm:pb-24">
         <div className="mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-[28px] bg-[#1a5ee5] px-8 py-10 text-white shadow-[0_24px_70px_rgba(26,94,229,0.22)] lg:px-14 lg:py-14">
+          <div className="relative overflow-hidden rounded-[24px] bg-[#1a5ee5] px-5 py-7 text-white shadow-[0_24px_70px_rgba(26,94,229,0.22)] sm:rounded-[28px] sm:px-8 sm:py-10 lg:px-14 lg:py-14">
             <div className="absolute -bottom-24 right-12 h-56 w-56 rotate-45 rounded-[42px] bg-white/12" aria-hidden="true" />
             <div className="absolute -top-28 right-72 h-44 w-44 rotate-45 rounded-[36px] bg-white/10" aria-hidden="true" />
 
             <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-3xl">
-                <h2 className="inter-semibold text-4xl leading-tight text-white sm:text-5xl">
+                <h2 className="inter-semibold text-3xl leading-tight text-white sm:text-5xl">
                   Klaar om fulfilment slimmer aan te pakken?
                 </h2>
-                <p className="mt-4 max-w-2xl inter-medium text-lg leading-8 text-white/82">
+                <p className="mt-4 max-w-2xl inter-medium text-base leading-7 text-white/82 sm:text-lg sm:leading-8">
                   Ontdek hoe Sendwise PRO je helpt sneller te picken, foutloos te verpakken en overzicht te houden.
                 </p>
               </div>

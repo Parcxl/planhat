@@ -167,9 +167,9 @@ const StartMetSendwise = () => {
         <main className="min-h-screen overflow-hidden bg-white text-[#0d1321]">
             <Homepage2Header />
 
-            <section className="relative overflow-hidden bg-white pt-32 sm:pt-36 lg:pt-44">
-                <div className="absolute left-0 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#eaf2ff] blur-3xl" />
-                <div className="mx-auto grid min-h-[680px] w-full max-w-7xl items-center gap-12 px-6 pb-20 lg:grid-cols-[0.9fr_1.1fr] lg:pb-24">
+            <section className="relative overflow-hidden bg-white pt-24 sm:pt-28 lg:pt-44">
+                <div className="absolute left-0 top-0 h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-[#eaf2ff] blur-3xl sm:h-[520px] sm:w-[520px]" />
+                <div className="mx-auto grid w-full max-w-7xl items-center gap-9 px-4 pb-12 sm:px-6 sm:pb-16 lg:min-h-[680px] lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:pb-24">
                     <div className="relative z-10 max-w-[680px] lg:pb-10">
                         <div className="mb-5 flex items-center gap-3 text-[#6f7694]">
                             <div className="flex -space-x-2">
@@ -185,11 +185,11 @@ const StartMetSendwise = () => {
                             </div>
                             <p className="inter-medium text-[0.95rem]">Vraag in 3 korte stappen je account aan</p>
                         </div>
-                        <h1 className="inter-semibold text-[3rem] leading-[0.98] tracking-[0px] text-[#0d1321] sm:text-[4.2rem] lg:text-[5.2rem]">
+                        <h1 className="inter-semibold text-[2.7rem] leading-[1.02] tracking-[0px] text-[#0d1321] sm:text-[4.2rem] sm:leading-[0.98] lg:text-[5.2rem]">
                             <span className="block sm:whitespace-nowrap">Start met</span>
                             <span className="block sm:whitespace-nowrap text-[#1a5ee5]">Sendwise.</span>
                         </h1>
-                        <p className="mt-7 max-w-[570px] text-[1.08rem] leading-[1.75] text-[#4e5a73] sm:text-[1.2rem]">
+                        <p className="mt-5 max-w-[570px] text-base leading-7 text-[#4e5a73] sm:mt-7 sm:text-[1.2rem] sm:leading-[1.75]">
                             Maak je aanvraag laagdrempelig aan. We nemen contact op, bekijken je verzendprofiel en helpen je met de beste tarieven en koppelingen.
                         </p>
                         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -202,14 +202,14 @@ const StartMetSendwise = () => {
                                         block: "start",
                                     });
                                 }}
-                                className="group inline-flex w-fit items-center gap-3 rounded-full bg-[#1a5ee5] px-7 py-3.5 text-[0.98rem] font-semibold text-white shadow-[0_18px_42px_rgba(26,94,229,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#154fca]"
+                                className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1a5ee5] px-7 py-3.5 text-[0.98rem] font-semibold text-white shadow-[0_18px_42px_rgba(26,94,229,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#154fca] sm:w-fit"
                             >
                                 Account aanvragen
                                 <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
                             </a>
                             <Link
                                 to="/contact"
-                                className="inline-flex w-fit items-center gap-3 rounded-full border border-[#d8e3f2] bg-white px-7 py-3.5 text-[0.98rem] font-semibold text-[#0d1321] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#1a5ee5]/30 hover:text-[#1a5ee5]"
+                                className="inline-flex w-full items-center justify-center gap-3 rounded-full border border-[#d8e3f2] bg-white px-7 py-3.5 text-[0.98rem] font-semibold text-[#0d1321] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#1a5ee5]/30 hover:text-[#1a5ee5] sm:w-fit"
                             >
                                 Eerst kennismaken
                             </Link>
@@ -218,10 +218,13 @@ const StartMetSendwise = () => {
 
                     <div className="relative z-10 flex items-center justify-center lg:min-h-[540px] lg:justify-end">
                         <div className="relative w-full max-w-[610px]">
-                            <div className="relative overflow-hidden rounded-[34px] border border-[#dbe7f5] bg-white shadow-[0_30px_80px_rgba(15,23,42,0.14)]">
+                            <div className="relative overflow-hidden rounded-[24px] border border-[#dbe7f5] bg-white shadow-[0_24px_65px_rgba(15,23,42,0.12)] sm:rounded-[34px] lg:shadow-[0_30px_80px_rgba(15,23,42,0.14)]">
                                 <img
-                                    src="/profile-founder-van.png"
+                                    src="/profile-founder-van.webp"
                                     alt="Olivier van Sendwise"
+                                    fetchPriority="high"
+                                    loading="eager"
+                                    decoding="async"
                                     className="aspect-[1.06/1] w-full scale-[1.12] object-cover object-center"
                                 />
                             </div>
@@ -230,7 +233,7 @@ const StartMetSendwise = () => {
                 </div>
             </section>
 
-            <section className="bg-[#f7fbff] px-6 py-16 lg:py-20">
+            <section className="bg-[#f7fbff] px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
                 <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-4">
                     {expectations.map((item) => (
                         <article key={item} className="rounded-[24px] border border-[#dfeaf7] bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
@@ -241,7 +244,7 @@ const StartMetSendwise = () => {
                 </div>
             </section>
 
-            <section id="account-aanvragen" className="bg-white px-6 py-16 lg:bg-[#f7fbff] lg:py-24">
+            <section id="account-aanvragen" className="bg-white px-4 py-14 sm:px-6 sm:py-16 lg:bg-[#f7fbff] lg:py-24">
                 <div className="mx-auto max-w-7xl">
                     <div className="mb-10 max-w-3xl">
                         <p className="inter-semibold text-[0.9rem] uppercase tracking-[0.08em] text-[#1a5ee5]">Account aanvragen</p>
@@ -253,7 +256,7 @@ const StartMetSendwise = () => {
                         </p>
                     </div>
 
-                    <div className="overflow-hidden rounded-[30px] border border-[#dfeaf7] bg-white shadow-[0_28px_80px_rgba(15,23,42,0.08)]">
+                    <div className="overflow-hidden rounded-[24px] border border-[#dfeaf7] bg-white shadow-[0_28px_80px_rgba(15,23,42,0.08)] sm:rounded-[30px]">
                         <div className="grid lg:grid-cols-[0.42fr_0.58fr]">
                             <aside className="border-b border-[#e1eaf7] bg-[#fbfdff] p-6 sm:p-8 lg:border-b-0 lg:border-r">
                                 <div className="space-y-3">
@@ -491,7 +494,7 @@ const StartMetSendwise = () => {
                                             type="button"
                                             onClick={handleBack}
                                             disabled={currentStep === 0 || status.state === "loading"}
-                                            className="inline-flex w-fit items-center gap-2 rounded-full border border-[#d8e3f2] bg-white px-6 py-3 text-[0.95rem] font-semibold text-[#0d1321] transition-all duration-300 hover:border-[#1a5ee5]/30 hover:text-[#1a5ee5] disabled:cursor-not-allowed disabled:opacity-40"
+                                            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#d8e3f2] bg-white px-6 py-3 text-[0.95rem] font-semibold text-[#0d1321] transition-all duration-300 hover:border-[#1a5ee5]/30 hover:text-[#1a5ee5] disabled:cursor-not-allowed disabled:opacity-40 sm:w-fit"
                                         >
                                             <FiArrowLeft />
                                             Terug
@@ -501,7 +504,7 @@ const StartMetSendwise = () => {
                                             <button
                                                 type="button"
                                                 onClick={handleNext}
-                                                className="inline-flex w-fit items-center gap-3 rounded-full bg-[#1a5ee5] px-7 py-3.5 text-[0.98rem] font-semibold text-white shadow-[0_18px_42px_rgba(26,94,229,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#154fca]"
+                                                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1a5ee5] px-7 py-3.5 text-[0.98rem] font-semibold text-white shadow-[0_18px_42px_rgba(26,94,229,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#154fca] sm:w-fit"
                                             >
                                                 Volgende stap
                                                 <FiArrowRight />
@@ -510,7 +513,7 @@ const StartMetSendwise = () => {
                                             <button
                                                 type="submit"
                                                 disabled={status.state === "loading"}
-                                                className="inline-flex w-fit items-center gap-3 rounded-full bg-[#1a5ee5] px-7 py-3.5 text-[0.98rem] font-semibold text-white shadow-[0_18px_42px_rgba(26,94,229,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#154fca] disabled:cursor-not-allowed disabled:opacity-60"
+                                                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1a5ee5] px-7 py-3.5 text-[0.98rem] font-semibold text-white shadow-[0_18px_42px_rgba(26,94,229,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#154fca] disabled:cursor-not-allowed disabled:opacity-60 sm:w-fit"
                                             >
                                                 {status.state === "loading" ? "Aanvraag versturen..." : "Account aanvragen"}
                                                 <FiArrowRight />
@@ -524,9 +527,9 @@ const StartMetSendwise = () => {
                 </div>
             </section>
 
-            <section className="bg-[#f7fbff] px-6 py-16 lg:py-24">
+            <section className="bg-[#f7fbff] px-4 py-14 sm:px-6 sm:py-16 lg:py-24">
                 <div className="mx-auto max-w-7xl">
-                    <div className="relative overflow-hidden rounded-[30px] bg-[#1a5ee5] px-7 py-10 text-white shadow-[0_28px_70px_rgba(26,94,229,0.24)] sm:px-10 lg:px-14 lg:py-14">
+                    <div className="relative overflow-hidden rounded-[24px] bg-[#1a5ee5] px-5 py-7 text-white shadow-[0_28px_70px_rgba(26,94,229,0.24)] sm:rounded-[30px] sm:px-10 sm:py-10 lg:px-14 lg:py-14">
                         <div className="absolute right-[-80px] top-[-120px] h-[300px] w-[300px] rounded-full bg-white/14 blur-2xl" />
                         <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
                             <div>
