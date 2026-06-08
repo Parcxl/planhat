@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from "react"
+import { lazy, Suspense, useEffect, useState } from "react"
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { AnimatePresence, motion as Motion } from "framer-motion"
 import HomePage2 from "./page/Homepage2"
@@ -24,21 +24,102 @@ const BlogGoedgepickt = lazy(() => import("./page/BlogGoedgepickt"))
 const WerkenBij = lazy(() => import("./page/WerkenBij"))
 const Kennisbank = lazy(() => import("./page/Kennisbank"))
 
+const criticalImagesByPath = {
+  "/": ["/sendwise-hero-delivery-van.jpg"],
+  "/homepage2": ["/sendwise-hero-delivery-van.jpg"],
+  "/oplossingen/sendwise": ["/sendwise-platform-dashboard-hero.webp"],
+  "/oplossingen/pro": ["/sendwise-pro-dashboard-hero.webp"],
+  "/oplossingen/connect": ["/sendwise-connect-hero.jpg"],
+  "/voor-webshops": ["/sendwise-platform-hero.webp"],
+  "/voor-fulfilmentcenters": ["/fulfilmentcenters-hero.avif"],
+  "/prijzen": ["/profile-olivier.avif"],
+  "/contact": ["/contact-hero-olivier.avif"],
+  "/start-met-sendwise": ["/profile-founder-van.webp"],
+  "/blog/sendwise-goedgepickt": ["/sendwise-hero-picture.avif"],
+  "/integraties/woocommerce": ["/woocommerce-logo.webp"],
+  "/integraties/ccv-shop": ["/ccv-icon.svg"],
+}
+
+const loadedCriticalImages = new Set()
+
+const preloadCriticalImage = (src) => {
+  if (!src || loadedCriticalImages.has(src)) return Promise.resolve()
+
+  return new Promise((resolve) => {
+    const image = new Image()
+    image.fetchPriority = "high"
+    image.onload = () => {
+      loadedCriticalImages.add(src)
+      resolve()
+    }
+    image.onerror = resolve
+    image.src = src
+  })
+}
+
+const syncCriticalPreloadLinks = (sources) => {
+  document.head
+    .querySelectorAll('link[data-route-critical-image="true"]')
+    .forEach((node) => node.remove())
+
+  sources.forEach((src) => {
+    const link = document.createElement("link")
+    link.rel = "preload"
+    link.as = "image"
+    link.href = src
+    link.setAttribute("data-route-critical-image", "true")
+    document.head.appendChild(link)
+  })
+}
+
 const PageTransition = ({ children }) => (
-  <Motion.div
-    className="w-full"
-    initial={{ opacity: 0, y: 6 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -4 }}
-    transition={{ duration: 0.18, ease: "easeOut" }}
-  >
-    {children}
-  </Motion.div>
+  <PreloadedPageTransition>{children}</PreloadedPageTransition>
 )
 
 const RouteFallback = () => (
   <div className="min-h-screen bg-white" aria-hidden="true" />
 )
+
+const PreloadedPageTransition = ({ children }) => {
+  const location = useLocation()
+  const [imagesReady, setImagesReady] = useState(true)
+
+  useEffect(() => {
+    const criticalImages = criticalImagesByPath[location.pathname] || []
+    syncCriticalPreloadLinks(criticalImages)
+
+    if (criticalImages.length === 0 || criticalImages.every((src) => loadedCriticalImages.has(src))) {
+      setImagesReady(true)
+      return undefined
+    }
+
+    let active = true
+    setImagesReady(false)
+
+    Promise.race([
+      Promise.all(criticalImages.map(preloadCriticalImage)),
+      new Promise((resolve) => window.setTimeout(resolve, 900)),
+    ]).then(() => {
+      if (active) setImagesReady(true)
+    })
+
+    return () => {
+      active = false
+    }
+  }, [location.pathname])
+
+  return (
+    <Motion.div
+      className="w-full"
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: imagesReady ? 1 : 0, y: imagesReady ? 0 : 6 }}
+      exit={{ opacity: 0, y: -4 }}
+      transition={{ duration: 0.18, ease: "easeOut" }}
+    >
+      {children}
+    </Motion.div>
+  )
+}
 
 const seoMap = {
   "/": {
