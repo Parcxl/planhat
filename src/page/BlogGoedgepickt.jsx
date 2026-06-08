@@ -102,7 +102,8 @@ export default function BlogGoedgepickt() {
                 <img
                   src="/sendwise-hero-picture.avif"
                   alt="Integratie tussen Sendwise en Goedgepickt"
-                  loading="lazy"
+                  fetchPriority="high"
+                  loading="eager"
                   decoding="async"
                   className="h-56 w-full object-cover"
                 />

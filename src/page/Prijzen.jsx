@@ -375,6 +375,9 @@ const Prijzen = () => {
                             <img
                                 src="/profile-olivier.avif"
                                 alt="Olivier van Sendwise"
+                                fetchPriority="high"
+                                loading="eager"
+                                decoding="async"
                                 className="aspect-[1.02/1] w-full scale-[1.12] object-cover object-center"
                             />
                         </div>

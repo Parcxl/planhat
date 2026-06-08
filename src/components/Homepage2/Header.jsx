@@ -5,7 +5,6 @@ import {
   FiArrowRight,
   FiCheck,
   FiChevronDown,
-  FiHelpCircle,
   FiLayers,
   FiMenu,
   FiPackage,
@@ -162,10 +161,12 @@ const dropdownIconMap = {
 const Homepage2Header = () => {
   const [activeMenu, setActiveMenu] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileGroup, setMobileGroup] = useState(null)
 
   const closeMenus = () => {
     setActiveMenu(null)
     setMobileOpen(false)
+    setMobileGroup(null)
   }
 
   return (
@@ -198,9 +199,18 @@ const Homepage2Header = () => {
         </div>
       </div>
 
-      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between gap-4 px-6">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:h-20">
         <Link to="/" aria-label="Sendwise homepage" onClick={closeMenus} className="shrink-0">
-          <img src="/sendwise-tekst-blauw.png" alt="Sendwise" className="h-7 w-auto" />
+          <img
+            src="/sendwise-tekst-blauw.png"
+            alt="Sendwise"
+            width="465"
+            height="84"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            className="h-6 w-auto lg:h-7"
+          />
         </Link>
 
         <nav className="hidden items-center rounded-[18px] border border-[#dce6f6] bg-[#edf3fb] p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] lg:flex">
@@ -287,49 +297,106 @@ const Homepage2Header = () => {
           type="button"
           className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d8dee8] text-[#0d1321] lg:hidden"
           aria-label={mobileOpen ? "Menu sluiten" : "Menu openen"}
-          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-expanded={mobileOpen}
+          onClick={() => {
+            if (mobileOpen) setMobileGroup(null)
+            setMobileOpen(!mobileOpen)
+          }}
         >
-          {mobileOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
+          <AnimatePresence mode="wait" initial={false}>
+            <Motion.span
+              key={mobileOpen ? "close" : "menu"}
+              initial={{ opacity: 0, rotate: -18, scale: 0.86 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              exit={{ opacity: 0, rotate: 18, scale: 0.86 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+            >
+              {mobileOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
+            </Motion.span>
+          </AnimatePresence>
         </button>
       </div>
 
-      {mobileOpen && (
-        <div className="border-t border-[#e3e8f0] bg-white lg:hidden">
-          <div className="mx-auto w-full max-w-7xl px-6 py-5">
-            <div className="mb-5 grid gap-2">
-              {trustItems.map((item) => (
-                <span key={item} className="inline-flex items-center gap-2 inter-semibold text-sm text-[#445066]">
-                  <FiCheck className="text-[#1a5ee5]" aria-hidden="true" />
-                  {item}
-                </span>
-              ))}
-            </div>
+      <AnimatePresence initial={false}>
+        {mobileOpen && (
+          <Motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-x-0 bottom-0 top-16 overflow-hidden border-t border-[#e3e8f0] bg-white lg:hidden"
+          >
+            <div className="flex h-full flex-col">
+              <Motion.div
+                initial={{ y: -10 }}
+                animate={{ y: 0 }}
+                exit={{ y: -8 }}
+                transition={{ duration: 0.24, ease: "easeOut" }}
+                className="mx-auto flex min-h-0 w-full max-w-7xl flex-1 flex-col overflow-y-auto px-4 py-6 sm:px-6"
+              >
+                <div className="flex flex-col space-y-3">
+                  {navGroups.map((group) => {
+                    const isOpen = mobileGroup === group.label
 
-            <div className="space-y-5">
-              {navGroups.map((group) => (
-                <div key={group.label}>
-                  <p className="mb-2 inter-bold text-xs uppercase tracking-[0.12em] text-[#7b8797]">{group.label}</p>
-                  <div className="grid gap-1">
-                    {group.items.map(({ title, to }) => (
-                      <Link key={title} to={to} onClick={closeMenus} className="flex items-center justify-between gap-3 rounded-2xl px-3 py-3 inter-semibold text-[#111827] transition hover:bg-[#f4f7fb]">
-                        <span>{title}</span>
-                        <FiArrowRight className="text-[#9aa4b2]" aria-hidden="true" />
+                    return (
+                      <div key={group.label} className="rounded-[22px] border border-[#e7edf6] bg-[#fbfdff] shadow-[0_14px_36px_rgba(7,17,31,0.045)]">
+                        <button
+                          type="button"
+                          onClick={() => setMobileGroup(isOpen ? null : group.label)}
+                          className="flex w-full items-center justify-between gap-3 px-5 py-5 inter-semibold text-lg text-[#111827]"
+                          aria-expanded={isOpen}
+                        >
+                          <span>{group.label}</span>
+                          <FiChevronDown className={`h-5 w-5 text-[#8a95a6] transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} aria-hidden="true" />
+                        </button>
+
+                        <AnimatePresence initial={false}>
+                          {isOpen && (
+                            <Motion.div
+                              key={`${group.label}-items`}
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                              className="overflow-hidden"
+                            >
+                              <div className="grid gap-1 border-t border-[#e7edf6] px-2 py-2">
+                                {group.items.map(({ title, to, visual }) => {
+                                  const DropdownIcon = dropdownIconMap[visual] || FiArrowRight
+
+                                  return (
+                                    <Link key={title} to={to} onClick={closeMenus} className="flex items-center justify-between gap-3 rounded-2xl px-3 py-4 inter-semibold text-base text-[#111827] transition hover:bg-[#f4f7fb]">
+                                      <span className="flex min-w-0 items-center gap-3">
+                                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px] bg-[#eef5ff] text-[#1a5ee5] ring-1 ring-[#dce9ff]">
+                                          <DropdownIcon className="h-5 w-5" aria-hidden="true" />
+                                        </span>
+                                        <span className="truncate">{title}</span>
+                                      </span>
+                                      <FiArrowRight className="shrink-0 text-[#9aa4b2]" aria-hidden="true" />
+                                    </Link>
+                                  )
+                                })}
+                              </div>
+                            </Motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )
+                  })}
+
+                  <div className="grid gap-3 pt-1">
+                    {directLinks.map((link) => (
+                      <Link key={link.label} to={link.to} onClick={closeMenus} className="flex items-center justify-between gap-3 rounded-[22px] border border-[#e7edf6] bg-[#fbfdff] px-5 py-5 inter-semibold text-lg text-[#111827] shadow-[0_14px_36px_rgba(7,17,31,0.045)] transition hover:bg-[#f4f7fb]">
+                        <span>{link.label}</span>
+                        <FiArrowRight className="h-5 w-5 text-[#9aa4b2]" aria-hidden="true" />
                       </Link>
                     ))}
                   </div>
                 </div>
-              ))}
+              </Motion.div>
 
-              <div className="grid gap-1">
-                {directLinks.map((link) => (
-                  <Link key={link.label} to={link.to} onClick={closeMenus} className="flex items-center gap-3 rounded-2xl px-3 py-3 inter-semibold text-[#111827] transition hover:bg-[#f4f7fb]">
-                    <FiHelpCircle className="text-[#1a5ee5]" aria-hidden="true" />
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-
-              <div className="grid gap-3 border-t border-[#e3e8f0] pt-5">
+              <div className="mx-auto grid w-full max-w-7xl gap-3 border-t border-[#e3e8f0] bg-white px-4 py-4 sm:px-6">
                 <a href="https://app.sendwise.nl" className="inline-flex items-center justify-center rounded-full border border-[#d8dee8] px-5 py-3 inter-bold text-sm text-[#1f2937]">
                   Inloggen
                 </a>
@@ -339,9 +406,9 @@ const Homepage2Header = () => {
                 </Link>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </Motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }
