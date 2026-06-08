@@ -27,8 +27,8 @@ const Kennisbank = lazy(() => import("./page/Kennisbank"))
 const sharedCriticalImages = ["/sendwise-tekst-blauw.png", "/sendwise-tekst.png"]
 
 const criticalImagesByPath = {
-  "/": ["/sendwise-hero-delivery-van.jpg", ...sharedCriticalImages],
-  "/homepage2": ["/sendwise-hero-delivery-van.jpg", ...sharedCriticalImages],
+  "/": ["/sendwise-hero-delivery-van.jpg", "/inpakken-afbeelding-1.png", "/profile-founder-van.webp", ...sharedCriticalImages],
+  "/homepage2": ["/sendwise-hero-delivery-van.jpg", "/inpakken-afbeelding-1.png", "/profile-founder-van.webp", ...sharedCriticalImages],
   "/oplossingen/sendwise": ["/sendwise-platform-dashboard-hero.webp", ...sharedCriticalImages],
   "/oplossingen/pro": ["/sendwise-pro-dashboard-hero.webp", ...sharedCriticalImages],
   "/oplossingen/connect": ["/sendwise-connect-hero.jpg", ...sharedCriticalImages],
