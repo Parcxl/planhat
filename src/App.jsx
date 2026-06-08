@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { AnimatePresence, motion as Motion } from "framer-motion"
 import Header from "./components/ui/Header"
@@ -57,7 +57,7 @@ const integrationLogoImages = [
 ]
 
 const homepageImages = [
-  "/sendwise-hero-delivery-van.png",
+  "/sendwise-hero-delivery-van.jpg",
   "/homepage2-webshop.png",
   "/homepage2-fulfilment.png",
   "/inpakken-afbeelding-1.png",
@@ -156,29 +156,18 @@ const PageTransition = ({ children }) => (
 
 const PreloadedPageTransition = ({ children }) => {
   const location = useLocation()
-  const [imagesReady, setImagesReady] = useState(false)
 
   useEffect(() => {
-    let active = true
-    setImagesReady(false)
-
-    preloadRouteImages(getPreloadImagesForPath(location.pathname)).then(() => {
-      if (active) setImagesReady(true)
-    })
-
-    return () => {
-      active = false
-    }
+    preloadRouteImages(getPreloadImagesForPath(location.pathname))
   }, [location.pathname])
 
   return (
     <Motion.div
       className="w-full"
       initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: imagesReady ? 1 : 0, y: imagesReady ? 0 : 6 }}
+      animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -4 }}
       transition={{ duration: 0.18, ease: "easeOut" }}
-      aria-busy={!imagesReady}
     >
       {children}
     </Motion.div>
