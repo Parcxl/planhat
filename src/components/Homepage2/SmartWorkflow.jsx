@@ -64,9 +64,9 @@ const PackingPreview = ({ Icon }) => (
     <img
       src="/inpakken-afbeelding-1.png"
       alt="Producten inpakken in Sendwise"
-      loading="lazy"
+      loading="eager"
       decoding="async"
-      fetchPriority="low"
+      fetchPriority="high"
       className="mx-auto w-[92%] -rotate-2 rounded-2xl border border-[#dfe7f4] bg-white shadow-[0_18px_45px_rgba(7,17,90,0.12)] sm:w-[82%] lg:w-[69%] lg:rounded-3xl lg:shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
     />
 
@@ -85,9 +85,9 @@ const ShippingPreview = ({ Icon }) => {
       <img
         src="/verzenden-afbeelding-1.png"
         alt="Verzendmethode kiezen in Sendwise"
-        loading="lazy"
+        loading="eager"
         decoding="async"
-        fetchPriority="low"
+        fetchPriority="high"
         className="w-[66%] -rotate-2 rounded-2xl border border-[#dfe7f4] bg-white shadow-[0_18px_45px_rgba(7,17,90,0.12)] sm:w-[54%] lg:w-[43%] lg:rounded-3xl lg:shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
       />
 
@@ -101,9 +101,9 @@ const ShippingPreview = ({ Icon }) => {
       <img
         src="/verzenden-afbeelding-2.png"
         alt="Afleveradres kaart in Sendwise"
-        loading="lazy"
+        loading="eager"
         decoding="async"
-        fetchPriority="low"
+        fetchPriority="high"
         className="relative ml-auto mt-6 w-[94%] rotate-2 rounded-2xl border border-[#dfe7f4] bg-white shadow-[0_18px_45px_rgba(7,17,90,0.12)] lg:mt-7 lg:w-[75%] lg:rounded-3xl lg:shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
       />
     </div>
@@ -201,9 +201,9 @@ const SmartWorkflow = () => {
                       <img
                         src="/retour-afbeelding-1.png"
                         alt="Recente retouren overzicht"
-                        loading="lazy"
+                        loading="eager"
                         decoding="async"
-                        fetchPriority="low"
+                        fetchPriority="high"
                         className="w-full rounded-2xl border border-[#dfe7f4] bg-white shadow-[0_18px_45px_rgba(7,17,90,0.12)] lg:rounded-3xl lg:shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
                       />
                     </div>
@@ -219,9 +219,9 @@ const SmartWorkflow = () => {
                       <img
                         src="/retour-afbeelding-2.png"
                         alt="Retourportaal order controleren"
-                        loading="lazy"
+                        loading="eager"
                         decoding="async"
-                        fetchPriority="low"
+                        fetchPriority="high"
                         className="w-full rounded-2xl border border-[#dfe7f4] bg-white shadow-[0_18px_45px_rgba(7,17,90,0.12)] lg:rounded-3xl lg:shadow-[0_24px_70px_rgba(7,17,90,0.14)]"
                       />
                     </div>
@@ -235,9 +235,9 @@ const SmartWorkflow = () => {
                 <img
                   src={active.testimonial.image}
                   alt={active.testimonial.alt}
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
-                  fetchPriority="low"
+                  fetchPriority="high"
                   className="h-full min-h-[390px] w-full scale-110 object-cover object-center lg:min-h-[520px] lg:scale-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#07115a]/90 via-[#07115a]/15 to-transparent" />
