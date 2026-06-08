@@ -1,27 +1,28 @@
-import { useEffect } from "react"
+import { lazy, Suspense, useEffect } from "react"
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { AnimatePresence, motion as Motion } from "framer-motion"
-import Header from "./components/ui/Header"
 import HomePage2 from "./page/Homepage2"
-import FloatingBoxDemo from "./page/FloatingBoxDemo"
-import Contact from "./page/Contact"
-import OverOns from "./page/OverOns"
-import Prijzen from "./page/Prijzen"
-import SendwisePlatform from "./page/SendwisePlatform"
-import SendwisePro from "./page/SendwisePro"
-import SendwiseConnect from "./page/SendwiseConnect"
-import IntegratieWooCommerce from "./page/IntegratieWooCommerce"
-import IntegratieCCVShop from "./page/IntegratieCCVShop"
-import VoorWebshops from "./page/VoorWebshops"
-import VoorFulfilmentcenters from "./page/VoorFulfilmentcenters"
-import StartMetSendwise from "./page/StartMetSendwise"
-import AlgemeneVoorwaarden from "./page/AlgemeneVoorwaarden"
-import Verwerkersovereenkomst from "./page/Verwerkersovereenkomst"
-import Privacy from "./page/Privacy"
-import Integraties from "./page/Integraties"
-import BlogGoedgepickt from "./page/BlogGoedgepickt"
-import WerkenBij from "./page/WerkenBij"
-import Kennisbank from "./page/Kennisbank"
+
+const Header = lazy(() => import("./components/ui/Header"))
+const FloatingBoxDemo = lazy(() => import("./page/FloatingBoxDemo"))
+const Contact = lazy(() => import("./page/Contact"))
+const OverOns = lazy(() => import("./page/OverOns"))
+const Prijzen = lazy(() => import("./page/Prijzen"))
+const SendwisePlatform = lazy(() => import("./page/SendwisePlatform"))
+const SendwisePro = lazy(() => import("./page/SendwisePro"))
+const SendwiseConnect = lazy(() => import("./page/SendwiseConnect"))
+const IntegratieWooCommerce = lazy(() => import("./page/IntegratieWooCommerce"))
+const IntegratieCCVShop = lazy(() => import("./page/IntegratieCCVShop"))
+const VoorWebshops = lazy(() => import("./page/VoorWebshops"))
+const VoorFulfilmentcenters = lazy(() => import("./page/VoorFulfilmentcenters"))
+const StartMetSendwise = lazy(() => import("./page/StartMetSendwise"))
+const AlgemeneVoorwaarden = lazy(() => import("./page/AlgemeneVoorwaarden"))
+const Verwerkersovereenkomst = lazy(() => import("./page/Verwerkersovereenkomst"))
+const Privacy = lazy(() => import("./page/Privacy"))
+const Integraties = lazy(() => import("./page/Integraties"))
+const BlogGoedgepickt = lazy(() => import("./page/BlogGoedgepickt"))
+const WerkenBij = lazy(() => import("./page/WerkenBij"))
+const Kennisbank = lazy(() => import("./page/Kennisbank"))
 
 const commonPreloadImages = [
   "/sendwise-tekst-blauw.png",
@@ -152,6 +153,10 @@ const preloadRouteImages = (sources) => {
 
 const PageTransition = ({ children }) => (
   <PreloadedPageTransition>{children}</PreloadedPageTransition>
+)
+
+const RouteFallback = () => (
+  <div className="min-h-screen bg-white" aria-hidden="true" />
 )
 
 const PreloadedPageTransition = ({ children }) => {
@@ -315,154 +320,198 @@ const AnimatedRoutes = () => {
         <Route
           path="/verzenddoos-animatie"
           element={
-            <PageTransition>
-              <FloatingBoxDemo />
-            </PageTransition>
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <FloatingBoxDemo />
+              </PageTransition>
+            </Suspense>
           }
         />
         <Route
           path="/oplossingen/sendwise"
           element={
-            <PageTransition>
-              <SendwisePlatform />
-            </PageTransition>
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <SendwisePlatform />
+              </PageTransition>
+            </Suspense>
           }
         />
         <Route
           path="/oplossingen/pro"
           element={
-            <PageTransition>
-              <SendwisePro />
-            </PageTransition>
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <SendwisePro />
+              </PageTransition>
+            </Suspense>
           }
         />
         <Route
           path="/oplossingen/connect"
           element={
-            <PageTransition>
-              <SendwiseConnect />
-            </PageTransition>
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <SendwiseConnect />
+              </PageTransition>
+            </Suspense>
           }
         />
         <Route
           path="/voor-webshops"
           element={
-            <PageTransition>
-              <VoorWebshops />
-            </PageTransition>
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <VoorWebshops />
+              </PageTransition>
+            </Suspense>
           }
         />
         <Route
           path="/voor-fulfilmentcenters"
           element={
-            <PageTransition>
-              <VoorFulfilmentcenters />
-            </PageTransition>
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <VoorFulfilmentcenters />
+              </PageTransition>
+            </Suspense>
           }
         />
         <Route
           path="/prijzen"
           element={
-            <PageTransition>
-              <Prijzen />
-            </PageTransition>
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <Prijzen />
+              </PageTransition>
+            </Suspense>
           }
         />
         <Route
           path="/contact"
           element={
-            <PageTransition>
-              <Contact />
-            </PageTransition>
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <Contact />
+              </PageTransition>
+            </Suspense>
           }
         />
         <Route
           path="/integraties"
           element={
-            <PageTransition>
-              <Integraties />
-            </PageTransition>
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <Integraties />
+              </PageTransition>
+            </Suspense>
           }
         />
         <Route
           path="/start-met-sendwise"
           element={
-            <PageTransition>
-              <StartMetSendwise />
-            </PageTransition>
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <StartMetSendwise />
+              </PageTransition>
+            </Suspense>
           }
         />
         <Route
           path="/werken-bij"
           element={
-            <PageTransition>
-              <WerkenBij />
-            </PageTransition>
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <WerkenBij />
+              </PageTransition>
+            </Suspense>
           }
         />
         <Route
           path="/kennisbank"
           element={
-            <PageTransition>
-              <Kennisbank />
-            </PageTransition>
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <Kennisbank />
+              </PageTransition>
+            </Suspense>
           }
         />
-        <Route element={<Header />}>
+        <Route
+          element={(
+            <Suspense fallback={<RouteFallback />}>
+              <Header />
+            </Suspense>
+          )}
+        >
           <Route
             path="/over-ons"
             element={
-              <PageTransition>
-                <OverOns />
-              </PageTransition>
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition>
+                  <OverOns />
+                </PageTransition>
+              </Suspense>
             }
           />
           <Route
             path="/integraties/woocommerce"
             element={
-              <PageTransition>
-                <IntegratieWooCommerce />
-              </PageTransition>
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition>
+                  <IntegratieWooCommerce />
+                </PageTransition>
+              </Suspense>
             }
           />
           <Route
             path="/integraties/ccv-shop"
             element={
-              <PageTransition>
-                <IntegratieCCVShop />
-              </PageTransition>
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition>
+                  <IntegratieCCVShop />
+                </PageTransition>
+              </Suspense>
             }
           />
           <Route
             path="/algemene-voorwaarden"
             element={
-              <PageTransition>
-                <AlgemeneVoorwaarden />
-              </PageTransition>
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition>
+                  <AlgemeneVoorwaarden />
+                </PageTransition>
+              </Suspense>
             }
           />
           <Route
             path="/verwerkersovereenkomst"
             element={
-              <PageTransition>
-                <Verwerkersovereenkomst />
-              </PageTransition>
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition>
+                  <Verwerkersovereenkomst />
+                </PageTransition>
+              </Suspense>
             }
           />
           <Route
             path="/privacy"
             element={
-              <PageTransition>
-                <Privacy />
-              </PageTransition>
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition>
+                  <Privacy />
+                </PageTransition>
+              </Suspense>
             }
           />
           <Route
             path="/blog/sendwise-goedgepickt"
             element={
-              <PageTransition>
-                <BlogGoedgepickt />
-              </PageTransition>
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition>
+                  <BlogGoedgepickt />
+                </PageTransition>
+              </Suspense>
             }
           />
           <Route
