@@ -544,11 +544,7 @@ const FacebookAdsLanding = () => {
                   alt={`${carrier.name} vervoerder`}
                   loading="lazy"
                   decoding="async"
-                  className={`max-h-12 max-w-[105px] object-contain sm:max-h-24 sm:max-w-[190px] ${
-                    carrier.name === "PostNL"
-                      ? "drop-shadow-none sm:drop-shadow-[0_22px_28px_rgba(7,17,90,0.22)]"
-                      : "drop-shadow-[0_14px_18px_rgba(7,17,90,0.16)] sm:drop-shadow-[0_22px_28px_rgba(7,17,90,0.22)]"
-                  }`}
+                  className="max-h-14 max-w-[118px] object-contain drop-shadow-none sm:max-h-24 sm:max-w-[190px] sm:drop-shadow-[0_22px_28px_rgba(7,17,90,0.22)]"
                 />
               </div>
             ))}
