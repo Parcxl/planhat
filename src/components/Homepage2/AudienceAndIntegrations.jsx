@@ -70,7 +70,7 @@ const AudienceFeatureRow = ({ title, text, cta, to, image, imageAlt, textSide })
   )
 
   const imageCard = (
-    <div className="h-[210px] overflow-hidden rounded-[22px] shadow-[0_22px_60px_rgba(7,17,31,0.09)] sm:h-[250px] sm:rounded-[24px]">
+    <div className="relative h-[210px] overflow-hidden rounded-[22px] shadow-[0_22px_60px_rgba(7,17,31,0.09)] sm:h-[250px] sm:rounded-[24px]">
       <img
         src={image}
         alt={imageAlt}
@@ -79,6 +79,7 @@ const AudienceFeatureRow = ({ title, text, cta, to, image, imageAlt, textSide })
         fetchPriority="low"
         className="h-full w-full object-cover"
       />
+      <div className="absolute -bottom-10 -right-10 h-24 w-24 rounded-full bg-[#eef2f6] sm:hidden" aria-hidden="true" />
     </div>
   )
 
