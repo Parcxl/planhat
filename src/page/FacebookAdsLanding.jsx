@@ -122,7 +122,9 @@ const FacebookAdsLanding = () => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setCarrierSceneVisible(entry.isIntersecting)
+        if (entry.isIntersecting) {
+          setCarrierSceneVisible(true)
+        }
       },
       { threshold: 0.68 }
     )
@@ -320,7 +322,7 @@ const FacebookAdsLanding = () => {
       `}</style>
       <Homepage2Header />
 
-      <section className="relative overflow-hidden bg-[#1a5ee5] pt-20 sm:pt-28 lg:pt-44">
+      <section className="relative overflow-hidden bg-[#1a5ee5] pt-24 sm:pt-28 lg:pt-44">
         <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-4 pb-8 sm:px-6 sm:pb-12 lg:min-h-[640px] lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 lg:pb-12">
           <div className="relative z-10 max-w-[690px] lg:pb-10">
             <div className="mb-5 flex items-center gap-3 text-white">
@@ -516,11 +518,11 @@ const FacebookAdsLanding = () => {
                 decoding="async"
                 className="h-full w-full object-contain drop-shadow-[0_24px_34px_rgba(7,17,90,0.20)]"
               />
-              <div className="absolute -right-6 top-1 rotate-[8deg] rounded-[12px] bg-white px-2.5 py-2 shadow-[0_16px_34px_rgba(7,17,90,0.16)] ring-1 ring-[#dfeaf7] sm:-right-8 sm:top-2 sm:px-3">
-                <p className="inter-semibold text-[0.72rem] leading-none text-[#07115a]">Geen</p>
-                <p className="mt-1 inter-semibold text-[0.72rem] leading-none text-[#1a5ee5]">contract</p>
-                <div className="mt-2 h-1 w-12 rounded-full bg-[#dce8ff]" />
-                <div className="mt-1 h-1 w-8 rounded-full bg-[#dce8ff]" />
+              <div className="absolute -right-5 top-0 rotate-[8deg] rounded-[10px] bg-white px-2 py-1.5 shadow-[0_10px_24px_rgba(7,17,90,0.12)] ring-1 ring-[#dfeaf7] sm:-right-8 sm:top-2 sm:rounded-[12px] sm:px-3 sm:py-2 sm:shadow-[0_16px_34px_rgba(7,17,90,0.16)]">
+                <p className="inter-semibold text-[0.62rem] leading-none text-[#07115a] sm:text-[0.72rem]">Geen</p>
+                <p className="mt-0.5 inter-semibold text-[0.62rem] leading-none text-[#1a5ee5] sm:mt-1 sm:text-[0.72rem]">contract</p>
+                <div className="mt-1.5 h-0.5 w-9 rounded-full bg-[#dce8ff] sm:mt-2 sm:h-1 sm:w-12" />
+                <div className="mt-1 h-0.5 w-6 rounded-full bg-[#dce8ff] sm:h-1 sm:w-8" />
               </div>
             </div>
 
@@ -542,7 +544,11 @@ const FacebookAdsLanding = () => {
                   alt={`${carrier.name} vervoerder`}
                   loading="lazy"
                   decoding="async"
-                  className="max-h-12 max-w-[105px] object-contain drop-shadow-[0_22px_28px_rgba(7,17,90,0.22)] sm:max-h-24 sm:max-w-[190px]"
+                  className={`max-h-12 max-w-[105px] object-contain sm:max-h-24 sm:max-w-[190px] ${
+                    carrier.name === "PostNL"
+                      ? "drop-shadow-none sm:drop-shadow-[0_22px_28px_rgba(7,17,90,0.22)]"
+                      : "drop-shadow-[0_14px_18px_rgba(7,17,90,0.16)] sm:drop-shadow-[0_22px_28px_rgba(7,17,90,0.22)]"
+                  }`}
                 />
               </div>
             ))}
