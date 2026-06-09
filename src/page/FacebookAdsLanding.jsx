@@ -5,6 +5,8 @@ import Homepage2Footer from "../components/Homepage2/Footer"
 import Reviews from "../components/Homepage2/Reviews"
 import PlatformAutomationAnimation from "../components/animations/PlatformAutomationAnimation"
 
+const algemeneVoorwaardenPdf = "/sendwise-algemene-voorwaarden:15-03-2026.pdf"
+
 const heroPoints = [
   "All-in verzendtarieven",
   "Geen abonnementskosten",
@@ -188,7 +190,7 @@ const FacebookAdsLanding = () => {
 
       setStatus({
         state: "success",
-        message: "Je aanvraag is verzonden. Olivier neemt binnen 24 uur contact met je op.",
+        message: "Je aanvraag is verzonden. Wij nemen binnen 24 uur contact met je op.",
         form: formKey,
       })
       setFormData(initialFormData)
@@ -275,7 +277,17 @@ const FacebookAdsLanding = () => {
             onChange={(event) => setAcceptedTerms(event.target.checked)}
             className="mt-1 h-4 w-4 rounded border-[#c9d7eb] text-[#1a5ee5] focus:ring-[#1a5ee5]/20"
           />
-          Ik ga akkoord met de algemene voorwaarden
+          <span>
+            Ik ga akkoord met de{" "}
+            <a
+              href={algemeneVoorwaardenPdf}
+              target="_blank"
+              rel="noreferrer"
+              className="inter-semibold text-[#1a5ee5] hover:underline"
+            >
+              algemene voorwaarden
+            </a>
+          </span>
         </label>
 
         {visibleStatus.message ? (
