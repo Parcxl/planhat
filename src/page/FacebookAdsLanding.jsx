@@ -516,7 +516,7 @@ const FacebookAdsLanding = () => {
                 alt="Sendwise"
                 loading="lazy"
                 decoding="async"
-                className="h-full w-full object-contain drop-shadow-[0_24px_34px_rgba(7,17,90,0.20)]"
+                className="h-full w-full object-contain drop-shadow-none sm:drop-shadow-[0_24px_34px_rgba(7,17,90,0.20)]"
               />
               <div className="absolute -right-5 top-0 rotate-[8deg] rounded-[10px] bg-white px-2 py-1.5 shadow-[0_10px_24px_rgba(7,17,90,0.12)] ring-1 ring-[#dfeaf7] sm:-right-8 sm:top-2 sm:rounded-[12px] sm:px-3 sm:py-2 sm:shadow-[0_16px_34px_rgba(7,17,90,0.16)]">
                 <p className="inter-semibold text-[0.62rem] leading-none text-[#07115a] sm:text-[0.72rem]">Geen</p>
