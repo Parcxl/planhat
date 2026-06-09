@@ -40,8 +40,7 @@ const homepageWorkflowImages = [
 const criticalImagesByPath = {
   "/": ["/sendwise-hero-delivery-van.jpg", ...homepageWorkflowImages, ...sharedCriticalImages],
   "/homepage2": ["/sendwise-hero-delivery-van.jpg", ...homepageWorkflowImages, ...sharedCriticalImages],
-  "/facebook-ads": ["/sendwise-hero-delivery-van.jpg", "/verzenden-afbeelding-1.png", "/verzenden-afbeelding-2.png", ...sharedCriticalImages],
-  "/landings/facebook-ads": ["/sendwise-hero-delivery-van.jpg", "/verzenden-afbeelding-1.png", "/verzenden-afbeelding-2.png", ...sharedCriticalImages],
+  "/verzend-slimmer": ["/sendwise-hero-delivery-van.jpg", "/verzenden-afbeelding-1.png", "/verzenden-afbeelding-2.png", ...sharedCriticalImages],
   "/oplossingen/sendwise": ["/sendwise-platform-dashboard-hero.webp", ...sharedCriticalImages],
   "/oplossingen/pro": ["/sendwise-pro-dashboard-hero.webp", ...sharedCriticalImages],
   "/oplossingen/connect": ["/sendwise-connect-hero.jpg", ...sharedCriticalImages],
@@ -98,12 +97,7 @@ const seoMap = {
     description:
       "Nieuwe witte homepage voor Sendwise met scherpe verzendtarieven, slimme vervoerderkeuze en fulfilmentsoftware.",
   },
-  "/facebook-ads": {
-    title: "Sendwise voor webshops en fulfilmentteams | Slimmer verzenden vanaf €3,50",
-    description:
-      "Minder handwerk, meer grip op verzenden. Ontdek Sendwise voor labels, tracking, retouren en fulfilmentgroei zonder contracten of vaste kosten.",
-  },
-  "/landings/facebook-ads": {
+  "/verzend-slimmer": {
     title: "Sendwise voor webshops en fulfilmentteams | Slimmer verzenden vanaf €3,50",
     description:
       "Minder handwerk, meer grip op verzenden. Ontdek Sendwise voor labels, tracking, retouren en fulfilmentgroei zonder contracten of vaste kosten.",
@@ -254,17 +248,7 @@ const AnimatedRoutes = () => {
           }
         />
         <Route
-          path="/facebook-ads"
-          element={
-            <Suspense fallback={<RouteFallback />}>
-              <PageTransition>
-                <FacebookAdsLanding />
-              </PageTransition>
-            </Suspense>
-          }
-        />
-        <Route
-          path="/landings/facebook-ads"
+          path="/verzend-slimmer"
           element={
             <Suspense fallback={<RouteFallback />}>
               <PageTransition>
