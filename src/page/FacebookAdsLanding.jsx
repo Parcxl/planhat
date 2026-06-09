@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import { FiArrowRight, FiCheck, FiLink, FiPrinter, FiTruck } from "react-icons/fi"
 import Homepage2Header from "../components/Homepage2/Header"
 import Homepage2Footer from "../components/Homepage2/Footer"
@@ -360,13 +361,13 @@ const FacebookAdsLanding = () => {
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="#sendwise-aanvraag"
+              <Link
+                to="/contact"
                 className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-white px-6 inter-medium text-base text-[#1a5ee5] shadow-[0_14px_30px_rgba(7,17,90,0.18)] transition hover:bg-[#eef4ff] sm:w-auto"
               >
-                Vraag een account aan
+                Contact opnemen
                 <FiArrowRight className="h-5 w-5 transition-transform duration-300 ease-out group-hover:translate-x-1" aria-hidden="true" />
-              </a>
+              </Link>
             </div>
 
             <ul className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-7 sm:gap-y-4">
@@ -620,6 +621,13 @@ const FacebookAdsLanding = () => {
             <p className="mt-4 max-w-lg inter-medium text-base leading-8 text-white/78 sm:text-[1.05rem]">
               Laat je gegevens achter. Wij nemen contact met je op en kijken welke Sendwise opzet past bij jouw webshop.
             </p>
+            <Link
+              to="/contact"
+              className="group mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-white px-6 inter-medium text-base text-[#07115a] shadow-[0_14px_30px_rgba(7,17,90,0.18)] transition hover:bg-[#eef4ff] sm:w-auto"
+            >
+              Contact opnemen
+              <FiArrowRight className="h-5 w-5 transition-transform duration-300 ease-out group-hover:translate-x-1" aria-hidden="true" />
+            </Link>
             <ul className="mt-7 grid gap-3">
               {heroPoints.map((point) => (
                 <li key={point} className="flex items-center gap-2.5 inter-medium text-[0.95rem] text-white">
