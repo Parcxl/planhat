@@ -1,189 +1,152 @@
-import { createElement, useState } from "react"
-import { Link } from "react-router-dom"
-import {
-  FiArrowRight,
-  FiCheck,
-  FiClock,
-  FiCreditCard,
-  FiLayers,
-  FiPackage,
-  FiRefreshCw,
-  FiShield,
-  FiTruck,
-  FiZap,
-} from "react-icons/fi"
+import { useEffect, useRef, useState } from "react"
+import { FiArrowRight, FiCheck, FiLink, FiPrinter, FiTruck } from "react-icons/fi"
+import Homepage2Header from "../components/Homepage2/Header"
 import Homepage2Footer from "../components/Homepage2/Footer"
+import Reviews from "../components/Homepage2/Reviews"
+import PlatformAutomationAnimation from "../components/animations/PlatformAutomationAnimation"
 
-const trustPoints = [
-  "Pakketten verzenden vanaf €3,50",
-  "Geen contracten of abonnementskosten",
-  "Labels, tracking en fulfilment in één platform",
+const heroPoints = [
+  "All-in verzendtarieven",
+  "Geen abonnementskosten",
+  "Binnen enkele minuten gestart",
 ]
 
 const customerLogos = [
   { name: "Boxxl", src: "/boxxl.png" },
   { name: "Solza", src: "/solza-logo.png" },
   { name: "Ferrachi", src: "/ferrachi.png" },
-  { name: "Devision", src: "/devision.png" },
 ]
 
-const painPoints = [
-  {
-    title: "Je betaalt te veel per pakket",
-    text: "Verzendtarieven lopen op, toeslagen stapelen zich op en het is onduidelijk waar je marge verdwijnt.",
-    icon: FiCreditCard,
-  },
-  {
-    title: "Je verzendproces kost te veel tijd",
-    text: "Orders, labels, tracking en retouren zitten verspreid over losse tools en handmatige stappen.",
-    icon: FiClock,
-  },
-  {
-    title: "Je wilt groeien zonder logistieke chaos",
-    text: "Meer volume vraagt om meer structuur, maar je wilt niet direct vastzitten aan ingewikkelde software of contracten.",
-    icon: FiLayers,
-  },
+const webshopIntegrations = [
+  { name: "WooCommerce", src: "/woocommerce-logo.webp" },
+  { name: "Shopify", src: "/shopify-logo.webp" },
+  { name: "Wix", src: "/wix.png" },
+  { name: "CCV", src: "/ccv-icon.svg" },
+  { name: "Lightspeed", src: "/lightspeed.webp" },
+  { name: "Bol.com", src: "/bol-logo.png" },
+  { name: "Mijnwebwinkel", src: "/mijnwebwinkel.webp" },
+  { name: "Goedgepickt", src: "/goedgepickt-sendwise-logo.webp" },
 ]
 
-const benefits = [
+const carrierHighlights = [
   {
-    eyebrow: "Platform",
-    title: "Alles voor verzenden in één dashboard",
-    text: "Orders komen automatisch binnen, labels staan snel klaar en tracking gaat direct mee naar je klant.",
-    icon: FiPackage,
+    name: "DHL",
+    src: "/sendwise-dhl.svg",
+    saving: "-37%",
+    className: "left-3 top-8 lg:left-8 lg:top-10",
+    transform: "perspective(900px) rotateX(10deg) rotateY(-24deg) rotateZ(-7deg) translateZ(28px)",
+    from: "translate(180px, 118px) scale(0.62)",
   },
   {
-    eyebrow: "CONNECT",
-    title: "Slimme vervoerderkeuze zonder extra gedoe",
-    text: "Gebruik één pickup en laat Sendwise de beste route en vervoerder per land ondersteunen.",
-    icon: FiTruck,
+    name: "Gofo",
+    src: "/gofo-logo-sendwise.webp",
+    saving: "-24%",
+    className: "right-2 top-12 lg:right-8 lg:top-16",
+    transform: "perspective(900px) rotateX(8deg) rotateY(22deg) rotateZ(7deg) translateZ(18px)",
+    from: "translate(-178px, 105px) scale(0.62)",
   },
   {
-    eyebrow: "PRO",
-    title: "Klaar om op te schalen als je volume groeit",
-    text: "Picken, packen, voorraad en fulfilmentprocessen hou je strak zodra je team of orderaantallen toenemen.",
-    icon: FiZap,
-  },
-]
-
-const featureChecks = [
-  "Scherpe all-in verzendtarieven",
-  "Automatische label- en trackingflow",
-  "Koppelingen met WooCommerce, Shopify, CCV Shop en meer",
-  "Retouren overzichtelijk verwerkt",
-  "Opschalen met fulfilmentsoftware zodra je eraan toe bent",
-  "Nederlandse support zonder omwegen",
-]
-
-const steps = [
-  {
-    number: "01",
-    title: "Koppel je shop",
-    text: "Orders komen automatisch binnen vanuit je webshop of fulfilmentflow.",
+    name: "PostNL",
+    src: "/postnl-icoon.webp",
+    saving: "-19%",
+    className: "left-9 bottom-8 lg:left-16 lg:bottom-10",
+    transform: "perspective(900px) rotateX(-8deg) rotateY(-18deg) rotateZ(5deg) translateZ(16px)",
+    from: "translate(150px, -118px) scale(0.62)",
   },
   {
-    number: "02",
-    title: "Verwerk sneller",
-    text: "Maak labels aan, kies de juiste verzendmethode en houd grip op iedere order.",
-  },
-  {
-    number: "03",
-    title: "Schaal zonder extra complexiteit",
-    text: "Breid uit met CONNECT of PRO wanneer je meer volume en meer procescontrole nodig hebt.",
+    name: "FedEx",
+    src: "/fedex-logo-nieuw.png",
+    saving: "-31%",
+    className: "right-8 bottom-5 lg:right-14 lg:bottom-12",
+    transform: "perspective(900px) rotateX(-10deg) rotateY(24deg) rotateZ(-6deg) translateZ(24px)",
+    from: "translate(-152px, -122px) scale(0.62)",
   },
 ]
 
-const faqs = [
-  {
-    question: "Voor wie is deze Sendwise landingspagina bedoeld?",
-    answer:
-      "Voor webshops en fulfilmentteams die sneller, goedkoper en overzichtelijker willen verzenden zonder direct vast te zitten aan contracten of losse systemen.",
-  },
-  {
-    question: "Kan ik starten zonder abonnementskosten?",
-    answer:
-      "Ja. Sendwise is juist ingericht om laagdrempelig te starten, met duidelijke verzendtarieven en zonder vaste contractdruk.",
-  },
-  {
-    question: "Werkt Sendwise met mijn webshop of fulfilmentproces?",
-    answer:
-      "Sendwise ondersteunt onder meer WooCommerce, Shopify, CCV Shop, Mijnwebwinkel, Lightspeed en maatwerk via de API. Voor grotere volumes is uitbreiding met CONNECT of PRO mogelijk.",
-  },
-  {
-    question: "Wat is het verschil tussen Sendwise, CONNECT en PRO?",
-    answer:
-      "Sendwise is je basis voor labels, tracking en scherpe tarieven. CONNECT helpt je slim te verzenden met de juiste vervoerder per land. PRO voegt fulfilmentsoftware toe voor pick, pack en voorraadbeheer.",
-  },
+const platformFeatures = [
+  "Retourportaal voor klanten",
+  "Branded trackingpagina's",
+  "Labelbranding in je eigen huisstijl",
+  "Automatische verzendregels per order",
 ]
+
+const LogoRail = ({ items, reverse = false, withSavings = false, compact = false }) => (
+  <div
+    className={`flex w-max ${compact ? "gap-0" : "gap-3"}`}
+    style={{
+      animation: `landingLogoRail ${reverse ? "36s" : "32s"} linear infinite ${reverse ? "reverse" : ""}`,
+    }}
+  >
+    {[...items, ...items].map((item, index) => (
+      <div
+        key={`${item.name}-${index}`}
+        className={`relative flex shrink-0 items-center justify-center ${
+          compact ? "h-20 w-28 sm:h-24 sm:w-36 lg:h-28 lg:w-40" : "h-24 w-30 px-2 sm:h-32 sm:w-36"
+        }`}
+      >
+        {withSavings ? (
+          <span className="absolute right-1 top-1 rounded-full bg-[#e8fff2] px-2 py-0.5 inter-semibold text-[0.72rem] text-[#128042] ring-1 ring-[#bdf5d2]">
+            {item.saving}
+          </span>
+        ) : null}
+        <img
+          src={item.src}
+          alt={withSavings ? `${item.name} vervoerder` : `${item.name} integratie`}
+          loading="lazy"
+          decoding="async"
+          className={`object-contain ${
+            compact ? "max-h-16 max-w-[130px] sm:max-h-20 sm:max-w-[170px] lg:max-h-24 lg:max-w-[190px]" : "max-h-16 max-w-[128px] sm:max-h-24 sm:max-w-[168px]"
+          }`}
+        />
+      </div>
+    ))}
+  </div>
+)
 
 const initialFormData = {
+  naam: "",
   bedrijfsnaam: "",
-  website: "",
-  voornaam: "",
   email: "",
   telefoon: "",
 }
 
-const LandingHeader = () => (
-  <header className="sticky top-0 z-40 border-b border-[#dbe5f2] bg-white/92 backdrop-blur-md">
-    <div className="mx-auto flex h-18 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
-      <Link to="/" aria-label="Sendwise homepage" className="shrink-0">
-        <img
-          src="/sendwise-tekst-blauw.png"
-          alt="Sendwise"
-          width="465"
-          height="84"
-          fetchPriority="high"
-          loading="eager"
-          decoding="async"
-          className="h-7 w-auto"
-        />
-      </Link>
-
-      <div className="flex items-center gap-3">
-        <Link
-          to="/contact"
-          className="hidden rounded-full border border-[#d8e3f2] px-4 py-2.5 inter-semibold text-sm text-[#07115a] transition hover:border-[#b8c4d8] hover:bg-[#f8fbff] sm:inline-flex"
-        >
-          Plan een demo
-        </Link>
-        <Link
-          to="/start-met-sendwise"
-          className="inline-flex items-center gap-2 rounded-full bg-[#1a5ee5] px-4 py-2.5 inter-semibold text-sm text-white shadow-[0_14px_30px_rgba(26,94,229,0.18)] transition hover:bg-[#164fc2]"
-        >
-          Start met Sendwise
-          <FiArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
-      </div>
-    </div>
-  </header>
-)
-
 const FacebookAdsLanding = () => {
+  const carrierSceneRef = useRef(null)
   const [formData, setFormData] = useState(initialFormData)
   const [acceptedTerms, setAcceptedTerms] = useState(false)
-  const [status, setStatus] = useState({ state: "idle", message: "" })
+  const [status, setStatus] = useState({ state: "idle", message: "", form: "" })
+  const [carrierSceneVisible, setCarrierSceneVisible] = useState(false)
+
+  useEffect(() => {
+    if (!carrierSceneRef.current) return undefined
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setCarrierSceneVisible(entry.isIntersecting)
+      },
+      { threshold: 0.68 }
+    )
+
+    observer.observe(carrierSceneRef.current)
+
+    return () => observer.disconnect()
+  }, [])
 
   const handleChange = (event) => {
     const { name, value } = event.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-    setStatus({ state: "idle", message: "" })
-  }
-
-  const normalizeWebsite = (website) => {
-    const trimmed = website.trim()
-    if (!trimmed) return ""
-    return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`
+    setStatus({ state: "idle", message: "", form: "" })
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    const formKey = event.currentTarget.dataset.form || "account"
 
-    const requiredFields = ["bedrijfsnaam", "website", "voornaam", "email", "telefoon"]
+    const requiredFields = ["naam", "bedrijfsnaam", "email", "telefoon"]
     const missingField = requiredFields.find((field) => !formData[field].trim())
 
     if (missingField) {
-      setStatus({ state: "error", message: "Vul alle velden in om je aanvraag te versturen." })
+      setStatus({ state: "error", message: "Vul alle velden in om je aanvraag te versturen.", form: formKey })
       return
     }
 
@@ -191,19 +154,23 @@ const FacebookAdsLanding = () => {
       setStatus({
         state: "error",
         message: "Ga akkoord met de algemene voorwaarden om je aanvraag te versturen.",
+        form: formKey,
       })
       return
     }
 
     const payload = {
-      ...formData,
-      website: normalizeWebsite(formData.website),
+      bedrijfsnaam: formData.bedrijfsnaam,
+      website: "",
+      voornaam: formData.naam,
       achternaam: "",
+      email: formData.email,
+      telefoon: formData.telefoon,
       kvk: "1234567",
     }
 
     try {
-      setStatus({ state: "loading", message: "Aanvraag wordt verstuurd..." })
+      setStatus({ state: "loading", message: "Aanvraag wordt verstuurd...", form: formKey })
 
       const response = await fetch("/api/accountaanvraag", {
         method: "POST",
@@ -219,7 +186,8 @@ const FacebookAdsLanding = () => {
 
       setStatus({
         state: "success",
-        message: "Je aanvraag is verzonden. We nemen binnen 24 uur contact met je op.",
+        message: "Je aanvraag is verzonden. Olivier neemt binnen 24 uur contact met je op.",
+        form: formKey,
       })
       setFormData(initialFormData)
       setAcceptedTerms(false)
@@ -227,57 +195,170 @@ const FacebookAdsLanding = () => {
       setStatus({
         state: "error",
         message: error?.message || "Er ging iets mis bij het versturen. Probeer het later opnieuw.",
+        form: formKey,
       })
     }
   }
 
-  const inputClass = "w-full rounded-[16px] border border-[#d8e3f2] bg-white px-4 py-3.5 text-sm text-[#0d1321] outline-none transition-all duration-300 placeholder:text-[#8b96aa] focus:border-[#1a5ee5] focus:ring-4 focus:ring-[#1a5ee5]/10"
+  const inputClass = "w-full rounded-[14px] border border-[#d8e3f2] bg-white px-4 py-3 text-sm text-[#0d1321] outline-none transition-all duration-300 placeholder:text-[#a3adbf] focus:border-[#1a5ee5] focus:ring-4 focus:ring-[#1a5ee5]/10"
+  const renderAccountForm = (formKey) => {
+    const fieldPrefix = `${formKey}-`
+    const visibleStatus = status.form === formKey ? status : { state: "idle", message: "" }
+
+    return (
+      <form onSubmit={handleSubmit} data-form={formKey} className="mt-6">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label htmlFor={`${fieldPrefix}naam`} className="mb-2 block inter-semibold text-sm text-[#07115a]">
+              Naam *
+            </label>
+            <input
+              id={`${fieldPrefix}naam`}
+              name="naam"
+              value={formData.naam}
+              onChange={handleChange}
+              placeholder="Uw naam"
+              className={inputClass}
+            />
+          </div>
+
+          <div>
+            <label htmlFor={`${fieldPrefix}bedrijfsnaam`} className="mb-2 block inter-semibold text-sm text-[#07115a]">
+              Bedrijfsnaam *
+            </label>
+            <input
+              id={`${fieldPrefix}bedrijfsnaam`}
+              name="bedrijfsnaam"
+              value={formData.bedrijfsnaam}
+              onChange={handleChange}
+              placeholder="Bedrijfsnaam"
+              className={inputClass}
+            />
+          </div>
+
+          <div>
+            <label htmlFor={`${fieldPrefix}email`} className="mb-2 block inter-semibold text-sm text-[#07115a]">
+              E-mail *
+            </label>
+            <input
+              id={`${fieldPrefix}email`}
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="info@email.nl"
+              className={inputClass}
+            />
+          </div>
+
+          <div>
+            <label htmlFor={`${fieldPrefix}telefoon`} className="mb-2 block inter-semibold text-sm text-[#07115a]">
+              Telefoonnummer *
+            </label>
+            <input
+              id={`${fieldPrefix}telefoon`}
+              name="telefoon"
+              value={formData.telefoon}
+              onChange={handleChange}
+              placeholder="+31 6 12345678"
+              className={inputClass}
+            />
+          </div>
+        </div>
+
+        <label className="mt-5 flex items-start gap-3 text-sm leading-6 text-[#667085]">
+          <input
+            type="checkbox"
+            checked={acceptedTerms}
+            onChange={(event) => setAcceptedTerms(event.target.checked)}
+            className="mt-1 h-4 w-4 rounded border-[#c9d7eb] text-[#1a5ee5] focus:ring-[#1a5ee5]/20"
+          />
+          Ik ga akkoord met de algemene voorwaarden
+        </label>
+
+        {visibleStatus.message ? (
+          <div
+            className={`mt-5 rounded-[16px] px-4 py-3 text-sm ${
+              visibleStatus.state === "success"
+                ? "bg-[#e8fff2] text-[#14532d]"
+                : visibleStatus.state === "error"
+                  ? "bg-[#ffe9e9] text-[#991b1b]"
+                  : "bg-white text-[#07115a]"
+            }`}
+          >
+            {visibleStatus.message}
+          </div>
+        ) : null}
+
+        <button
+          type="submit"
+          className="group mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-[#1a5ee5] px-6 inter-medium text-base text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2]"
+        >
+          Vraag je account aan
+          <FiArrowRight className="h-5 w-5 transition-transform duration-300 ease-out group-hover:translate-x-1" aria-hidden="true" />
+        </button>
+      </form>
+    )
+  }
 
   return (
-    <main className="min-h-screen bg-[#f7fbff] text-[#0d1321]">
-      <LandingHeader />
+    <main className="min-h-screen bg-white text-[#0d1321]">
+      <style>{`
+        @keyframes olivierFloat {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+        @keyframes landingLogoRail {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+      `}</style>
+      <Homepage2Header />
 
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_#e7f2ff_0,_#f7fbff_46%,_#ffffff_100%)] px-4 pb-18 pt-14 sm:px-6 sm:pb-22 sm:pt-18 lg:pb-28 lg:pt-24">
-        <div className="absolute left-[-7rem] top-12 h-52 w-52 rounded-full bg-[#d8e9ff]/70 blur-3xl" aria-hidden="true" />
-        <div className="absolute right-[-3rem] top-24 h-64 w-64 rounded-full bg-[#1a5ee5]/10 blur-3xl" aria-hidden="true" />
+      <section className="relative overflow-hidden bg-[#1a5ee5] pt-20 sm:pt-28 lg:pt-44">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-4 pb-8 sm:px-6 sm:pb-12 lg:min-h-[640px] lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 lg:pb-12">
+          <div className="relative z-10 max-w-[690px] lg:pb-10">
+            <div className="mb-5 flex items-center gap-3 text-white">
+              <div className="flex -space-x-2">
+                {customerLogos.map(({ name, src }) => (
+                  <span key={name} className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border-2 border-white bg-white shadow-[0_4px_12px_rgba(15,23,42,0.10)]">
+                    <img src={src} alt={name} className="max-h-5 max-w-[26px] object-contain" />
+                  </span>
+                ))}
+              </div>
+              <p className="inter-medium text-sm leading-snug text-white sm:text-[0.95rem]">
+                Meer dan 650 webshops gingen je voor
+              </p>
+            </div>
 
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.98fr_1.02fr]">
-          <div className="relative z-10 max-w-3xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#d8e8ff] bg-white px-4 py-2 inter-semibold text-xs uppercase tracking-[0.1em] text-[#1a5ee5] shadow-[0_10px_30px_rgba(26,94,229,0.08)]">
-              <span className="h-2 w-2 rounded-full bg-[#1a5ee5]" aria-hidden="true" />
-              Slimmer verzenden voor webshops en fulfilmentteams
-            </span>
-
-            <h1 className="mt-6 inter-semibold text-[2.9rem] leading-[0.98] text-[#07115a] sm:text-[4.2rem] lg:text-[5.2rem]">
-              Minder handwerk.
-              <span className="block text-[#1a5ee5]">Meer grip op verzenden.</span>
+            <h1 className="inter-semibold text-[2.45rem] leading-[1.04] text-white min-[390px]:text-[2.75rem] sm:text-6xl sm:leading-[1.02] lg:text-7xl">
+              <span className="block sm:whitespace-nowrap">Verzend slimmer.</span>
+              <span className="block sm:whitespace-nowrap">Groei zonder gedoe.</span>
             </h1>
 
-            <p className="mt-6 max-w-2xl inter-medium text-lg leading-8 text-[#475467]">
-              Sendwise helpt webshops om orders sneller te verwerken, labels direct aan te maken en verzendkosten onder controle te houden.
-              Zonder contracten, zonder vaste kosten en met transparante tarieven vanaf €3,50 per pakket.
+            <p className="mt-5 max-w-[540px] text-base leading-7 text-[#dbe7ff] sm:mt-6 sm:text-[1.08rem] sm:leading-[1.7]">
+              Sendwise geeft je webshop snelle labels, scherpe tarieven en minder handwerk in je verzendproces.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                to="/start-met-sendwise"
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-[14px] bg-[#1a5ee5] px-6 inter-semibold text-sm text-white shadow-[0_18px_35px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2]"
+              <a
+                href="#sendwise-aanvraag"
+                className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-white px-6 inter-medium text-base text-[#1a5ee5] shadow-[0_14px_30px_rgba(7,17,90,0.18)] transition hover:bg-[#eef4ff] sm:w-auto"
               >
-                Vraag direct een account aan
-                <FiArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
-              </Link>
-              <Link
-                to="/contact"
-                className="inline-flex h-12 items-center justify-center rounded-[14px] border border-[#d6e2f1] bg-white px-6 inter-semibold text-sm text-[#07115a] shadow-[0_10px_24px_rgba(7,17,31,0.05)] transition hover:border-[#bfd2ea] hover:bg-[#f8fbff]"
-              >
-                Plan een kennismaking
-              </Link>
+                Vraag een account aan
+                <FiArrowRight className="h-5 w-5 transition-transform duration-300 ease-out group-hover:translate-x-1" aria-hidden="true" />
+              </a>
             </div>
 
-            <ul className="mt-8 grid gap-3 sm:grid-cols-3">
-              {trustPoints.map((point) => (
-                <li key={point} className="flex items-start gap-2.5 rounded-[16px] border border-[#deebf8] bg-white/90 px-4 py-3 inter-medium text-sm leading-6 text-[#445066] shadow-[0_14px_35px_rgba(7,17,31,0.05)]">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e7f0ff] text-[#1a5ee5]">
+            <ul className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-7 sm:gap-y-4">
+              {heroPoints.map((point) => (
+                <li key={point} className="flex items-center gap-2.5 inter-medium text-[0.95rem] text-white sm:text-base">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/18 text-white">
                     <FiCheck className="h-3.5 w-3.5 stroke-[3]" aria-hidden="true" />
                   </span>
                   {point}
@@ -286,95 +367,104 @@ const FacebookAdsLanding = () => {
             </ul>
           </div>
 
-          <div className="relative z-10">
-            <div className="relative overflow-hidden rounded-[28px] border border-[#d9e6f7] bg-white p-3 shadow-[0_30px_95px_rgba(7,17,31,0.14)] sm:rounded-[36px] sm:p-4">
+          <div className="relative flex items-center justify-center lg:min-h-[570px] lg:items-start lg:justify-end lg:pt-8">
+            <div
+              className="pointer-events-none absolute left-[-18px] top-[-70px] hidden h-[72px] w-[138px] text-white lg:block"
+              aria-hidden="true"
+            >
+              <svg
+                width="138"
+                height="72"
+                viewBox="0 0 138 72"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="absolute left-1 top-0 overflow-visible"
+              >
+                <path
+                  d="M16 8C17 29 32 43 55 41C78 39 98 42 113 58"
+                  stroke="currentColor"
+                  strokeWidth="2.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M101 58L115 60L110 47"
+                  stroke="currentColor"
+                  strokeWidth="2.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+
+            <div
+              id="sendwise-aanvraag"
+              className="relative w-full max-w-[500px] rounded-[22px] border border-white/18 bg-[#f8fbff] p-5 shadow-[0_24px_65px_rgba(7,17,90,0.24)] sm:rounded-[30px] sm:p-7 lg:max-w-[520px] lg:rounded-[34px] lg:p-8 lg:shadow-[0_34px_95px_rgba(7,17,90,0.28)]"
+            >
+              <div className="flex items-start justify-between gap-6">
+                <div>
+                  <h2 className="inter-semibold text-[1.45rem] leading-tight text-[#07115a] sm:text-[1.65rem]">
+                    Start direct met verzenden
+                  </h2>
+                  <p className="mt-2 max-w-md inter-medium text-sm leading-6 text-[#5a667c]">
+                    Laat je gegevens achter en wij nemen contact met je op.
+                  </p>
+                </div>
+
               <img
-                src="/sendwise-hero-delivery-van.jpg"
-                alt="Pakket wordt in een Sendwise bezorgbus geladen"
-                width="960"
-                height="960"
+                src="/profile-olivier.avif"
+                alt="Olivier van Sendwise"
+                width="112"
+                height="112"
                 fetchPriority="high"
                 loading="eager"
                 decoding="async"
-                className="aspect-[1.05/1] w-full rounded-[22px] object-cover object-center sm:rounded-[28px]"
+                className="hidden h-16 w-16 rounded-full object-cover ring-4 ring-white sm:block"
+                style={{ animation: "olivierFloat 4.2s ease-in-out infinite" }}
               />
-
-              <div className="absolute bottom-7 left-7 max-w-[320px] rounded-[22px] border border-white/40 bg-[#07115a]/82 p-5 text-white shadow-[0_18px_50px_rgba(7,17,31,0.28)] backdrop-blur-md">
-                <p className="inter-semibold text-[1.05rem] leading-6">
-                  Eén platform voor labels, tracking, retouren en fulfilmentgroei.
-                </p>
-                <p className="mt-2 inter-medium text-sm leading-6 text-white/78">
-                  Eerst slimmer verzenden. Daarna rustig opschalen met CONNECT of PRO.
-                </p>
-              </div>
             </div>
+
+            {renderAccountForm("hero")}
+          </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-4 py-7 sm:px-6 sm:py-9">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-6">
-          <p className="w-full text-center inter-semibold text-xs uppercase tracking-[0.18em] text-[#7b8797]">
-            Vertrouwd door groeiende webshops en fulfilmentpartners
-          </p>
-          {customerLogos.map(({ name, src }) => (
+      <section className="bg-white px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.94fr_1.06fr] lg:gap-16">
+          <div className="relative">
+            <div
+              className="overflow-hidden rounded-[24px] bg-[#f4f8ff] shadow-[0_24px_65px_rgba(7,17,31,0.12)] sm:rounded-[30px] lg:rounded-[34px]"
+              style={{ animation: "olivierFloat 4.6s ease-in-out infinite" }}
+            >
             <img
-              key={name}
-              src={src}
-              alt={name}
+              src="/profile-founder-van.webp"
+              alt="Olivier van Sendwise"
+              width="1254"
+              height="1254"
               loading="lazy"
               decoding="async"
-              fetchPriority="low"
-              className="h-10 w-auto max-w-[110px] object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"
+              className="aspect-[1.28/1] w-full object-cover object-center"
             />
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-[#f7fbff] px-4 py-16 sm:px-6 sm:py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-3xl">
-            <span className="inter-semibold text-xs uppercase tracking-[0.18em] text-[#1a5ee5]">Herkenbaar?</span>
-            <h2 className="mt-3 inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl">
-              Je hoeft niet nóg harder te werken om slimmer te verzenden.
-            </h2>
-            <p className="mt-4 max-w-2xl inter-medium text-base leading-8 text-[#667085]">
-              Veel webshops en fulfilmentteams lopen tegen dezelfde dingen aan: te hoge verzendkosten,
-              te veel handwerk en te weinig grip zodra het volume oploopt. Sendwise helpt om die laag rustiger en slimmer in te richten.
-            </p>
+            </div>
           </div>
 
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {painPoints.map(({ title, text, icon: Icon }) => (
-              <article
-                key={title}
-                className="rounded-[24px] border border-[#e1eaf7] bg-white p-6 shadow-[0_18px_55px_rgba(7,17,31,0.065)]"
-              >
-                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#eef5ff] text-[#1a5ee5] ring-1 ring-[#dce9ff]">
-                  {createElement(Icon, { className: "h-7 w-7", "aria-hidden": true })}
-                </span>
-                <h3 className="mt-6 inter-semibold text-2xl leading-tight text-[#07115a]">{title}</h3>
-                <p className="mt-3 inter-medium text-base leading-7 text-[#667085]">{text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white px-4 py-16 sm:px-6 sm:py-22">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <span className="inter-semibold text-xs uppercase tracking-[0.18em] text-[#1a5ee5]">Wat je krijgt</span>
-            <h2 className="mt-3 inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl">
-              Eén plek om je webshopverzending eindelijk overzichtelijk te maken.
+          <div className="max-w-[620px]">
+            <h2 className="inter-semibold text-[2rem] leading-[1.08] text-[#07115a] sm:text-[2.85rem]">
+              Te dure verzendingen eten je marge op
             </h2>
-            <p className="mt-4 max-w-2xl inter-medium text-base leading-8 text-[#667085]">
-              Geen losse tools voor labels, tracking, tarieven en doorgroei. Sendwise brengt die laag samen, zodat je webshopteam sneller werkt en minder laat liggen.
+            <p className="mt-5 text-base leading-8 text-[#4e5a73] sm:text-[1.08rem]">
+              Je webshop groeit, maar elke zending kost meer dan nodig. Losse vervoerders, onduidelijke toeslagen en handmatig labels maken zorgen voor druk op je marge.
             </p>
-            <ul className="mt-7 grid gap-3 sm:grid-cols-2">
-              {featureChecks.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 inter-medium text-sm leading-6 text-[#445066]">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e7f0ff] text-[#1a5ee5]">
+
+            <ul className="mt-8 grid gap-3">
+              {[
+                "Je betaalt te veel per pakket, vooral bij groeiend volume",
+                "Toeslagen en uitzonderingen maken je kosten onvoorspelbaar",
+                "Handmatig vergelijken en labels maken kost onnodig tijd",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 inter-medium text-base leading-7 text-[#1f2a44]">
+                  <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e7f0ff] text-[#1a5ee5]">
                     <FiCheck className="h-3.5 w-3.5 stroke-[3]" aria-hidden="true" />
                   </span>
                   {item}
@@ -382,308 +472,175 @@ const FacebookAdsLanding = () => {
               ))}
             </ul>
           </div>
+        </div>
+      </section>
 
-          <div className="relative grid gap-5">
-            {benefits.map(({ eyebrow, title, text, icon: Icon }) => (
-              <article
-                key={title}
-                className="rounded-[24px] border border-[#e1eaf7] bg-[#fbfdff] p-6 shadow-[0_18px_50px_rgba(7,17,31,0.06)]"
-              >
-                <div className="flex items-center gap-4">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-[#1a5ee5] ring-1 ring-[#dce9ff]">
-                    {createElement(Icon, { className: "h-6 w-6", "aria-hidden": true })}
-                  </span>
-                  <span className="rounded-full bg-white px-3 py-1.5 inter-semibold text-xs uppercase tracking-[0.08em] text-[#536175] ring-1 ring-[#e1eaf7]">
-                    {eyebrow}
-                  </span>
-                </div>
-                <h3 className="mt-5 inter-semibold text-2xl leading-tight text-[#07115a]">{title}</h3>
-                <p className="mt-3 inter-medium text-base leading-7 text-[#667085]">{text}</p>
-              </article>
-            ))}
+      <Reviews />
+
+      <section className="overflow-hidden bg-[#f7fbff] px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
+          <div>
+            <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#eef5ff] px-3.5 py-2 inter-semibold text-xs uppercase tracking-[0.08em] text-[#1a5ee5] ring-1 ring-[#dce9ff]">
+              <FiLink className="h-4 w-4" aria-hidden="true" />
+              Stap 1
+            </span>
+            <h2 className="inter-semibold text-[2rem] leading-[1.08] text-[#07115a] sm:text-[2.85rem]">
+              Koppel je webshop
+            </h2>
+            <p className="mt-5 max-w-xl text-base leading-8 text-[#4e5a73] sm:text-[1.08rem]">
+              Orders komen automatisch binnen vanuit je webshop, marketplace of eigen koppeling. Geen overtypen, geen losse exports.
+            </p>
+          </div>
+
+          <div className="relative overflow-hidden py-3">
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[#f7fbff] to-transparent sm:w-20" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[#f7fbff] to-transparent sm:w-20" />
+            <LogoRail items={webshopIntegrations} compact />
+            <div className="mt-1">
+              <LogoRail items={[...webshopIntegrations.slice(4), ...webshopIntegrations.slice(0, 4)]} reverse compact />
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="account-aanvragen" className="bg-[#07115a] px-4 py-16 text-white sm:px-6 sm:py-22">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
-          <div>
-            <span className="inter-semibold text-xs uppercase tracking-[0.18em] text-[#8dbbff]">Zo werkt het</span>
-            <h2 className="mt-3 inter-semibold text-4xl leading-tight text-white sm:text-5xl">
-              Van losse orderstress naar een webshopproces dat klopt.
-            </h2>
-            <p className="mt-4 max-w-2xl inter-medium text-base leading-8 text-white/76">
-              Zodra je overzicht hebt op orders, labels, tracking en retouren, wordt verzenden geen los pijnpunt meer
-              maar een proces dat meegroeit met je webshop.
-            </p>
+      <section className="overflow-hidden bg-white px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.18fr_0.82fr] lg:gap-14">
+          <div ref={carrierSceneRef} className="relative order-2 min-h-[300px] overflow-hidden rounded-[24px] bg-[#f7fbff] px-4 py-6 shadow-[inset_0_0_0_1px_rgba(225,234,247,0.9)] sm:min-h-[430px] sm:px-8 lg:order-1 lg:rounded-[28px]">
+            <div className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1a5ee5]/8 blur-2xl" aria-hidden="true" />
 
-            <div className="mt-8 grid gap-4">
-              {steps.map(({ number, title, text }) => (
-                <div key={number} className="rounded-[22px] border border-white/14 bg-white/6 p-5 backdrop-blur-sm">
-                  <div className="flex items-start gap-4">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#1a5ee5] inter-semibold text-sm text-white">
-                      {number}
-                    </span>
-                    <div>
-                      <h3 className="inter-semibold text-xl text-white">{title}</h3>
-                      <p className="mt-2 inter-medium text-sm leading-6 text-white/76">{text}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="relative grid gap-6">
-            <div className="absolute -right-6 -top-6 h-28 w-28 rotate-45 rounded-[26px] bg-white/8" aria-hidden="true" />
-            <div className="grid gap-4">
+            <div className="absolute left-1/2 top-1/2 z-10 h-20 w-20 -translate-x-1/2 -translate-y-1/2 sm:h-32 sm:w-32">
               <img
-                src="/verzenden-afbeelding-1.png"
-                alt="Verzendmethode kiezen in Sendwise"
-                loading="eager"
+                src="/sendwise-badge-blue-overlay.png"
+                alt="Sendwise"
+                loading="lazy"
                 decoding="async"
-                fetchPriority="high"
-                className="w-[68%] -rotate-2 rounded-[24px] border border-white/10 bg-white shadow-[0_22px_60px_rgba(7,17,31,0.24)]"
+                className="h-full w-full object-contain drop-shadow-[0_24px_34px_rgba(7,17,90,0.20)]"
               />
-              <img
-                src="/verzenden-afbeelding-2.png"
-                alt="Overzicht van afleveradres en verzending in Sendwise"
-                loading="eager"
-                decoding="async"
-                fetchPriority="high"
-                className="ml-auto w-[92%] rotate-2 rounded-[24px] border border-white/10 bg-white shadow-[0_22px_60px_rgba(7,17,31,0.24)]"
-              />
+              <div className="absolute -right-6 top-1 rotate-[8deg] rounded-[12px] bg-white px-2.5 py-2 shadow-[0_16px_34px_rgba(7,17,90,0.16)] ring-1 ring-[#dfeaf7] sm:-right-8 sm:top-2 sm:px-3">
+                <p className="inter-semibold text-[0.72rem] leading-none text-[#07115a]">Geen</p>
+                <p className="mt-1 inter-semibold text-[0.72rem] leading-none text-[#1a5ee5]">contract</p>
+                <div className="mt-2 h-1 w-12 rounded-full bg-[#dce8ff]" />
+                <div className="mt-1 h-1 w-8 rounded-full bg-[#dce8ff]" />
+              </div>
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="rounded-[26px] border border-white/12 bg-white/10 p-5 shadow-[0_22px_60px_rgba(7,17,31,0.18)] backdrop-blur-md sm:p-6"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="inter-semibold text-xl text-white">Vraag direct je Sendwise account aan</p>
-                  <p className="mt-2 inter-medium text-sm leading-6 text-white/76">
-                    Kort formulier, snelle opvolging. We nemen binnen 24 uur contact op.
-                  </p>
-                </div>
-                <span className="rounded-full bg-white/12 px-3 py-1.5 inter-semibold text-xs uppercase tracking-[0.08em] text-[#9ec4ff]">
-                  Voor webshops
+            {carrierHighlights.map((carrier) => (
+              <div
+                key={carrier.name}
+                className={`absolute z-20 flex h-20 w-28 items-center justify-center transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] sm:h-32 sm:w-48 ${carrier.className}`}
+                style={{
+                  opacity: carrierSceneVisible ? 1 : 0,
+                  transform: carrierSceneVisible ? carrier.transform : carrier.from,
+                  transformStyle: "preserve-3d",
+                }}
+              >
+                <span className="absolute -right-1 top-0 z-10 rounded-full bg-[#e8fff2] px-2 py-1 inter-semibold text-xs text-[#128042] shadow-[0_10px_24px_rgba(18,128,66,0.14)] ring-1 ring-[#bdf5d2] sm:px-3 sm:py-1.5 sm:text-sm">
+                  {carrier.saving}
                 </span>
-              </div>
-
-              <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                <div className="sm:col-span-2">
-                  <label htmlFor="bedrijfsnaam" className="mb-2 block inter-semibold text-sm text-white">
-                    Bedrijfsnaam
-                  </label>
-                  <input
-                    id="bedrijfsnaam"
-                    name="bedrijfsnaam"
-                    value={formData.bedrijfsnaam}
-                    onChange={handleChange}
-                    placeholder="Bijv. Mijn Webshop B.V."
-                    className={inputClass}
-                  />
-                </div>
-
-                <div className="sm:col-span-2">
-                  <label htmlFor="website" className="mb-2 block inter-semibold text-sm text-white">
-                    Webshop URL
-                  </label>
-                  <input
-                    id="website"
-                    name="website"
-                    value={formData.website}
-                    onChange={handleChange}
-                    placeholder="www.jouwdomein.nl"
-                    className={inputClass}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="voornaam" className="mb-2 block inter-semibold text-sm text-white">
-                    Voornaam
-                  </label>
-                  <input
-                    id="voornaam"
-                    name="voornaam"
-                    value={formData.voornaam}
-                    onChange={handleChange}
-                    placeholder="Voornaam"
-                    className={inputClass}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="telefoon" className="mb-2 block inter-semibold text-sm text-white">
-                    Telefoonnummer
-                  </label>
-                  <input
-                    id="telefoon"
-                    name="telefoon"
-                    value={formData.telefoon}
-                    onChange={handleChange}
-                    placeholder="+31 6 ..."
-                    className={inputClass}
-                  />
-                </div>
-
-                <div className="sm:col-span-2">
-                  <label htmlFor="email" className="mb-2 block inter-semibold text-sm text-white">
-                    E-mailadres
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="naam@bedrijf.nl"
-                    className={inputClass}
-                  />
-                </div>
-              </div>
-
-              <label className="mt-4 flex items-start gap-3 text-sm leading-6 text-white/76">
-                <input
-                  type="checkbox"
-                  checked={acceptedTerms}
-                  onChange={(event) => setAcceptedTerms(event.target.checked)}
-                  className="mt-1 h-4 w-4 rounded border-white/30 bg-transparent text-[#9ec4ff] focus:ring-[#9ec4ff]"
+                <img
+                  src={carrier.src}
+                  alt={`${carrier.name} vervoerder`}
+                  loading="lazy"
+                  decoding="async"
+                  className="max-h-12 max-w-[105px] object-contain drop-shadow-[0_22px_28px_rgba(7,17,90,0.22)] sm:max-h-24 sm:max-w-[190px]"
                 />
-                Ik ga akkoord met de algemene voorwaarden en wil dat Sendwise contact met mij opneemt over een accountaanvraag.
-              </label>
-
-              {status.message ? (
-                <div
-                  className={`mt-4 rounded-[16px] px-4 py-3 text-sm ${
-                    status.state === "success"
-                      ? "bg-[#e8fff2] text-[#14532d]"
-                      : status.state === "error"
-                        ? "bg-[#ffe9e9] text-[#991b1b]"
-                        : "bg-white/12 text-white"
-                  }`}
-                >
-                  {status.message}
-                </div>
-              ) : null}
-
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <p className="inter-medium text-sm leading-6 text-white/68">
-                  Geen contracten. Geen abonnementskosten. Wel snelle opvolging.
-                </p>
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 inter-semibold text-sm text-[#1a5ee5] transition hover:bg-[#edf4ff]"
-                >
-                  Account aanvragen
-                  <FiArrowRight className="h-4 w-4" aria-hidden="true" />
-                </button>
               </div>
-            </form>
+            ))}
           </div>
-        </div>
-      </section>
 
-      <section className="bg-white px-4 py-16 sm:px-6 sm:py-22">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.92fr_1.08fr]">
-          <div>
-            <span className="inter-semibold text-xs uppercase tracking-[0.18em] text-[#1a5ee5]">Transparantie</span>
-            <h2 className="mt-3 inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl">
-              Geen vaag offertetraject als je gewoon wilt weten waar je aan toe bent.
+          <div className="order-1 lg:order-2">
+            <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#eef5ff] px-3.5 py-2 inter-semibold text-xs uppercase tracking-[0.08em] text-[#1a5ee5] ring-1 ring-[#dce9ff]">
+              <FiTruck className="h-4 w-4" aria-hidden="true" />
+              Stap 2
+            </span>
+            <h2 className="inter-semibold text-[2rem] leading-[1.08] text-[#07115a] sm:text-[2.85rem]">
+              Kies direct het beste tarief
             </h2>
-            <p className="mt-4 max-w-2xl inter-medium text-base leading-8 text-[#667085]">
-              In de voorbeelden viel op hoe sterk transparantie werkt. Daarom benoemt deze landingspagina meteen de belangrijkste instapvoorwaarden.
+            <p className="mt-5 max-w-xl text-base leading-8 text-[#4e5a73] sm:text-[1.08rem]">
+              Sendwise vergelijkt vervoerders en maakt je verzendkosten voorspelbaar. Je ziet sneller waar je marge blijft liggen.
             </p>
           </div>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            {[
-              {
-                title: "Vanaf €3,50",
-                text: "Start direct met scherpe pakketprijzen zonder onduidelijke lagen erbovenop.",
-                icon: FiCreditCard,
-              },
-              {
-                title: "Geen abonnement",
-                text: "Je betaalt niet eerst vaste softwarekosten voordat het voor je mag werken.",
-                icon: FiShield,
-              },
-              {
-                title: "Klaar om te schalen",
-                text: "Wanneer je verder groeit, breid je uit met CONNECT of PRO zonder je basis opnieuw te moeten bouwen.",
-                icon: FiRefreshCw,
-              },
-            ].map(({ title, text, icon: Icon }) => (
-              <article key={title} className="rounded-[24px] border border-[#e1eaf7] bg-[#fbfdff] p-6 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-[#1a5ee5] ring-1 ring-[#dce9ff]">
-                  {createElement(Icon, { className: "h-6 w-6", "aria-hidden": true })}
-                </span>
-                <h3 className="mt-5 inter-semibold text-2xl leading-tight text-[#07115a]">{title}</h3>
-                <p className="mt-3 inter-medium text-base leading-7 text-[#667085]">{text}</p>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
 
-      <section className="bg-[#f7fbff] px-4 py-16 sm:px-6 sm:py-22">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-3xl">
-            <span className="inter-semibold text-xs uppercase tracking-[0.18em] text-[#1a5ee5]">Veelgestelde vragen</span>
-            <h2 className="mt-3 inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl">
-              Eerst antwoorden. Daarna pas je keuze.
+      <section className="bg-[#f7fbff] px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <div>
+            <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#eef5ff] px-3.5 py-2 inter-semibold text-xs uppercase tracking-[0.08em] text-[#1a5ee5] ring-1 ring-[#dce9ff]">
+              <FiPrinter className="h-4 w-4" aria-hidden="true" />
+              Stap 3
+            </span>
+            <h2 className="inter-semibold text-[2rem] leading-[1.08] text-[#07115a] sm:text-[2.85rem]">
+              Meer dan labels printen
             </h2>
+            <p className="mt-5 max-w-xl text-base leading-8 text-[#4e5a73] sm:text-[1.08rem]">
+              Sendwise wordt de verzendlaag van je webshop. Van retouren tot branded tracking en automatische verzendregels: alles blijft gekoppeld aan dezelfde order.
+            </p>
+
+            <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+              {platformFeatures.map((feature) => (
+                <li key={feature} className="flex items-start gap-2.5 inter-medium text-sm leading-6 text-[#445066]">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e7f0ff] text-[#1a5ee5]">
+                    <FiCheck className="h-3.5 w-3.5 stroke-[3]" aria-hidden="true" />
+                  </span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className="mt-10 grid gap-4">
-            {faqs.map(({ question, answer }) => (
-              <details
-                key={question}
-                className="group rounded-[22px] border border-[#e1eaf7] bg-white p-6 shadow-[0_14px_40px_rgba(15,23,42,0.04)]"
-              >
-                <summary className="cursor-pointer list-none inter-semibold text-xl leading-tight text-[#07115a]">
-                  {question}
-                </summary>
-                <p className="mt-4 inter-medium text-base leading-7 text-[#667085]">{answer}</p>
-              </details>
-            ))}
+          <div className="relative min-h-[320px] overflow-hidden rounded-[24px] border border-[#dfe8f6] bg-white p-2.5 shadow-[0_24px_70px_rgba(7,17,31,0.10)] sm:min-h-[390px] sm:p-4 lg:min-h-[430px] lg:rounded-[28px]">
+            <div className="relative h-[300px] sm:h-[350px] lg:h-[390px]">
+              <PlatformAutomationAnimation />
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-4 pb-18 pt-8 sm:px-6 sm:pb-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-[30px] bg-[#1a5ee5] px-6 py-8 text-white shadow-[0_26px_70px_rgba(26,94,229,0.24)] sm:px-10 sm:py-10 lg:px-14 lg:py-14">
-            <div className="absolute -bottom-24 right-8 h-56 w-56 rotate-45 rounded-[40px] bg-white/12" aria-hidden="true" />
-            <div className="absolute -top-28 right-60 h-44 w-44 rotate-45 rounded-[32px] bg-white/10" aria-hidden="true" />
+      <section className="bg-white px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 rounded-[24px] bg-[#07115a] px-5 py-7 text-white shadow-[0_24px_70px_rgba(7,17,90,0.18)] sm:rounded-[30px] sm:px-8 sm:py-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:rounded-[34px] lg:px-12 lg:py-12">
+          <div className="max-w-xl">
+            <h2 className="inter-semibold text-[2rem] leading-tight sm:text-[2.5rem]">
+              Start vandaag nog met slimmer verzenden
+            </h2>
+            <p className="mt-4 max-w-lg inter-medium text-base leading-8 text-white/78 sm:text-[1.05rem]">
+              Laat je gegevens achter. Wij nemen contact met je op en kijken welke Sendwise opzet past bij jouw webshop.
+            </p>
+            <ul className="mt-7 grid gap-3">
+              {heroPoints.map((point) => (
+                <li key={point} className="flex items-center gap-2.5 inter-medium text-[0.95rem] text-white">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/14 text-white">
+                    <FiCheck className="h-3.5 w-3.5 stroke-[3]" aria-hidden="true" />
+                  </span>
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-              <div className="max-w-3xl">
-                <h2 className="inter-semibold text-3xl leading-tight text-white sm:text-5xl">
-                  Klaar om slimmer te verzenden met Sendwise?
-                </h2>
-                <p className="mt-4 max-w-2xl inter-medium text-base leading-7 text-white/84 sm:text-lg sm:leading-8">
-                  Vraag direct een account aan of plan een kennismaking. Dan kijken we samen hoe Sendwise het beste past bij jouw verzendvolume en proces.
+          <div className="rounded-[22px] bg-[#f8fbff] p-5 text-[#0d1321] shadow-[0_24px_65px_rgba(7,17,31,0.18)] sm:p-7 lg:rounded-[30px] lg:p-8">
+            <div className="flex items-start justify-between gap-6">
+              <div>
+                <h3 className="inter-semibold text-[1.45rem] leading-tight text-[#07115a] sm:text-[1.65rem]">
+                  Vraag je account aan
+                </h3>
+                <p className="mt-2 max-w-md inter-medium text-sm leading-6 text-[#5a667c]">
+                  Binnen enkele minuten aangevraagd. Geen abonnementskosten, geen contracten.
                 </p>
               </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Link
-                  to="/start-met-sendwise"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 inter-semibold text-sm text-[#1a5ee5] transition hover:bg-[#edf4ff]"
-                >
-                  Start met Sendwise
-                  <FiArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 inter-semibold text-sm text-white transition hover:bg-white/10"
-                >
-                  Plan een demo
-                </Link>
-              </div>
+              <img
+                src="/profile-olivier.avif"
+                alt="Olivier van Sendwise"
+                width="112"
+                height="112"
+                loading="lazy"
+                decoding="async"
+                className="hidden h-16 w-16 rounded-full object-cover ring-4 ring-white sm:block"
+                style={{ animation: "olivierFloat 4.2s ease-in-out infinite" }}
+              />
             </div>
+
+            {renderAccountForm("cta")}
           </div>
         </div>
       </section>
