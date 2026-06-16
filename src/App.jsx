@@ -22,7 +22,8 @@ const Privacy = lazy(() => import("./page/Privacy"))
 const Integraties = lazy(() => import("./page/Integraties"))
 const BlogGoedgepickt = lazy(() => import("./page/BlogGoedgepickt"))
 const WerkenBij = lazy(() => import("./page/WerkenBij"))
-const Kennisbank = lazy(() => import("./page/Kennisbank"))
+const Kennisbank = lazy(() => import("./page/KennisbankHome"))
+const KennisbankWixVerbinden = lazy(() => import("./page/KennisbankWixVerbinden"))
 const FacebookAdsLanding = lazy(() => import("./page/FacebookAdsLanding"))
 
 const sharedCriticalImages = ["/sendwise-tekst-blauw.png", "/sendwise-tekst.png"]
@@ -52,6 +53,8 @@ const criticalImagesByPath = {
   "/blog/sendwise-goedgepickt": ["/sendwise-hero-picture.avif", ...sharedCriticalImages],
   "/integraties/woocommerce": ["/woocommerce-logo.webp", ...sharedCriticalImages],
   "/integraties/ccv-shop": ["/ccv-icon.svg", ...sharedCriticalImages],
+  "/kennisbank": ["/wix-step-8.png", ...sharedCriticalImages],
+  "/kennisbank/wix-verbinden": ["/wix-step-8.png", "/wix-step-1.png", ...sharedCriticalImages],
 }
 
 const syncCriticalPreloadLinks = (sources) => {
@@ -169,7 +172,12 @@ const seoMap = {
   "/kennisbank": {
     title: "Kennisbank | Sendwise artikelen en hulp",
     description:
-      "Binnenkort vind je hier praktische artikelen over verzenden, integraties, tarieven en fulfilment workflows.",
+      "Praktische Sendwise handleidingen voor integraties, verzending en fulfilment workflows.",
+  },
+  "/kennisbank/wix-verbinden": {
+    title: "Wix verbinden met Sendwise | Stap-voor-stap handleiding",
+    description:
+      "Lees hoe je in Wix een API key maakt en access token, account ID en site ID gebruikt om Wix met Sendwise te koppelen.",
   },
   "/start-met-sendwise": {
     title: "Start met Sendwise | Vraag een account aan",
@@ -363,6 +371,16 @@ const AnimatedRoutes = () => {
             <Suspense fallback={<RouteFallback />}>
               <PageTransition>
                 <Kennisbank />
+              </PageTransition>
+            </Suspense>
+          }
+        />
+        <Route
+          path="/kennisbank/wix-verbinden"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <KennisbankWixVerbinden />
               </PageTransition>
             </Suspense>
           }
