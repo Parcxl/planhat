@@ -38,7 +38,7 @@ const Footer = () => {
                                         <p>Magento</p>
                                         <p>Mijnwebwinkel</p>
                                         <p>Ecwid</p>
-                                        <p>Wix</p>
+                                        <Link to="/kennisbank/wix-verbinden">Wix</Link>
                                         <p>PrestaShop</p>
                                         <p>Bol.com</p>
                                         <p>Lyra</p>

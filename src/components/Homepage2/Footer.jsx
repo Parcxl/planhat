@@ -29,7 +29,7 @@ const footerColumns = [
       { label: "Magento" },
       { label: "Mijnwebwinkel" },
       { label: "Ecwid" },
-      { label: "Wix" },
+      { label: "Wix", to: "/kennisbank/wix-verbinden" },
       { label: "PrestaShop" },
       { label: "Bol.com" },
       { label: "Lyra" },
@@ -55,7 +55,7 @@ const FooterLink = ({ link }) => {
 
 const Homepage2Footer = () => {
   return (
-    <footer className="bg-[#07115a] px-6 pb-8 pt-16 text-white">
+    <footer className="bg-[#07115a] px-4 pb-8 pt-12 text-white sm:px-6 sm:pt-16">
       <div className="mx-auto max-w-7xl">
         <div className="p-0">
           <div className="grid gap-10 lg:grid-cols-[0.95fr_2fr]">
@@ -64,7 +64,7 @@ const Homepage2Footer = () => {
                 <img src="/sendwise-tekst.png" alt="Sendwise" className="h-8 w-auto brightness-0 invert" />
               </Link>
 
-              <p className="mt-5 max-w-sm inter-medium text-base leading-7 text-white/72">
+              <p className="mt-5 max-w-sm inter-medium text-[0.95rem] leading-7 text-white/72 sm:text-base">
                 Het verzendplatform voor webshops en fulfilmentcenters die slimmer willen verzenden zonder vaste kosten.
               </p>
 
@@ -83,7 +83,7 @@ const Homepage2Footer = () => {
                   <h3 className="inter-semibold text-xs uppercase tracking-[0.12em] text-[#62a6ff]">
                     {column.title}
                   </h3>
-                  <div className={`mt-5 grid gap-3 ${column.wide ? "grid-cols-2 gap-x-8" : ""}`}>
+                  <div className={`mt-5 grid gap-3 ${column.wide ? "grid-cols-2 gap-x-5 sm:gap-x-8" : ""}`}>
                     {column.links.map((link) => (
                       <FooterLink key={link.label} link={link} />
                     ))}
