@@ -25,6 +25,7 @@ const WerkenBij = lazy(() => import("./page/WerkenBij"))
 const Kennisbank = lazy(() => import("./page/KennisbankHome"))
 const KennisbankWixVerbinden = lazy(() => import("./page/KennisbankWixVerbinden"))
 const FacebookAdsLanding = lazy(() => import("./page/FacebookAdsLanding"))
+const FacebookAdsThanks = lazy(() => import("./page/FacebookAdsThanks"))
 
 const sharedCriticalImages = ["/sendwise-tekst-blauw.png", "/sendwise-tekst.png"]
 const homepageWorkflowImages = [
@@ -42,6 +43,7 @@ const criticalImagesByPath = {
   "/": ["/sendwise-hero-delivery-van.jpg", ...homepageWorkflowImages, ...sharedCriticalImages],
   "/homepage2": ["/sendwise-hero-delivery-van.jpg", ...homepageWorkflowImages, ...sharedCriticalImages],
   "/verzend-slimmer": ["/sendwise-hero-delivery-van.jpg", "/verzenden-afbeelding-1.png", "/verzenden-afbeelding-2.png", ...sharedCriticalImages],
+  "/verzend-slimmer/bedankt": ["/sendwise-hero-delivery-van.jpg", ...sharedCriticalImages],
   "/oplossingen/sendwise": ["/sendwise-platform-dashboard-hero.webp", ...sharedCriticalImages],
   "/oplossingen/pro": ["/sendwise-pro-dashboard-hero.webp", ...sharedCriticalImages],
   "/oplossingen/connect": ["/sendwise-connect-hero.jpg", ...sharedCriticalImages],
@@ -104,6 +106,11 @@ const seoMap = {
     title: "Sendwise voor webshops en fulfilmentteams | Slimmer verzenden vanaf €3,50",
     description:
       "Minder handwerk, meer grip op verzenden. Ontdek Sendwise voor labels, tracking, retouren en fulfilmentgroei zonder contracten of vaste kosten.",
+  },
+  "/verzend-slimmer/bedankt": {
+    title: "Bedankt voor je aanvraag | Sendwise",
+    description:
+      "Je Sendwise accountaanvraag is ontvangen. Het team neemt contact met je op om je account klaar te zetten.",
   },
   "/verzenddoos-animatie": {
     title: "3D verzenddoos animatie | Sendwise",
@@ -261,6 +268,16 @@ const AnimatedRoutes = () => {
             <Suspense fallback={<RouteFallback />}>
               <PageTransition>
                 <FacebookAdsLanding />
+              </PageTransition>
+            </Suspense>
+          }
+        />
+        <Route
+          path="/verzend-slimmer/bedankt"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <FacebookAdsThanks />
               </PageTransition>
             </Suspense>
           }

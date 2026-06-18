@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { FiArrowRight, FiCheck, FiLink, FiPrinter, FiTruck } from "react-icons/fi"
 import Homepage2Header from "../components/Homepage2/Header"
 import Homepage2Footer from "../components/Homepage2/Footer"
@@ -115,6 +115,7 @@ const initialFormData = {
 
 const FacebookAdsLanding = () => {
   const carrierSceneRef = useRef(null)
+  const navigate = useNavigate()
   const [formData, setFormData] = useState(initialFormData)
   const [acceptedTerms, setAcceptedTerms] = useState(false)
   const [status, setStatus] = useState({ state: "idle", message: "", form: "" })
@@ -189,13 +190,9 @@ const FacebookAdsLanding = () => {
         throw new Error(data?.error || data?.message || "Er ging iets mis bij het versturen.")
       }
 
-      setStatus({
-        state: "success",
-        message: "Je aanvraag is verzonden. Wij nemen binnen 24 uur contact met je op.",
-        form: formKey,
-      })
       setFormData(initialFormData)
       setAcceptedTerms(false)
+      navigate("/verzend-slimmer/bedankt")
     } catch (error) {
       setStatus({
         state: "error",
