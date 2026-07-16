@@ -1,7 +1,8 @@
-import { createElement, useEffect } from "react"
+import { createElement, useEffect, useRef } from "react"
 import { FiArrowRight, FiMail, FiPhone } from "react-icons/fi"
 import Homepage2Header from "../components/Homepage2/Header"
 import Homepage2Footer from "../components/Homepage2/Footer"
+import { CONSENT_CHANGE_EVENT, getStoredConsent } from "../lib/consent"
 
 const pixelId = "1522034239328606"
 
@@ -27,28 +28,52 @@ const contactOptions = [
 ]
 
 const FacebookAdsThanks = () => {
+  const pageViewTracked = useRef(false)
+
   useEffect(() => {
-    if (!window.fbq) {
-      ;(function (f, b, e, v, n, t, s) {
-        n = f.fbq = function () {
-          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-        }
-        if (!f._fbq) f._fbq = n
-        n.push = n
-        n.loaded = true
-        n.version = "2.0"
-        n.queue = []
-        t = b.createElement(e)
-        t.async = true
-        t.src = v
-        t.id = "sendwise-meta-pixel"
-        s = b.getElementsByTagName(e)[0]
-        s.parentNode.insertBefore(t, s)
-      })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js")
+    const trackPageView = (consent = getStoredConsent()) => {
+      if (!consent?.marketing || pageViewTracked.current) return
+
+      if (!window.fbq) {
+        ;(function (f, b, e, v, n, t, s) {
+          n = f.fbq = function () {
+            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+          }
+          if (!f._fbq) f._fbq = n
+          n.push = n
+          n.loaded = true
+          n.version = "2.0"
+          n.queue = []
+          t = b.createElement(e)
+          t.async = true
+          t.src = v
+          t.id = "sendwise-meta-pixel"
+          s = b.getElementsByTagName(e)[0]
+          s.parentNode.insertBefore(t, s)
+        })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js")
+      }
+
+      window.fbq("consent", "grant")
+
+      if (!window.__sendwiseMetaPixelInitialized) {
+        window.fbq("init", pixelId)
+        window.__sendwiseMetaPixelInitialized = true
+      }
+
+      window.fbq("track", "PageView")
+      pageViewTracked.current = true
     }
 
-    window.fbq("init", pixelId)
-    window.fbq("track", "PageView")
+    const handleConsentChange = (event) => {
+      trackPageView(event.detail)
+    }
+
+    trackPageView()
+    window.addEventListener(CONSENT_CHANGE_EVENT, handleConsentChange)
+
+    return () => {
+      window.removeEventListener(CONSENT_CHANGE_EVENT, handleConsentChange)
+    }
   }, [])
 
   return (
@@ -142,16 +167,6 @@ const FacebookAdsThanks = () => {
           </div>
         </div>
       </section>
-
-      <noscript>
-        <img
-          height="1"
-          width="1"
-          style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`}
-          alt=""
-        />
-      </noscript>
 
       <Homepage2Footer />
     </main>

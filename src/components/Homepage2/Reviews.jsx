@@ -49,7 +49,7 @@ const Reviews = () => {
   const marqueeReviews = [...reviews, ...reviews]
 
   return (
-    <section className="overflow-hidden bg-white px-6 pb-14 pt-16 lg:pb-18 lg:pt-20">
+    <section className="overflow-hidden bg-white px-4 pb-12 pt-14 sm:px-6 sm:pb-14 sm:pt-16 lg:pb-18 lg:pt-20">
       <style>{`
         @keyframes homepage2ReviewsMarquee {
           from { transform: translateX(0); }
@@ -65,20 +65,20 @@ const Reviews = () => {
             ))}
           </div>
 
-          <h2 className="mt-6 inter-semibold text-5xl leading-tight text-[#07115a] sm:text-6xl">
+          <h2 className="mt-5 inter-semibold text-4xl leading-tight text-[#07115a] sm:mt-6 sm:text-5xl lg:text-6xl">
             Wat klanten zeggen over Sendwise
           </h2>
         </div>
 
-        <div className="relative mt-10 overflow-hidden py-4">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent" />
+        <div className="relative mt-8 overflow-hidden py-4 sm:mt-10">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-white to-transparent sm:w-24" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-white to-transparent sm:w-24" />
 
           <div className="flex w-max gap-5" style={{ animation: "homepage2ReviewsMarquee 42s linear infinite" }}>
             {marqueeReviews.map(({ name, text, timeAgo }, index) => (
               <article
                 key={`${name}-${index}`}
-                className="flex min-h-[250px] w-[330px] shrink-0 flex-col rounded-2xl border border-[#e4ecf8] bg-white p-6 shadow-[0_18px_55px_rgba(7,17,31,0.07)]"
+                className="flex min-h-[245px] w-[286px] shrink-0 flex-col rounded-2xl border border-[#e4ecf8] bg-white p-5 shadow-[0_18px_55px_rgba(7,17,31,0.07)] sm:min-h-[250px] sm:w-[330px] sm:p-6"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex gap-1 text-[#f5b301]" aria-label="5 sterren">

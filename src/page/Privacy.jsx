@@ -17,7 +17,7 @@ const Privacy = () => {
                                     Privacyverklaring Sendwise
                                 </h1>
                                 <p className="text-gray-600 inter-medium text-[0.98rem]">
-                                    Laatst bijgewerkt: 11 oktober 2025
+                                    Laatst bijgewerkt: 16 juli 2026
                                 </p>
                             </div>
                         </div>
@@ -149,8 +149,23 @@ const Privacy = () => {
 
                             <div className="space-y-3">
                                 <h2 className="inter-medium text-[1.3rem] text-gray-900">10. Cookies en vergelijkbare technieken</h2>
-                                <p>Onze website maakt gebruik van functionele en analytische cookies om het gebruiksgemak te verbeteren en onze diensten te optimaliseren.</p>
-                                <p>Trackingcookies of marketingcookies worden alleen geplaatst met uw voorafgaande toestemming, conform de Telecommunicatiewet en de AVG. Meer informatie vindt u in onze Cookieverklaring.</p>
+                                <p>Onze website gebruikt noodzakelijke opslag om uw cookievoorkeur te bewaren. Analytische en marketingcookies worden alleen gebruikt nadat u daarvoor toestemming heeft gegeven. U kunt toestemming per categorie geven, weigeren en later weer intrekken.</p>
+                                <div className="space-y-2">
+                                    <p className="text-gray-900 inter-semibold">Microsoft Clarity (analytics)</p>
+                                    <p>Met Microsoft Clarity analyseren wij hoe bezoekers door de website navigeren, klikken en scrollen. Clarity kan hiervoor heatmaps en sessie-opnamen maken. Invoervelden en andere gevoelige inhoud worden gemaskeerd. Reguliere opnamen zijn volgens Microsoft maximaal 30 dagen beschikbaar; favoriete opnamen en een beperkte steekproef kunnen maximaal 9 maanden worden bewaard.</p>
+                                    <p>Bij toestemming voor analytics kan Clarity onder meer de cookies <span className="font-mono text-[0.9em]">_clck</span> en <span className="font-mono text-[0.9em]">_clsk</span> plaatsen. Microsoft Ireland Operations Limited verwerkt de gegevens voor deze dienst. Meer informatie staat in de <a className="text-[#1a5ee5] underline underline-offset-2" href="https://privacy.microsoft.com/nl-nl/privacystatement" target="_blank" rel="noreferrer">privacyverklaring van Microsoft</a>.</p>
+                                </div>
+                                <div className="space-y-2">
+                                    <p className="text-gray-900 inter-semibold">Meta Pixel (marketing)</p>
+                                    <p>Op pagina's die onderdeel zijn van onze advertentiecampagnes kan de Meta Pixel meten of een campagne tot een bezoek of aanvraag heeft geleid. De Pixel wordt alleen geladen wanneer u marketingcookies accepteert. Meta kan de verzamelde gegevens volgens haar eigen voorwaarden gebruiken.</p>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => window.dispatchEvent(new Event("sendwise:open-cookie-settings"))}
+                                    className="inline-flex w-fit rounded-full border border-[#1a5ee5] px-5 py-2.5 inter-semibold text-sm text-[#1a5ee5] transition hover:bg-blue-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1a5ee5]"
+                                >
+                                    Cookie-instellingen wijzigen
+                                </button>
                             </div>
 
                             <div className="space-y-3">
