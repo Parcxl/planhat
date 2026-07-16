@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from "react"
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { AnimatePresence, motion as Motion } from "framer-motion"
 import HomePage2 from "./page/Homepage2"
+import Cookie from "./components/ui/Cookie"
 
 const Header = lazy(() => import("./components/ui/Header"))
 const FloatingBoxDemo = lazy(() => import("./page/FloatingBoxDemo"))
@@ -497,6 +498,7 @@ function App() {
   return (
     <BrowserRouter>
       <AnimatedRoutes />
+      <Cookie />
     </BrowserRouter>
   )
 }

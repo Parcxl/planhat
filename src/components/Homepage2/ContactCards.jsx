@@ -33,14 +33,14 @@ const contactCards = [
 
 const ContactCards = ({ className = "" }) => {
   return (
-    <section className={`bg-white px-6 pb-16 ${className}`}>
+    <section className={`bg-white px-4 pb-14 sm:px-6 sm:pb-16 ${className}`}>
       <div className="mx-auto max-w-7xl">
         <div className="mb-9 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <h2 className="inter-semibold text-4xl leading-tight text-[#07115a] sm:text-5xl">
               Neem contact op
             </h2>
-            <p className="mt-3 max-w-2xl inter-medium text-lg leading-8 text-[#667085]">
+            <p className="mt-3 max-w-2xl inter-medium text-base leading-7 text-[#667085] sm:text-lg sm:leading-8">
               We denken graag mee over je webshop, fulfilmentproces of verzendtarieven.
             </p>
           </div>
@@ -51,14 +51,14 @@ const ContactCards = ({ className = "" }) => {
             <a
               key={title}
               href={href}
-              className="group flex min-h-[290px] rounded-[24px] border border-[#e1eaf7] bg-[#fbfdff] p-7 shadow-[0_18px_55px_rgba(7,17,31,0.065)] transition duration-300 hover:border-[#bfd4f8] hover:bg-white hover:shadow-[0_26px_75px_rgba(7,17,31,0.10)]"
+              className="group flex min-h-[260px] rounded-[22px] border border-[#e1eaf7] bg-[#fbfdff] p-5 shadow-[0_18px_55px_rgba(7,17,31,0.065)] transition duration-300 hover:border-[#bfd4f8] hover:bg-white hover:shadow-[0_26px_75px_rgba(7,17,31,0.10)] sm:min-h-[290px] sm:rounded-[24px] sm:p-7"
               target={eyebrow === "Adres" ? "_blank" : undefined}
               rel={eyebrow === "Adres" ? "noreferrer" : undefined}
             >
               <div className="flex w-full flex-col">
                 <div className="flex items-start justify-between gap-5">
-                  <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-[#1a5ee5] shadow-[0_12px_30px_rgba(26,94,229,0.10)] ring-1 ring-[#dce9ff] transition group-hover:bg-[#eef5ff]">
-                    {createElement(Icon, { className: "h-8 w-8", "aria-hidden": true })}
+                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-[#1a5ee5] shadow-[0_12px_30px_rgba(26,94,229,0.10)] ring-1 ring-[#dce9ff] transition group-hover:bg-[#eef5ff] sm:h-16 sm:w-16">
+                    {createElement(Icon, { className: "h-7 w-7 sm:h-8 sm:w-8", "aria-hidden": true })}
                   </span>
                   <span className="rounded-full bg-white px-3 py-1.5 inter-semibold text-xs uppercase tracking-[0.08em] text-[#536175] ring-1 ring-[#e1eaf7]">
                     {eyebrow}
@@ -66,7 +66,7 @@ const ContactCards = ({ className = "" }) => {
                 </div>
 
                 <div className="mt-7">
-                  <h3 className="inter-semibold text-2xl leading-tight text-[#07115a]">{title}</h3>
+                  <h3 className="inter-semibold text-[1.35rem] leading-tight text-[#07115a] sm:text-2xl">{title}</h3>
                   <p className="mt-3 inter-medium text-base leading-7 text-[#667085]">{note}</p>
                 </div>
 
