@@ -9,11 +9,11 @@ const sourceHtml = await readFile(join(distRoot, "index.html"), "utf8")
 const siteUrl = "https://www.sendwise.nl"
 const routePath = "/kennisbank/retourportaal-herroepingsrecht"
 const canonicalUrl = `${siteUrl}${routePath}`
-const title = "Retourportaal & herroepingsrecht voor webshops | Sendwise"
+const title = "Herroepingsknop voor webshops verplicht | Sendwise"
 const description =
-  "Ontdek wat het herroepingsrecht betekent voor webshops en hoe een aanpasbaar Sendwise-retourportaal retouren eenvoudiger en schaalbaar maakt."
+  "Lees wat de verplichte herroepingsknop betekent voor webshops en hoe Sendwise het herroepingsproces compliant en automatisch inricht."
 const socialImage = `${siteUrl}/retour-afbeelding-2.png`
-const socialImageAlt = "Voorbeeld van het aanpasbare retourportaal van Sendwise"
+const socialImageAlt = "Voorbeeld van het herroepingsproces in Sendwise"
 
 const escapeHtml = (value) =>
   value
@@ -35,7 +35,7 @@ const articleStructuredData = {
       "@type": "BlogPosting",
       "@id": `${canonicalUrl}#article`,
       mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
-      headline: "Waarom makkelijk retourneren geen luxe meer is",
+      headline: "De nieuwe herroepingsknop voor webshops",
       description,
       image: [socialImage],
       datePublished: "2026-07-03",
@@ -48,7 +48,7 @@ const articleStructuredData = {
       },
       publisher: { "@id": `${siteUrl}/#organization` },
       isPartOf: { "@id": `${siteUrl}/#website` },
-      about: ["Retourportaal", "Herroepingsrecht", "Webshops", "Retouren"],
+      about: ["Herroepingsknop", "Herroepingsrecht", "Webshops", "ACM"],
     },
     {
       "@type": "BreadcrumbList",
@@ -56,7 +56,7 @@ const articleStructuredData = {
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
         { "@type": "ListItem", position: 2, name: "Kennisbank", item: `${siteUrl}/kennisbank` },
-        { "@type": "ListItem", position: 3, name: "Retourportaal en herroepingsrecht", item: canonicalUrl },
+        { "@type": "ListItem", position: 3, name: "Herroepingsknop voor webshops", item: canonicalUrl },
       ],
     },
   ],
@@ -67,30 +67,32 @@ const staticArticle = `
     <article style="max-width:920px;margin:0 auto;line-height:1.75">
       <a href="/kennisbank" style="color:#1a5ee5;font-weight:600;text-decoration:none">← Terug naar kennisbank</a>
       <p style="margin:32px 0 12px;color:#6f7694;font-weight:600">Retouren &amp; herroepingsrecht</p>
-      <h1 style="max-width:850px;margin:0;color:#07115a;font-size:clamp(42px,7vw,72px);line-height:1.02;font-weight:600">Waarom makkelijk retourneren geen luxe meer is</h1>
-      <p style="max-width:760px;margin:28px 0 10px;color:#526078;font-size:18px">Retouren zijn niet alleen een operationeel proces. Ze raken je klantbeleving, je conversie en je verplichtingen als webshop. Met een goed retourportaal maak je retourneren duidelijker, sneller en beter schaalbaar.</p>
+      <h1 style="max-width:850px;margin:0;color:#07115a;font-size:clamp(42px,7vw,72px);line-height:1.02;font-weight:600">De nieuwe herroepingsknop voor webshops</h1>
+      <p style="max-width:760px;margin:28px 0 10px;color:#526078;font-size:18px">Sinds juni 2026 moeten webshops en apps een duidelijke herroepingsknop aanbieden. Lees wat deze verplichting betekent en hoe Sendwise het herroepingsproces automatiseert.</p>
       <p style="color:#5e6a80">Door Sendwise Team · 3 juli 2026 · ongeveer 5 minuten lezen</p>
       <figure style="margin:40px 0">
         <img src="/profile-joep.webp" alt="Joep van Sendwise bij de blauwe Sendwise-bus" width="1254" height="1254" style="display:block;width:100%;max-width:560px;border-radius:28px" />
-        <figcaption style="max-width:560px;margin-top:12px;color:#334155;font-weight:600">“Met het retourportaal maken klanten zelf eenvoudig een retour aan, terwijl jij overzicht houdt op iedere status.” — Joep van Sendwise</figcaption>
+        <figcaption style="max-width:560px;margin-top:12px;color:#334155;font-weight:600">“Met een duidelijke herroepingsknop maak je annuleren net zo laagdrempelig als bestellen, zonder extra werk voor je klantenservice.” — Joep van Sendwise</figcaption>
       </figure>
       <section>
-        <p>Retouren zijn voor veel webshops nog steeds een noodzakelijk kwaad. Ze kosten tijd, geld en aandacht. Toch wordt een soepel retourproces steeds belangrijker. Niet alleen omdat consumenten het verwachten, maar ook omdat wet- en regelgeving rondom online aankopen duidelijke eisen stelt aan het herroepingsrecht.</p>
-        <p>In Nederland en de rest van Europa geldt bij online aankopen in veel gevallen een wettelijke bedenktijd van 14 dagen. Binnen die periode mag een consument de koop herroepen, zonder daarvoor een reden te hoeven geven.</p>
-        <h2 style="margin-top:48px;color:#07115a;font-size:32px;line-height:1.2">Herroepingsrecht: wat betekent het voor webshops?</h2>
-        <p>Het herroepingsrecht geeft consumenten bij online aankopen het recht om binnen 14 dagen af te zien van de aankoop. Voor producten geldt deze periode vanaf het moment van levering. Voor diensten geldt de termijn vanaf het moment dat de overeenkomst is gesloten.</p>
-        <p>Klanten moeten vooraf duidelijk geïnformeerd worden over retourvoorwaarden en eventuele retourkosten. Retouren zijn daarmee onderdeel van je wettelijke informatieplicht, je klantbeleving en je operationele proces.</p>
-        <h2 style="margin-top:48px;color:#07115a;font-size:32px;line-height:1.2">Waarom makkelijker retourneren steeds belangrijker wordt</h2>
-        <p>Een duidelijk retourproces, automatische retourlabels, transparante kosten, statusupdates en minder handmatig werk helpen om vertrouwen op te bouwen.</p>
-        <h2 style="margin-top:48px;color:#07115a;font-size:32px;line-height:1.2">Retourneren in Nederland en Europa</h2>
-        <p>Internationaal retourneren wordt complexer door verschillende vervoerders, tarieven en klantverwachtingen. Toch verwacht de consument overal hetzelfde: snel, duidelijk en zonder gedoe retourneren.</p>
-        <h2 style="margin-top:48px;color:#07115a;font-size:32px;line-height:1.2">Een volledig aanpasbaar retourportaal</h2>
+        <p>Retouren en annuleringen zijn voor veel webshops nog altijd een noodzakelijk kwaad. Toch verandert er iets fundamenteels. Online retailers moeten in hun online omgeving, zoals webshops en apps, een duidelijke en toegankelijke ontbindingsfunctie aanbieden.</p>
+        <p>Deze functie wordt vaak de herroepingsknop genoemd. Wie online verkoopt aan consumenten, moet het voor klanten makkelijk maken om een online aankoop binnen de wettelijke bedenktijd ongedaan te maken.</p>
+        <h2 style="margin-top:48px;color:#07115a;font-size:32px;line-height:1.2">Wat is de herroepingsknop?</h2>
+        <p>De herroepingsknop is een digitale functie waarmee een consument met een paar klikken kan aangeven dat hij een aankoop wil herroepen. De knop maakt het mogelijk om een online aankoop van een product of dienst binnen de wettelijke bedenktijd van 14 dagen te annuleren.</p>
+        <p>Een vage contactknop of algemene retourpagina is niet genoeg. De functie moet duidelijk maken waarvoor die is, bijvoorbeeld met tekst als "Koop ongedaan maken".</p>
+        <h2 style="margin-top:48px;color:#07115a;font-size:32px;line-height:1.2">Wat verandert er aan het herroepingsrecht?</h2>
+        <p>Voor consumenten verandert het wettelijke herroepingsrecht inhoudelijk niet. Wat wel verandert, is de manier waarop consumenten dat recht moeten kunnen uitoefenen: digitaal, duidelijk en zonder onnodige drempels.</p>
+        <h2 style="margin-top:48px;color:#07115a;font-size:32px;line-height:1.2">Voor wie geldt de verplichting?</h2>
+        <p>De verplichting geldt voor webshops en online dienstverleners die verkopen aan consumenten. B2B-transacties vallen buiten deze consumentenregel.</p>
+        <h2 style="margin-top:48px;color:#07115a;font-size:32px;line-height:1.2">Zo regelt Sendwise de herroepingsknop</h2>
         <img src="/retour-afbeelding-2.png" alt="Voorbeeld van een volledig aanpasbaar retourportaal in Sendwise" width="1190" height="650" style="display:block;width:100%;margin:24px 0;border-radius:24px" />
-        <p>Met het retourportaal van Sendwise melden klanten zelf hun retour aan. Jij bepaalt welke retourredenen en verzendmethodes beschikbaar zijn en houdt overzicht op iedere status.</p>
-        <h2 style="margin-top:48px;color:#07115a;font-size:32px;line-height:1.2">Waarom kiezen voor Sendwise?</h2>
-        <p>Je krijgt een professioneel, volledig aanpasbaar retourportaal en scherpe verzendprijzen. Zo wordt retourneren een beheersbaar onderdeel van je logistieke proces.</p>
+        <p>Sendwise zorgt voor een duidelijke, wettelijk correcte herroepingsfunctie die klanten makkelijk kunnen vinden. Het verzoek, de automatische bevestiging en de interne opvolging sluiten aan op je bestaande processen rond ruilen, retourneren en klantenservice.</p>
+        <h2 style="margin-top:48px;color:#07115a;font-size:32px;line-height:1.2">Wat riskeer je zonder herroepingsknop?</h2>
+        <p>Als consumenten niet goed worden geïnformeerd over hun herroepingsrecht of de herroepingsfunctie, kan de wettelijke bedenktijd worden verlengd tot maximaal een jaar. Ook kan de ACM boetes opleggen.</p>
+        <h2 style="margin-top:48px;color:#07115a;font-size:32px;line-height:1.2">FAQ over de herroepingsknop</h2>
+        <p>Sinds juni 2026 moeten webshops en online dienstverleners een duidelijke herroepingsfunctie aanbieden voor online aankopen van consumenten. De knop is een extra route naast het bestaande modelformulier.</p>
         <p style="margin-top:36px"><a href="/start-met-sendwise" style="display:inline-block;border-radius:12px;background:#1a5ee5;color:#fff;padding:12px 20px;font-weight:600;text-decoration:none">Direct registreren</a></p>
-        <p style="margin-top:44px;color:#5e6a80;font-size:14px">Bron: <a href="https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_en.htm">Europese Commissie / Your Europe</a>.</p>
+        <p style="margin-top:44px;color:#5e6a80;font-size:14px">Bron: <a href="https://www.acm.nl/nl/publicaties/acm-roept-online-retailers-op-zich-voor-te-bereiden-op-herroepingsknop">Autoriteit Consument &amp; Markt</a>.</p>
       </section>
     </article>
   </main>`

@@ -6,14 +6,14 @@ import Homepage2Footer from "../components/Homepage2/Footer"
 
 const articles = [
   {
-    title: "Waarom makkelijk retourneren geen luxe meer is",
+    title: "De nieuwe herroepingsknop voor webshops",
     description:
-      "Lees wat het herroepingsrecht betekent voor webshops en hoe een slim retourportaal zorgt voor minder handwerk en een betere klantbeleving.",
+      "Lees wat de verplichte herroepingsknop betekent voor webshops en hoe je het herroepingsproces automatiseert met Sendwise.",
     to: "/kennisbank/retourportaal-herroepingsrecht",
-    category: "Retouren",
+    category: "Herroepingsrecht",
     readTime: "± 5 min",
     image: "/retour-afbeelding-2.png",
-    tags: ["Retourportaal", "Herroepingsrecht", "Webshops", "Europa"],
+    tags: ["Herroepingsknop", "Herroepingsrecht", "Webshops", "ACM"],
   },
   {
     title: "Wix verbinden met Sendwise",

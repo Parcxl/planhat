@@ -190,12 +190,12 @@ const seoMap = {
       "Lees hoe je in Wix een API key maakt en access token, account ID en site ID gebruikt om Wix met Sendwise te koppelen.",
   },
   "/kennisbank/retourportaal-herroepingsrecht": {
-    title: "Retourportaal & herroepingsrecht voor webshops | Sendwise",
+    title: "Herroepingsknop voor webshops verplicht | Sendwise",
     description:
-      "Ontdek wat het herroepingsrecht betekent voor webshops en hoe een aanpasbaar Sendwise-retourportaal retouren eenvoudiger en schaalbaar maakt.",
+      "Lees wat de verplichte herroepingsknop betekent voor webshops en hoe Sendwise het herroepingsproces compliant en automatisch inricht.",
     type: "article",
     image: "/retour-afbeelding-2.png",
-    imageAlt: "Voorbeeld van het aanpasbare retourportaal van Sendwise",
+    imageAlt: "Voorbeeld van het herroepingsproces in Sendwise",
     publishedTime: "2026-07-03",
     modifiedTime: "2026-07-17",
   },
@@ -249,7 +249,7 @@ const getRouteStructuredData = (pathname, seo, canonicalUrl, imageUrl) => {
         "@type": "BlogPosting",
         "@id": `${canonicalUrl}#article`,
         mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
-        headline: "Waarom makkelijk retourneren geen luxe meer is",
+        headline: "De nieuwe herroepingsknop voor webshops",
         description: seo.description,
         image: [imageUrl],
         datePublished: seo.publishedTime,
@@ -262,7 +262,7 @@ const getRouteStructuredData = (pathname, seo, canonicalUrl, imageUrl) => {
         },
         publisher: { "@id": `${SITE_URL}/#organization` },
         isPartOf: { "@id": `${SITE_URL}/#website` },
-        about: ["Retourportaal", "Herroepingsrecht", "Webshops", "Retouren"],
+        about: ["Herroepingsknop", "Herroepingsrecht", "Webshops", "ACM"],
       },
       {
         "@type": "BreadcrumbList",
@@ -270,7 +270,7 @@ const getRouteStructuredData = (pathname, seo, canonicalUrl, imageUrl) => {
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
           { "@type": "ListItem", position: 2, name: "Kennisbank", item: `${SITE_URL}/kennisbank` },
-          { "@type": "ListItem", position: 3, name: "Retourportaal en herroepingsrecht", item: canonicalUrl },
+          { "@type": "ListItem", position: 3, name: "Herroepingsknop voor webshops", item: canonicalUrl },
         ],
       },
     ],

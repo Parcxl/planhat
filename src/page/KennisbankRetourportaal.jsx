@@ -14,21 +14,21 @@ import Homepage2Header from "../components/Homepage2/Header"
 import Homepage2Footer from "../components/Homepage2/Footer"
 
 const benefits = [
-  "Volledig aanpasbaar retourportaal",
-  "Voor een fractie van de prijs van veel concurrenten",
-  "Automatische retouraanmeldingen",
-  "Scherpe verzendtarieven",
-  "Overzicht in retouren en statussen",
-  "Geschikt voor Nederland en Europa",
+  "Wettelijk correcte herroepingsfunctie",
+  "Duidelijke knop of link op je webshop",
+  "Herroepen zonder verplichte accountdrempel",
+  "Automatische bevestiging per e-mail",
+  "Aansluiting op je retourproces",
+  "Geschikt voor webshops en online diensten",
 ]
 
 const returnProcessBenefits = [
-  "Duidelijke retourinstructies",
-  "Automatisch gegenereerde retourlabels",
-  "Transparante retourkosten",
-  "Meerdere vervoerders of verzendopties",
-  "Statusupdates voor klant en webshop",
-  "Minder handmatig werk voor klantenservice",
+  "Maak de knop makkelijk vindbaar, bijvoorbeeld in de footer",
+  "Gebruik duidelijke tekst zoals 'Koop ongedaan maken'",
+  "Laat alleen noodzakelijke bestelgegevens invullen",
+  "Stuur direct een automatische ontvangstbevestiging",
+  "Houd het modelformulier daarnaast beschikbaar",
+  "Laat het proces aansluiten op klantenservice en retourbeleid",
 ]
 
 const MetaItem = ({ icon, children }) => (
@@ -81,13 +81,13 @@ export default function KennisbankRetourportaal() {
               </div>
 
               <h1 className="mt-6 inter-semibold text-[2.75rem] leading-[1.02] text-indigo-950 sm:text-6xl sm:leading-[1.02] lg:text-7xl">
-                Waarom makkelijk retourneren geen luxe meer is
+                De nieuwe herroepingsknop voor webshops
               </h1>
 
               <p className="mt-7 max-w-2xl text-[1.05rem] leading-8 text-[#526078] sm:text-[1.12rem]">
-                Retouren zijn niet alleen een operationeel proces. Ze raken je klantbeleving, je
-                conversie en je verplichtingen als webshop. Met een goed retourportaal maak je
-                retourneren duidelijker, sneller en beter schaalbaar.
+                Sinds juni 2026 moeten webshops en apps een duidelijke herroepingsknop aanbieden.
+                Lees wat deze verplichting betekent, voor wie de regels gelden en hoe je het
+                herroepingsproces automatiseert met Sendwise.
               </p>
 
               <div className="mt-7 flex flex-wrap gap-x-5 gap-y-3">
@@ -111,8 +111,8 @@ export default function KennisbankRetourportaal() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#07115a]/95 via-[#07115a]/15 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white sm:p-9 lg:p-10">
                 <p className="inter-semibold text-[1.35rem] leading-tight sm:text-[1.75rem] lg:text-[1.9rem]">
-                  “Met het retourportaal maken klanten zelf eenvoudig een retour aan, terwijl jij
-                  overzicht houdt op iedere status.”
+                  “Met een duidelijke herroepingsknop maak je annuleren net zo laagdrempelig als
+                  bestellen, zonder extra werk voor je klantenservice.”
                 </p>
                 <p className="mt-5 inter-medium text-sm text-white/80 sm:text-base">Joep van Sendwise</p>
               </div>
@@ -125,63 +125,68 @@ export default function KennisbankRetourportaal() {
         <div className="mx-auto max-w-4xl">
           <section className="space-y-5 text-[1rem] leading-8 text-[#334155] sm:text-[1.06rem]">
             <p>
-              Retouren zijn voor veel webshops nog steeds een noodzakelijk kwaad. Ze kosten tijd,
-              geld en aandacht. Toch wordt een soepel retourproces steeds belangrijker. Niet alleen
-              omdat consumenten het verwachten, maar ook omdat wet- en regelgeving rondom online
-              aankopen duidelijke eisen stelt aan het herroepingsrecht.
+              Retouren en annuleringen zijn voor veel webshops nog altijd een noodzakelijk kwaad.
+              Toch verandert er iets fundamenteels. De Autoriteit Consument &amp; Markt wijst online
+              retailers erop dat zij in hun online omgeving, zoals webshops en apps, een duidelijke
+              en toegankelijke ontbindingsfunctie moeten aanbieden.
             </p>
             <p>
-              In Nederland en de rest van Europa geldt bij online aankopen in veel gevallen een
-              wettelijke bedenktijd van 14 dagen. Binnen die periode mag een consument de koop
-              herroepen, zonder daarvoor een reden te hoeven geven. Voor webshops betekent dit dat
-              retourneren niet alleen praktisch goed geregeld moet zijn, maar ook helder,
-              toegankelijk en betrouwbaar moet worden aangeboden.
+              Deze functie wordt vaak de herroepingsknop genoemd. Wie online verkoopt aan
+              consumenten, moet het voor klanten makkelijk maken om een online aankoop binnen de
+              wettelijke bedenktijd ongedaan te maken. Geen zoektocht door algemene voorwaarden,
+              geen verplicht mailtje naar de klantenservice en geen verstopt formulier.
             </p>
 
             <div className="rounded-[24px] border border-[#cfe0fb] bg-[#f3f8ff] p-6 text-[#355070] sm:p-7">
               <p className="font-medium">
-                Veel webshops hebben hun verkoopproces strak ingericht, maar het retourproces blijft
-                achter. Klanten moeten mailen, wachten op instructies, handmatig labels ontvangen of
-                onduidelijke retourvoorwaarden uitpluizen. Dat is niet meer van deze tijd.
+                Een online aankoop is vaak met een paar klikken gedaan. De nieuwe
+                herroepingsfunctie zorgt ervoor dat consumenten hun aankoop ook digitaal,
+                laagdrempelig en zonder onnodige drempels kunnen herroepen.
               </p>
             </div>
           </section>
 
           <section className="mt-16">
             <h2 className="inter-semibold text-[2rem] leading-tight text-[#0d1321] sm:text-[2.6rem]">
-              Herroepingsrecht: wat betekent het voor webshops?
+              Wat is de herroepingsknop?
             </h2>
             <div className="mt-6 space-y-5 text-[1rem] leading-8 text-[#334155] sm:text-[1.06rem]">
               <p>
-                Het herroepingsrecht geeft consumenten bij online aankopen het recht om binnen 14
-                dagen af te zien van de aankoop. Volgens Europese consumentenregels geldt deze
-                periode bij producten vanaf het moment van levering. Voor diensten geldt de termijn
-                vanaf het moment dat de overeenkomst is gesloten.
+                De herroepingsknop is een digitale functie op je website of in je app waarmee een
+                consument met een paar klikken kan aangeven dat hij een aankoop wil herroepen. De
+                knop maakt het mogelijk om een online aankoop van een product of dienst binnen de
+                wettelijke bedenktijd van 14 dagen te annuleren.
               </p>
               <p>
-                Daarnaast moeten klanten vooraf duidelijk geïnformeerd worden over retourvoorwaarden
-                en eventuele retourkosten. Als een webshop de consument niet goed informeert over
-                retourkosten, kan dat gevolgen hebben voor wie deze kosten uiteindelijk moet dragen.
+                De verplichting komt voort uit Europese regels en is in Nederland vastgelegd in het
+                Burgerlijk Wetboek. De kern is eenvoudig: consumenten moeten een online aankoop net
+                zo makkelijk kunnen ontbinden als zij die hebben gesloten.
               </p>
               <p>
-                <strong className="font-semibold text-[#0d1321]">Kort gezegd:</strong> retouren zijn
-                geen bijzaak meer. Ze zijn onderdeel van je wettelijke informatieplicht, je
-                klantbeleving en je operationele proces.
+                <strong className="font-semibold text-[#0d1321]">Kort gezegd:</strong> een vage
+                contactknop of algemene retourpagina is niet genoeg. De functie moet duidelijk maken
+                waarvoor die is, bijvoorbeeld met tekst als "Koop ongedaan maken".
               </p>
             </div>
           </section>
 
           <section className="mt-16">
             <h2 className="inter-semibold text-[2rem] leading-tight text-[#0d1321] sm:text-[2.6rem]">
-              Waarom makkelijker retourneren steeds belangrijker wordt
+              Wat verandert er aan het herroepingsrecht?
             </h2>
             <div className="mt-6 space-y-5 text-[1rem] leading-8 text-[#334155] sm:text-[1.06rem]">
               <p>
-                Consumenten vergelijken webshops niet alleen op prijs of levertijd. Ze kijken ook
-                naar hoe makkelijk ze iets kunnen terugsturen. Een onduidelijk retourproces zorgt
-                voor twijfel vóór aankoop en frustratie ná aankoop.
+                Voor consumenten verandert het wettelijke herroepingsrecht inhoudelijk niet. Zij
+                kunnen nog steeds binnen de wettelijke bedenktijd van 14 dagen aangeven dat zij van
+                de aankoop afzien. Bij fysieke producten start die bedenktijd vanaf levering. Bij
+                diensten en digitale content start de termijn vanaf het sluiten van de overeenkomst.
               </p>
-              <p>Een goed retourproces helpt juist om vertrouwen op te bouwen.</p>
+              <p>
+                Wat wel verandert, is de manier waarop consumenten dat recht moeten kunnen
+                uitoefenen. De herroeping moet digitaal, duidelijk en zonder onnodige drempels
+                kunnen. De knop is een aanvulling op het bestaande modelformulier en vervangt dat
+                formulier dus niet.
+              </p>
             </div>
             <div className="mt-7">
               <CheckList items={returnProcessBenefits} />
@@ -190,18 +195,19 @@ export default function KennisbankRetourportaal() {
 
           <section className="mt-16">
             <h2 className="inter-semibold text-[2rem] leading-tight text-[#0d1321] sm:text-[2.6rem]">
-              Retourneren in Nederland en Europa
+              Voor wie geldt de verplichting?
             </h2>
             <div className="mt-6 space-y-5 text-[1rem] leading-8 text-[#334155] sm:text-[1.06rem]">
               <p>
-                De Europese markt wordt steeds toegankelijker voor webshops. Maar zodra je
-                internationaal verkoopt, wordt retourneren complexer. Elk land heeft andere
-                vervoerders, verschillende tarieven en andere klantverwachtingen.
+                De verplichting geldt voor webshops en online dienstverleners die verkopen aan
+                consumenten. Dat gaat niet alleen om webshops met fysieke producten, maar ook om
+                online diensten en digitale producten zoals cursussen of andere digitale content.
               </p>
               <p>
-                Toch verwacht de consument overal hetzelfde: snel, duidelijk en zonder gedoe
-                retourneren. Daarom is een retourportaal geen extraatje meer voor grote webshops. Het
-                wordt steeds meer de standaard voor iedere webshop die serieus wil groeien.
+                Verkoop je uitsluitend zakelijk, dan valt je webshop buiten deze consumentenregel.
+                Verkoop je zowel B2C als B2B, dan moet het consumentendeel van je transacties wel
+                een duidelijke herroepingsfunctie aanbieden. De knop geldt alleen voor producten en
+                diensten die ook online zijn aangeschaft.
               </p>
             </div>
           </section>
@@ -224,18 +230,18 @@ export default function KennisbankRetourportaal() {
                 De Sendwise-oplossing
               </p>
               <h2 className="mt-4 inter-semibold text-[2rem] leading-tight text-[#0d1321] sm:text-[2.6rem]">
-                Een volledig aanpasbaar retourportaal
+                Zo regelt Sendwise de herroepingsknop
               </h2>
               <div className="mt-5 space-y-4 text-[1rem] leading-8 text-[#526078]">
-                <p>Sendwise helpt webshops om retouren professioneel en betaalbaar te organiseren.</p>
+                <p>Sendwise helpt webshops om de herroepingsknop professioneel in te richten.</p>
                 <p>
-                  Klanten melden zelf hun retour aan. Jij bepaalt hoe het portaal werkt, welke
-                  retourredenen zichtbaar zijn, welke verzendmethodes beschikbaar zijn en hoe het
-                  proces eruitziet.
+                  We zorgen voor een duidelijke, wettelijk correcte herroepingsfunctie die klanten
+                  makkelijk kunnen vinden, bijvoorbeeld via de footer of accountomgeving van je
+                  webshop.
                 </p>
                 <p>
-                  Het resultaat: minder handmatig werk, minder vragen bij de klantenservice en een
-                  betere ervaring voor je klant.
+                  Het verzoek, de automatische bevestiging en de interne opvolging sluiten aan op je
+                  bestaande processen rond ruilen, retourneren en klantenservice.
                 </p>
               </div>
             </div>
@@ -249,35 +255,72 @@ export default function KennisbankRetourportaal() {
         <div className="mx-auto max-w-4xl">
           <section className="mt-16">
             <h2 className="inter-semibold text-[2rem] leading-tight text-[#0d1321] sm:text-[2.6rem]">
-              Waarom kiezen voor Sendwise?
+              Wat riskeer je zonder herroepingsknop?
             </h2>
             <div className="mt-6 space-y-5 text-[1rem] leading-8 text-[#334155] sm:text-[1.06rem]">
               <p>
-                Veel retourportalen zijn duur, complex of vooral gebouwd voor grote
-                enterprise-webshops. Sendwise pakt dat anders aan.
+                Niet voldoen aan de regels kan directe gevolgen hebben. Als consumenten niet goed
+                worden geïnformeerd over hun herroepingsrecht of de herroepingsfunctie, kan de
+                wettelijke bedenktijd worden verlengd tot maximaal een jaar. Ook kan de ACM boetes
+                opleggen.
               </p>
               <p>
-                Je krijgt een professioneel, volledig aanpasbaar retourportaal voor een fractie van
-                de prijs van veel concurrenten. Daarbij profiteer je van scherpe verzendprijzen,
-                waardoor retourneren niet onnodig duur hoeft te worden.
+                Voor een webshop raakt dat direct aan marges, voorraadbeheer en klantenservice. Een
+                aankoop die veel langer kan worden herroepen, zorgt voor onzekerheid in je
+                operationele proces.
               </p>
               <p>
-                Zo maak je van retouren geen kostenpost waar je grip op verliest, maar een beheersbaar
-                onderdeel van je logistieke proces.
+                Door de knop goed in te richten, maak je van een wettelijke verplichting geen risico,
+                maar een beheersbaar onderdeel van je logistiek.
+              </p>
+            </div>
+          </section>
+
+          <section className="mt-16">
+            <h2 className="inter-semibold text-[2rem] leading-tight text-[#0d1321] sm:text-[2.6rem]">
+              FAQ over de herroepingsknop
+            </h2>
+            <div className="mt-6 space-y-5 text-[1rem] leading-8 text-[#334155] sm:text-[1.06rem]">
+              <p>
+                <strong className="font-semibold text-[#0d1321]">
+                  Vanaf wanneer is de herroepingsknop verplicht?
+                </strong>{" "}
+                Sinds juni 2026 moeten webshops en online dienstverleners een duidelijke
+                herroepingsfunctie aanbieden voor online aankopen van consumenten.
+              </p>
+              <p>
+                <strong className="font-semibold text-[#0d1321]">
+                  Geldt de verplichting ook voor B2B?
+                </strong>{" "}
+                Nee. De verplichting geldt voor verkoop aan consumenten. Zakelijke transacties
+                vallen hier buiten.
+              </p>
+              <p>
+                <strong className="font-semibold text-[#0d1321]">
+                  Vervangt de knop het herroepingsformulier?
+                </strong>{" "}
+                Nee. De herroepingsknop is een extra route naast het bestaande modelformulier.
+              </p>
+              <p>
+                <strong className="font-semibold text-[#0d1321]">
+                  Moet ik dit zelf bouwen?
+                </strong>{" "}
+                Nee. Sendwise kan de herroepingsknop en de automatische opvolging voor je
+                inrichten, zodat je webshop op tijd en correct voldoet.
               </p>
             </div>
           </section>
 
           <section className="mt-16 rounded-[32px] bg-[#1a5ee5] px-6 py-9 text-white shadow-[0_24px_75px_rgba(26,94,229,0.24)] sm:px-10 sm:py-11">
             <p className="text-sm font-semibold uppercase tracking-[0.12em] text-white/75">
-              Klaar voor de toekomst
+              Klaar voor de verplichting
             </p>
             <h2 className="mt-3 inter-semibold text-[2rem] leading-tight sm:text-[2.7rem]">
-              Maak je retourproces slimmer, goedkoper en professioneler
+              Maak je herroepingsproces compliant en geautomatiseerd
             </h2>
             <p className="mt-5 max-w-2xl text-[1rem] leading-8 text-white/85 sm:text-[1.06rem]">
-              Ontdek hoe jouw webshop binnen korte tijd kan werken met een volledig aanpasbaar
-              retourportaal en scherpe verzendtarieven.
+              Ontdek hoe Sendwise jouw webshop helpt met een duidelijke herroepingsknop,
+              automatische bevestigingen en een proces dat aansluit op je bestaande workflow.
             </p>
             <Link
               to="/start-met-sendwise"
@@ -291,16 +334,16 @@ export default function KennisbankRetourportaal() {
           <section className="mt-10 border-t border-[#dce7f4] pt-7 text-sm leading-7 text-[#5e6a80]">
             <p className="font-semibold text-[#0d1321]">Bron</p>
             <p className="mt-2">
-              Europese Commissie / Your Europe over consumentenrechten, retouren en herroepingsrecht
-              bij online aankopen.
+              Autoriteit Consument &amp; Markt, Ondernemersplein/KVK en het Burgerlijk Wetboek over de
+              herroepingsknop en het herroepingsrecht bij online aankopen.
             </p>
             <a
-              href="https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_en.htm"
+              href="https://www.acm.nl/nl/publicaties/acm-roept-online-retailers-op-zich-voor-te-bereiden-op-herroepingsknop"
               target="_blank"
               rel="noreferrer"
               className="mt-3 inline-flex items-center gap-2 font-semibold text-[#1a5ee5] hover:underline"
             >
-              Bekijk de Europese consumentenregels
+              Bekijk de ACM-publicatie
               <FiExternalLink aria-hidden="true" />
             </a>
           </section>
