@@ -25,6 +25,7 @@ const BlogGoedgepickt = lazy(() => import("./page/BlogGoedgepickt"))
 const WerkenBij = lazy(() => import("./page/WerkenBij"))
 const Kennisbank = lazy(() => import("./page/KennisbankHome"))
 const KennisbankWixVerbinden = lazy(() => import("./page/KennisbankWixVerbinden"))
+const KennisbankRetourportaal = lazy(() => import("./page/KennisbankRetourportaal"))
 const FacebookAdsLanding = lazy(() => import("./page/FacebookAdsLanding"))
 const FacebookAdsThanks = lazy(() => import("./page/FacebookAdsThanks"))
 
@@ -58,6 +59,7 @@ const criticalImagesByPath = {
   "/integraties/ccv-shop": ["/ccv-icon.svg", ...sharedCriticalImages],
   "/kennisbank": ["/wix-step-8.png", ...sharedCriticalImages],
   "/kennisbank/wix-verbinden": ["/wix-step-8.png", "/wix-step-1.png", ...sharedCriticalImages],
+  "/kennisbank/retourportaal-herroepingsrecht": ["/profile-joep.webp", ...sharedCriticalImages],
 }
 
 const syncCriticalPreloadLinks = (sources) => {
@@ -187,6 +189,16 @@ const seoMap = {
     description:
       "Lees hoe je in Wix een API key maakt en access token, account ID en site ID gebruikt om Wix met Sendwise te koppelen.",
   },
+  "/kennisbank/retourportaal-herroepingsrecht": {
+    title: "Retourportaal & herroepingsrecht voor webshops | Sendwise",
+    description:
+      "Ontdek wat het herroepingsrecht betekent voor webshops en hoe een aanpasbaar Sendwise-retourportaal retouren eenvoudiger en schaalbaar maakt.",
+    type: "article",
+    image: "/retour-afbeelding-2.png",
+    imageAlt: "Voorbeeld van het aanpasbare retourportaal van Sendwise",
+    publishedTime: "2026-07-03",
+    modifiedTime: "2026-07-17",
+  },
   "/start-met-sendwise": {
     title: "Start met Sendwise | Vraag een account aan",
     description:
@@ -197,6 +209,72 @@ const seoMap = {
     description:
       "Leer hoe je Sendwise koppelt aan Goedgepickt via een API-key en dynamische verzendmethoden in een duidelijke stap-voor-stap gids.",
   },
+}
+
+const SITE_URL = "https://www.sendwise.nl"
+const DEFAULT_SOCIAL_IMAGE = "/sendwise-hero-delivery-van.jpg"
+const DEFAULT_SOCIAL_IMAGE_ALT = "Pakket wordt in een blauwe Sendwise-bezorgbus geladen"
+
+const upsertMeta = (attribute, key, content) => {
+  let tag = document.head.querySelector(`meta[${attribute}="${key}"]`)
+  if (!tag) {
+    tag = document.createElement("meta")
+    tag.setAttribute(attribute, key)
+    document.head.appendChild(tag)
+  }
+  tag.setAttribute("content", content)
+}
+
+const removeMeta = (attribute, key) => {
+  document.head.querySelector(`meta[${attribute}="${key}"]`)?.remove()
+}
+
+const setCanonical = (href) => {
+  let tag = document.head.querySelector('link[rel="canonical"]')
+  if (!tag) {
+    tag = document.createElement("link")
+    tag.setAttribute("rel", "canonical")
+    document.head.appendChild(tag)
+  }
+  tag.setAttribute("href", href)
+}
+
+const getRouteStructuredData = (pathname, seo, canonicalUrl, imageUrl) => {
+  if (pathname !== "/kennisbank/retourportaal-herroepingsrecht") return null
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${canonicalUrl}#article`,
+        mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+        headline: "Waarom makkelijk retourneren geen luxe meer is",
+        description: seo.description,
+        image: [imageUrl],
+        datePublished: seo.publishedTime,
+        dateModified: seo.modifiedTime,
+        inLanguage: "nl-NL",
+        author: {
+          "@type": "Organization",
+          name: "Sendwise Team",
+          url: `${SITE_URL}/over-ons`,
+        },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        about: ["Retourportaal", "Herroepingsrecht", "Webshops", "Retouren"],
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+          { "@type": "ListItem", position: 2, name: "Kennisbank", item: `${SITE_URL}/kennisbank` },
+          { "@type": "ListItem", position: 3, name: "Retourportaal en herroepingsrecht", item: canonicalUrl },
+        ],
+      },
+    ],
+  }
 }
 
 const AnimatedRoutes = () => {
@@ -223,14 +301,51 @@ const AnimatedRoutes = () => {
     const seo = seoMap[location.pathname] || seoMap["/"]
     if (!seo) return
 
+    document.documentElement.lang = "nl"
     document.title = seo.title
-    let descriptionTag = document.querySelector('meta[name="description"]')
-    if (!descriptionTag) {
-      descriptionTag = document.createElement("meta")
-      descriptionTag.setAttribute("name", "description")
-      document.head.appendChild(descriptionTag)
+    const canonicalPath = location.pathname === "/homepage2" ? "/" : location.pathname
+    const canonicalUrl = `${SITE_URL}${canonicalPath === "/" ? "/" : canonicalPath}`
+    const imageUrl = `${SITE_URL}${seo.image || DEFAULT_SOCIAL_IMAGE}`
+    const imageAlt = seo.imageAlt || DEFAULT_SOCIAL_IMAGE_ALT
+
+    upsertMeta("name", "description", seo.description)
+    upsertMeta("name", "robots", "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1")
+    setCanonical(canonicalUrl)
+
+    upsertMeta("property", "og:locale", "nl_NL")
+    upsertMeta("property", "og:type", seo.type || "website")
+    upsertMeta("property", "og:site_name", "Sendwise")
+    upsertMeta("property", "og:title", seo.title)
+    upsertMeta("property", "og:description", seo.description)
+    upsertMeta("property", "og:url", canonicalUrl)
+    upsertMeta("property", "og:image", imageUrl)
+    upsertMeta("property", "og:image:alt", imageAlt)
+
+    upsertMeta("name", "twitter:card", "summary_large_image")
+    upsertMeta("name", "twitter:title", seo.title)
+    upsertMeta("name", "twitter:description", seo.description)
+    upsertMeta("name", "twitter:image", imageUrl)
+    upsertMeta("name", "twitter:image:alt", imageAlt)
+
+    if (seo.type === "article") {
+      upsertMeta("property", "article:published_time", seo.publishedTime)
+      upsertMeta("property", "article:modified_time", seo.modifiedTime)
+      upsertMeta("property", "article:author", "Sendwise Team")
+    } else {
+      removeMeta("property", "article:published_time")
+      removeMeta("property", "article:modified_time")
+      removeMeta("property", "article:author")
     }
-    descriptionTag.setAttribute("content", seo.description)
+
+    const structuredData = getRouteStructuredData(location.pathname, seo, canonicalUrl, imageUrl)
+    let structuredDataTag = document.getElementById("route-structured-data")
+    if (!structuredDataTag) {
+      structuredDataTag = document.createElement("script")
+      structuredDataTag.id = "route-structured-data"
+      structuredDataTag.type = "application/ld+json"
+      document.head.appendChild(structuredDataTag)
+    }
+    structuredDataTag.textContent = JSON.stringify(structuredData || {})
   }, [location.pathname])
 
   return (
@@ -399,6 +514,16 @@ const AnimatedRoutes = () => {
             <Suspense fallback={<RouteFallback />}>
               <PageTransition>
                 <KennisbankWixVerbinden />
+              </PageTransition>
+            </Suspense>
+          }
+        />
+        <Route
+          path="/kennisbank/retourportaal-herroepingsrecht"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <KennisbankRetourportaal />
               </PageTransition>
             </Suspense>
           }

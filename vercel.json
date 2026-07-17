@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/kennisbank/retourportaal-herroepingsrecht",
+      "destination": "/kennisbank/retourportaal-herroepingsrecht/index.html"
+    },
+    {
+      "source": "/kennisbank/retourportaal-herroepingsrecht/",
+      "destination": "/kennisbank/retourportaal-herroepingsrecht/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

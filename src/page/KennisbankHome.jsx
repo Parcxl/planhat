@@ -6,6 +6,16 @@ import Homepage2Footer from "../components/Homepage2/Footer"
 
 const articles = [
   {
+    title: "Waarom makkelijk retourneren geen luxe meer is",
+    description:
+      "Lees wat het herroepingsrecht betekent voor webshops en hoe een slim retourportaal zorgt voor minder handwerk en een betere klantbeleving.",
+    to: "/kennisbank/retourportaal-herroepingsrecht",
+    category: "Retouren",
+    readTime: "± 5 min",
+    image: "/retour-afbeelding-2.png",
+    tags: ["Retourportaal", "Herroepingsrecht", "Webshops", "Europa"],
+  },
+  {
     title: "Wix verbinden met Sendwise",
     description:
       "Stap-voor-stap handleiding voor het aanmaken van een Wix API key en het invullen van access token, account ID en site ID in Sendwise.",
@@ -123,7 +133,7 @@ export default function KennisbankHome() {
               <div className="rounded-[28px] border border-[#dce7f4] bg-white p-10 text-center shadow-[0_18px_50px_rgba(15,23,42,0.05)]">
                 <p className="text-lg font-semibold text-[#0d1321]">Geen artikelen gevonden</p>
                 <p className="mt-3 text-[0.98rem] text-[#5e6a80]">
-                  Probeer een andere zoekterm, bijvoorbeeld Wix of integratie.
+                  Probeer een andere zoekterm, bijvoorbeeld retouren, Wix of integratie.
                 </p>
               </div>
             ) : null}
