@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/generate-seo-pages.mjs",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "node scripts/serve-dist.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
