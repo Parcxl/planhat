@@ -26,6 +26,7 @@ const WerkenBij = lazy(() => import("./page/WerkenBij"))
 const Kennisbank = lazy(() => import("./page/KennisbankHome"))
 const KennisbankWixVerbinden = lazy(() => import("./page/KennisbankWixVerbinden"))
 const KennisbankRetourportaal = lazy(() => import("./page/KennisbankRetourportaal"))
+const KennisbankPostnlToeslagen = lazy(() => import("./page/KennisbankPostnlToeslagen"))
 const FacebookAdsLanding = lazy(() => import("./page/FacebookAdsLanding"))
 const FacebookAdsThanks = lazy(() => import("./page/FacebookAdsThanks"))
 
@@ -60,6 +61,7 @@ const criticalImagesByPath = {
   "/kennisbank": ["/wix-step-8.png", ...sharedCriticalImages],
   "/kennisbank/wix-verbinden": ["/wix-step-8.png", "/wix-step-1.png", ...sharedCriticalImages],
   "/kennisbank/retourportaal-herroepingsrecht": ["/profile-joep.webp", ...sharedCriticalImages],
+  "/kennisbank/postnl-energietoeslag-vrachtwagenheffing": ["/postnl-icoon.webp", ...sharedCriticalImages],
 }
 
 const syncCriticalPreloadLinks = (sources) => {
@@ -199,6 +201,16 @@ const seoMap = {
     publishedTime: "2026-07-03",
     modifiedTime: "2026-07-17",
   },
+  "/kennisbank/postnl-energietoeslag-vrachtwagenheffing": {
+    title: "PostNL-energietoeslag en vrachtwagenheffing | Sendwise",
+    description:
+      "Lees hoe de PostNL-energietoeslag werkt, waar je het actuele bedrag vindt en waarom Sendwise de vrachtwagenheffing niet doorberekent.",
+    type: "article",
+    image: "/postnl-icoon.webp",
+    imageAlt: "PostNL-beeldmerk bij uitleg over energietoeslag en vrachtwagenheffing",
+    publishedTime: "2026-08-10",
+    modifiedTime: "2026-08-10",
+  },
   "/start-met-sendwise": {
     title: "Start met Sendwise | Vraag een account aan",
     description:
@@ -239,8 +251,22 @@ const setCanonical = (href) => {
   tag.setAttribute("href", href)
 }
 
+const articleStructuredData = {
+  "/kennisbank/retourportaal-herroepingsrecht": {
+    headline: "De nieuwe herroepingsknop voor webshops",
+    breadcrumb: "Herroepingsknop voor webshops",
+    about: ["Herroepingsknop", "Herroepingsrecht", "Webshops", "ACM"],
+  },
+  "/kennisbank/postnl-energietoeslag-vrachtwagenheffing": {
+    headline: "Uitleg over de PostNL-energietoeslag en vrachtwagenheffing",
+    breadcrumb: "PostNL-energietoeslag en vrachtwagenheffing",
+    about: ["PostNL", "Energietoeslag", "Vrachtwagenheffing", "Verzendkosten"],
+  },
+}
+
 const getRouteStructuredData = (pathname, seo, canonicalUrl, imageUrl) => {
-  if (pathname !== "/kennisbank/retourportaal-herroepingsrecht") return null
+  const article = articleStructuredData[pathname]
+  if (!article) return null
 
   return {
     "@context": "https://schema.org",
@@ -249,7 +275,7 @@ const getRouteStructuredData = (pathname, seo, canonicalUrl, imageUrl) => {
         "@type": "BlogPosting",
         "@id": `${canonicalUrl}#article`,
         mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
-        headline: "De nieuwe herroepingsknop voor webshops",
+        headline: article.headline,
         description: seo.description,
         image: [imageUrl],
         datePublished: seo.publishedTime,
@@ -262,7 +288,7 @@ const getRouteStructuredData = (pathname, seo, canonicalUrl, imageUrl) => {
         },
         publisher: { "@id": `${SITE_URL}/#organization` },
         isPartOf: { "@id": `${SITE_URL}/#website` },
-        about: ["Herroepingsknop", "Herroepingsrecht", "Webshops", "ACM"],
+        about: article.about,
       },
       {
         "@type": "BreadcrumbList",
@@ -270,7 +296,7 @@ const getRouteStructuredData = (pathname, seo, canonicalUrl, imageUrl) => {
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
           { "@type": "ListItem", position: 2, name: "Kennisbank", item: `${SITE_URL}/kennisbank` },
-          { "@type": "ListItem", position: 3, name: "Herroepingsknop voor webshops", item: canonicalUrl },
+          { "@type": "ListItem", position: 3, name: article.breadcrumb, item: canonicalUrl },
         ],
       },
     ],
@@ -524,6 +550,16 @@ const AnimatedRoutes = () => {
             <Suspense fallback={<RouteFallback />}>
               <PageTransition>
                 <KennisbankRetourportaal />
+              </PageTransition>
+            </Suspense>
+          }
+        />
+        <Route
+          path="/kennisbank/postnl-energietoeslag-vrachtwagenheffing"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <KennisbankPostnlToeslagen />
               </PageTransition>
             </Suspense>
           }

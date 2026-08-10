@@ -6,6 +6,18 @@ import Homepage2Footer from "../components/Homepage2/Footer"
 
 const articles = [
   {
+    title: "Uitleg over de PostNL-energietoeslag en vrachtwagenheffing",
+    description:
+      "Lees hoe de variabele PostNL-energietoeslag werkt, waar je het actuele bedrag vindt en waarom Sendwise de vrachtwagenheffing niet doorberekent.",
+    to: "/kennisbank/postnl-energietoeslag-vrachtwagenheffing",
+    category: "Tarieven & toeslagen",
+    readTime: "± 6 min",
+    image: "/postnl-icoon.webp",
+    tags: ["PostNL", "Energietoeslag", "Vrachtwagenheffing", "Facturatie"],
+    imageClassName: "object-contain p-14 sm:p-20",
+    imageBackground: "bg-[#fff100]",
+  },
+  {
     title: "De nieuwe herroepingsknop voor webshops",
     description:
       "Lees wat de verplichte herroepingsknop betekent voor webshops en hoe je het herroepingsproces automatiseert met Sendwise.",
@@ -81,11 +93,11 @@ export default function KennisbankHome() {
                 to={article.to}
                 className="group grid gap-6 rounded-[32px] border border-[#dce7f4] bg-white p-5 shadow-[0_18px_50px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_70px_rgba(15,23,42,0.10)] lg:grid-cols-[0.92fr,1.08fr] lg:p-6"
               >
-                <div className="overflow-hidden rounded-[24px] border border-[#e3edf8] bg-[#f7fbff]">
+                <div className={`overflow-hidden rounded-[24px] border border-[#e3edf8] ${article.imageBackground || "bg-[#f7fbff]"}`}>
                   <img
                     src={article.image}
                     alt={article.title}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.01]"
+                    className={`h-full min-h-[250px] w-full transition duration-500 group-hover:scale-[1.01] ${article.imageClassName || "object-cover"}`}
                     loading="lazy"
                     decoding="async"
                   />
