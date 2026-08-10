@@ -153,7 +153,7 @@ const postnlStructuredData = {
       headline: "Uitleg over de PostNL-energietoeslag en vrachtwagenheffing",
       description: postnlDescription,
       image: [postnlSocialImage],
-      datePublished: "2026-08-10",
+      datePublished: "2026-08-06",
       dateModified: "2026-08-10",
       inLanguage: "nl-NL",
       author: { "@type": "Organization", name: "Sendwise Team", url: `${siteUrl}/over-ons` },
@@ -180,7 +180,7 @@ const postnlStaticArticle = `
       <p style="margin:32px 0 12px;color:#1a5ee5;font-weight:600">Tarieven &amp; toeslagen</p>
       <h1 style="max-width:900px;margin:0;color:#0d1321;font-size:clamp(40px,7vw,70px);line-height:1.03;font-weight:600">Uitleg over de PostNL-energietoeslag en vrachtwagenheffing</h1>
       <p style="max-width:760px;margin:28px 0 10px;color:#526078;font-size:18px">Door hogere brandstofprijzen stijgen de kosten voor pakketvervoer. Lees wat je in augustus op je factuur ziet, zodat je niet voor verrassingen komt te staan.</p>
-      <p style="color:#5e6a80">Door Sendwise Team · 10 augustus 2026 · ongeveer 6 minuten lezen</p>
+      <p style="color:#5e6a80">Door Sendwise Team · 6 augustus 2026 · ongeveer 6 minuten lezen</p>
       <section style="margin-top:40px">
         <div style="display:flex;flex-wrap:wrap;gap:16px;margin:28px 0">
           <div style="min-width:220px;border-radius:20px;background:#edf4ff;padding:24px"><strong style="display:block;font-size:36px">€ 0,17</strong>Energietoeslag per PostNL-pakket, exclusief btw</div>
@@ -235,7 +235,7 @@ postnlHtml = postnlHtml
   )
   .replace(
     "</head>",
-    `  <meta property="article:published_time" content="2026-08-10" />\n  <meta property="article:modified_time" content="2026-08-10" />\n  <meta property="article:author" content="Sendwise Team" />\n</head>`,
+    `  <meta property="article:published_time" content="2026-08-06" />\n  <meta property="article:modified_time" content="2026-08-10" />\n  <meta property="article:author" content="Sendwise Team" />\n</head>`,
   )
   .replace('<div id="root"></div>', `<div id="root">${postnlStaticArticle}</div>`)
 

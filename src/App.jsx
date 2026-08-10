@@ -208,7 +208,7 @@ const seoMap = {
     type: "article",
     image: "/postnl-icoon.webp",
     imageAlt: "PostNL-beeldmerk bij uitleg over energietoeslag en vrachtwagenheffing",
-    publishedTime: "2026-08-10",
+    publishedTime: "2026-08-06",
     modifiedTime: "2026-08-10",
   },
   "/start-met-sendwise": {

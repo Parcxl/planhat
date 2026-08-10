@@ -150,7 +150,7 @@ export default function KennisbankPostnlToeslagen() {
             </p>
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-[#dce3ec] pt-6">
               <MetaItem icon={FiUser}>Sendwise Team</MetaItem>
-              <MetaItem icon={FiCalendar}>10 augustus 2026</MetaItem>
+              <MetaItem icon={FiCalendar}>6 augustus 2026</MetaItem>
               <MetaItem icon={FiClock}>± 6 min lezen</MetaItem>
             </div>
           </div>
