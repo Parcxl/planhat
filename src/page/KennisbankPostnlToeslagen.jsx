@@ -19,6 +19,7 @@ import Homepage2Footer from "../components/Homepage2/Footer"
 
 const summaryItems = [
   "In augustus 2026 is de energietoeslag € 0,17 per PostNL-pakket, exclusief btw.",
+  "De toeslag geldt voor pakketten naar Nederland, België en de rest van Europa, maar niet voor brievenbuspakketten.",
   "Het bedrag wordt maandelijks opnieuw vastgesteld en kan dus stijgen of dalen.",
   "De eerste factuur waarop de toeslag apart staat, is die van 19 augustus 2026.",
   "De vrachtwagenheffing bedraagt € 0,11 per PostNL-pakket en wordt niet afzonderlijk doorberekend.",
@@ -47,6 +48,11 @@ const faqs = [
     question: "Hoe hoog is de PostNL-energietoeslag?",
     answer:
       "Voor augustus 2026 bedraagt de energietoeslag € 0,17 per PostNL-pakket, exclusief btw. PostNL stelt de toeslag iedere maand opnieuw vast, waardoor deze kan stijgen of dalen.",
+  },
+  {
+    question: "Voor welke zendingen geldt de energietoeslag?",
+    answer:
+      "De energietoeslag geldt voor pakketten naar Nederland, België en de rest van Europa. Brievenbuspakketten vallen buiten deze toeslag.",
   },
   {
     question: "Geldt de toeslag van € 0,17 ook na augustus?",
@@ -203,6 +209,14 @@ export default function KennisbankPostnlToeslagen() {
                   vastgesteld op <strong className="font-semibold text-[#0d1321]">€ 0,17 per PostNL-pakket, exclusief btw</strong>.
                   Dit is geen vast tarief: PostNL kan de toeslag iedere maand verhogen of verlagen.
                   De hoogte is gebaseerd op de kosten voor stroom en brandstof binnen Nederland.
+                </p>
+              </div>
+
+              <div className="mt-7 border-l-2 border-[#1a5ee5] bg-[#f7fbff] px-5 py-4 sm:px-6">
+                <p className="font-semibold text-[#0d1321]">Voor welke zendingen geldt de toeslag?</p>
+                <p className="mt-2 text-[0.98rem] leading-7 text-[#526078]">
+                  De energietoeslag geldt alleen voor pakketten naar Nederland, België en de rest
+                  van Europa. Voor brievenbuspakketten wordt deze toeslag niet berekend.
                 </p>
               </div>
             </section>

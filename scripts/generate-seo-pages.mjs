@@ -189,6 +189,7 @@ const postnlStaticArticle = `
         <p>Door de oorlog in Iran en de onrust in het Midden-Oosten zijn de brandstofprijzen fors gestegen. Dit heeft direct invloed op de kosten die PostNL maakt voor het vervoeren en bezorgen van pakketten.</p>
         <h2 style="margin-top:48px;font-size:32px;line-height:1.2">Waarom geldt er een energietoeslag?</h2>
         <p>PostNL berekent een variabele energietoeslag per pakket. Voor augustus 2026 is deze vastgesteld op € 0,17 per PostNL-pakket, exclusief btw. Het bedrag geldt alleen voor augustus en kan iedere maand worden verhoogd of verlaagd. De hoogte is gebaseerd op de kosten voor stroom en brandstof binnen Nederland.</p>
+        <p><strong>Voor welke zendingen geldt de toeslag?</strong> De energietoeslag geldt alleen voor pakketten naar Nederland, België en de rest van Europa. Voor brievenbuspakketten wordt deze toeslag niet berekend.</p>
         <h2 style="margin-top:48px;font-size:32px;line-height:1.2">Wanneer zie je de energietoeslag op je factuur?</h2>
         <p>De factuur van 19 augustus 2026 is de eerste waarop de energietoeslag apart staat. Het actuele maandbedrag vind je in Sendwise via Instellingen → Administratie → Toeslagen.</p>
         <h2 style="margin-top:48px;font-size:32px;line-height:1.2">Hoelang wordt de energietoeslag apart berekend?</h2>
