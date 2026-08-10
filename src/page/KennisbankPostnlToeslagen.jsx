@@ -8,8 +8,9 @@ import {
   FiChevronDown,
   FiClock,
   FiExternalLink,
+  FiMail,
+  FiPhone,
   FiSettings,
-  FiShield,
   FiTruck,
   FiUser,
 } from "react-icons/fi"
@@ -20,7 +21,7 @@ const summaryItems = [
   "In augustus 2026 is de energietoeslag € 0,17 per PostNL-pakket, exclusief btw.",
   "Het bedrag wordt maandelijks opnieuw vastgesteld en kan dus stijgen of dalen.",
   "De eerste factuur waarop de toeslag apart staat, is die van 19 augustus 2026.",
-  "Sendwise neemt de vrachtwagenheffing van € 0,11 per pakket volledig voor eigen rekening.",
+  "De vrachtwagenheffing bedraagt € 0,11 per PostNL-pakket en wordt niet afzonderlijk doorberekend.",
   "Vanaf 2027 wordt de energietoeslag verwerkt in de reguliere PostNL-tarieven.",
 ]
 
@@ -36,7 +37,7 @@ const contents = [
   ["factuur", "Wanneer staat die op je factuur?"],
   ["looptijd", "Hoelang wordt die apart berekend?"],
   ["vrachtwagenheffing", "Hoe werkt de vrachtwagenheffing?"],
-  ["sendwise-betaalt", "Wat neemt Sendwise voor zijn rekening?"],
+  ["vrachtwagenheffing-kosten", "Wat kost de vrachtwagenheffing?"],
   ["samengevat", "Alles op een rij"],
   ["veelgestelde-vragen", "Veelgestelde vragen"],
 ]
@@ -80,7 +81,7 @@ const faqs = [
   {
     question: "Wordt de vrachtwagenheffing aan mij doorberekend?",
     answer:
-      "Nee. De vrachtwagenheffing veroorzaakt € 0,11 extra kosten per PostNL-pakket, maar Sendwise neemt dit bedrag volledig voor eigen rekening.",
+      "Nee. De vrachtwagenheffing bedraagt € 0,11 per PostNL-pakket. Sendwise draagt deze kosten zelf en berekent ze niet afzonderlijk aan klanten door.",
   },
   {
     question: "Hoelang blijft de energietoeslag apart zichtbaar?",
@@ -97,7 +98,7 @@ const MetaItem = ({ icon: Icon, children }) => (
 )
 
 const ArticleHeading = ({ id, eyebrow, children }) => (
-  <div className="scroll-mt-28" id={id}>
+  <div className="scroll-mt-36" id={id}>
     {eyebrow ? (
       <p className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-[#1a5ee5]">{eyebrow}</p>
     ) : null}
@@ -145,8 +146,7 @@ export default function KennisbankPostnlToeslagen() {
             </h1>
             <p className="mt-7 max-w-4xl text-[1.08rem] leading-8 text-[#526078] sm:text-[1.18rem]">
               Door hogere brandstofprijzen stijgen de kosten voor pakketvervoer. We leggen uit wat
-              je in augustus op je factuur ziet en welke nieuwe kosten Sendwise niet aan je
-              doorberekent.
+              je in augustus op je factuur ziet, zodat je niet voor verrassingen komt te staan.
             </p>
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-[#dce3ec] pt-6">
               <MetaItem icon={FiUser}>Sendwise Team</MetaItem>
@@ -159,7 +159,7 @@ export default function KennisbankPostnlToeslagen() {
 
       <article className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
         <div className="mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-[260px,minmax(0,760px)] lg:justify-center lg:gap-16">
-          <aside className="self-start lg:sticky lg:top-28">
+          <aside className="self-start lg:sticky lg:top-36">
             <nav aria-label="Inhoudsopgave" className="border-l-2 border-[#dce5f0] py-1 pl-5">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0d1321]">In dit artikel</p>
               <ol className="mt-4 space-y-1.5">
@@ -202,6 +202,7 @@ export default function KennisbankPostnlToeslagen() {
                   <strong className="font-semibold text-[#0d1321]"> augustus 2026</strong> is deze
                   vastgesteld op <strong className="font-semibold text-[#0d1321]">€ 0,17 per PostNL-pakket, exclusief btw</strong>.
                   Dit is geen vast tarief: PostNL kan de toeslag iedere maand verhogen of verlagen.
+                  De hoogte is gebaseerd op de kosten voor stroom en brandstof binnen Nederland.
                 </p>
               </div>
             </section>
@@ -300,27 +301,31 @@ export default function KennisbankPostnlToeslagen() {
               </p>
             </section>
 
-            <section id="sendwise-betaalt" className="mt-14 scroll-mt-28 overflow-hidden rounded-[30px] bg-[#0d1321] p-6 text-white sm:p-9">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10">
-                <FiShield size={22} aria-hidden="true" />
-              </div>
-              <p className="mt-7 text-xs font-semibold uppercase tracking-[0.15em] text-[#8fb6ff]">Onze keuze</p>
-              <h2 className="mt-3 inter-semibold text-[1.9rem] leading-[1.14] sm:text-[2.45rem]">
-                Sendwise neemt de vrachtwagenheffing voor eigen rekening
+            <section id="vrachtwagenheffing-kosten" className="mt-14 scroll-mt-36 border-y border-[#dce7f4] py-9 sm:py-11">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#1a5ee5]">Kosten per pakket</p>
+              <h2 className="mt-3 inter-semibold text-[1.9rem] leading-[1.14] text-[#0d1321] sm:text-[2.45rem]">
+                Wat kost de vrachtwagenheffing?
               </h2>
-              <p className="mt-5 text-[1rem] leading-8 text-white/75 sm:text-[1.06rem]">
-                De vrachtwagenheffing zorgt voor Sendwise voor een extra kostenpost van
-                <strong className="font-semibold text-white"> € 0,11 per PostNL-pakket</strong>. Om de gevolgen voor
-                onze klanten te beperken, nemen we dit bedrag volledig voor eigen rekening. Voor
-                PostNL-zendingen wordt alleen de actuele, variabele energietoeslag afzonderlijk berekend.
-              </p>
-              <div className="mt-7 inline-flex items-center gap-3 rounded-2xl bg-white/10 px-4 py-3 text-sm font-semibold text-white">
-                <FiCheck className="text-[#8fb6ff]" aria-hidden="true" />
-                Jij betaalt € 0,00 vrachtwagenheffing
+              <div className="mt-7 grid gap-6 sm:grid-cols-[180px,1fr] sm:items-start">
+                <div className="border-l-2 border-[#1a5ee5] pl-5">
+                  <p className="text-[2.4rem] font-semibold leading-none text-[#0d1321]">€ 0,11</p>
+                  <p className="mt-2 text-sm leading-6 text-[#5e6a80]">per PostNL-pakket</p>
+                </div>
+                <div className="space-y-4 text-[1rem] leading-8 text-[#526078] sm:text-[1.06rem]">
+                  <p>
+                    De vrachtwagenheffing verhoogt de kosten van een PostNL-zending met € 0,11 per
+                    pakket. Dit bedrag hangt samen met het vervoer tussen distributie- en
+                    sorteercentra met vrachtwagens die onder de heffing vallen.
+                  </p>
+                  <p>
+                    Sendwise neemt deze kosten voor zijn rekening. De € 0,11 wordt daarom niet als
+                    afzonderlijke toeslag aan klanten doorberekend.
+                  </p>
+                </div>
               </div>
             </section>
 
-            <section className="mt-14 scroll-mt-28" id="samengevat">
+            <section className="mt-14 scroll-mt-36" id="samengevat">
               <ArticleHeading eyebrow="Kort en duidelijk">Samengevat</ArticleHeading>
               <ul className="mt-6 space-y-3">
                 {summaryItems.map((item) => (
@@ -334,7 +339,7 @@ export default function KennisbankPostnlToeslagen() {
               </ul>
             </section>
 
-            <section className="mt-16 scroll-mt-28" id="veelgestelde-vragen">
+            <section className="mt-16 scroll-mt-36" id="veelgestelde-vragen">
               <ArticleHeading eyebrow="Snel antwoord">Veelgestelde vragen</ArticleHeading>
               <div className="mt-7 divide-y divide-[#dce7f4] border-y border-[#dce7f4]">
                 {faqs.map((faq) => (
@@ -348,6 +353,39 @@ export default function KennisbankPostnlToeslagen() {
                     <p className="max-w-2xl pb-6 pr-12 text-[0.98rem] leading-8 text-[#526078]">{faq.answer}</p>
                   </details>
                 ))}
+              </div>
+            </section>
+
+            <section className="mt-14 border-t border-[#dce7f4] pt-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1a5ee5]">Vragen over de toeslagen?</p>
+              <h2 className="mt-3 inter-semibold text-[1.8rem] leading-tight text-[#0d1321] sm:text-[2.2rem]">
+                Neem contact op met ons team
+              </h2>
+              <div className="mt-7 grid gap-5 sm:grid-cols-2">
+                <a
+                  href="mailto:info@sendwise.nl"
+                  className="group border-l-2 border-[#dce5f0] pl-5 transition-colors hover:border-[#1a5ee5]"
+                >
+                  <span className="flex items-center gap-2 text-sm text-[#5e6a80]">
+                    <FiMail aria-hidden="true" />
+                    Stuur ons een bericht
+                  </span>
+                  <span className="mt-2 block font-semibold text-[#0d1321] transition-colors group-hover:text-[#1a5ee5]">
+                    info@sendwise.nl
+                  </span>
+                </a>
+                <a
+                  href="tel:+31619156123"
+                  className="group border-l-2 border-[#dce5f0] pl-5 transition-colors hover:border-[#1a5ee5]"
+                >
+                  <span className="flex items-center gap-2 text-sm text-[#5e6a80]">
+                    <FiPhone aria-hidden="true" />
+                    Bel direct met ons team
+                  </span>
+                  <span className="mt-2 block font-semibold text-[#0d1321] transition-colors group-hover:text-[#1a5ee5]">
+                    +31 6 19156123
+                  </span>
+                </a>
               </div>
             </section>
 

@@ -179,26 +179,28 @@ const postnlStaticArticle = `
       <a href="/kennisbank" style="color:#1a5ee5;font-weight:600;text-decoration:none">← Terug naar kennisbank</a>
       <p style="margin:32px 0 12px;color:#1a5ee5;font-weight:600">Tarieven &amp; toeslagen</p>
       <h1 style="max-width:900px;margin:0;color:#0d1321;font-size:clamp(40px,7vw,70px);line-height:1.03;font-weight:600">Uitleg over de PostNL-energietoeslag en vrachtwagenheffing</h1>
-      <p style="max-width:760px;margin:28px 0 10px;color:#526078;font-size:18px">Door hogere brandstofprijzen stijgen de kosten voor pakketvervoer. Lees wat je in augustus op je factuur ziet en welke nieuwe kosten Sendwise niet aan je doorberekent.</p>
+      <p style="max-width:760px;margin:28px 0 10px;color:#526078;font-size:18px">Door hogere brandstofprijzen stijgen de kosten voor pakketvervoer. Lees wat je in augustus op je factuur ziet, zodat je niet voor verrassingen komt te staan.</p>
       <p style="color:#5e6a80">Door Sendwise Team · 10 augustus 2026 · ongeveer 6 minuten lezen</p>
       <section style="margin-top:40px">
         <div style="display:flex;flex-wrap:wrap;gap:16px;margin:28px 0">
           <div style="min-width:220px;border-radius:20px;background:#edf4ff;padding:24px"><strong style="display:block;font-size:36px">€ 0,17</strong>Energietoeslag per PostNL-pakket, exclusief btw</div>
-          <div style="min-width:220px;border-radius:20px;background:#0d1321;color:#fff;padding:24px"><strong style="display:block;font-size:36px">€ 0,11</strong>Vrachtwagenheffing die Sendwise voor jou betaalt</div>
+          <div style="min-width:220px;border-radius:20px;background:#0d1321;color:#fff;padding:24px"><strong style="display:block;font-size:36px">€ 0,11</strong>Vrachtwagenheffing per PostNL-pakket</div>
         </div>
         <p>Door de oorlog in Iran en de onrust in het Midden-Oosten zijn de brandstofprijzen fors gestegen. Dit heeft direct invloed op de kosten die PostNL maakt voor het vervoeren en bezorgen van pakketten.</p>
         <h2 style="margin-top:48px;font-size:32px;line-height:1.2">Waarom geldt er een energietoeslag?</h2>
-        <p>PostNL berekent een variabele energietoeslag per pakket. Voor augustus 2026 is deze vastgesteld op € 0,17 per PostNL-pakket, exclusief btw. Het bedrag geldt alleen voor augustus en kan iedere maand worden verhoogd of verlaagd.</p>
+        <p>PostNL berekent een variabele energietoeslag per pakket. Voor augustus 2026 is deze vastgesteld op € 0,17 per PostNL-pakket, exclusief btw. Het bedrag geldt alleen voor augustus en kan iedere maand worden verhoogd of verlaagd. De hoogte is gebaseerd op de kosten voor stroom en brandstof binnen Nederland.</p>
         <h2 style="margin-top:48px;font-size:32px;line-height:1.2">Wanneer zie je de energietoeslag op je factuur?</h2>
         <p>De factuur van 19 augustus 2026 is de eerste waarop de energietoeslag apart staat. Het actuele maandbedrag vind je in Sendwise via Instellingen → Administratie → Toeslagen.</p>
         <h2 style="margin-top:48px;font-size:32px;line-height:1.2">Hoelang wordt de energietoeslag apart berekend?</h2>
         <p>De toeslag wordt tot en met 31 december 2026 afzonderlijk berekend. Vanaf 2027 wordt deze kostenontwikkeling verwerkt in de jaarlijkse indexering van de reguliere PostNL-tarieven.</p>
         <h2 style="margin-top:48px;font-size:32px;line-height:1.2">Hoe zit het met de vrachtwagenheffing?</h2>
         <p>Sinds 1 juli 2026 geldt in Nederland een vrachtwagenheffing voor vrachtwagens met een technische maximummassa van meer dan 3.500 kilogram. PostNL gebruikt zulke vrachtwagens tussen distributie- en sorteercentra.</p>
-        <h2 style="margin-top:48px;font-size:32px;line-height:1.2">Sendwise neemt de vrachtwagenheffing voor eigen rekening</h2>
-        <p>De vrachtwagenheffing zorgt voor € 0,11 extra kosten per PostNL-pakket. Sendwise neemt dit bedrag volledig voor eigen rekening. Alleen de actuele, variabele energietoeslag wordt afzonderlijk berekend.</p>
+        <h2 style="margin-top:48px;font-size:32px;line-height:1.2">Wat kost de vrachtwagenheffing?</h2>
+        <p>De vrachtwagenheffing verhoogt de kosten met € 0,11 per PostNL-pakket. Sendwise draagt deze kosten zelf en berekent ze niet als afzonderlijke toeslag aan klanten door.</p>
         <h2 style="margin-top:48px;font-size:32px;line-height:1.2">Veelgestelde vragen</h2>
         <p>De energietoeslag bedraagt in augustus € 0,17 exclusief btw, kan maandelijks veranderen en blijft tot eind 2026 apart zichtbaar. De vrachtwagenheffing wordt niet aan klanten doorberekend.</p>
+        <h2 style="margin-top:48px;font-size:32px;line-height:1.2">Neem contact op met ons team</h2>
+        <p>Stuur ons een bericht via <a href="mailto:info@sendwise.nl">info@sendwise.nl</a> of bel direct met ons team via <a href="tel:+31619156123">+31 6 19156123</a>.</p>
         <p style="margin-top:36px"><a href="/start-met-sendwise" style="display:inline-block;border-radius:12px;background:#1a5ee5;color:#fff;padding:12px 20px;font-weight:600;text-decoration:none">Start met Sendwise</a></p>
         <p style="margin-top:44px;color:#5e6a80;font-size:14px">Bronnen: <a href="https://wetten.overheid.nl/BWBR0047082/2026-03-01/0">Wet vrachtwagenheffing</a> en <a href="https://www.rijksoverheid.nl/themas/verkeer-en-vervoer/goederenvervoer/vrachtwagenheffing">Rijksoverheid</a>.</p>
       </section>
