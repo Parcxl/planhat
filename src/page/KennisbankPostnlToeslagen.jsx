@@ -8,12 +8,10 @@ import {
   FiChevronDown,
   FiClock,
   FiExternalLink,
-  FiInfo,
   FiSettings,
   FiShield,
   FiTruck,
   FiUser,
-  FiZap,
 } from "react-icons/fi"
 import Homepage2Header from "../components/Homepage2/Header"
 import Homepage2Footer from "../components/Homepage2/Footer"
@@ -114,15 +112,22 @@ export default function KennisbankPostnlToeslagen() {
     window.scrollTo(0, 0)
   }, [])
 
+  const handleContentsClick = (event, id) => {
+    event.preventDefault()
+    const section = document.getElementById(id)
+    if (!section) return
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    section.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" })
+    window.history.replaceState(null, "", `#${id}`)
+  }
+
   return (
-    <main className="min-h-screen overflow-hidden bg-white text-[#0d1321]">
+    <main className="min-h-screen bg-white text-[#0d1321]">
       <Homepage2Header />
 
-      <header className="relative overflow-hidden bg-[#f7fbff] px-4 pb-14 pt-28 sm:px-6 sm:pb-20 sm:pt-32 lg:pt-44">
-        <div className="absolute left-[-10rem] top-[-8rem] h-[30rem] w-[30rem] rounded-full bg-[#dceaff] blur-3xl" />
-        <div className="absolute bottom-[-13rem] right-[-8rem] h-[30rem] w-[30rem] rounded-full bg-[#edf4ff] blur-3xl" />
-
-        <div className="relative mx-auto max-w-7xl">
+      <header className="border-b border-[#e4eaf2] bg-[#f8fafc] px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-44">
+        <div className="mx-auto max-w-7xl">
           <Link
             to="/kennisbank"
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#1a5ee5] transition hover:text-[#164fc2]"
@@ -131,79 +136,39 @@ export default function KennisbankPostnlToeslagen() {
             Terug naar kennisbank
           </Link>
 
-          <div className="mt-9 grid gap-10 lg:grid-cols-[1.12fr,0.88fr] lg:items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#cfe0fa] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#1a5ee5] shadow-sm">
-                <FiInfo aria-hidden="true" />
-                Tarieven &amp; toeslagen
-              </div>
-              <h1 className="mt-6 max-w-4xl inter-semibold text-[2.55rem] leading-[1.02] tracking-[-0.02em] text-[#0d1321] sm:text-[3.7rem] lg:text-[4.65rem]">
-                Uitleg over de PostNL-energietoeslag en vrachtwagenheffing
-              </h1>
-              <p className="mt-6 max-w-3xl text-[1.05rem] leading-8 text-[#526078] sm:text-[1.12rem]">
-                Door hogere brandstofprijzen stijgen de kosten voor pakketvervoer. We leggen uit wat
-                je in augustus op je factuur ziet — en welke nieuwe kosten Sendwise juist níét aan je
-                doorberekent.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-x-5 gap-y-3">
-                <MetaItem icon={FiUser}>Sendwise Team</MetaItem>
-                <MetaItem icon={FiCalendar}>10 augustus 2026</MetaItem>
-                <MetaItem icon={FiClock}>± 6 min lezen</MetaItem>
-              </div>
-            </div>
-
-            <div className="rounded-[32px] border border-[#dce7f4] bg-white p-5 shadow-[0_28px_80px_rgba(15,23,42,0.10)] sm:p-7">
-              <div className="flex items-center justify-between border-b border-[#e4edf7] pb-5">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7a879c]">Augustus 2026</p>
-                  <p className="mt-1 text-lg font-semibold text-[#0d1321]">Kosten per PostNL-pakket</p>
-                </div>
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff100] p-2.5">
-                  <img src="/postnl-icoon.webp" alt="PostNL" className="h-full w-full object-contain" />
-                </div>
-              </div>
-
-              <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                <div className="rounded-[24px] bg-[#edf4ff] p-5">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-[#1a5ee5]">
-                    <FiZap aria-hidden="true" />
-                  </div>
-                  <p className="mt-6 text-[2.35rem] font-semibold leading-none text-[#0d1321]">€ 0,17</p>
-                  <p className="mt-2 text-sm font-semibold text-[#334155]">Energietoeslag</p>
-                  <p className="mt-1 text-xs leading-5 text-[#68758a]">Variabel · excl. btw</p>
-                </div>
-                <div className="relative overflow-hidden rounded-[24px] bg-[#0d1321] p-5 text-white">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white">
-                    <FiShield aria-hidden="true" />
-                  </div>
-                  <p className="mt-6 text-[2.35rem] font-semibold leading-none">€ 0,11</p>
-                  <p className="mt-2 text-sm font-semibold">Vrachtwagenheffing</p>
-                  <p className="mt-1 text-xs leading-5 text-white/65">Betaalt Sendwise voor jou</p>
-                </div>
-              </div>
-
-              <div className="mt-5 flex items-center gap-3 rounded-2xl border border-[#dce7f4] px-4 py-3 text-sm leading-6 text-[#526078]">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#eaf8ef] text-[#16834c]">
-                  <FiCheck size={15} aria-hidden="true" />
-                </span>
-                Alleen de actuele energietoeslag wordt aan jou doorberekend.
-              </div>
+          <div className="mt-12 max-w-5xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1a5ee5]">
+              Tarieven &amp; toeslagen
+            </p>
+            <h1 className="mt-5 inter-semibold text-[2.65rem] leading-[1.04] tracking-[-0.025em] text-[#0d1321] sm:text-[3.9rem] lg:text-[5rem]">
+              Uitleg over de PostNL-energietoeslag en vrachtwagenheffing
+            </h1>
+            <p className="mt-7 max-w-4xl text-[1.08rem] leading-8 text-[#526078] sm:text-[1.18rem]">
+              Door hogere brandstofprijzen stijgen de kosten voor pakketvervoer. We leggen uit wat
+              je in augustus op je factuur ziet en welke nieuwe kosten Sendwise niet aan je
+              doorberekent.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-[#dce3ec] pt-6">
+              <MetaItem icon={FiUser}>Sendwise Team</MetaItem>
+              <MetaItem icon={FiCalendar}>10 augustus 2026</MetaItem>
+              <MetaItem icon={FiClock}>± 6 min lezen</MetaItem>
             </div>
           </div>
         </div>
       </header>
 
       <article className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[260px,minmax(0,760px)] lg:justify-center lg:gap-16">
-          <aside className="lg:sticky lg:top-28 lg:self-start">
-            <nav aria-label="Inhoudsopgave" className="rounded-[24px] border border-[#dce7f4] bg-[#fbfdff] p-5">
-              <p className="text-sm font-semibold text-[#0d1321]">In dit artikel</p>
-              <ol className="mt-4 space-y-1">
+        <div className="mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-[260px,minmax(0,760px)] lg:justify-center lg:gap-16">
+          <aside className="self-start lg:sticky lg:top-28">
+            <nav aria-label="Inhoudsopgave" className="border-l-2 border-[#dce5f0] py-1 pl-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0d1321]">In dit artikel</p>
+              <ol className="mt-4 space-y-1.5">
                 {contents.map(([id, label], index) => (
                   <li key={id}>
                     <a
                       href={`#${id}`}
-                      className="group flex gap-3 rounded-xl px-2 py-2 text-sm leading-5 text-[#5e6a80] transition hover:bg-white hover:text-[#1a5ee5]"
+                      onClick={(event) => handleContentsClick(event, id)}
+                      className="group flex gap-3 py-1.5 text-sm leading-5 text-[#5e6a80] transition-colors hover:text-[#1a5ee5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a5ee5]/30"
                     >
                       <span className="font-semibold text-[#a0abbd] group-hover:text-[#1a5ee5]">{index + 1}</span>
                       <span>{label}</span>
@@ -355,7 +320,7 @@ export default function KennisbankPostnlToeslagen() {
               </div>
             </section>
 
-            <section className="mt-14" id="samengevat">
+            <section className="mt-14 scroll-mt-28" id="samengevat">
               <ArticleHeading eyebrow="Kort en duidelijk">Samengevat</ArticleHeading>
               <ul className="mt-6 space-y-3">
                 {summaryItems.map((item) => (
