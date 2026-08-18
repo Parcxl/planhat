@@ -58,7 +58,6 @@ const criticalImagesByPath = {
   "/blog/sendwise-goedgepickt": ["/sendwise-hero-picture.avif"],
   "/integraties/woocommerce": ["/woocommerce-logo.webp"],
   "/integraties/ccv-shop": ["/ccv-icon.svg"],
-  "/kennisbank": ["/wix-step-8.png"],
   "/kennisbank/wix-verbinden": ["/wix-step-8.png"],
   "/kennisbank/retourportaal-herroepingsrecht": ["/profile-joep.webp"],
   "/kennisbank/postnl-energietoeslag-vrachtwagenheffing": ["/postnl-icoon.webp"],

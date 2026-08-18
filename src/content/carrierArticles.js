@@ -10,10 +10,10 @@ export const CARRIER_ARTICLES = {
     category: "Vervoerders",
     readTime: "± 6 min",
     publishedTime: "2026-08-18",
-    image: "/postnl-icoon.webp",
-    imageAlt: "PostNL-beeldmerk",
-    imageBackground: "bg-[#fff100]",
-    imageClassName: "object-contain p-16 sm:p-20",
+    image: "/kennisbank-postnl-bezorger.jpg",
+    imageAlt: "PostNL-bezorger met pakketten bij een woning",
+    imageBackground: "bg-[#f4f6f8]",
+    imageClassName: "object-cover",
     quickAnswer:
       "PostNL is voor veel Nederlandse webshops een sterke keuze door het landelijke netwerk, de herkenbaarheid bij consumenten en de ruime mogelijkheden voor thuis- en out-of-homebezorging. Of PostNL de beste keuze is, hangt af van je pakketformaten, bestemmingen, gewenste bezorgopties en totale kosten inclusief toeslagen.",
     intro: [
@@ -115,10 +115,10 @@ export const CARRIER_ARTICLES = {
     category: "Vervoerders",
     readTime: "± 6 min",
     publishedTime: "2026-08-18",
-    image: "/sendwise-dhl.svg",
-    imageAlt: "DHL-beeldmerk",
-    imageBackground: "bg-[#ffcc00]",
-    imageClassName: "object-contain p-12 sm:p-16",
+    image: "/kennisbank-dhl-bezorger.jpg",
+    imageAlt: "DHL-bezorger met pakket bij een elektrische bestelbus",
+    imageBackground: "bg-[#f4f6f8]",
+    imageClassName: "object-cover",
     quickAnswer:
       "DHL eCommerce kan een sterke keuze zijn voor webshops die binnen Nederland, de Benelux of Europa verzenden en gebruik willen maken van thuisbezorging, ServicePoints en pakketautomaten. Of DHL de beste keuze is, hangt af van je formaten, volumes, bestemmingen, bezorgopties en contractvoorwaarden.",
     intro: [
@@ -220,10 +220,10 @@ export const CARRIER_ARTICLES = {
     category: "Vervoerders",
     readTime: "± 6 min",
     publishedTime: "2026-08-18",
-    image: "/gofo-logo-sendwise.webp",
-    imageAlt: "GOFO-beeldmerk",
-    imageBackground: "bg-[#f3f5f8]",
-    imageClassName: "object-contain p-10 sm:p-14",
+    image: "/kennisbank-gofo-bezorger.jpg",
+    imageAlt: "GOFO-bezorger met pakket bij een bestelbus",
+    imageBackground: "bg-[#f4f6f8]",
+    imageClassName: "object-cover",
     quickAnswer:
       "GOFO is een technologiegedreven last-mile-vervoerder die sinds 2024 in Nederland actief is en in 2026 landelijke dekking meldt. De vervoerder biedt voor Nederlandse zendingen een bezorgtijd van één tot twee werkdagen en drie gratis bezorgpogingen. Het netwerk is jonger en de out-of-home- en retourmogelijkheden zijn nog beperkter dan bij gevestigde vervoerders.",
     intro: [
