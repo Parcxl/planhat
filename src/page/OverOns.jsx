@@ -2,7 +2,7 @@ import { Flex } from "antd";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import { GoArrowUpRight } from "react-icons/go";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";

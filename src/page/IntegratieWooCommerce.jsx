@@ -35,9 +35,9 @@ const WooCommerceHeroCard = () => (
         <Flex className="absolute inset-0 z-20 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 w-full h-full items-center px-6 sm:px-10 lg:px-20">
                 <Flex className="text-white w-full flex-col space-y-4 items-start text-left justify-center">
-                    <p className="inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.5rem] text-left">
+                    <h1 className="inter-semibold lg:text-[2rem] sm:text-[1.8rem] text-[1.5rem] text-left">
                         Het verzendplatform voor WooCommerce
-                    </p>
+                    </h1>
                     <p className="text-left md:w-[90%] lg:mx-0 inter-medium lg:pl-0 pl-2 lg:text-[1.2rem]">
                         Verbind je WooCommerce-webshop en verzend sneller, goedkoper en zonder gedoe.
                     </p>
