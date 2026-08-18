@@ -1,3 +1,5 @@
+import { CARRIER_ARTICLES } from "../content/carrierArticles.js"
+
 export const SITE_URL = "https://www.sendwise.nl"
 export const DEFAULT_SOCIAL_IMAGE = "/sendwise-hero-delivery-van.jpg"
 export const DEFAULT_SOCIAL_IMAGE_ALT = "Pakket wordt in een blauwe Sendwise-bezorgbus geladen"
@@ -180,6 +182,66 @@ export const SEO_ROUTES = {
     about: ["PostNL", "Energietoeslag", "Vrachtwagenheffing", "Verzendkosten"],
     breadcrumb: ["Kennisbank", "PostNL-energietoeslag en vrachtwagenheffing"],
   }),
+  "/kennisbank/welke-vervoerder-webshop": route({
+    title: "Welke vervoerder voor je webshop? | Keuzehulp | Sendwise",
+    description:
+      "Welke vervoerder past bij jouw webshop? Vergelijk pakketformaat, gewicht, bestemming, bezorgopties, pickup en totale verzendkosten.",
+    type: "article",
+    schemaType: "BlogPosting",
+    image: "/sendwise-hero-delivery-van.jpg",
+    imageAlt: "Pakket wordt geladen in een Sendwise-bezorgbus",
+    publishedTime: "2026-08-18",
+    modifiedTime: "2026-08-18",
+    headline: "Welke vervoerder kies je voor jouw webshop?",
+    about: ["Vervoerder kiezen", "Webshop", "Pakketdienst", "Verzendkosten", "Verzendsoftware"],
+    breadcrumb: ["Kennisbank", "Welke vervoerder voor je webshop"],
+    faq: [
+      {
+        question: "Welke vervoerder is het beste voor een webshop?",
+        answer:
+          "Er bestaat geen vervoerder die voor iedere webshop het beste is. De juiste keuze hangt af van pakketformaat, gewicht, waarde, bestemming, bezorgopties, volume en de gewenste pickup.",
+      },
+      {
+        question: "Is één vervoerder of meerdere vervoerders beter?",
+        answer:
+          "Eén vervoerder geeft meestal het meeste overzicht bij een voorspelbaar verzendprofiel. Meerdere vervoerders kunnen interessant zijn bij uiteenlopende formaten, internationale bestemmingen, piekdrukte of specifieke bezorgwensen.",
+      },
+      {
+        question: "Waar moet je verzendtarieven op vergelijken?",
+        answer:
+          "Vergelijk het basistarief samen met alle relevante toeslagen, pickupkosten, retourtarieven, verzekeringsopties en kosten voor afwijkende maten of gewichten.",
+      },
+      {
+        question: "Kun je meerdere vervoerders vanuit één systeem gebruiken?",
+        answer:
+          "Ja. Met verzendsoftware zoals Sendwise beheer je labels, tracking en vervoerders vanuit één platform. Afhankelijk van je volume en locatie kan ook één gezamenlijke pickup mogelijk zijn.",
+      },
+      {
+        question: "Hoe helpt Sendwise bij het kiezen van een vervoerder?",
+        answer:
+          "Sendwise kijkt naar je producten, volumes, bestemmingen en huidige verzendproces. Op basis daarvan krijg je advies over een passende vervoerder of combinatie van vervoerders.",
+      },
+    ],
+  }),
+  ...Object.fromEntries(
+    Object.entries(CARRIER_ARTICLES).map(([path, article]) => [
+      path,
+      route({
+        title: article.seoTitle,
+        description: article.description,
+        type: "article",
+        schemaType: "BlogPosting",
+        image: article.image,
+        imageAlt: article.imageAlt,
+        publishedTime: article.publishedTime,
+        modifiedTime: article.publishedTime,
+        headline: article.title,
+        about: article.about,
+        breadcrumb: ["Kennisbank", article.breadcrumb],
+        faq: article.faqs,
+      }),
+    ]),
+  ),
   "/start-met-sendwise": route({
     title: "Start met Sendwise | Vraag een account aan",
     description:
@@ -361,6 +423,21 @@ export const buildRouteStructuredData = (pathname, seo = getSeoForPath(pathname)
       "@type": "BreadcrumbList",
       "@id": `${canonicalUrl}#breadcrumb`,
       itemListElement: items,
+    })
+  }
+
+  if (seo.faq?.length) {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${canonicalUrl}#faq`,
+      mainEntity: seo.faq.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
     })
   }
 

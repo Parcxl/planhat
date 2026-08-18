@@ -3,8 +3,32 @@ import { Link } from "react-router-dom"
 import { FiArrowRight, FiClock, FiSearch } from "react-icons/fi"
 import Homepage2Header from "../components/Homepage2/Header"
 import Homepage2Footer from "../components/Homepage2/Footer"
+import { CARRIER_ARTICLES } from "../content/carrierArticles"
+
+const carrierArticles = Object.entries(CARRIER_ARTICLES).map(([to, article]) => ({
+  title: article.title,
+  description: article.excerpt,
+  to,
+  category: article.category,
+  readTime: article.readTime,
+  image: article.image,
+  tags: article.about.slice(0, 4),
+  imageClassName: article.imageClassName,
+  imageBackground: article.imageBackground,
+}))
 
 const articles = [
+  {
+    title: "Welke vervoerder kies je voor jouw webshop?",
+    description:
+      "Vergelijk vervoerders op pakketformaat, bestemming, bezorgopties en totale kosten en bepaal welke aanpak bij jouw webshop past.",
+    to: "/kennisbank/welke-vervoerder-webshop",
+    category: "Vervoerders kiezen",
+    readTime: "± 7 min",
+    image: "/sendwise-hero-delivery-van.jpg",
+    tags: ["Vervoerder", "Webshop", "Verzendkosten", "Pakketdienst"],
+  },
+  ...carrierArticles,
   {
     title: "Uitleg over de PostNL-energietoeslag en vrachtwagenheffing",
     description:

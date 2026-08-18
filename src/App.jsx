@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-ro
 import { AnimatePresence, motion as Motion } from "framer-motion"
 import HomePage2 from "./page/Homepage2"
 import Cookie from "./components/ui/Cookie"
+import { CARRIER_ARTICLES, CARRIER_ARTICLE_PATHS } from "./content/carrierArticles"
 import {
   buildRouteStructuredData,
   DEFAULT_SOCIAL_IMAGE,
@@ -35,6 +36,8 @@ const Kennisbank = lazy(() => import("./page/KennisbankHome"))
 const KennisbankWixVerbinden = lazy(() => import("./page/KennisbankWixVerbinden"))
 const KennisbankRetourportaal = lazy(() => import("./page/KennisbankRetourportaal"))
 const KennisbankPostnlToeslagen = lazy(() => import("./page/KennisbankPostnlToeslagen"))
+const KennisbankWelkeVervoerder = lazy(() => import("./page/KennisbankWelkeVervoerder"))
+const KennisbankVervoerderDetail = lazy(() => import("./page/KennisbankVervoerderDetail"))
 const FacebookAdsLanding = lazy(() => import("./page/FacebookAdsLanding"))
 const FacebookAdsThanks = lazy(() => import("./page/FacebookAdsThanks"))
 const NotFound = lazy(() => import("./page/NotFound"))
@@ -59,6 +62,8 @@ const criticalImagesByPath = {
   "/kennisbank/wix-verbinden": ["/wix-step-8.png"],
   "/kennisbank/retourportaal-herroepingsrecht": ["/profile-joep.webp"],
   "/kennisbank/postnl-energietoeslag-vrachtwagenheffing": ["/postnl-icoon.webp"],
+  "/kennisbank/welke-vervoerder-webshop": ["/sendwise-hero-delivery-van.jpg"],
+  ...Object.fromEntries(CARRIER_ARTICLE_PATHS.map((path) => [path, [CARRIER_ARTICLES[path].image]])),
 }
 
 const syncCriticalPreloadLinks = (sources) => {
@@ -387,6 +392,29 @@ export const AnimatedRoutes = () => {
             </Suspense>
           }
         />
+        <Route
+          path="/kennisbank/welke-vervoerder-webshop"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <KennisbankWelkeVervoerder />
+              </PageTransition>
+            </Suspense>
+          }
+        />
+        {CARRIER_ARTICLE_PATHS.map((path) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition>
+                  <KennisbankVervoerderDetail />
+                </PageTransition>
+              </Suspense>
+            }
+          />
+        ))}
         <Route
           element={(
             <Suspense fallback={<RouteFallback />}>
