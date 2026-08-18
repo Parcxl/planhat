@@ -3,6 +3,14 @@ import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-ro
 import { AnimatePresence, motion as Motion } from "framer-motion"
 import HomePage2 from "./page/Homepage2"
 import Cookie from "./components/ui/Cookie"
+import {
+  buildRouteStructuredData,
+  DEFAULT_SOCIAL_IMAGE,
+  DEFAULT_SOCIAL_IMAGE_ALT,
+  getCanonicalUrl,
+  getSeoForPath,
+  SITE_URL,
+} from "./seo/routes"
 
 const Header = lazy(() => import("./components/ui/Header"))
 const FloatingBoxDemo = lazy(() => import("./page/FloatingBoxDemo"))
@@ -29,39 +37,28 @@ const KennisbankRetourportaal = lazy(() => import("./page/KennisbankRetourportaa
 const KennisbankPostnlToeslagen = lazy(() => import("./page/KennisbankPostnlToeslagen"))
 const FacebookAdsLanding = lazy(() => import("./page/FacebookAdsLanding"))
 const FacebookAdsThanks = lazy(() => import("./page/FacebookAdsThanks"))
-
-const sharedCriticalImages = ["/sendwise-tekst-blauw.png", "/sendwise-tekst.png"]
-const homepageWorkflowImages = [
-  "/inpakken-afbeelding-1.png",
-  "/verzenden-afbeelding-1.png",
-  "/verzenden-afbeelding-2.png",
-  "/retour-afbeelding-1.png",
-  "/retour-afbeelding-2.png",
-  "/profile-founder-van.webp",
-  "/profile-ward.webp",
-  "/profile-joep.webp",
-]
+const NotFound = lazy(() => import("./page/NotFound"))
 
 const criticalImagesByPath = {
-  "/": ["/sendwise-hero-delivery-van.jpg", ...homepageWorkflowImages, ...sharedCriticalImages],
-  "/homepage2": ["/sendwise-hero-delivery-van.jpg", ...homepageWorkflowImages, ...sharedCriticalImages],
-  "/verzend-slimmer": ["/sendwise-hero-delivery-van.jpg", "/verzenden-afbeelding-1.png", "/verzenden-afbeelding-2.png", ...sharedCriticalImages],
-  "/verzend-slimmer/bedankt": ["/sendwise-hero-delivery-van.jpg", ...sharedCriticalImages],
-  "/oplossingen/sendwise": ["/sendwise-platform-dashboard-hero.webp", ...sharedCriticalImages],
-  "/oplossingen/pro": ["/sendwise-pro-dashboard-hero.webp", ...sharedCriticalImages],
-  "/oplossingen/connect": ["/sendwise-connect-hero.jpg", ...sharedCriticalImages],
-  "/voor-webshops": ["/sendwise-platform-hero.webp", ...sharedCriticalImages],
-  "/voor-fulfilmentcenters": ["/fulfilmentcenters-hero.avif", ...sharedCriticalImages],
-  "/prijzen": ["/profile-olivier.avif", ...sharedCriticalImages],
-  "/contact": ["/contact-hero-olivier.avif", ...sharedCriticalImages],
-  "/start-met-sendwise": ["/profile-founder-van.webp", ...sharedCriticalImages],
-  "/blog/sendwise-goedgepickt": ["/sendwise-hero-picture.avif", ...sharedCriticalImages],
-  "/integraties/woocommerce": ["/woocommerce-logo.webp", ...sharedCriticalImages],
-  "/integraties/ccv-shop": ["/ccv-icon.svg", ...sharedCriticalImages],
-  "/kennisbank": ["/wix-step-8.png", ...sharedCriticalImages],
-  "/kennisbank/wix-verbinden": ["/wix-step-8.png", "/wix-step-1.png", ...sharedCriticalImages],
-  "/kennisbank/retourportaal-herroepingsrecht": ["/profile-joep.webp", ...sharedCriticalImages],
-  "/kennisbank/postnl-energietoeslag-vrachtwagenheffing": ["/postnl-icoon.webp", ...sharedCriticalImages],
+  "/": ["/sendwise-hero-delivery-van.jpg"],
+  "/homepage2": ["/sendwise-hero-delivery-van.jpg"],
+  "/verzend-slimmer": ["/sendwise-hero-delivery-van.jpg"],
+  "/verzend-slimmer/bedankt": ["/sendwise-hero-delivery-van.jpg"],
+  "/oplossingen/sendwise": ["/sendwise-platform-dashboard-hero.webp"],
+  "/oplossingen/pro": ["/sendwise-pro-dashboard-hero.webp"],
+  "/oplossingen/connect": ["/sendwise-connect-hero.jpg"],
+  "/voor-webshops": ["/sendwise-platform-hero.webp"],
+  "/voor-fulfilmentcenters": ["/fulfilmentcenters-hero.avif"],
+  "/prijzen": ["/profile-olivier.avif"],
+  "/contact": ["/contact-hero-olivier.avif"],
+  "/start-met-sendwise": ["/profile-founder-van.webp"],
+  "/blog/sendwise-goedgepickt": ["/sendwise-hero-picture.avif"],
+  "/integraties/woocommerce": ["/woocommerce-logo.webp"],
+  "/integraties/ccv-shop": ["/ccv-icon.svg"],
+  "/kennisbank": ["/wix-step-8.png"],
+  "/kennisbank/wix-verbinden": ["/wix-step-8.png"],
+  "/kennisbank/retourportaal-herroepingsrecht": ["/profile-joep.webp"],
+  "/kennisbank/postnl-energietoeslag-vrachtwagenheffing": ["/postnl-icoon.webp"],
 }
 
 const syncCriticalPreloadLinks = (sources) => {
@@ -83,7 +80,7 @@ const syncCriticalPreloadLinks = (sources) => {
 const PageTransition = ({ children }) => (
   <Motion.div
     className="w-full"
-    initial={{ opacity: 0, y: 6 }}
+    initial={typeof window === "undefined" ? false : { opacity: 0, y: 6 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -4 }}
     transition={{ duration: 0.18, ease: "easeOut" }}
@@ -95,137 +92,6 @@ const PageTransition = ({ children }) => (
 const RouteFallback = () => (
   <div className="min-h-screen bg-white" aria-hidden="true" />
 )
-
-const seoMap = {
-  "/": {
-    title: "Slim verzenden voor webshops — vanaf €3,50 per pakket | Sendwise",
-    description:
-      "Verzend pakketten vanaf €3,50 per stuk. Geen contracten, geen abonnementskosten en eerlijke all-in tarieven zonder verrassingen.",
-  },
-  "/homepage2": {
-    title: "Sendwise homepage redesign | Slim verzenden voor webshops",
-    description:
-      "Nieuwe witte homepage voor Sendwise met scherpe verzendtarieven, slimme vervoerderkeuze en fulfilmentsoftware.",
-  },
-  "/verzend-slimmer": {
-    title: "Sendwise voor webshops en fulfilmentteams | Slimmer verzenden vanaf €3,50",
-    description:
-      "Minder handwerk, meer grip op verzenden. Ontdek Sendwise voor labels, tracking, retouren en fulfilmentgroei zonder contracten of vaste kosten.",
-  },
-  "/verzend-slimmer/bedankt": {
-    title: "Bedankt voor je aanvraag | Sendwise",
-    description:
-      "Je Sendwise accountaanvraag is ontvangen. Het team neemt contact met je op om je account klaar te zetten.",
-  },
-  "/verzenddoos-animatie": {
-    title: "3D verzenddoos animatie | Sendwise",
-    description: "Losse 3D animatie van een zwevende kartonnen verzenddoos.",
-  },
-  "/oplossingen/sendwise": {
-    title: "Sendwise verzendplatform | Labels, tracking & integraties",
-    description:
-      "Het verzendplatform voor webshops en fulfilment. Labels printen, tracking beheren en integreren met al je systemen.",
-  },
-  "/oplossingen/pro": {
-    title: "Sendwise PRO | Fulfilment software voor webshops",
-    description:
-      "Pick & pack, voorraadbeheer en magazijninzicht in één fulfilment dashboard. Ontwikkeld voor schaalbare webshops.",
-  },
-  "/oplossingen/connect": {
-    title: "CONNECT verzendmethode | Eén pickup, beste vervoerder",
-    description:
-      "Verzend met één vaste methode via de beste vervoerder per land. Goedkoper, eenvoudiger en betrouwbaarder verzenden.",
-  },
-  "/voor-webshops": {
-    title: "Verzendoplossing voor webshops — vanaf €3,50 | Sendwise",
-    description:
-      "Goedkoper verzenden zonder contracten. Eén platform voor labels, tracking en fulfilment.",
-  },
-  "/voor-fulfilmentcenters": {
-    title: "Verzendoplossing voor fulfilmentcenters — scherpe tarieven",
-    description:
-      "Eén verzendlaag voor al je klanten. Minder pickups, lagere kosten en centrale support.",
-  },
-  "/integraties/woocommerce": {
-    title: "WooCommerce verzendsoftware | Koppel WooCommerce met Sendwise",
-    description:
-      "Verbind je WooCommerce webshop met Sendwise en verzend sneller met scherpe tarieven en automatische labels.",
-  },
-  "/integraties/ccv-shop": {
-    title: "CCV Shop verzendsoftware | Koppel CCV Shop met Sendwise",
-    description:
-      "Gebruik Sendwise als verzendlaag bovenop CCV Shop. Labels, tracking en scherpe tarieven zonder contracten.",
-  },
-  "/prijzen": {
-    title: "Verzendtarieven | Pakketten verzenden vanaf €3,50",
-    description:
-      "Bekijk indicatieve verzendtarieven per land. Geen abonnementen, geen contracten en eerlijke prijzen.",
-  },
-  "/verwerkersovereenkomst": {
-    title: "Verwerkersovereenkomst (DPA) | Sendwise",
-    description:
-      "De Verwerkersovereenkomst (DPA) van Sendwise met afspraken over verwerking van persoonsgegevens.",
-  },
-  "/over-ons": {
-    title: "Over Sendwise | Slimmer en goedkoper verzenden",
-    description:
-      "Sendwise is het verzendplatform voor webshops en fulfilmentcenters. Eerlijk, schaalbaar en transparant.",
-  },
-  "/contact": {
-    title: "Contact | Neem contact op met Sendwise",
-    description:
-      "Vragen over verzenden, tarieven of samenwerking? Neem contact op met Sendwise.",
-  },
-  "/werken-bij": {
-    title: "Werken bij Sendwise | Vacatures en stages",
-    description:
-      "Bekijk open rollen bij Sendwise, waaronder sales medewerker en stagiair software developer.",
-  },
-  "/kennisbank": {
-    title: "Kennisbank | Sendwise artikelen en hulp",
-    description:
-      "Praktische Sendwise handleidingen voor integraties, verzending en fulfilment workflows.",
-  },
-  "/kennisbank/wix-verbinden": {
-    title: "Wix verbinden met Sendwise | Stap-voor-stap handleiding",
-    description:
-      "Lees hoe je in Wix een API key maakt en access token, account ID en site ID gebruikt om Wix met Sendwise te koppelen.",
-  },
-  "/kennisbank/retourportaal-herroepingsrecht": {
-    title: "Herroepingsknop voor webshops verplicht | Sendwise",
-    description:
-      "Lees wat de verplichte herroepingsknop betekent voor webshops en hoe Sendwise het herroepingsproces compliant en automatisch inricht.",
-    type: "article",
-    image: "/retour-afbeelding-2.png",
-    imageAlt: "Voorbeeld van het herroepingsproces in Sendwise",
-    publishedTime: "2026-07-03",
-    modifiedTime: "2026-07-17",
-  },
-  "/kennisbank/postnl-energietoeslag-vrachtwagenheffing": {
-    title: "PostNL-energietoeslag en vrachtwagenheffing | Sendwise",
-    description:
-      "Lees hoe de PostNL-energietoeslag werkt, waar je het actuele bedrag vindt en waarom Sendwise de vrachtwagenheffing niet doorberekent.",
-    type: "article",
-    image: "/postnl-icoon.webp",
-    imageAlt: "PostNL-beeldmerk bij uitleg over energietoeslag en vrachtwagenheffing",
-    publishedTime: "2026-08-06",
-    modifiedTime: "2026-08-10",
-  },
-  "/start-met-sendwise": {
-    title: "Start met Sendwise | Vraag een account aan",
-    description:
-      "Vraag een Sendwise account aan en ontdek hoe je slimmer en goedkoper kunt verzenden.",
-  },
-  "/blog/sendwise-goedgepickt": {
-    title: "Verbind Sendwise met Goedgepickt | Stap-voor-stap handleiding",
-    description:
-      "Leer hoe je Sendwise koppelt aan Goedgepickt via een API-key en dynamische verzendmethoden in een duidelijke stap-voor-stap gids.",
-  },
-}
-
-const SITE_URL = "https://www.sendwise.nl"
-const DEFAULT_SOCIAL_IMAGE = "/sendwise-hero-delivery-van.jpg"
-const DEFAULT_SOCIAL_IMAGE_ALT = "Pakket wordt in een blauwe Sendwise-bezorgbus geladen"
 
 const upsertMeta = (attribute, key, content) => {
   let tag = document.head.querySelector(`meta[${attribute}="${key}"]`)
@@ -251,59 +117,11 @@ const setCanonical = (href) => {
   tag.setAttribute("href", href)
 }
 
-const articleStructuredData = {
-  "/kennisbank/retourportaal-herroepingsrecht": {
-    headline: "De nieuwe herroepingsknop voor webshops",
-    breadcrumb: "Herroepingsknop voor webshops",
-    about: ["Herroepingsknop", "Herroepingsrecht", "Webshops", "ACM"],
-  },
-  "/kennisbank/postnl-energietoeslag-vrachtwagenheffing": {
-    headline: "Uitleg over de PostNL-energietoeslag en vrachtwagenheffing",
-    breadcrumb: "PostNL-energietoeslag en vrachtwagenheffing",
-    about: ["PostNL", "Energietoeslag", "Vrachtwagenheffing", "Verzendkosten"],
-  },
+const removeCanonical = () => {
+  document.head.querySelector('link[rel="canonical"]')?.remove()
 }
 
-const getRouteStructuredData = (pathname, seo, canonicalUrl, imageUrl) => {
-  const article = articleStructuredData[pathname]
-  if (!article) return null
-
-  return {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BlogPosting",
-        "@id": `${canonicalUrl}#article`,
-        mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
-        headline: article.headline,
-        description: seo.description,
-        image: [imageUrl],
-        datePublished: seo.publishedTime,
-        dateModified: seo.modifiedTime,
-        inLanguage: "nl-NL",
-        author: {
-          "@type": "Organization",
-          name: "Sendwise Team",
-          url: `${SITE_URL}/over-ons`,
-        },
-        publisher: { "@id": `${SITE_URL}/#organization` },
-        isPartOf: { "@id": `${SITE_URL}/#website` },
-        about: article.about,
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": `${canonicalUrl}#breadcrumb`,
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-          { "@type": "ListItem", position: 2, name: "Kennisbank", item: `${SITE_URL}/kennisbank` },
-          { "@type": "ListItem", position: 3, name: article.breadcrumb, item: canonicalUrl },
-        ],
-      },
-    ],
-  }
-}
-
-const AnimatedRoutes = () => {
+export const AnimatedRoutes = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -316,7 +134,7 @@ const AnimatedRoutes = () => {
   }, [location, navigate])
 
   useEffect(() => {
-    syncCriticalPreloadLinks(criticalImagesByPath[location.pathname] || sharedCriticalImages)
+    syncCriticalPreloadLinks(criticalImagesByPath[location.pathname] || [])
   }, [location.pathname])
 
   useEffect(() => {
@@ -324,26 +142,31 @@ const AnimatedRoutes = () => {
   }, [location.pathname])
 
   useEffect(() => {
-    const seo = seoMap[location.pathname] || seoMap["/"]
-    if (!seo) return
+    const seo = getSeoForPath(location.pathname)
 
     document.documentElement.lang = "nl"
     document.title = seo.title
-    const canonicalPath = location.pathname === "/homepage2" ? "/" : location.pathname
-    const canonicalUrl = `${SITE_URL}${canonicalPath === "/" ? "/" : canonicalPath}`
+    const canonicalUrl = getCanonicalUrl(location.pathname)
     const imageUrl = `${SITE_URL}${seo.image || DEFAULT_SOCIAL_IMAGE}`
     const imageAlt = seo.imageAlt || DEFAULT_SOCIAL_IMAGE_ALT
 
     upsertMeta("name", "description", seo.description)
-    upsertMeta("name", "robots", "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1")
-    setCanonical(canonicalUrl)
+    upsertMeta(
+      "name",
+      "robots",
+      seo.index
+        ? "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+        : "noindex,follow",
+    )
+    if (seo.notFound) removeCanonical()
+    else setCanonical(canonicalUrl)
 
     upsertMeta("property", "og:locale", "nl_NL")
     upsertMeta("property", "og:type", seo.type || "website")
     upsertMeta("property", "og:site_name", "Sendwise")
     upsertMeta("property", "og:title", seo.title)
     upsertMeta("property", "og:description", seo.description)
-    upsertMeta("property", "og:url", canonicalUrl)
+    upsertMeta("property", "og:url", seo.notFound ? SITE_URL : canonicalUrl)
     upsertMeta("property", "og:image", imageUrl)
     upsertMeta("property", "og:image:alt", imageAlt)
 
@@ -363,7 +186,7 @@ const AnimatedRoutes = () => {
       removeMeta("property", "article:author")
     }
 
-    const structuredData = getRouteStructuredData(location.pathname, seo, canonicalUrl, imageUrl)
+    const structuredData = buildRouteStructuredData(location.pathname, seo)
     let structuredDataTag = document.getElementById("route-structured-data")
     if (!structuredDataTag) {
       structuredDataTag = document.createElement("script")
@@ -644,9 +467,11 @@ const AnimatedRoutes = () => {
           <Route
             path="*"
             element={
-              <PageTransition>
-                <HomePage2 />
-              </PageTransition>
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition>
+                  <NotFound />
+                </PageTransition>
+              </Suspense>
             }
           />
         </Route>

@@ -42,6 +42,20 @@
           "logo": {
             "@type": "ImageObject",
             "url": "https://www.sendwise.nl/logo.svg"
+          },
+          "email": "info@sendwise.nl",
+          "telephone": "+31619156123",
+          "identifier": {
+            "@type": "PropertyValue",
+            "propertyID": "KvK",
+            "value": "98390376"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Ondernemingsweg 66",
+            "postalCode": "2404HN",
+            "addressLocality": "Alphen aan den Rijn",
+            "addressCountry": "NL"
           }
         },
         {
@@ -85,31 +99,36 @@
   </script>
   <script>
     (function () {
-      var sharedImages = ["/sendwise-tekst-blauw.png", "/sendwise-tekst.png"];
       var criticalImagesByPath = {
-        "/": ["/sendwise-hero-delivery-van.jpg", "/inpakken-afbeelding-1.png", "/profile-founder-van.webp"].concat(sharedImages),
-        "/homepage2": ["/sendwise-hero-delivery-van.jpg", "/inpakken-afbeelding-1.png", "/profile-founder-van.webp"].concat(sharedImages),
-        "/oplossingen/sendwise": ["/sendwise-platform-dashboard-hero.webp"].concat(sharedImages),
-        "/oplossingen/pro": ["/sendwise-pro-dashboard-hero.webp"].concat(sharedImages),
-        "/oplossingen/connect": ["/sendwise-connect-hero.jpg"].concat(sharedImages),
-        "/voor-webshops": ["/sendwise-platform-hero.webp"].concat(sharedImages),
-        "/voor-fulfilmentcenters": ["/fulfilmentcenters-hero.avif"].concat(sharedImages),
-        "/prijzen": ["/profile-olivier.avif"].concat(sharedImages),
-        "/contact": ["/contact-hero-olivier.avif"].concat(sharedImages),
-        "/start-met-sendwise": ["/profile-founder-van.webp"].concat(sharedImages),
-        "/blog/sendwise-goedgepickt": ["/sendwise-hero-picture.avif"].concat(sharedImages),
-        "/integraties/woocommerce": ["/woocommerce-logo.webp"].concat(sharedImages),
-        "/integraties/ccv-shop": ["/ccv-icon.svg"].concat(sharedImages),
-        "/kennisbank/retourportaal-herroepingsrecht": ["/profile-joep.webp"].concat(sharedImages),
+        "/": ["/sendwise-hero-delivery-van.jpg"],
+        "/homepage2": ["/sendwise-hero-delivery-van.jpg"],
+        "/verzend-slimmer": ["/sendwise-hero-delivery-van.jpg"],
+        "/verzend-slimmer/bedankt": ["/sendwise-hero-delivery-van.jpg"],
+        "/oplossingen/sendwise": ["/sendwise-platform-dashboard-hero.webp"],
+        "/oplossingen/pro": ["/sendwise-pro-dashboard-hero.webp"],
+        "/oplossingen/connect": ["/sendwise-connect-hero.jpg"],
+        "/voor-webshops": ["/sendwise-platform-hero.webp"],
+        "/voor-fulfilmentcenters": ["/fulfilmentcenters-hero.avif"],
+        "/prijzen": ["/profile-olivier.avif"],
+        "/contact": ["/contact-hero-olivier.avif"],
+        "/start-met-sendwise": ["/profile-founder-van.webp"],
+        "/blog/sendwise-goedgepickt": ["/sendwise-hero-picture.avif"],
+        "/integraties/woocommerce": ["/woocommerce-logo.webp"],
+        "/integraties/ccv-shop": ["/ccv-icon.svg"],
+        "/kennisbank": ["/wix-step-8.png"],
+        "/kennisbank/wix-verbinden": ["/wix-step-8.png"],
+        "/kennisbank/retourportaal-herroepingsrecht": ["/profile-joep.webp"],
+        "/kennisbank/postnl-energietoeslag-vrachtwagenheffing": ["/postnl-icoon.webp"]
       };
 
-      var sources = criticalImagesByPath[window.location.pathname] || sharedImages;
+      var sources = criticalImagesByPath[window.location.pathname] || [];
       sources.forEach(function (src) {
         var link = document.createElement("link");
         link.rel = "preload";
         link.as = "image";
         link.href = src;
         link.setAttribute("fetchpriority", "high");
+        link.setAttribute("data-route-critical-image", "true");
         document.head.appendChild(link);
       });
     })();

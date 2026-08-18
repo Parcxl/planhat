@@ -1,16 +1,16 @@
 {
-  "rewrites": [
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
     {
-      "source": "/kennisbank/retourportaal-herroepingsrecht",
-      "destination": "/kennisbank/retourportaal-herroepingsrecht/index.html"
+      "source": "/homepage2",
+      "destination": "/",
+      "permanent": true
     },
     {
-      "source": "/kennisbank/retourportaal-herroepingsrecht/",
-      "destination": "/kennisbank/retourportaal-herroepingsrecht/index.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/blog",
+      "destination": "/kennisbank",
+      "permanent": true
     }
   ]
 }

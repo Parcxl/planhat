@@ -8,9 +8,9 @@ const distRoot = join(projectRoot, "dist")
 const requestedPort = Number.parseInt(process.argv[2] || "4173", 10)
 const port = Number.isFinite(requestedPort) ? requestedPort : 4173
 
-const prerenderedRoutes = new Map([
-  ["/kennisbank/retourportaal-herroepingsrecht", "kennisbank/retourportaal-herroepingsrecht/index.html"],
-  ["/kennisbank/retourportaal-herroepingsrecht/", "kennisbank/retourportaal-herroepingsrecht/index.html"],
+const redirects = new Map([
+  ["/homepage2", "/"],
+  ["/blog", "/kennisbank"],
 ])
 
 const contentTypes = {
@@ -22,6 +22,7 @@ const contentTypes = {
   ".js": "text/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8",
   ".mp4": "video/mp4",
+  ".pdf": "application/pdf",
   ".png": "image/png",
   ".svg": "image/svg+xml",
   ".txt": "text/plain; charset=utf-8",
@@ -34,35 +35,55 @@ const safeFilePath = (relativePath) => {
   return filePath.startsWith(`${distRoot}${sep}`) ? filePath : null
 }
 
+const existingFile = async (relativePath) => {
+  const filePath = safeFilePath(relativePath)
+  if (!filePath) return null
+  try {
+    return (await stat(filePath)).isFile() ? filePath : null
+  } catch {
+    return null
+  }
+}
+
 const server = createServer(async (request, response) => {
   try {
-    const pathname = decodeURIComponent(new URL(request.url || "/", `http://${request.headers.host || "localhost"}`).pathname)
-    let relativePath = prerenderedRoutes.get(pathname)
+    const url = new URL(request.url || "/", `http://${request.headers.host || "localhost"}`)
+    let pathname = decodeURIComponent(url.pathname)
 
-    if (!relativePath) {
-      const publicPath = pathname.replace(/^\/+/, "")
-      const candidate = safeFilePath(publicPath)
-      if (candidate && publicPath) {
-        try {
-          if ((await stat(candidate)).isFile()) relativePath = publicPath
-        } catch {
-          // Non-file routes use the SPA fallback below.
-        }
-      }
-    }
-
-    relativePath ||= "index.html"
-    const filePath = safeFilePath(relativePath)
-    if (!filePath) {
-      response.writeHead(403)
-      response.end("Forbidden")
+    if (pathname.length > 1 && pathname.endsWith("/")) {
+      response.writeHead(308, { Location: `${pathname.replace(/\/+$/, "")}${url.search}` })
+      response.end()
       return
     }
 
+    if (redirects.has(pathname)) {
+      response.writeHead(308, { Location: redirects.get(pathname) })
+      response.end()
+      return
+    }
+
+    const publicPath = pathname.replace(/^\/+/, "")
+    let filePath
+    let statusCode = 200
+
+    if (pathname === "/") {
+      filePath = await existingFile("index.html")
+    } else if (extname(publicPath)) {
+      filePath = await existingFile(publicPath)
+    } else {
+      filePath = await existingFile(`${publicPath}.html`)
+    }
+
+    if (!filePath) {
+      filePath = await existingFile("404.html")
+      statusCode = 404
+    }
+
     const body = await readFile(filePath)
-    response.writeHead(200, {
-      "Content-Type": contentTypes[extname(filePath).toLowerCase()] || "application/octet-stream",
-      "Cache-Control": relativePath.endsWith(".html") ? "no-cache" : "public, max-age=31536000, immutable",
+    const extension = extname(filePath).toLowerCase()
+    response.writeHead(statusCode, {
+      "Content-Type": contentTypes[extension] || "application/octet-stream",
+      "Cache-Control": extension === ".html" ? "no-cache" : "public, max-age=31536000, immutable",
     })
     response.end(body)
   } catch (error) {
