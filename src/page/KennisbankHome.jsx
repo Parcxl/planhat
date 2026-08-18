@@ -99,6 +99,8 @@ const filters = [
   { label: "Nieuws", icon: <FiZap aria-hidden="true" /> },
 ]
 
+const popularSearches = ["PostNL", "DHL", "GOFO", "Wix"]
+
 const normalize = (value) =>
   value
     .normalize("NFD")
@@ -142,62 +144,63 @@ export default function KennisbankHome() {
     <main className="min-h-screen overflow-hidden bg-[#f6f8fb] text-[#0d1321]">
       <Homepage2Header />
 
-      <section className="relative overflow-hidden bg-[#07115a] px-4 pb-28 pt-32 text-white sm:px-6 sm:pt-36 lg:pb-36 lg:pt-44">
-        <div className="absolute -left-28 top-20 h-72 w-72 rounded-full bg-[#1a5ee5]/35 blur-3xl" />
-        <div className="absolute -right-20 bottom-[-8rem] h-96 w-96 rounded-full bg-[#4b8cff]/25 blur-3xl" />
-        <div className="absolute left-1/2 top-[-12rem] h-96 w-96 -translate-x-1/2 rounded-full bg-white/10 blur-3xl" />
+      <section className="relative overflow-hidden border-b border-[#dbe6f4] bg-[#edf4ff] px-4 pb-28 pt-32 sm:px-6 sm:pb-32 sm:pt-36 lg:pb-36 lg:pt-40">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(26,94,229,0.13),transparent_35%),radial-gradient(circle_at_85%_30%,rgba(121,173,255,0.22),transparent_28%)]" />
+        <div className="absolute left-1/2 top-20 h-px w-[min(90vw,1100px)] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#b7cdf0] to-transparent" />
 
-        <div className="relative mx-auto max-w-7xl">
-          <div className="grid gap-10 lg:grid-cols-[1.04fr_0.96fr] lg:items-end">
-            <div className="max-w-3xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#79adff]">Sendwise kennisbank</p>
-              <h1 className="mt-5 inter-semibold text-[3rem] leading-[0.98] tracking-[-0.03em] sm:text-[4.3rem] lg:text-[5.35rem]">
-                Alles over slimmer verzenden.
-              </h1>
-              <p className="mt-7 max-w-2xl text-[1.05rem] leading-8 text-white/72 sm:text-[1.15rem]">
-                Praktische handleidingen, vervoerdersvergelijkingen en actuele uitleg voor webshops
-                die grip willen houden op hun verzendproces.
-              </p>
-            </div>
+        <div className="relative mx-auto max-w-4xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#c9daf2] bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-[#1a5ee5] shadow-sm backdrop-blur">
+            <FiBookOpen className="text-sm" aria-hidden="true" />
+            Sendwise kennisbank
+          </div>
 
-            <div className="rounded-[28px] border border-white/15 bg-white/10 p-3 shadow-[0_28px_80px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:p-4">
-              <label htmlFor="knowledge-search" className="sr-only">Zoek in de kennisbank</label>
-              <div className="relative">
-                <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-[#6f7e99]" aria-hidden="true" />
-                <input
-                  id="knowledge-search"
-                  type="search"
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Zoek op vervoerder, integratie of onderwerp..."
-                  className="h-16 w-full rounded-[20px] border border-transparent bg-white px-14 text-[0.98rem] font-medium text-[#0d1321] outline-none transition placeholder:text-[#8490a4] focus:border-[#79adff] focus:ring-4 focus:ring-[#79adff]/20"
-                />
-                {query ? (
-                  <button
-                    type="button"
-                    onClick={() => setQuery("")}
-                    aria-label="Zoekopdracht wissen"
-                    className="absolute right-4 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#edf2f8] text-[#56647a] transition hover:bg-[#dfe8f4]"
-                  >
-                    <FiX aria-hidden="true" />
-                  </button>
-                ) : null}
-              </div>
-              <div className="grid grid-cols-3 gap-2 px-2 pb-1 pt-4 text-center">
-                <div>
-                  <p className="inter-semibold text-xl">{articles.length}</p>
-                  <p className="mt-1 text-xs text-white/55">Artikelen</p>
-                </div>
-                <div className="border-x border-white/12">
-                  <p className="inter-semibold text-xl">3</p>
-                  <p className="mt-1 text-xs text-white/55">Categorieën</p>
-                </div>
-                <div>
-                  <p className="inter-semibold text-xl">Direct</p>
-                  <p className="mt-1 text-xs text-white/55">Doorzoekbaar</p>
-                </div>
-              </div>
+          <h1 className="mx-auto mt-7 max-w-3xl inter-semibold text-[2.8rem] leading-[1.02] tracking-[-0.035em] text-[#0b1745] sm:text-[4rem] lg:text-[4.75rem]">
+            Waar kunnen we je mee helpen?
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-[1rem] leading-7 text-[#566684] sm:text-[1.12rem] sm:leading-8">
+            Vind snel een handleiding, vervoerdersvergelijking of antwoord over slimmer verzenden met Sendwise.
+          </p>
+
+          <div className="mx-auto mt-10 max-w-3xl rounded-[24px] border border-[#cbdaf0] bg-white p-2.5 shadow-[0_22px_65px_rgba(24,61,122,0.15)] sm:p-3">
+            <label htmlFor="knowledge-search" className="sr-only">Zoek in de kennisbank</label>
+            <div className="relative">
+              <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-xl text-[#1a5ee5]" aria-hidden="true" />
+              <input
+                id="knowledge-search"
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Zoek op vervoerder, integratie of onderwerp..."
+                className="h-[4.25rem] w-full rounded-[17px] border border-[#e0e8f3] bg-[#f9fbfe] pl-14 pr-14 text-[0.98rem] font-medium text-[#0d1321] outline-none transition placeholder:text-[#7f8ca1] focus:border-[#79adff] focus:bg-white focus:ring-4 focus:ring-[#79adff]/20 sm:h-[4.75rem] sm:text-[1.05rem]"
+              />
+              {query ? (
+                <button
+                  type="button"
+                  onClick={() => setQuery("")}
+                  aria-label="Zoekopdracht wissen"
+                  className="absolute right-4 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#eaf1fa] text-[#56647a] transition hover:bg-[#dce8f7]"
+                >
+                  <FiX aria-hidden="true" />
+                </button>
+              ) : null}
             </div>
+          </div>
+
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm text-[#66758d]">
+            <span className="mr-1 font-medium">Veel gezocht:</span>
+            {popularSearches.map((term) => (
+              <button
+                key={term}
+                type="button"
+                onClick={() => {
+                  setQuery(term)
+                  setActiveFilter("Alles")
+                }}
+                className="rounded-full border border-[#cedbef] bg-white/75 px-3.5 py-1.5 font-semibold text-[#38527d] transition hover:border-[#8eb4ec] hover:bg-white hover:text-[#1a5ee5]"
+              >
+                {term}
+              </button>
+            ))}
           </div>
         </div>
       </section>
