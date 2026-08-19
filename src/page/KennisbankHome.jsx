@@ -13,6 +13,7 @@ import {
 import Homepage2Header from "../components/Homepage2/Header"
 import Homepage2Footer from "../components/Homepage2/Footer"
 import { CARRIER_ARTICLES } from "../content/carrierArticles"
+import { KNOWLEDGE_ARTICLES } from "../content/knowledgeArticles"
 
 const carrierArticles = Object.entries(CARRIER_ARTICLES).map(([to, article]) => ({
   title: article.title,
@@ -24,6 +25,21 @@ const carrierArticles = Object.entries(CARRIER_ARTICLES).map(([to, article]) => 
   image: article.image,
   imageAlt: article.imageAlt,
   tags: article.about.slice(0, 4),
+}))
+
+const knowledgeArticles = Object.entries(KNOWLEDGE_ARTICLES).map(([to, article]) => ({
+  title: article.title,
+  description: article.excerpt,
+  to,
+  type: article.type,
+  category: article.category,
+  readTime: article.readTime,
+  image: article.image,
+  imageAlt: article.imageAlt,
+  tags: article.about.slice(0, 5),
+  imagePosition: article.imagePosition,
+  imageClassName: article.imageClassName,
+  imageBackground: article.imageBackground,
 }))
 
 const articles = [
@@ -40,6 +56,7 @@ const articles = [
     tags: ["Vervoerder", "Webshop", "Verzendkosten", "Pakketdienst"],
   },
   ...carrierArticles,
+  ...knowledgeArticles,
   {
     title: "Uitleg over de PostNL-energietoeslag en vrachtwagenheffing",
     description:
@@ -157,9 +174,6 @@ export default function KennisbankHome() {
           <h1 className="mx-auto mt-7 max-w-3xl inter-semibold text-[2.8rem] leading-[1.02] tracking-[-0.035em] text-[#0b1745] sm:text-[4rem] lg:text-[4.75rem]">
             Waar kunnen we je mee helpen?
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-[1rem] leading-7 text-[#566684] sm:text-[1.12rem] sm:leading-8">
-            Vind snel een handleiding, vervoerdersvergelijking of antwoord over slimmer verzenden met Sendwise.
-          </p>
 
           <div className="mx-auto mt-10 max-w-3xl rounded-[24px] border border-[#cbdaf0] bg-white p-2.5 shadow-[0_22px_65px_rgba(24,61,122,0.15)] sm:p-3">
             <label htmlFor="knowledge-search" className="sr-only">Zoek in de kennisbank</label>
@@ -252,7 +266,7 @@ export default function KennisbankHome() {
                     <img
                       src={article.image}
                       alt={article.imageAlt}
-                      className={`h-full w-full transition duration-500 group-hover:scale-[1.035] ${article.imageClassName || "object-cover"}`}
+                      className={`h-full w-full transition duration-500 group-hover:scale-[1.035] ${article.imageClassName || `object-cover ${article.imagePosition || "object-center"}`}`}
                       loading="lazy"
                       decoding="async"
                     />

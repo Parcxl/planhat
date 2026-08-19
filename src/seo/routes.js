@@ -1,4 +1,5 @@
 import { CARRIER_ARTICLES } from "../content/carrierArticles.js"
+import { KNOWLEDGE_ARTICLES } from "../content/knowledgeArticles.js"
 
 export const SITE_URL = "https://www.sendwise.nl"
 export const DEFAULT_SOCIAL_IMAGE = "/sendwise-hero-delivery-van.jpg"
@@ -225,6 +226,25 @@ export const SEO_ROUTES = {
   }),
   ...Object.fromEntries(
     Object.entries(CARRIER_ARTICLES).map(([path, article]) => [
+      path,
+      route({
+        title: article.seoTitle,
+        description: article.description,
+        type: "article",
+        schemaType: "BlogPosting",
+        image: article.image,
+        imageAlt: article.imageAlt,
+        publishedTime: article.publishedTime,
+        modifiedTime: article.publishedTime,
+        headline: article.title,
+        about: article.about,
+        breadcrumb: ["Kennisbank", article.breadcrumb],
+        faq: article.faqs,
+      }),
+    ]),
+  ),
+  ...Object.fromEntries(
+    Object.entries(KNOWLEDGE_ARTICLES).map(([path, article]) => [
       path,
       route({
         title: article.seoTitle,

@@ -4,6 +4,7 @@ import { AnimatePresence, motion as Motion } from "framer-motion"
 import HomePage2 from "./page/Homepage2"
 import Cookie from "./components/ui/Cookie"
 import { CARRIER_ARTICLES, CARRIER_ARTICLE_PATHS } from "./content/carrierArticles"
+import { KNOWLEDGE_ARTICLES, KNOWLEDGE_ARTICLE_PATHS } from "./content/knowledgeArticles"
 import {
   buildRouteStructuredData,
   DEFAULT_SOCIAL_IMAGE,
@@ -38,6 +39,7 @@ const KennisbankRetourportaal = lazy(() => import("./page/KennisbankRetourportaa
 const KennisbankPostnlToeslagen = lazy(() => import("./page/KennisbankPostnlToeslagen"))
 const KennisbankWelkeVervoerder = lazy(() => import("./page/KennisbankWelkeVervoerder"))
 const KennisbankVervoerderDetail = lazy(() => import("./page/KennisbankVervoerderDetail"))
+const KennisbankArticleDetail = lazy(() => import("./page/KennisbankArticleDetail"))
 const FacebookAdsLanding = lazy(() => import("./page/FacebookAdsLanding"))
 const FacebookAdsThanks = lazy(() => import("./page/FacebookAdsThanks"))
 const NotFound = lazy(() => import("./page/NotFound"))
@@ -63,6 +65,7 @@ const criticalImagesByPath = {
   "/kennisbank/postnl-energietoeslag-vrachtwagenheffing": ["/postnl-icoon.webp"],
   "/kennisbank/welke-vervoerder-webshop": ["/sendwise-hero-delivery-van.jpg"],
   ...Object.fromEntries(CARRIER_ARTICLE_PATHS.map((path) => [path, [CARRIER_ARTICLES[path].image]])),
+  ...Object.fromEntries(KNOWLEDGE_ARTICLE_PATHS.map((path) => [path, [KNOWLEDGE_ARTICLES[path].image]])),
 }
 
 const syncCriticalPreloadLinks = (sources) => {
@@ -409,6 +412,19 @@ export const AnimatedRoutes = () => {
               <Suspense fallback={<RouteFallback />}>
                 <PageTransition>
                   <KennisbankVervoerderDetail />
+                </PageTransition>
+              </Suspense>
+            }
+          />
+        ))}
+        {KNOWLEDGE_ARTICLE_PATHS.map((path) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition>
+                  <KennisbankArticleDetail />
                 </PageTransition>
               </Suspense>
             }
