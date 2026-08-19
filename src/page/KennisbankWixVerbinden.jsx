@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { createElement, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import {
   FiArrowRight,
@@ -116,9 +116,9 @@ const steps = [
   },
 ]
 
-const MetaItem = ({ icon: Icon, children }) => (
+const MetaItem = ({ icon, children }) => (
   <div className="flex items-center gap-2 text-sm text-[#5e6a80] sm:text-base">
-    <Icon size={16} />
+    {createElement(icon, { size: 16, "aria-hidden": true })}
     <span>{children}</span>
   </div>
 )
@@ -259,14 +259,14 @@ export default function KennisbankWixVerbinden() {
 
             </div>
 
-            <div className="rounded-[32px] border border-[#dce7f4] bg-white p-4 shadow-[0_26px_70px_rgba(15,23,42,0.08)] sm:p-5">
+            <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[32px] border border-[#202020] bg-black p-10 shadow-[0_26px_70px_rgba(15,23,42,0.12)] sm:p-14">
               <img
-                src="/wix-step-8.png"
-                alt="Succesvolle Wix koppeling met Sendwise"
+                src="/wix.png"
+                alt="Wix-logo"
                 fetchPriority="high"
                 loading="eager"
                 decoding="async"
-                className="w-full rounded-[24px] border border-[#e3edf8]"
+                className="h-full w-full object-contain"
               />
             </div>
           </div>

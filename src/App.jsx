@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-ro
 import { AnimatePresence, motion as Motion } from "framer-motion"
 import HomePage2 from "./page/Homepage2"
 import Cookie from "./components/ui/Cookie"
+import { CARRIER_ARTICLES, CARRIER_ARTICLE_PATHS } from "./content/carrierArticles"
+import { KNOWLEDGE_ARTICLES, KNOWLEDGE_ARTICLE_PATHS } from "./content/knowledgeArticles"
 import {
   buildRouteStructuredData,
   DEFAULT_SOCIAL_IMAGE,
@@ -35,6 +37,9 @@ const Kennisbank = lazy(() => import("./page/KennisbankHome"))
 const KennisbankWixVerbinden = lazy(() => import("./page/KennisbankWixVerbinden"))
 const KennisbankRetourportaal = lazy(() => import("./page/KennisbankRetourportaal"))
 const KennisbankPostnlToeslagen = lazy(() => import("./page/KennisbankPostnlToeslagen"))
+const KennisbankWelkeVervoerder = lazy(() => import("./page/KennisbankWelkeVervoerder"))
+const KennisbankVervoerderDetail = lazy(() => import("./page/KennisbankVervoerderDetail"))
+const KennisbankArticleDetail = lazy(() => import("./page/KennisbankArticleDetail"))
 const FacebookAdsLanding = lazy(() => import("./page/FacebookAdsLanding"))
 const FacebookAdsThanks = lazy(() => import("./page/FacebookAdsThanks"))
 const NotFound = lazy(() => import("./page/NotFound"))
@@ -52,13 +57,15 @@ const criticalImagesByPath = {
   "/prijzen": ["/profile-olivier.avif"],
   "/contact": ["/contact-hero-olivier.avif"],
   "/start-met-sendwise": ["/profile-founder-van.webp"],
-  "/blog/sendwise-goedgepickt": ["/sendwise-hero-picture.avif"],
+  "/blog/sendwise-goedgepickt": ["/goedgepickt-sendwise-logo.webp"],
   "/integraties/woocommerce": ["/woocommerce-logo.webp"],
   "/integraties/ccv-shop": ["/ccv-icon.svg"],
-  "/kennisbank": ["/wix-step-8.png"],
-  "/kennisbank/wix-verbinden": ["/wix-step-8.png"],
+  "/kennisbank/wix-verbinden": ["/wix.png"],
   "/kennisbank/retourportaal-herroepingsrecht": ["/profile-joep.webp"],
   "/kennisbank/postnl-energietoeslag-vrachtwagenheffing": ["/postnl-icoon.webp"],
+  "/kennisbank/welke-vervoerder-webshop": ["/sendwise-hero-delivery-van.jpg"],
+  ...Object.fromEntries(CARRIER_ARTICLE_PATHS.map((path) => [path, [CARRIER_ARTICLES[path].image]])),
+  ...Object.fromEntries(KNOWLEDGE_ARTICLE_PATHS.map((path) => [path, [KNOWLEDGE_ARTICLES[path].image]])),
 }
 
 const syncCriticalPreloadLinks = (sources) => {
@@ -387,6 +394,42 @@ export const AnimatedRoutes = () => {
             </Suspense>
           }
         />
+        <Route
+          path="/kennisbank/welke-vervoerder-webshop"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <PageTransition>
+                <KennisbankWelkeVervoerder />
+              </PageTransition>
+            </Suspense>
+          }
+        />
+        {CARRIER_ARTICLE_PATHS.map((path) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition>
+                  <KennisbankVervoerderDetail />
+                </PageTransition>
+              </Suspense>
+            }
+          />
+        ))}
+        {KNOWLEDGE_ARTICLE_PATHS.map((path) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition>
+                  <KennisbankArticleDetail />
+                </PageTransition>
+              </Suspense>
+            }
+          />
+        ))}
         <Route
           element={(
             <Suspense fallback={<RouteFallback />}>

@@ -1,20 +1,74 @@
 import { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
-import { FiArrowRight, FiClock, FiSearch } from "react-icons/fi"
+import {
+  FiArrowRight,
+  FiBookOpen,
+  FiClock,
+  FiFileText,
+  FiGrid,
+  FiSearch,
+  FiX,
+  FiZap,
+} from "react-icons/fi"
 import Homepage2Header from "../components/Homepage2/Header"
 import Homepage2Footer from "../components/Homepage2/Footer"
+import { CARRIER_ARTICLES } from "../content/carrierArticles"
+import { KNOWLEDGE_ARTICLES } from "../content/knowledgeArticles"
+
+const carrierArticles = Object.entries(CARRIER_ARTICLES).map(([to, article]) => ({
+  title: article.title,
+  description: article.excerpt,
+  to,
+  type: "Blog",
+  category: article.category,
+  readTime: article.readTime,
+  image: article.image,
+  imageAlt: article.imageAlt,
+  tags: article.about.slice(0, 4),
+}))
+
+const knowledgeArticles = Object.entries(KNOWLEDGE_ARTICLES).map(([to, article]) => ({
+  title: article.title,
+  description: article.excerpt,
+  to,
+  type: article.type,
+  category: article.category,
+  readTime: article.readTime,
+  image: article.image,
+  imageAlt: article.imageAlt,
+  tags: article.about.slice(0, 5),
+  imagePosition: article.imagePosition,
+  imageClassName: article.imageClassName,
+  imageBackground: article.imageBackground,
+}))
 
 const articles = [
+  {
+    title: "Welke vervoerder kies je voor jouw webshop?",
+    description:
+      "Vergelijk vervoerders op pakketformaat, bestemming, bezorgopties en totale kosten en bepaal welke aanpak bij jouw webshop past.",
+    to: "/kennisbank/welke-vervoerder-webshop",
+    type: "Blog",
+    category: "Keuzehulp",
+    readTime: "± 7 min",
+    image: "/sendwise-hero-delivery-van.jpg",
+    imageAlt: "Pakket wordt geladen in een blauwe Sendwise-bezorgbus",
+    tags: ["Vervoerder", "Webshop", "Verzendkosten", "Pakketdienst"],
+  },
+  ...carrierArticles,
+  ...knowledgeArticles,
   {
     title: "Uitleg over de PostNL-energietoeslag en vrachtwagenheffing",
     description:
       "Lees hoe de variabele PostNL-energietoeslag werkt, waar je het actuele bedrag vindt en waarom Sendwise de vrachtwagenheffing niet doorberekent.",
     to: "/kennisbank/postnl-energietoeslag-vrachtwagenheffing",
+    type: "Nieuws",
     category: "Tarieven & toeslagen",
     readTime: "± 6 min",
     image: "/postnl-icoon.webp",
+    imageAlt: "PostNL-beeldmerk bij uitleg over energietoeslagen",
     tags: ["PostNL", "Energietoeslag", "Vrachtwagenheffing", "Facturatie"],
-    imageClassName: "object-contain p-14 sm:p-20",
+    imageClassName: "object-contain p-12",
     imageBackground: "bg-[#fff100]",
   },
   {
@@ -22,134 +76,251 @@ const articles = [
     description:
       "Lees wat de verplichte herroepingsknop betekent voor webshops en hoe je het herroepingsproces automatiseert met Sendwise.",
     to: "/kennisbank/retourportaal-herroepingsrecht",
-    category: "Herroepingsrecht",
+    type: "Nieuws",
+    category: "Wetgeving",
     readTime: "± 5 min",
-    image: "/retour-afbeelding-2.png",
+    image: "/kennisbank-beelden/herroepingsknop-online-aankoop.jpg",
+    imageAlt: "Consument doet een online aankoop waarop het herroepingsrecht van toepassing is",
     tags: ["Herroepingsknop", "Herroepingsrecht", "Webshops", "ACM"],
   },
   {
     title: "Wix verbinden met Sendwise",
     description:
-      "Stap-voor-stap handleiding voor het aanmaken van een Wix API key en het invullen van access token, account ID en site ID in Sendwise.",
+      "Stap-voor-stap handleiding voor het aanmaken van een Wix API key en het koppelen van je webshop met Sendwise.",
     to: "/kennisbank/wix-verbinden",
+    type: "Handleiding",
     category: "Integraties",
     readTime: "± 7 min",
-    image: "/wix-step-8.png",
+    image: "/wix.png",
+    imageAlt: "Wix-logo",
+    imageClassName: "object-contain p-10",
+    imageBackground: "bg-black",
     tags: ["Wix", "Integratie", "API key", "Access token"],
+  },
+  {
+    title: "Goedgepickt verbinden met Sendwise",
+    description:
+      "Koppel Goedgepickt aan Sendwise met een API-key en stel dynamische verzendmethoden stap voor stap correct in.",
+    to: "/blog/sendwise-goedgepickt",
+    type: "Handleiding",
+    category: "Integraties",
+    readTime: "± 8 min",
+    image: "/goedgepickt-sendwise-logo.webp",
+    imageAlt: "Goedgepickt-logo",
+    imageClassName: "object-contain p-10",
+    imageBackground: "bg-[#eef3f8]",
+    tags: ["Goedgepickt", "Integratie", "API", "Verzendmethoden"],
   },
 ]
 
+const filters = [
+  { label: "Alles", icon: <FiGrid aria-hidden="true" /> },
+  { label: "Blog", icon: <FiFileText aria-hidden="true" /> },
+  { label: "Handleiding", icon: <FiBookOpen aria-hidden="true" /> },
+  { label: "Nieuws", icon: <FiZap aria-hidden="true" /> },
+]
+
+const popularSearches = ["PostNL", "DHL", "GOFO", "Wix"]
+
+const normalize = (value) =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+
+const typeStyles = {
+  Blog: "bg-[#e8f0ff] text-[#1a5ee5]",
+  Handleiding: "bg-[#e9f8ef] text-[#16794a]",
+  Nieuws: "bg-[#fff2df] text-[#a65300]",
+}
+
 export default function KennisbankHome() {
   const [query, setQuery] = useState("")
+  const [activeFilter, setActiveFilter] = useState("Alles")
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   const filteredArticles = useMemo(() => {
-    const needle = query.trim().toLowerCase()
-    if (!needle) return articles
+    const needle = normalize(query.trim())
 
-    return articles.filter((article) =>
-      [article.title, article.description, article.category, ...article.tags]
-        .join(" ")
-        .toLowerCase()
-        .includes(needle),
-    )
-  }, [query])
+    return articles.filter((article) => {
+      const matchesType = activeFilter === "Alles" || article.type === activeFilter
+      if (!matchesType) return false
+      if (!needle) return true
+
+      return normalize(
+        [article.title, article.description, article.type, article.category, ...article.tags].join(" "),
+      ).includes(needle)
+    })
+  }, [activeFilter, query])
+
+  const clearSearch = () => {
+    setQuery("")
+    setActiveFilter("Alles")
+  }
 
   return (
-    <main className="min-h-screen overflow-hidden bg-white text-[#0d1321]">
+    <main className="min-h-screen overflow-hidden bg-[#f6f8fb] text-[#0d1321]">
       <Homepage2Header />
 
-      <section className="relative overflow-hidden px-4 pb-16 pt-32 sm:px-6 sm:pt-36 lg:pb-20 lg:pt-44">
-        <div className="absolute left-0 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#eaf2ff] blur-3xl" />
-        <div className="absolute right-[-8rem] top-20 h-[24rem] w-[24rem] rounded-full bg-[#f1f7ff] blur-3xl" />
+      <section className="relative overflow-hidden border-b border-[#dbe6f4] bg-[#edf4ff] px-4 pb-28 pt-32 sm:px-6 sm:pb-32 sm:pt-36 lg:pb-36 lg:pt-40">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(26,94,229,0.13),transparent_35%),radial-gradient(circle_at_85%_30%,rgba(121,173,255,0.22),transparent_28%)]" />
+        <div className="absolute left-1/2 top-20 h-px w-[min(90vw,1100px)] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#b7cdf0] to-transparent" />
 
-        <div className="relative mx-auto max-w-7xl">
-          <div className="mx-auto max-w-4xl text-center">
-            <h1 className="inter-semibold text-[3rem] leading-[0.98] tracking-[0px] text-[#0d1321] sm:text-[4.2rem] lg:text-[5.2rem]">
-              Kennisbank
-            </h1>
+        <div className="relative mx-auto max-w-4xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#c9daf2] bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-[#1a5ee5] shadow-sm backdrop-blur">
+            <FiBookOpen className="text-sm" aria-hidden="true" />
+            Sendwise kennisbank
+          </div>
 
-            <div className="mx-auto mt-10 w-full max-w-3xl rounded-[28px] border border-[#dfeaf7] bg-white p-3 shadow-[0_25px_70px_rgba(15,23,42,0.08)]">
-              <div className="relative">
-                <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-[#8b96aa]" />
-                <input
-                  type="search"
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Zoek op integratie, platform of onderwerp..."
-                  className="h-14 w-full rounded-2xl border border-transparent bg-[#f7fbff] px-5 pl-12 text-[1rem] font-medium text-[#0d1321] outline-none transition-all duration-300 placeholder:text-[#8b96aa] focus:border-[#1a5ee5]/30 focus:bg-white focus:ring-4 focus:ring-[#1a5ee5]/10"
-                />
-              </div>
+          <h1 className="mx-auto mt-7 max-w-3xl inter-semibold text-[2.8rem] leading-[1.02] tracking-[-0.035em] text-[#0b1745] sm:text-[4rem] lg:text-[4.75rem]">
+            Waar kunnen we je mee helpen?
+          </h1>
+
+          <div className="mx-auto mt-10 max-w-3xl rounded-[24px] border border-[#cbdaf0] bg-white p-2.5 shadow-[0_22px_65px_rgba(24,61,122,0.15)] sm:p-3">
+            <label htmlFor="knowledge-search" className="sr-only">Zoek in de kennisbank</label>
+            <div className="relative">
+              <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-xl text-[#1a5ee5]" aria-hidden="true" />
+              <input
+                id="knowledge-search"
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Zoek op vervoerder, integratie of onderwerp..."
+                className="h-[4.25rem] w-full rounded-[17px] border border-[#e0e8f3] bg-[#f9fbfe] pl-14 pr-14 text-[0.98rem] font-medium text-[#0d1321] outline-none transition placeholder:text-[#7f8ca1] focus:border-[#79adff] focus:bg-white focus:ring-4 focus:ring-[#79adff]/20 sm:h-[4.75rem] sm:text-[1.05rem]"
+              />
+              {query ? (
+                <button
+                  type="button"
+                  onClick={() => setQuery("")}
+                  aria-label="Zoekopdracht wissen"
+                  className="absolute right-4 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#eaf1fa] text-[#56647a] transition hover:bg-[#dce8f7]"
+                >
+                  <FiX aria-hidden="true" />
+                </button>
+              ) : null}
             </div>
           </div>
 
-          <div className="mt-14 grid gap-6">
-            {filteredArticles.map((article) => (
-              <Link
-                key={article.title}
-                to={article.to}
-                className="group grid gap-6 rounded-[32px] border border-[#dce7f4] bg-white p-5 shadow-[0_18px_50px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_70px_rgba(15,23,42,0.10)] lg:grid-cols-[0.92fr,1.08fr] lg:p-6"
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm text-[#66758d]">
+            <span className="mr-1 font-medium">Veel gezocht:</span>
+            {popularSearches.map((term) => (
+              <button
+                key={term}
+                type="button"
+                onClick={() => {
+                  setQuery(term)
+                  setActiveFilter("Alles")
+                }}
+                className="rounded-full border border-[#cedbef] bg-white/75 px-3.5 py-1.5 font-semibold text-[#38527d] transition hover:border-[#8eb4ec] hover:bg-white hover:text-[#1a5ee5]"
               >
-                <div className={`overflow-hidden rounded-[24px] border border-[#e3edf8] ${article.imageBackground || "bg-[#f7fbff]"}`}>
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className={`h-full min-h-[250px] w-full transition duration-500 group-hover:scale-[1.01] ${article.imageClassName || "object-cover"}`}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
+                {term}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                <div className="flex flex-col justify-between gap-6 py-2">
-                  <div>
-                    <div className="flex flex-wrap items-center gap-3 text-sm">
-                      <span className="rounded-full bg-[#f2f7ff] px-3 py-1.5 font-semibold text-[#1a5ee5]">
-                        {article.category}
-                      </span>
-                      <span className="inline-flex items-center gap-2 text-[#5e6a80]">
-                        <FiClock size={14} />
+      <section className="relative z-10 -mt-10 px-4 pb-24 sm:px-6 lg:pb-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-5 rounded-[26px] border border-[#dce5f0] bg-white p-4 shadow-[0_18px_55px_rgba(15,23,42,0.09)] sm:flex-row sm:items-center sm:justify-between sm:p-5">
+            <div className="flex gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0" role="group" aria-label="Filter artikelen op type">
+              {filters.map(({ label, icon }) => {
+                const active = activeFilter === label
+                const count = label === "Alles" ? articles.length : articles.filter((article) => article.type === label).length
+
+                return (
+                  <button
+                    key={label}
+                    type="button"
+                    onClick={() => setActiveFilter(label)}
+                    aria-pressed={active}
+                    className={`inline-flex shrink-0 items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition ${
+                      active
+                        ? "bg-[#1a5ee5] text-white shadow-[0_10px_24px_rgba(26,94,229,0.22)]"
+                        : "bg-[#f3f6fa] text-[#536078] hover:bg-[#e8eef6] hover:text-[#0d1321]"
+                    }`}
+                  >
+                    {icon}
+                    {label}
+                    <span className={`rounded-md px-1.5 py-0.5 text-[0.68rem] ${active ? "bg-white/18 text-white" : "bg-white text-[#7b8799]"}`}>
+                      {count}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+
+            <p className="shrink-0 text-sm font-medium text-[#69768b]" aria-live="polite">
+              {filteredArticles.length} {filteredArticles.length === 1 ? "resultaat" : "resultaten"}
+            </p>
+          </div>
+
+          {filteredArticles.length ? (
+            <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {filteredArticles.map((article) => (
+                <Link
+                  key={article.to}
+                  to={article.to}
+                  className="group flex min-h-full flex-col overflow-hidden rounded-[26px] border border-[#dce5f0] bg-white shadow-[0_12px_34px_rgba(15,23,42,0.055)] transition duration-300 hover:-translate-y-1 hover:border-[#c8d8eb] hover:shadow-[0_24px_65px_rgba(15,23,42,0.12)]"
+                >
+                  <div className={`relative aspect-[16/10] overflow-hidden ${article.imageBackground || "bg-[#eef3f8]"}`}>
+                    <img
+                      src={article.image}
+                      alt={article.imageAlt}
+                      className={`h-full w-full transition duration-500 group-hover:scale-[1.035] ${article.imageClassName || `object-cover ${article.imagePosition || "object-center"}`}`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span className={`absolute left-4 top-4 rounded-full px-3 py-1.5 text-xs font-semibold shadow-sm ${typeStyles[article.type]}`}>
+                      {article.type}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-1 flex-col p-6">
+                    <div className="flex items-center justify-between gap-4 text-xs font-semibold uppercase tracking-[0.1em] text-[#728096]">
+                      <span>{article.category}</span>
+                      <span className="inline-flex items-center gap-1.5 whitespace-nowrap normal-case tracking-normal">
+                        <FiClock aria-hidden="true" />
                         {article.readTime}
                       </span>
                     </div>
 
-                    <h2 className="mt-5 inter-semibold text-[1.8rem] leading-tight text-[#0d1321] sm:text-[2.2rem]">
+                    <h2 className="mt-5 inter-semibold text-[1.45rem] leading-[1.16] text-[#0d1321] sm:text-[1.6rem]">
                       {article.title}
                     </h2>
+                    <p className="mt-4 line-clamp-3 text-[0.96rem] leading-7 text-[#5a687e]">{article.description}</p>
 
-                    <p className="mt-4 max-w-2xl text-[1rem] leading-8 text-[#526078]">{article.description}</p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {article.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-[#dce7f4] bg-white px-3 py-1.5 text-xs font-semibold text-[#5e6a80]"
-                      >
-                        {tag}
+                    <div className="mt-auto flex items-center justify-between border-t border-[#e4eaf1] pt-5 text-sm font-semibold text-[#1a5ee5]">
+                      <span>Lees artikel</span>
+                      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#edf4ff] transition group-hover:translate-x-0.5 group-hover:bg-[#1a5ee5] group-hover:text-white">
+                        <FiArrowRight aria-hidden="true" />
                       </span>
-                    ))}
+                    </div>
                   </div>
-
-                  <div className="inline-flex items-center gap-2 text-sm font-semibold text-[#1a5ee5]">
-                    Lees handleiding
-                    <FiArrowRight className="transition group-hover:translate-x-0.5" />
-                  </div>
-                </div>
-              </Link>
-            ))}
-
-            {filteredArticles.length === 0 ? (
-              <div className="rounded-[28px] border border-[#dce7f4] bg-white p-10 text-center shadow-[0_18px_50px_rgba(15,23,42,0.05)]">
-                <p className="text-lg font-semibold text-[#0d1321]">Geen artikelen gevonden</p>
-                <p className="mt-3 text-[0.98rem] text-[#5e6a80]">
-                  Probeer een andere zoekterm, bijvoorbeeld retouren, Wix of integratie.
-                </p>
-              </div>
-            ) : null}
-          </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-8 rounded-[28px] border border-dashed border-[#cbd8e7] bg-white px-6 py-16 text-center shadow-[0_12px_34px_rgba(15,23,42,0.04)]">
+              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#edf4ff] text-xl text-[#1a5ee5]">
+                <FiSearch aria-hidden="true" />
+              </span>
+              <h2 className="mt-5 inter-semibold text-2xl text-[#0d1321]">Geen artikelen gevonden</h2>
+              <p className="mx-auto mt-3 max-w-md text-[0.98rem] leading-7 text-[#667389]">
+                Probeer een andere zoekterm of bekijk opnieuw alle blogs, handleidingen en nieuwsartikelen.
+              </p>
+              <button
+                type="button"
+                onClick={clearSearch}
+                className="mt-6 rounded-xl bg-[#1a5ee5] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#164fc2]"
+              >
+                Wis zoekopdracht en filters
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
