@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react"
+import { createElement, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { FiClock, FiUser, FiCalendar, FiCheckCircle, FiClipboard } from "react-icons/fi"
 
 const shipmentsUrl = "https://api.sendwise.nl/shipments"
 const shippingMethodsUrl = "https://api.sendwise.nl/shipping-methods"
 
-const MetaItem = ({ icon: Icon, children }) => (
+const MetaItem = ({ icon, children }) => (
   <div className="flex items-center gap-2 text-gray-600 text-sm sm:text-base">
-    <Icon size={16} />
+    {createElement(icon, { size: 16, "aria-hidden": true })}
     <span>{children}</span>
   </div>
 )
@@ -22,7 +22,6 @@ const CopyButton = ({ value, id }) => {
       setTimeout(() => setCopied(false), 2000)
     } catch (e) {
       // stille fallback; we tonen geen aparte error in de UI
-      // eslint-disable-next-line no-console
       console.error("Clipboard copy failed", e)
     }
   }
@@ -98,37 +97,15 @@ export default function BlogGoedgepickt() {
             </div>
 
             <div className="relative hidden sm:block">
-              <div className="relative rounded-3xl border border-slate-100 bg-white/80 shadow-[0_18px_50px_rgba(15,23,42,0.16)] overflow-hidden">
+              <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-3xl border border-slate-200 bg-[#eef3f8] p-10 shadow-[0_18px_50px_rgba(15,23,42,0.12)] lg:p-14">
                 <img
-                  src="/sendwise-hero-picture.avif"
-                  alt="Integratie tussen Sendwise en Goedgepickt"
+                  src="/goedgepickt-sendwise-logo.webp"
+                  alt="Goedgepickt-logo"
                   fetchPriority="high"
                   loading="eager"
                   decoding="async"
-                  className="h-56 w-full object-cover"
+                  className="h-full w-full rounded-[28px] object-contain"
                 />
-                <div className="p-4 flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center">
-                      <img
-                        src="https://wclkrgejvcuglowsrefl.supabase.co/storage/v1/object/public/integraties/goedgepickt%20sendwise%20logo.png"
-                        alt="Goedgepickt"
-                        className="h-7 w-7 object-contain"
-                      />
-                    </div>
-                    <div className="h-px w-6 bg-slate-200" />
-                    <div className="h-10 w-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center">
-                      <img
-                        src="https://wclkrgejvcuglowsrefl.supabase.co/storage/v1/object/public/logos/Sendwise%20zonder%20connect.png"
-                        alt="Sendwise"
-                        className="h-7 w-7 object-contain"
-                      />
-                    </div>
-                  </div>
-                  <p className="text-xs text-slate-500 text-right">
-                    Eén koppeling tussen je fulfilmentproces en slimme verzending.
-                  </p>
-                </div>
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@ import { GUIDE_ARTICLES } from "./guideArticles.js"
 import { IMPORTED_KNOWLEDGE_ARTICLES } from "./importedKnowledgeArticles.js"
 import { WOOCOMMERCE_GUIDE_ARTICLE } from "./woocommerceGuideArticle.js"
 
-export const KNOWLEDGE_ARTICLES = {
+const RAW_KNOWLEDGE_ARTICLES = {
   "/kennisbank/gofo-voor-webshops": {
     title: "Is GOFO de beste vervoerder voor jouw webshop?",
     seoTitle: "GOFO voor je webshop: voordelen en aandachtspunten | Sendwise",
@@ -769,5 +769,360 @@ export const KNOWLEDGE_ARTICLES = {
   ...GUIDE_ARTICLES,
   ...WOOCOMMERCE_GUIDE_ARTICLE,
 }
+
+const GUIDE_PATHS = new Set([
+  "/kennisbank/bol-com-koppelen",
+  "/kennisbank/ccv-shop-koppelen",
+  "/kennisbank/lightspeed-koppelen",
+  "/kennisbank/magento-2-koppelen",
+  "/kennisbank/mijnwebwinkel-koppelen",
+  "/kennisbank/prestashop-koppelen",
+  "/kennisbank/shopify-koppelen",
+  "/kennisbank/woocommerce-koppelen",
+])
+
+const pexelsArticleImage = (file, imageAlt, author, photoId) => ({
+  image: `/kennisbank-beelden/${file}`,
+  imageAlt,
+  imageCredit: {
+    label: `${author} via Pexels`,
+    href: `https://www.pexels.com/photo/${photoId}/`,
+  },
+})
+
+const ARTICLE_IMAGE_OVERRIDES = {
+  "/kennisbank/internationaal-verzenden": {
+    image: "/kennisbank-beelden/fedex-vrachtvliegtuig.jpg",
+    imageAlt: "FedEx-vrachtvliegtuigen op een luchthaven",
+    imageCredit: { label: "Skyhawk4Life via Wikimedia Commons · CC BY 2.0", href: "https://commons.wikimedia.org/wiki/File:FedEx_aircraft.jpg" },
+  },
+  "/kennisbank/levertijd-postnl-nederland": {
+    image: "/kennisbank-beelden/postnl-bezorgbus-groningen.jpg",
+    imageAlt: "PostNL-bezorgbus in Groningen",
+    imageCredit: { label: "Donald Trung via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Post_NL_delivery_van,_Groningen_(2018).jpg" },
+  },
+  "/kennisbank/levertijd-postnl-duitsland": {
+    image: "/kennisbank-beelden/postnl-kantoor-amsterdam.jpg",
+    imageAlt: "PostNL-locatie in Amsterdam",
+    imageCredit: { label: "Zhou Guanhuai via Wikimedia Commons · CC0", href: "https://commons.wikimedia.org/wiki/File:PostNL_Office.jpg" },
+  },
+  "/kennisbank/levertijd-postnl-frankrijk": {
+    image: "/kennisbank-beelden/postnl-feestdagen-brievenbus.jpg",
+    imageAlt: "PostNL-brievenbus tijdens de feestdagen",
+    imageCredit: { label: "Klaas van Buiten via Wikimedia Commons · CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:FeestdagenBrievenbusPostNl.jpg" },
+  },
+  "/kennisbank/levertijd-postnl-spanje": {
+    image: "/kennisbank-beelden/postnl-brievenbus-rotterdam.jpg",
+    imageAlt: "PostNL-brievenbus in Rotterdam",
+    imageCredit: { label: "Someone Not Awful via Wikimedia Commons · CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:PostNL_brievenbus_in_Ommoord.jpg" },
+  },
+  "/kennisbank/verzenden-naar-duitsland": {
+    image: "/kennisbank-beelden/dhl-pakketautomaat.jpg",
+    imageAlt: "DHL-pakketautomaat in Duitsland",
+    imageCredit: { label: "Herbert167 via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Deutsche_Post_DHL_Poststation.jpg" },
+  },
+  "/kennisbank/levertijd-dhl-nederland": {
+    image: "/kennisbank-beelden/dhl-bestelbus-stad.jpg",
+    imageAlt: "DHL-bestelbus tijdens een bezorgronde",
+    imageCredit: { label: "Raysonho via Wikimedia Commons · CC0", href: "https://commons.wikimedia.org/wiki/File:DHLVan4.jpg" },
+  },
+  "/kennisbank/levertijd-dhl-frankrijk": {
+    image: "/kennisbank-beelden/dhl-elektrische-bestelbus.jpg",
+    imageAlt: "Elektrische DHL-bestelbus",
+    imageCredit: { label: "Mateusmatsuda via Wikimedia Commons · CC BY 4.0", href: "https://commons.wikimedia.org/wiki/File:DHL_delivery_vehicle_alternative_fuel_Peugeot.jpg" },
+  },
+  "/kennisbank/levertijd-dhl-spanje": {
+    image: "/kennisbank-beelden/dhl-bestelbus-duitsland.jpg",
+    imageAlt: "DHL-bestelbus in Duitsland",
+    imageCredit: { label: "Stefan Kühn via Wikimedia Commons · CC0", href: "https://commons.wikimedia.org/wiki/File:DHL-Fahrzeug.jpg" },
+  },
+  "/kennisbank/gofo-voor-webshops": {
+    image: "/kennisbank-beelden/gofo-bestelbus-in-beweging.png",
+    imageAlt: "GOFO-bestelbus onderweg",
+    imageCredit: { label: "GOFO Media Hub", href: "https://hub.gofo.com/nl-nl/gofo-media-hub" },
+  },
+  "/kennisbank/levertijd-gofo-nederland": {
+    image: "/kennisbank-beelden/gofo-landelijke-dekking.gif",
+    imageAlt: "Kaart van de landelijke GOFO-dekking in Nederland",
+    imageCredit: { label: "GOFO Netherlands", href: "https://www.linkedin.com/company/gofo-netherlands" },
+  },
+  "/kennisbank/veelgestelde-vragen-pakketverzending": {
+    image: "/kennisbank-beelden/faq-pakketverzending.jpg",
+    imageAlt: "Klant ontvangt een pakket aan de deur",
+    imageCredit: { label: "Pavel Danilyuk via Pexels", href: "https://www.pexels.com/photo/a-woman-receiving-a-package-7190867/" },
+  },
+  "/kennisbank/goedkoopste-vervoerder-pakket": {
+    image: "/kennisbank-beelden/goedkoopste-vervoerder.jpg",
+    imageAlt: "Bestelbus vol pakketten voor internationale verzending",
+    imageCredit: { label: "Wojciech Kotlicki via Pexels", href: "https://www.pexels.com/photo/boxes-in-delivery-truck-in-warehouse-21838827/" },
+  },
+  "/kennisbank/herroepingsrecht-verzendkosten": {
+    image: "/kennisbank-beelden/herroepingsrecht-pakket.jpg",
+    imageAlt: "Persoon houdt een pakket met verzendlabel vast",
+    imageCredit: { label: "Polina Tankilevitch via Pexels", href: "https://www.pexels.com/photo/a-person-holding-a-delivery-box-4440792/" },
+  },
+  "/kennisbank/aansprakelijkheid-verzending": {
+    image: "/kennisbank-beelden/aansprakelijkheid-breekbaar.jpg",
+    imageAlt: "Kartonnen pakketten met breekbaar-markeringen",
+    imageCredit: { label: "Tima Miroshnichenko via Pexels", href: "https://www.pexels.com/photo/close-up-photo-of-stacked-carton-boxes-6169674/" },
+  },
+  "/kennisbank/verzendplatform-vs-vervoerder": {
+    image: "/kennisbank-beelden/verzendplatform-magazijn.jpg",
+    imageAlt: "Medewerker loopt door een magazijn met voorraad en pakketten",
+    imageCredit: { label: "Tiger Lily via Pexels", href: "https://www.pexels.com/photo/man-walking-on-a-warehouse-4480794/" },
+  },
+  "/kennisbank/laatste-besteldag-feestdagen": {
+    image: "/kennisbank-beelden/feestdagen-pakketten.jpg",
+    imageAlt: "Stapel pakketten klaar voor bezorging",
+    imageCredit: { label: "Polina Tankilevitch via Pexels", href: "https://www.pexels.com/photo/stacks-of-boxes-ready-for-delivery-4440800/" },
+  },
+  "/kennisbank/wat-is-een-verzendplatform": {
+    image: "/kennisbank-beelden/verzendplatform-bestelbus.jpg",
+    imageAlt: "Bezorger haalt pakketten uit een bestelbus",
+    imageCredit: { label: "Tima Miroshnichenko via Pexels", href: "https://www.pexels.com/photo/delivery-man-getting-packages-from-a-van-6169177/" },
+  },
+  "/kennisbank/verzendbeleid-pagina": {
+    image: "/kennisbank-beelden/verzendbeleid-label.jpg",
+    imageAlt: "Verzenddoos met adreslabel",
+    imageCredit: { label: "Albina White via Pexels", href: "https://www.pexels.com/photo/cardboard-box-with-a-label-12053213/" },
+  },
+  "/kennisbank/verpakkingsafval-verpact": {
+    image: "/kennisbank-beelden/verpakkingsafval-dozen.jpg",
+    imageAlt: "Gestapelde kartonnen dozen voor hergebruik en recycling",
+    imageCredit: { label: "Artem Podrez via Pexels", href: "https://www.pexels.com/photo/close-up-of-boxes-5025503/" },
+  },
+  "/kennisbank/pakket-geweigerd-door-klant": {
+    image: "/kennisbank-beelden/pakket-geweigerd-bestelbus.jpg",
+    imageAlt: "Pakketten in de laadruimte van een bestelbus",
+    imageCredit: { label: "Kampus Production via Pexels", href: "https://www.pexels.com/photo/brown-cardboard-boxes-inside-a-delivery-van-7843987/" },
+  },
+  "/kennisbank/levertijd-nederland-algemeen": {
+    image: "/kennisbank-beelden/levertijd-nederland-labels.jpg",
+    imageAlt: "Pakketten met verzendlabels klaar voor verzending",
+    imageCredit: { label: "Polina Tankilevitch via Pexels", href: "https://www.pexels.com/photo/mailing-details-paste-on-the-boxes-4440789/" },
+  },
+  "/kennisbank/levertijd-fedex-belgie": pexelsArticleImage(
+    "belgium-brussels.jpg",
+    "Skyline van Brussel als bestemming voor FedEx-zendingen naar België",
+    "Lexi Lauwers",
+    32952754,
+  ),
+  "/kennisbank/levertijd-fedex-duitsland": pexelsArticleImage(
+    "germany-berlin.jpg",
+    "Skyline van Berlijn als bestemming voor FedEx-zendingen naar Duitsland",
+    "János Csatlós",
+    20663612,
+  ),
+  "/kennisbank/levertijd-fedex-frankrijk": pexelsArticleImage(
+    "france-paris.jpg",
+    "Skyline van Parijs als bestemming voor FedEx-zendingen naar Frankrijk",
+    "Diego F. Parra",
+    16923130,
+  ),
+  "/kennisbank/levertijd-fedex-spanje": pexelsArticleImage(
+    "spain-barcelona.jpg",
+    "Skyline van Barcelona als bestemming voor FedEx-zendingen naar Spanje",
+    "Samar L.",
+    36286755,
+  ),
+  "/kennisbank/levertijd-fedex-vs": pexelsArticleImage(
+    "usa-new-york.jpg",
+    "Skyline van New York als bestemming voor FedEx-zendingen naar de Verenigde Staten",
+    "Brent Singleton",
+    36486508,
+  ),
+  "/kennisbank/levertijd-fedex-vk": pexelsArticleImage(
+    "uk-london.jpg",
+    "Skyline van Londen als bestemming voor FedEx-zendingen naar het Verenigd Koninkrijk",
+    "David Allen",
+    34311779,
+  ),
+  "/kennisbank/levertijd-fedex-mexico": pexelsArticleImage(
+    "mexico-city.jpg",
+    "Skyline van Mexico-Stad als bestemming voor FedEx-zendingen naar Mexico",
+    "Axell crz",
+    12252296,
+  ),
+  "/kennisbank/levertijd-fedex-denemarken": pexelsArticleImage(
+    "denmark-copenhagen.jpg",
+    "Skyline van Kopenhagen als bestemming voor FedEx-zendingen naar Denemarken",
+    "Ezequiel Filiberto",
+    15687267,
+  ),
+  "/kennisbank/levertijd-fedex-zweden": pexelsArticleImage(
+    "sweden-stockholm.jpg",
+    "Skyline van Stockholm als bestemming voor FedEx-zendingen naar Zweden",
+    "Ranger Zang",
+    17151095,
+  ),
+  "/kennisbank/levertijd-fedex-noorwegen": pexelsArticleImage(
+    "norway-oslo.jpg",
+    "Skyline van Oslo als bestemming voor FedEx-zendingen naar Noorwegen",
+    "@nomundodejr Jr.",
+    19735999,
+  ),
+  "/kennisbank/levertijd-fedex-zwitserland": pexelsArticleImage(
+    "switzerland-zurich.jpg",
+    "Skyline van Zürich als bestemming voor FedEx-zendingen naar Zwitserland",
+    "Ana Kenk",
+    36478843,
+  ),
+  "/kennisbank/verzendkosten-drempelbedrag": pexelsArticleImage(
+    "verzenddrempel-berekenen.jpg",
+    "Webshopeigenaar berekent een passend drempelbedrag voor gratis verzending",
+    "Mikhail Nilov",
+    8296991,
+  ),
+  "/kennisbank/verzendkosten-berekenen": pexelsArticleImage(
+    "verzendkosten-calculator.jpg",
+    "Calculator en laptop voor het berekenen van verzendkosten",
+    "weCare Media",
+    10020082,
+  ),
+  "/kennisbank/besparen-verzendkosten": pexelsArticleImage(
+    "besparen-verzendkosten.jpg",
+    "Financiële analyse om te besparen op verzendkosten",
+    "Tima Miroshnichenko",
+    6694492,
+  ),
+  "/kennisbank/brandstoftoeslag-uitgelegd": pexelsArticleImage(
+    "brandstoftoeslag-kosten.jpg",
+    "Eurobiljetten en calculator bij een overzicht van variabele verzendkosten",
+    "Alesia Kozik",
+    6771426,
+  ),
+  "/kennisbank/kosten-verzendplatform": pexelsArticleImage(
+    "platformkosten-begroten.jpg",
+    "Ondernemer begroot de kosten van een verzendplatform",
+    "Kaboompics.com",
+    5900033,
+  ),
+  "/kennisbank/verzendtijden-productpagina": pexelsArticleImage(
+    "levertijd-productpagina.jpg",
+    "Webshopproductpagina op een laptop waarop levertijdinformatie kan worden getoond",
+    "Pavel Danilyuk",
+    7190944,
+  ),
+  "/kennisbank/verzendkosten-winkelwagen": pexelsArticleImage(
+    "verzendkosten-winkelwagen.jpg",
+    "Online winkelwagen en checkout waarin verzendkosten zichtbaar worden",
+    "Pavel Danilyuk",
+    6407760,
+  ),
+  "/kennisbank/verzendopties-kortingsacties": pexelsArticleImage(
+    "korting-pakketbeleving.jpg",
+    "Open webshopbestelling met persoonlijke kaart als onderdeel van een actie",
+    "RDNE Stock project",
+    7310245,
+  ),
+  "/kennisbank/verzendkosten-ab-testen": pexelsArticleImage(
+    "verzendkosten-ab-test.jpg",
+    "Analyticsdashboard voor het vergelijken van resultaten van verzendkostenexperimenten",
+    "Atlantic Ambience",
+    12969403,
+  ),
+  "/kennisbank/juiste-verpakking-kiezen": pexelsArticleImage(
+    "verpakking-opmeten.jpg",
+    "Beschermd product wordt opgemeten voor de juiste verzendverpakking",
+    "Caique Araujo",
+    16039751,
+  ),
+  "/kennisbank/kleding-verzenden": pexelsArticleImage(
+    "kleding-verpakken.jpg",
+    "Kleding netjes verpakt in een compacte verzenddoos",
+    "Ron Lach",
+    9594421,
+  ),
+  "/kennisbank/sieraden-waardevolle-producten": pexelsArticleImage(
+    "sieraden-verpakken.jpg",
+    "Webshopondernemer verpakt een waardevol product zorgvuldig als cadeau",
+    "RDNE Stock project",
+    7309207,
+  ),
+  "/kennisbank/verpakkingsformaten-standaardiseren": pexelsArticleImage(
+    "verpakkingsformaten-magazijn.jpg",
+    "Gestandaardiseerde kartonnen dozen gestapeld in een magazijn",
+    "Arthur Uzoagba",
+    29653988,
+  ),
+  "/kennisbank/retourlabel-automatisch-meesturen": pexelsArticleImage(
+    "retourlabel-pakketten.jpg",
+    "Verzenddozen die met een retourlabel kunnen worden teruggestuurd",
+    "Artem Podrez",
+    5025503,
+  ),
+  "/kennisbank/retourpercentage-verlagen": pexelsArticleImage(
+    "retourpercentage-online-shopper.jpg",
+    "Online shopper bekijkt producten op een laptop voordat zij bestelt",
+    "Polina Tankilevitch",
+    5585795,
+  ),
+  "/kennisbank/retourregels-herroepingsrecht": pexelsArticleImage(
+    "retourregels-pakketoverdracht.jpg",
+    "Klant ontvangt een pakket waarop retourregels van toepassing kunnen zijn",
+    "Ivan S",
+    7621135,
+  ),
+  "/kennisbank/track-trace-eigen-huisstijl": pexelsArticleImage(
+    "branded-tracking-smartphone.jpg",
+    "Bezorger controleert actuele track-en-trace-informatie op een smartphone",
+    "Mike Jones",
+    9461969,
+  ),
+  "/kennisbank/bezorgervaring-klantbeoordelingen": pexelsArticleImage(
+    "bezorgervaring-feedback.jpg",
+    "Feedbackscherm voor een beoordeling van de bezorgervaring",
+    "Erik Mclean",
+    4249027,
+  ),
+  "/kennisbank/orderbevestiging-verzendbevestiging": pexelsArticleImage(
+    "orderbevestiging-webshop.jpg",
+    "Klanten bekijken samen bestel- en verzendinformatie op een laptop",
+    "Polina Tankilevitch",
+    5585811,
+  ),
+  "/kennisbank/levertijd-bpost-belgie": pexelsArticleImage(
+    "bpost-belgie-stad.jpg",
+    "Brusselse skyline als bestemming voor een bpost-zending binnen België",
+    "Ann H",
+    38073141,
+  ),
+  "/kennisbank/verzenden-startende-webshop": pexelsArticleImage(
+    "startende-webshop-inpakken.jpg",
+    "Startende webshopondernemer pakt bestellingen in vanuit een werkruimte",
+    "Komang dewi",
+    7436476,
+  ),
+  "/kennisbank/webshop-starten-verzending-regelen": pexelsArticleImage(
+    "webshop-starten-orders.jpg",
+    "Webshopteam verwerkt de eerste bestellingen en verzendlabels",
+    "Kampus Production",
+    7857532,
+  ),
+  "/kennisbank/verzendregels-automatiseren": pexelsArticleImage(
+    "verzendregels-analytics.jpg",
+    "Analytics op een laptop als beeld voor geautomatiseerde verzendregels",
+    "Tiger Lily",
+    7109316,
+  ),
+  "/kennisbank/verzenden-via-bol-com": pexelsArticleImage(
+    "bol-orders-inpakken.jpg",
+    "Online verkoper verwerkt en verpakt marketplacebestellingen",
+    "Kampus Production",
+    7289725,
+  ),
+}
+
+export const KNOWLEDGE_ARTICLES = Object.fromEntries(
+  Object.entries(RAW_KNOWLEDGE_ARTICLES).map(([path, article]) => [
+    path,
+    {
+      ...article,
+      ...(ARTICLE_IMAGE_OVERRIDES[path] || {}),
+      type: GUIDE_PATHS.has(path) ? "Handleiding" : "Blog",
+      ...(ARTICLE_IMAGE_OVERRIDES[path] ? { imageClassName: "object-cover", imageBackground: "bg-[#eef3f8]" } : {}),
+    },
+  ]),
+)
 
 export const KNOWLEDGE_ARTICLE_PATHS = Object.keys(KNOWLEDGE_ARTICLES)

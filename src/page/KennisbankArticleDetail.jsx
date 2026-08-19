@@ -139,6 +139,14 @@ export default function KennisbankArticleDetail() {
                 decoding="async"
                 className={`aspect-[4/3] h-full w-full ${article.imageClassName || `object-cover ${article.imagePosition || "object-center"}`}`}
               />
+              {article.imageCredit ? (
+                <p className="border-t border-[#dce7f4] bg-white px-5 py-3 text-xs leading-5 text-[#667085]">
+                  Beeld: {" "}
+                  <a href={article.imageCredit.href} target="_blank" rel="noreferrer" className="font-semibold text-[#1a5ee5] underline decoration-[#1a5ee5]/30 underline-offset-4">
+                    {article.imageCredit.label}
+                  </a>
+                </p>
+              ) : null}
             </div>
           </div>
         </div>
