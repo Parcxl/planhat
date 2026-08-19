@@ -71,13 +71,14 @@ export default function KennisbankArticleDetail() {
 
   if (!article) return null
 
+  const isIntegrationGuide = article.type === "Handleiding"
   const contents = [
     ["introductie", article.introTitle],
     ...article.sections.map((section) => [section.id, section.title]),
-    ["sendwise", "Hoe helpt Sendwise?"],
+    ...(!isIntegrationGuide ? [["sendwise", "Hoe helpt Sendwise?"]] : []),
     ["samenvatting", "Samengevat"],
     ["veelgestelde-vragen", "Veelgestelde vragen"],
-    ["bronnen", "Bronnen"],
+    ...(!isIntegrationGuide ? [["bronnen", "Bronnen"]] : []),
   ]
 
   const relatedArticles = Object.entries(KNOWLEDGE_ARTICLES)
@@ -270,17 +271,19 @@ export default function KennisbankArticleDetail() {
               </section>
             ))}
 
-            <section className="mt-14">
-              <ArticleHeading id="sendwise" eyebrow="Eén verzendplatform">Hoe helpt Sendwise?</ArticleHeading>
-              <p className="mt-5 text-[1rem] leading-8 text-[#526078] sm:text-[1.06rem]">{article.sendwise}</p>
-              <p className="mt-5 text-[1rem] leading-8 text-[#526078] sm:text-[1.06rem]">
-                Bekijk ook onze{" "}
-                <Link to="/prijzen" className="font-semibold text-[#1a5ee5] underline decoration-[#1a5ee5]/30 underline-offset-4">verzendtarieven</Link>,{" "}
-                <Link to="/integraties" className="font-semibold text-[#1a5ee5] underline decoration-[#1a5ee5]/30 underline-offset-4">webshopintegraties</Link>{" "}
-                en de mogelijkheden van{" "}
-                <Link to="/oplossingen/connect" className="font-semibold text-[#1a5ee5] underline decoration-[#1a5ee5]/30 underline-offset-4">Sendwise CONNECT</Link>.
-              </p>
-            </section>
+            {!isIntegrationGuide ? (
+              <section className="mt-14">
+                <ArticleHeading id="sendwise" eyebrow="Eén verzendplatform">Hoe helpt Sendwise?</ArticleHeading>
+                <p className="mt-5 text-[1rem] leading-8 text-[#526078] sm:text-[1.06rem]">{article.sendwise}</p>
+                <p className="mt-5 text-[1rem] leading-8 text-[#526078] sm:text-[1.06rem]">
+                  Bekijk ook onze{" "}
+                  <Link to="/prijzen" className="font-semibold text-[#1a5ee5] underline decoration-[#1a5ee5]/30 underline-offset-4">verzendtarieven</Link>,{" "}
+                  <Link to="/integraties" className="font-semibold text-[#1a5ee5] underline decoration-[#1a5ee5]/30 underline-offset-4">webshopintegraties</Link>{" "}
+                  en de mogelijkheden van{" "}
+                  <Link to="/oplossingen/connect" className="font-semibold text-[#1a5ee5] underline decoration-[#1a5ee5]/30 underline-offset-4">Sendwise CONNECT</Link>.
+                </p>
+              </section>
+            ) : null}
 
             <section id="samenvatting" className="mt-14 scroll-mt-36 rounded-[28px] border border-[#dce7f4] bg-[#f7fbff] p-6 sm:p-8">
               <div className="flex items-center gap-3 text-[#1a5ee5]">
@@ -302,21 +305,23 @@ export default function KennisbankArticleDetail() {
               </div>
             </section>
 
-            <section className="mt-14 scroll-mt-36" id="bronnen">
-              <ArticleHeading eyebrow={`Gecontroleerd op ${formatDate(article.publishedTime)}`}>Bronnen en actuele voorwaarden</ArticleHeading>
-              <p className="mt-5 text-[0.98rem] leading-7 text-[#526078]">
-                Voorwaarden, tarieven, wetgeving en netwerken kunnen veranderen. Controleer vóór een definitieve keuze altijd de actuele informatie van de genoemde organisatie.
-              </p>
-              <ul className="mt-5 space-y-3">
-                {article.sources.map((source) => (
-                  <li key={source.href}>
-                    <a href={source.href} target="_blank" rel="noreferrer" className="inline-flex items-start gap-2 text-[0.96rem] font-semibold leading-6 text-[#1a5ee5] underline decoration-[#1a5ee5]/30 underline-offset-4">
-                      {source.label} <FiExternalLink className="mt-1 shrink-0" aria-hidden="true" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </section>
+            {!isIntegrationGuide ? (
+              <section className="mt-14 scroll-mt-36" id="bronnen">
+                <ArticleHeading eyebrow={`Gecontroleerd op ${formatDate(article.publishedTime)}`}>Bronnen en actuele voorwaarden</ArticleHeading>
+                <p className="mt-5 text-[0.98rem] leading-7 text-[#526078]">
+                  Voorwaarden, tarieven, wetgeving en netwerken kunnen veranderen. Controleer vóór een definitieve keuze altijd de actuele informatie van de genoemde organisatie.
+                </p>
+                <ul className="mt-5 space-y-3">
+                  {article.sources.map((source) => (
+                    <li key={source.href}>
+                      <a href={source.href} target="_blank" rel="noreferrer" className="inline-flex items-start gap-2 text-[0.96rem] font-semibold leading-6 text-[#1a5ee5] underline decoration-[#1a5ee5]/30 underline-offset-4">
+                        {source.label} <FiExternalLink className="mt-1 shrink-0" aria-hidden="true" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
 
             <section className="mt-14">
               <h2 className="inter-semibold text-[1.65rem] text-[#0d1321]">Lees verder in de kennisbank</h2>
