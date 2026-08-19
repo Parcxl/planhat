@@ -1,5 +1,7 @@
 import { ADDITIONAL_KNOWLEDGE_ARTICLES } from "./additionalKnowledgeArticles.js"
+import { GUIDE_ARTICLES } from "./guideArticles.js"
 import { IMPORTED_KNOWLEDGE_ARTICLES } from "./importedKnowledgeArticles.js"
+import { WOOCOMMERCE_GUIDE_ARTICLE } from "./woocommerceGuideArticle.js"
 
 export const KNOWLEDGE_ARTICLES = {
   "/kennisbank/gofo-voor-webshops": {
@@ -764,6 +766,8 @@ export const KNOWLEDGE_ARTICLES = {
   },
   ...ADDITIONAL_KNOWLEDGE_ARTICLES,
   ...IMPORTED_KNOWLEDGE_ARTICLES,
+  ...GUIDE_ARTICLES,
+  ...WOOCOMMERCE_GUIDE_ARTICLE,
 }
 
 export const KNOWLEDGE_ARTICLE_PATHS = Object.keys(KNOWLEDGE_ARTICLES)

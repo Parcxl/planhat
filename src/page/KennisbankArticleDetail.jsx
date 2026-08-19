@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom"
 import {
   FiArrowLeft,
   FiArrowRight,
+  FiAlertTriangle,
   FiBookOpen,
   FiCalendar,
   FiCheck,
@@ -31,6 +32,25 @@ const ArticleHeading = ({ id, eyebrow, children }) => (
       {children}
     </h2>
   </div>
+)
+
+const GuideFigure = ({ figure }) => (
+  <figure className="mt-5 overflow-hidden rounded-[22px] border border-[#dce7f4] bg-[#f8fafc] shadow-[0_18px_45px_rgba(15,23,42,0.07)]">
+    <a href={figure.image} target="_blank" rel="noreferrer" aria-label={`${figure.imageAlt} op volledig formaat openen`}>
+      <img
+        src={figure.image}
+        alt={figure.imageAlt}
+        loading="lazy"
+        decoding="async"
+        className="h-auto w-full object-contain"
+      />
+    </a>
+    {figure.caption ? (
+      <figcaption className="border-t border-[#dce7f4] px-5 py-3 text-sm leading-6 text-[#667085]">
+        {figure.caption}
+      </figcaption>
+    ) : null}
+  </figure>
 )
 
 const formatDate = (value) =>
@@ -176,7 +196,21 @@ export default function KennisbankArticleDetail() {
                     {section.items.map((item) => (
                       <div key={item.title} className="rounded-[22px] border border-[#dce7f4] bg-white p-5 shadow-[0_12px_35px_rgba(15,23,42,0.04)]">
                         <p className="font-semibold text-[#0d1321]">{item.title}</p>
-                        <p className="mt-2 text-[0.96rem] leading-7 text-[#526078]">{item.text}</p>
+                        {item.text ? <p className="mt-2 text-[0.96rem] leading-7 text-[#526078]">{item.text}</p> : null}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+
+                {section.notes ? (
+                  <div className="mt-6 space-y-3">
+                    {section.notes.map((note, index) => (
+                      <div
+                        key={`${section.id}-note-${index}`}
+                        className={`flex items-start gap-3 rounded-[18px] border px-5 py-4 text-[0.97rem] leading-7 ${note.kind === "warning" ? "border-[#f1d49a] bg-[#fff9eb] text-[#6b4d16]" : "border-[#cfe0fb] bg-[#f3f8ff] text-[#334155]"}`}
+                      >
+                        <FiAlertTriangle className="mt-1 shrink-0 text-[#1a5ee5]" aria-hidden="true" />
+                        <p>{note.text}</p>
                       </div>
                     ))}
                   </div>
@@ -191,6 +225,39 @@ export default function KennisbankArticleDetail() {
                       </li>
                     ))}
                   </ol>
+                ) : null}
+
+                {section.guideSteps ? (
+                  <ol className="mt-8 space-y-7">
+                    {section.guideSteps.map((step, index) => (
+                      <li key={`${section.id}-guide-step-${index}`} className="rounded-[24px] border border-[#dce7f4] bg-white p-5 shadow-[0_14px_40px_rgba(15,23,42,0.05)] sm:p-6">
+                        <div className="flex items-start gap-4 text-[1rem] leading-8 text-[#334155] sm:text-[1.05rem]">
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1a5ee5] text-sm font-semibold text-white">{index + 1}</span>
+                          <p>{step.text}</p>
+                        </div>
+                        {step.figure ? <GuideFigure figure={step.figure} /> : null}
+                      </li>
+                    ))}
+                  </ol>
+                ) : null}
+
+                {section.subsections ? (
+                  <div className="mt-8 space-y-8">
+                    {section.subsections.map((subsection) => (
+                      <div key={subsection.title} className="border-l-2 border-[#cfe0fb] pl-5 sm:pl-6">
+                        <h3 className="inter-semibold text-[1.3rem] leading-tight text-[#0d1321] sm:text-[1.5rem]">{subsection.title}</h3>
+                        <div className="mt-3 space-y-3 text-[1rem] leading-8 text-[#526078]">
+                          {subsection.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+
+                {section.figures ? (
+                  <div className="mt-7 space-y-6">
+                    {section.figures.map((figure, index) => <GuideFigure key={`${section.id}-figure-${index}`} figure={figure} />)}
+                  </div>
                 ) : null}
               </section>
             ))}

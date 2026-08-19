@@ -250,7 +250,7 @@ export const SEO_ROUTES = {
         title: article.seoTitle,
         description: article.description,
         type: "article",
-        schemaType: "BlogPosting",
+        schemaType: article.type === "Handleiding" ? "TechArticle" : "BlogPosting",
         image: article.image,
         imageAlt: article.imageAlt,
         publishedTime: article.publishedTime,
