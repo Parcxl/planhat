@@ -1,6 +1,7 @@
 import { ADDITIONAL_KNOWLEDGE_ARTICLES } from "./additionalKnowledgeArticles.js"
 import { GUIDE_ARTICLES } from "./guideArticles.js"
 import { IMPORTED_KNOWLEDGE_ARTICLES } from "./importedKnowledgeArticles.js"
+import { PPWR_KNOWLEDGE_ARTICLE } from "./ppwrKnowledgeArticle.js"
 import { WOOCOMMERCE_GUIDE_ARTICLE } from "./woocommerceGuideArticle.js"
 
 const RAW_KNOWLEDGE_ARTICLES = {
@@ -765,6 +766,7 @@ const RAW_KNOWLEDGE_ARTICLES = {
     breadcrumb: "Verzendlabel maken",
   },
   ...ADDITIONAL_KNOWLEDGE_ARTICLES,
+  ...PPWR_KNOWLEDGE_ARTICLE,
   ...IMPORTED_KNOWLEDGE_ARTICLES,
   ...GUIDE_ARTICLES,
   ...WOOCOMMERCE_GUIDE_ARTICLE,
