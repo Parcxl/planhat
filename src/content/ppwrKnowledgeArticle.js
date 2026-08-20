@@ -1,14 +1,14 @@
 export const PPWR_KNOWLEDGE_ARTICLE = {
   "/kennisbank/ppwr-webshop": {
-    title: "PPWR voor webshops: wat moet je met je verpakkingen regelen?",
-    seoTitle: "PPWR voor webshops: praktisch stappenplan | Sendwise",
+    title: "PPWR voor webshops uitgelegd: dit moet je nu doen",
+    seoTitle: "PPWR voor webshops uitgelegd: stappenplan | Sendwise",
     description:
-      "Wat betekent de PPWR voor jouw webshop? Volg het stappenplan voor dozen, documentatie, Verpact, België, Duitsland en de regels vanaf 2028.",
+      "Nog nooit van de PPWR gehoord? Lees in gewone taal wat de verpakkingswet voor jouw webshop betekent en welke stappen je nu moet zetten.",
     excerpt:
-      "Een praktische PPWR-uitleg voor webshops: ontdek per verpakking wat je moet vastleggen, opvragen en per verkoopland regelen.",
+      "Een begrijpelijke PPWR-uitleg voor webshops, met een herkenbaar voorbeeld en een praktisch stappenplan voor verpakking, administratie en verkooplanden.",
     type: "Blog",
     category: "Juridisch",
-    readTime: "± 9 min",
+    readTime: "± 7 min",
     publishedTime: "2026-08-20",
     image: "/kennisbank-beelden/ppwr-webshop-verpakking.jpeg",
     imageAlt: "Webshopeigenaar verpakt een bestelling in een kartonnen verzenddoos voor PPWR-conforme verzending",
@@ -17,236 +17,251 @@ export const PPWR_KNOWLEDGE_ARTICLE = {
       href: "https://www.pexels.com/photo/close-up-photo-of-packaging-of-a-product-9594430/",
     },
     quickAnswer:
-      "Als webshop begin je met de verpakkingen die jij zelf toevoegt: verzenddozen, verzendzakken, tape, labels en opvulmateriaal. Noteer per verpakking waar je die koopt, of jouw naam of logo erop staat en naar welk land je ermee verzendt. Vraag daarna de PPWR-documentatie op bij je leverancier, houd gebruikte hoeveelheden bij en controleer per verkoopland je EPR-verplichtingen. De bekende grens van 50% lege ruimte geldt in beginsel pas vanaf 2030.",
-    introTitle: "Een praktische PPWR-route voor jouw webshop",
-    introEyebrow: "Begin bij de verpakking van je bestelling",
+      "De PPWR is de nieuwe Europese wet voor verpakkingen en verpakkingsafval. Voor jouw webshop betekent dit vier dingen. Breng je verpakkingen in kaart, vraag documentatie op bij leveranciers, houd hoeveelheden per land bij en controleer waar registratie nodig is. Gebruik je gewone onbedrukte verzenddozen, dan hoef je de technische documentatie meestal niet zelf te maken. Laat je dozen met je eigen naam of logo produceren, dan kan dat anders zijn.",
+    introTitle: "PPWR klinkt ingewikkelder dan het hoeft te zijn",
+    introEyebrow: "Een uitleg zonder juridisch jargon",
     intro: [
-      "Je hebt al een webshop en verstuurt bestellingen in dozen, zakken of enveloppen. Juist daarom krijg je met de Europese Packaging and Packaging Waste Regulation (PPWR) te maken. De PPWR is sinds 12 augustus 2026 van toepassing en stelt stapsgewijs strengere eisen aan verpakkingen en verpakkingsafval.",
-      "Je hoeft niet eerst alle juridische rollen uit je hoofd te leren. Voor jouw dagelijkse praktijk draait het om vier vragen: welke verpakking voeg jij toe, wie heeft die verpakking gemaakt, onder wiens naam of merk gebeurt dat en in welk land wordt de verpakking afval?",
-      "In dit artikel doorlopen we die vragen in een vaste volgorde. Zo weet je eerst welke verpakkingen binnen jouw webshop aandacht vragen, daarna welke documenten je nodig hebt en tot slot wat je per verkoopland moet controleren. De pagina is bijgewerkt op 20 augustus 2026 en is een praktische uitleg, geen juridisch advies.",
+      "Misschien zie je de letters PPWR nu voor het eerst. Of je hebt ergens gelezen dat webshops ineens verklaringen, registraties en verpakkingsadministraties nodig hebben. Dat klinkt al snel alsof je voor iedere doos een juridisch dossier moet schrijven. Voor de meeste webshops begint het gelukkig een stuk eenvoudiger.",
+      "PPWR staat voor Packaging and Packaging Waste Regulation. Het is de Europese verpakkingswet die sinds 12 augustus 2026 van toepassing is. De wet moet ervoor zorgen dat er minder verpakkingsafval ontstaat en dat verpakkingen beter kunnen worden hergebruikt en gerecycled.",
+      "Voor jou als webshopeigenaar zijn twee dingen belangrijk. Ten eerste moet duidelijk zijn dat de verpakking zelf aan de Europese regels voldoet. Ten tweede moet worden geregeld wie in het land van de klant verantwoordelijk is voor de inzameling en recycling van die verpakking. Die twee onderwerpen worden vaak door elkaar gehaald. Daarom behandelen we ze hieronder één voor één.",
     ],
     sections: [
       {
-        id: "stap-1-verpakkingen",
+        id: "praktijkvoorbeeld",
+        eyebrow: "Eerst een voorbeeld",
+        title: "Welke verpakkingen horen bij één webshopbestelling?",
+        paragraphs: [
+          "Stel: je verkoopt woonaccessoires. Een leverancier levert een vaas in een eigen productdoos. Jij stopt die productdoos in een verzenddoos, voegt opvulpapier toe, sluit de doos met tape en plakt er een verzendlabel op.",
+          "Voor de PPWR kijk je niet naar dit pakket als één geheel. De productdoos, verzenddoos, opvulling, tape en het label zijn afzonderlijke verpakkingsonderdelen. Per onderdeel kan een andere partij verantwoordelijk zijn voor de documentatie.",
+        ],
+        items: [
+          {
+            title: "De productdoos",
+            text: "Deze komt al met het product mee. De leverancier of merkhouder heeft hier meestal de meeste informatie over.",
+          },
+          {
+            title: "De verzenddoos",
+            text: "Deze voeg jij toe. Bij een standaard onbedrukte doos ligt de technische onderbouwing doorgaans bij de dozenfabrikant.",
+          },
+          {
+            title: "Opvulling en tape",
+            text: "Ook deze materialen gaan naar de klant en horen daarom in je overzicht van gebruikte verpakkingen.",
+          },
+          {
+            title: "Een doos met jouw logo",
+            text: "Laat je de doos speciaal onder jouw naam of merk maken, dan kan jouw webshop meer verantwoordelijkheid krijgen voor het ontwerp en de documentatie.",
+          },
+        ],
+      },
+      {
+        id: "stap-1-overzicht",
         eyebrow: "Stap 1",
-        title: "Breng in kaart wat jouw webshop zelf toevoegt",
+        title: "Maak een eenvoudige verpakkingslijst",
         paragraphs: [
-          "Begin niet bij de volledige verpakking van ieder product, maar bij de materialen die tijdens jouw orderverwerking worden toegevoegd. Dat is het deel waar je direct invloed op hebt en waarvoor je de administratie het makkelijkst kunt opzetten.",
-        ],
-        items: [
-          {
-            title: "Verzendverpakking",
-            text: "Noteer alle dozen, verzendzakken, brievenbusdozen en enveloppen die je gebruikt, inclusief formaat en leverancier.",
-          },
-          {
-            title: "Opvulling en bescherming",
-            text: "Neem papier, luchtkussens, noppenfolie, schuim, vakverdelingen en andere bescherming mee.",
-          },
-          {
-            title: "Sluiting en labels",
-            text: "Registreer tape, sluitmateriaal en labels wanneer die onderdeel worden van de verpakking die naar de klant gaat.",
-          },
-          {
-            title: "Productverpakking",
-            text: "Voeg productdozen, potjes, flesjes of zakjes toe wanneer je die zelf vult, importeert of onder je eigen merk laat maken.",
-          },
+          "Loop door je magazijn of inpakruimte en schrijf op wat je bij bestellingen gebruikt. Je hoeft nog geen ingewikkeld systeem te bouwen. Een spreadsheet met één regel per verpakkingsartikel is een goed begin.",
         ],
         steps: [
-          "Maak één lijst van alle verpakkingen die in je magazijn of inpakruimte liggen.",
-          "Noteer per artikel materiaal, leeg gewicht, afmetingen, leverancier en inkoopland.",
-          "Koppel ieder verpakkingsartikel aan de orders waarin je het gebruikt.",
+          "Noteer alle dozen, verzendzakken, enveloppen, tape, labels en soorten opvulling.",
+          "Schrijf per artikel op van welk materiaal het is gemaakt en hoeveel één leeg exemplaar weegt.",
+          "Voeg de naam van de leverancier, het artikelnummer en het land van inkoop toe.",
+          "Markeer welke verpakkingen standaard zijn en welke speciaal voor jouw webshop zijn gemaakt.",
+        ],
+        notes: [
+          {
+            kind: "info",
+            text: "Begin met de verpakkingen die jij tijdens het inpakken toevoegt. Productverpakkingen die al om je ingekochte artikelen zitten, kun je daarna samen met je productleveranciers controleren.",
+          },
         ],
       },
       {
-        id: "stap-2-wie-regelt-documentatie",
+        id: "stap-2-documentatie",
         eyebrow: "Stap 2",
-        title: "Bepaal wie de PPWR-documentatie moet regelen",
+        title: "Vraag je leveranciers om de juiste documenten",
         paragraphs: [
-          "De PPWR gebruikt hiervoor het woord ‘fabrikant’. Voor een webshop is de praktische vraag eenvoudiger: moet jouw leverancier de conformiteitsverklaring leveren, of moet jouw onderneming die zelf opstellen? Bekijk iedere verpakking aan de hand van de onderstaande situaties.",
+          "Voor ieder type verpakking moet iemand kunnen aantonen dat het aan de PPWR voldoet. De wet noemt die partij de fabrikant. Als webshop hoef je vooral te weten of je leverancier dit regelt of dat de verantwoordelijkheid bij jouw onderneming ligt.",
         ],
         items: [
           {
-            title: "Standaard doos zonder jouw logo",
-            text: "Koop je een kant-en-klare stijve doos of envelop zonder eigen bedrukking? Dan is de maker van die lege verpakking doorgaans verantwoordelijk voor de conformiteit. Vraag je leverancier schriftelijk wie de fabrikant is en om de bijbehorende documentatie.",
+            title: "Standaardverpakking zonder eigen bedrukking",
+            text: "Koop je een kant-en-klare stijve verzenddoos of kartonnen brievenbusdoos? Vraag de leverancier wie voor dit artikel de fabrikant is en vraag om de beschikbare conformiteits- en materiaaldocumentatie.",
           },
           {
-            title: "Maatwerk met jouw naam of logo",
-            text: "Laat je een verpakking speciaal onder jouw naam of merk ontwerpen of maken, dan kan jouw webshop als fabrikant gelden. Leg met de leverancier vast wie het ontwerp bepaalt en wie de conformiteitsverklaring opstelt.",
+            title: "Verpakking met jouw naam of logo",
+            text: "Laat je de verpakking onder jouw eigen merk ontwerpen of produceren? Vraag dan vóór een nieuwe bestelling wie de conformiteitsverklaring opstelt en wie verantwoordelijk is bij een wijziging van materiaal of ontwerp.",
           },
           {
-            title: "Product al verpakt ingekocht",
-            text: "Verkoop je een product ongewijzigd in de verpakking van een ander merk? Vraag de merkhouder of leverancier om de informatie voor die productverpakking. Bij import van buiten de EU kunnen extra verplichtingen bij jouw webshop komen te liggen.",
+            title: "Producten van een ander merk",
+            text: "Verkoop je een product ongewijzigd in de verpakking van je leverancier? Vraag die leverancier of merkhouder om informatie over de productverpakking en bewaar die bij het product.",
           },
           {
-            title: "Verpakking die pas bij vullen compleet wordt",
-            text: "Bij bepaalde flexibele materialen of productverpakkingen kan de partij die het materiaal gebruikt of vult verantwoordelijk worden, ook zonder eigen logo. Vraag bij twijfel je leverancier welk bedrijf volgens de PPWR de complete verpakking maakt.",
+            title: "Import of zelf gevulde verpakking",
+            text: "Importeer je producten van buiten de EU of vul je zelf productzakjes, potten of andere verpakkingen? Dan kunnen extra verplichtingen bij jouw webshop terechtkomen. Laat deze situatie afzonderlijk beoordelen.",
           },
         ],
         notes: [
           {
             kind: "warning",
-            text: "Een eigen logo is dus een belangrijk signaal, maar niet de enige regel. Voor micro-ondernemingen met minder dan tien medewerkers en maximaal €2 miljoen jaaromzet of balanstotaal kan bovendien een uitzondering gelden wanneer de leverancier in hetzelfde EU-land is gevestigd. Laat de rol daarom altijd schriftelijk door de leverancier bevestigen.",
+            text: "Een eigen logo is een belangrijk signaal, maar niet de enige beslisregel. Ook de manier waarop de verpakking wordt gemaakt, gevuld of geïmporteerd telt mee. Voor een micro-onderneming kan bovendien een uitzondering gelden wanneer de leverancier in hetzelfde EU-land is gevestigd. Vraag je leverancier daarom altijd om een schriftelijke bevestiging.",
           },
         ],
       },
       {
-        id: "stap-3-documenten-opvragen",
+        id: "stap-3-dossier",
         eyebrow: "Stap 3",
-        title: "Vraag per verpakking de juiste informatie op",
+        title: "Bewaar alles op één vaste plek",
         paragraphs: [
-          "Zodra je weet wie voor de conformiteit verantwoordelijk is, verzamel je de onderbouwing. Maak hiervoor per verpakkingsartikel een digitaal dossier. Zo hoef je informatie niet opnieuw te zoeken wanneer Verpact, een buitenlandse uitvoerder of een toezichthouder ernaar vraagt.",
+          "Maak voor ieder verpakkingsartikel een eigen map of digitaal dossier. Geef de map dezelfde naam of hetzelfde artikelnummer als in je verpakkingslijst. Zo kun je later direct terugvinden welke informatie bij welke doos of zak hoort.",
         ],
         steps: [
-          "Vraag wie voor dit verpakkingsartikel de PPWR-fabrikant is en laat dit schriftelijk bevestigen.",
-          "Vraag de EU-conformiteitsverklaring en beschikbare technische of materiaaldocumentatie op.",
-          "Leg materiaalsoort, leeg gewicht, productcode, leverancier en datum van ontvangst vast.",
-          "Vraag voor voedselcontactverpakkingen naar de onderbouwing rond de PPWR-grenswaarden voor PFAS.",
-          "Controleer bij eigen maatwerk wie jouw conformiteitsdossier opstelt en wie wijzigingen in materiaal of ontwerp bewaakt.",
+          "Bewaar de bevestiging waarin staat wie voor de verpakking verantwoordelijk is.",
+          "Sla de conformiteitsverklaring en materiaalspecificaties van de leverancier op.",
+          "Noteer wanneer je de informatie hebt ontvangen en voor welke productversie die geldt.",
+          "Vervang de documenten wanneer de leverancier het materiaal, gewicht of ontwerp aanpast.",
         ],
         notes: [
           {
             kind: "warning",
-            text: "Kun je bij een standaarddoos geen verklaring of materiaalinformatie krijgen? Kies dan niet zelf zomaar voor een verklaring. Vraag de leverancier eerst om duidelijkheid of stap over op een leverancier die de documentatie wel kan leveren.",
+            text: "Verkoop je eten, drinken of andere producten waarbij de verpakking met voedsel in contact komt? Vraag dan specifiek naar de onderbouwing rond de PPWR-grenswaarden voor PFAS.",
           },
         ],
       },
       {
-        id: "stap-4-hoeveelheden-bijhouden",
+        id: "stap-4-hoeveelheden",
         eyebrow: "Stap 4",
-        title: "Houd bij hoeveel verpakking je gebruikt",
+        title: "Houd bij wat je daadwerkelijk verstuurt",
         paragraphs: [
-          "Naast informatie over het ontwerp heb je voor de uitgebreide producentenverantwoordelijkheid (EPR) gegevens nodig over hoeveel verpakkingsmateriaal je in een land op de markt brengt. Begin daarom bij iedere verzonden order met een herleidbare verpakkingskeuze.",
+          "Documentatie vertelt waar je verpakking van is gemaakt. Voor de verwerking van verpakkingsafval moet je daarnaast weten hoeveel materiaal je in ieder land op de markt brengt. Koppel daarom bij voorkeur aan iedere order welk verpakkingsartikel is gebruikt.",
         ],
         items: [
           {
-            title: "Per verpakkingsartikel",
-            text: "Leg materiaal, gewicht en aantallen vast voor iedere doos, zak, envelop en soort opvulling.",
+            title: "Aantal",
+            text: "Hoeveel dozen, zakken of andere verpakkingsonderdelen heb je in een maand gebruikt?",
           },
           {
-            title: "Per bestemming",
-            text: "Splits de gebruikte verpakkingen uit naar het land waar de bestelling naartoe gaat.",
+            title: "Gewicht",
+            text: "Vermenigvuldig het lege gewicht per artikel met het aantal gebruikte exemplaren.",
           },
           {
-            title: "Per periode",
-            text: "Maak maandelijks een overzicht, zodat een jaaraangifte niet achteraf uit losse inkoopfacturen hoeft te worden gereconstrueerd.",
+            title: "Materiaal",
+            text: "Splits het totaal uit naar bijvoorbeeld papier en karton, kunststof, glas of metaal.",
           },
           {
-            title: "Bij wijzigingen",
-            text: "Bewaar ook wanneer je overstapt op een ander materiaal, gewicht, formaat of een nieuwe leverancier.",
+            title: "Bestemmingsland",
+            text: "Houd apart hoeveel verpakkingsmateriaal naar Nederland, België, Duitsland en andere landen gaat.",
           },
         ],
       },
       {
-        id: "stap-5-landencheck",
+        id: "stap-5-verkooplanden",
         eyebrow: "Stap 5",
-        title: "Controleer de regels in ieder land waar je verkoopt",
+        title: "Controleer waar jouw webshop moet registreren",
         paragraphs: [
-          "De technische verpakkingseisen komen uit dezelfde Europese PPWR, maar registratie, aangifte en financiering van recycling worden per lidstaat uitgevoerd. Verzend je rechtstreeks naar consumenten in een ander EU-land, dan kan jouw webshop daar verantwoordelijk worden voor de verpakking die bij de klant afval wordt.",
+          "De PPWR geldt in de hele Europese Unie, maar de inzameling en recycling van verpakkingsafval wordt per land geregeld. Dit heet uitgebreide producentenverantwoordelijkheid, vaak afgekort tot EPR. Verkoop je rechtstreeks aan een consument in een ander EU-land, dan kan jouw webshop in dat land verantwoordelijk worden voor de verpakking die bij de klant wordt weggegooid.",
         ],
         items: [
           {
-            title: "Nederland: Verpact",
-            text: "Verpact noemt een vrijstelling wanneer je minder dan 50.000 kilo verpakking per jaar op de Nederlandse markt brengt, maar uitzonderingen en je rol blijven belangrijk. Houd hoeveelheden dus ook onder de drempel bij. Op 20 augustus 2026 geldt daarnaast een tijdelijke stand-still voor verzend-, service- en primaireproductieverpakkingen; volg hiervoor de actuele Verpact-uitleg.",
+            title: "Verkoop je alleen in Nederland?",
+            text: "Controleer je situatie bij Verpact. Verpact noemt een vrijstelling onder 50.000 kilo verpakking per jaar, maar er bestaan uitzonderingen. Houd je hoeveelheden daarom ook onder die grens bij.",
           },
           {
-            title: "België: Fost Plus en Valipac",
-            text: "Voor huishoudelijke verpakkingen kijk je naar Fost Plus; voor bedrijfsmatige verpakkingen naar Valipac. Bepaal per Belgische order welke verpakking je op de markt brengt en laat door de betreffende organisatie bevestigen welke aansluiting en aangifte voor jouw webshop geldt.",
+            title: "Verkoop je aan Belgische klanten?",
+            text: "Controleer huishoudelijke verpakkingen bij Fost Plus en bedrijfsmatige verpakkingen bij Valipac. Laat bevestigen welke aansluiting en aangifte voor jouw webshop geldt.",
           },
           {
-            title: "Duitsland: LUCID",
-            text: "Lever je rechtstreeks aan Duitse consumenten en ben jij daar de verantwoordelijke producent, dan registreer je je zelf in LUCID. Voor verpakkingen met systeemdeelname sluit je daarnaast een contract met een duaal systeem en rapporteer je de hoeveelheden.",
+            title: "Verkoop je aan Duitse consumenten?",
+            text: "Controleer of je je in LUCID moet registreren en een contract met een duaal systeem nodig hebt. Voor Duitse consumentenverpakkingen moet je niet uitgaan van een algemene kleine-volumeregeling.",
           },
           {
-            title: "Duitsland: lokale gemachtigde",
-            text: "Heeft je webshop geen vestiging in Duitsland en lever je rechtstreeks aan Duitse eindgebruikers? Dan moet je sinds 12 augustus 2026 vóór de eerste levering een gemachtigde in Duitsland aanwijzen. Je eigen LUCID-registratie blijft daarbij verplicht.",
+            title: "Heb je geen vestiging in Duitsland?",
+            text: "Bij rechtstreekse levering aan Duitse eindgebruikers moet je sinds 12 augustus 2026 vóór de eerste levering een gemachtigde in Duitsland aanwijzen. De LUCID-registratie doe je wel zelf.",
           },
         ],
         notes: [
           {
-            kind: "warning",
-            text: "Ga niet uit van één EU-registratie. Maak een landenlijst op basis van je werkelijke orders en controleer daarna per land de lokale EPR-uitvoerder en eventuele vertegenwoordigersplicht.",
+            kind: "info",
+            text: "Verpact heeft voor verzend-, service- en primaireproductieverpakkingen tijdelijk op de pauzeknop gedrukt. Op 20 augustus 2026 vraagt Verpact bedrijven voorlopig te werken zoals vóór 12 augustus, terwijl nieuwe Europese uitleg wordt beoordeeld. Controleer de Verpact-pagina regelmatig op wijzigingen.",
           },
         ],
       },
       {
-        id: "stap-6-latere-regels",
+        id: "stap-6-toekomst",
         eyebrow: "Stap 6",
-        title: "Bereid je voor op de regels die later ingaan",
+        title: "Wat hoef je in 2026 nog niet te regelen?",
         paragraphs: [
-          "Niet iedere PPWR-regel geldt al sinds augustus 2026. Door de tijdlijn apart te houden, voorkom je dat je nu maatregelen als wettelijke verplichting presenteert die pas later ingaan.",
+          "Veel uitleg over de PPWR noemt regels voor 2028 en 2030 zonder duidelijk te zeggen dat die nog niet gelden. Daardoor lijkt het alsof je webshop nu al aan alle toekomstige eisen moet voldoen. Dat is niet zo.",
         ],
         items: [
           {
-            title: "Vanaf 2028: labels",
-            text: "Geharmoniseerde labels voor materiaalsamenstelling volgen in beginsel vanaf 12 augustus 2028, of later wanneer de uitvoeringsregels later gereed zijn.",
+            title: "Nieuwe materiaallabels",
+            text: "De geharmoniseerde labels voor materiaalsamenstelling volgen in beginsel vanaf augustus 2028, of later wanneer de Europese uitvoeringsregels later gereed zijn.",
           },
           {
-            title: "Vanaf februari 2028: verkoopverpakking",
-            text: "Lege ruimte in verkoopverpakkingen moet vanaf 12 februari 2028 worden beperkt tot wat functioneel nodig is en technisch kunnen worden onderbouwd.",
+            title: "Minder lege ruimte in verkoopverpakking",
+            text: "De specifieke eis om lege ruimte in verkoopverpakking tot het noodzakelijke te beperken volgt vanaf februari 2028.",
           },
           {
-            title: "Vanaf 2030 of later: maximaal 50%",
-            text: "De grens van maximaal 50% lege ruimte voor gegroepeerde, transport- en e-commerceverpakkingen geldt vanaf 1 januari 2030 of drie jaar na de relevante uitvoeringshandeling als die datum later is. Opvulmateriaal telt als lege ruimte.",
+            title: "Maximaal 50% lege ruimte",
+            text: "De 50%-grens voor gegroepeerde, transport- en e-commerceverpakkingen geldt vanaf 1 januari 2030 of drie jaar na de relevante uitvoeringshandeling wanneer die datum later is.",
           },
           {
-            title: "Vanaf 2030: meer materiaaleisen",
-            text: "Belangrijke eisen rond recyclebaarheid en minimumpercentages gerecycled materiaal in kunststofverpakkingen worden vanaf 2030 gefaseerd ingevoerd.",
+            title: "Meer eisen aan materialen",
+            text: "Belangrijke eisen voor recyclebaarheid en gerecycled materiaal in kunststofverpakkingen worden vanaf 2030 verder ingevoerd.",
           },
         ],
         notes: [
           {
-            kind: "warning",
-            text: "Minder lucht verzenden is nu al verstandig, maar de wettelijke 50%-grens geldt nog niet in 2026. Optimaliseer je doosformaten alvast op bescherming, materiaalgebruik en verzendkosten.",
+            kind: "info",
+            text: "Je hoeft de 50%-regel dus nog niet als wettelijke grens toe te passen. Minder lucht verzenden is wel nu al slim: je gebruikt minder materiaal en kunt mogelijk opslag- en verzendkosten besparen.",
           },
         ],
       },
       {
-        id: "actieplan-webshop",
-        eyebrow: "Jouw volgorde",
-        title: "Dit kun je als webshopeigenaar nu doen",
+        id: "checklist",
+        eyebrow: "Kort samengevat",
+        title: "Jouw PPWR-checklist voor deze week",
         steps: [
-          "Maak deze week een lijst van alle verpakkingen die jouw webshop zelf aan een bestelling toevoegt.",
-          "Markeer welke verpakkingen standaard zijn en welke speciaal onder jouw naam of logo zijn gemaakt.",
-          "Vraag leveranciers per verpakkingsartikel wie de PPWR-fabrikant is en welke documentatie beschikbaar is.",
-          "Maak één digitaal dossier per verpakking en leg materiaal, gewicht en leverancier vast.",
-          "Koppel verpakkingsgebruik aan orders en splits de hoeveelheden uit per bestemmingsland.",
-          "Controleer Verpact voor Nederland en de EPR-organisatie van ieder ander EU-land waarin je verkoopt.",
-          "Plan jaarlijks een controle op nieuwe PPWR-uitvoeringsregels en veranderingen bij je leveranciers.",
+          "Schrijf op welke verpakking je bij iedere bestelling toevoegt.",
+          "Markeer welke artikelen standaard zijn en welke jouw naam of logo dragen.",
+          "Mail je leveranciers en vraag wie de PPWR-documentatie verzorgt.",
+          "Bewaar de ontvangen documenten per verpakkingsartikel.",
+          "Begin aantallen en gewichten per bestemmingsland bij te houden.",
+          "Controleer alleen de landen waarin je daadwerkelijk verkoopt.",
+          "Plan over drie maanden een nieuw controlemoment voor gewijzigde regels.",
         ],
       },
     ],
     sendwise:
-      "Een bruikbare PPWR-administratie begint bij betrouwbare order- en verpakkingsdata. Sendwise werkt aan functionaliteit waarmee webshops het gebruikte verpakkingsmateriaal en de hoeveelheden aan orders kunnen koppelen. Daarmee wordt rapportage beter voorbereid, maar afspraken met leveranciers, conformiteitsdocumentatie en registratie per land blijven de verantwoordelijkheid van je webshop. Neem contact op als je wilt bespreken hoe je verpakkingskeuzes en verzendproces praktisch op elkaar afstemt.",
+      "Een goede verpakkingsadministratie begint bij je orders. Sendwise werkt aan functionaliteit waarmee je per order kunt vastleggen welk verpakkingsmateriaal is gebruikt. Zo wordt het eenvoudiger om aantallen en gewichten per land terug te vinden. Je webshop blijft zelf verantwoordelijk voor afspraken met leveranciers, de juiste documenten en registraties per land. Wil je alvast slimmer omgaan met doosformaten en verpakkingskeuzes? Dan denken we graag met je mee.",
     summary:
-      "Begin als webshop bij de verpakkingen die je zelf toevoegt. Vraag per verpakking wie de PPWR-documentatie verzorgt, houd materiaal en hoeveelheden per bestemmingsland bij en controleer daarna de lokale EPR-regels. Een eigen logo kan betekenen dat je zelf meer verantwoordelijkheid krijgt, maar is niet de enige beslisregel. De 50%-grens voor lege ruimte volgt in beginsel pas vanaf 2030.",
+      "Je hoeft als webshop niet voor iedere standaarddoos zelf technische documenten te schrijven. Begin met een overzicht van je verpakkingen, vraag leveranciers om de juiste informatie en houd per verkoopland bij hoeveel materiaal je verstuurt. Gebruik je verpakkingen met je eigen merk, importeer je van buiten de EU of vul je zelf productverpakkingen, controleer die situaties apart. De bekende 50%-regel voor lege ruimte geldt in beginsel pas vanaf 2030.",
     faqs: [
       {
-        question: "Wat moet ik als webshop als eerste doen voor de PPWR?",
-        answer: "Maak een lijst van alle dozen, zakken, enveloppen, tape, labels, opvulling en productverpakkingen die je zelf toevoegt. Noteer per verpakking het materiaal, gewicht, de leverancier en de landen waarin je ermee verzendt.",
+        question: "Wat is de PPWR in gewone taal?",
+        answer: "De PPWR is de Europese wet voor verpakkingen en verpakkingsafval. De regels moeten de hoeveelheid afval verminderen en ervoor zorgen dat verpakkingen beter kunnen worden hergebruikt en gerecycled.",
       },
       {
-        question: "Ben ik als webshop fabrikant als mijn logo op de doos staat?",
-        answer: "Bij een verpakking die onder jouw naam of merk wordt ontworpen of gemaakt, kan jouw webshop als fabrikant gelden. Leg met je leverancier vast wie het ontwerp bepaalt en de verklaring opstelt. Voor micro-ondernemingen kan bij een leverancier in hetzelfde EU-land een uitzondering gelden.",
+        question: "Geldt de PPWR ook voor mijn webshop?",
+        answer: "Als je bedrijfsmatig verpakte producten verkoopt of zelf verzendverpakkingen toevoegt, krijg je met onderdelen van de PPWR en nationale regels voor verpakkingsafval te maken. Wat je precies moet doen hangt af van je verpakking, leverancier en verkooplanden.",
       },
       {
-        question: "Wat moet ik doen met standaard dozen zonder eigen bedrukking?",
-        answer: "Vraag je dozenleverancier schriftelijk wie voor dat type verpakking de fabrikant is en vraag om de beschikbare conformiteits- en materiaaldocumentatie. Bewaar die informatie bij het betreffende verpakkingsartikel.",
+        question: "Moet ik voor een gewone verzenddoos zelf een verklaring maken?",
+        answer: "Bij een standaard stijve verzenddoos zonder eigen bedrukking ligt de technische onderbouwing doorgaans bij de maker van de doos. Vraag je leverancier schriftelijk wie verantwoordelijk is en om de beschikbare documentatie.",
       },
       {
-        question: "Kan ik ook zonder logo verantwoordelijk zijn voor een verpakking?",
-        answer: "Ja. Bij bepaalde flexibele of gevulde verpakkingen kan de partij die het materiaal samenstelt of vult verantwoordelijk worden. Ook import en rechtstreekse verkoop naar een ander EU-land kunnen extra verplichtingen veroorzaken.",
+        question: "Wat verandert er als mijn logo op de verpakking staat?",
+        answer: "Als de verpakking onder jouw naam of merk wordt ontworpen of gemaakt, kan je webshop verantwoordelijk worden voor de conformiteitsverklaring. Een logo is niet de enige beslisregel, dus leg met je leverancier schriftelijk vast wie het ontwerp en de documentatie beheert.",
       },
       {
-        question: "Is maximaal 50% lege ruimte al verplicht in 2026?",
-        answer: "Nee. Voor gegroepeerde, transport- en e-commerceverpakkingen geldt de 50%-grens vanaf 1 januari 2030 of drie jaar na de relevante uitvoeringshandeling als die datum later is.",
+        question: "Moet ik mij in ieder EU-land registreren?",
+        answer: "Niet in landen waar je niet verkoopt. Bij rechtstreekse verkoop aan consumenten in een ander EU-land kun je daar wel verantwoordelijk worden voor verpakkingsafval. Controleer daarom ieder land waarin je werkelijk bestellingen levert.",
       },
       {
-        question: "Moet mijn webshop zich in ieder EU-land registreren?",
-        answer: "Niet automatisch in ieder land, maar bij rechtstreekse grensoverschrijdende verkoop kun je producent worden in het land van de klant. Controleer daarom voor ieder EU-land waarin je werkelijk verkoopt de lokale EPR-registratie, aangifte en eventuele vertegenwoordigersplicht.",
+        question: "Is maximaal 50% lege ruimte al verplicht?",
+        answer: "Nee. Voor gegroepeerde, transport- en e-commerceverpakkingen geldt deze grens vanaf 1 januari 2030 of drie jaar na de relevante uitvoeringshandeling wanneer die datum later is.",
       },
       {
-        question: "Wat betekent de Verpact-stand-still voor mijn webshop?",
-        answer: "Verpact vraagt bedrijven op 20 augustus 2026 voor verzend-, service- en primaireproductieverpakkingen voorlopig uit te gaan van de situatie van vóór 12 augustus, terwijl Europese uitleg wordt beoordeeld. Blijf hoeveelheden en documentatie bijhouden en controleer Verpact regelmatig op wijzigingen.",
+        question: "Wat betekent de tijdelijke pauze van Verpact?",
+        answer: "Verpact vraagt bedrijven op 20 augustus 2026 voor verzend-, service- en primaireproductieverpakkingen voorlopig te werken zoals vóór 12 augustus, terwijl Europese uitleg wordt beoordeeld. Blijf je gegevens wel bijhouden en controleer Verpact regelmatig op wijzigingen.",
       },
     ],
     sources: [
@@ -259,11 +274,11 @@ export const PPWR_KNOWLEDGE_ARTICLE = {
         href: "https://www.verpact.nl/nl/conformiteit",
       },
       {
-        label: "Verpact: actuele PPWR-informatie, tijdlijn en stand-still",
+        label: "Verpact: actuele PPWR-informatie, tijdlijn en tijdelijke pauze",
         href: "https://www.verpact.nl/nl/alles-over-de-ppwr",
       },
       {
-        label: "ZSVR: onderscheid tussen fabrikant en producent met praktijkvoorbeelden",
+        label: "ZSVR: praktijkvoorbeelden voor verantwoordelijkheid rond verpakkingen",
         href: "https://www.verpackungsregister.org/en/first-steps/distinguishing-between-manufacturers-producers",
       },
       {
@@ -281,11 +296,11 @@ export const PPWR_KNOWLEDGE_ARTICLE = {
     ],
     about: [
       "PPWR webshop",
+      "PPWR uitgelegd",
       "PPWR 2026",
-      "Europese verpakkingsverordening",
-      "Verpakkingswetgeving",
+      "Europese verpakkingswet",
+      "Verpakkingsadministratie",
       "Verpact",
-      "Fost Plus",
       "LUCID",
       "E-commerceverpakking",
     ],
