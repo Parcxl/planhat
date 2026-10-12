@@ -72,13 +72,13 @@ export default function KennisbankArticleDetail() {
   if (!article) return null
 
   const isIntegrationGuide = article.type === "Handleiding"
+  const showSupplementaryContent = !article.hideSupplementaryContent
   const contents = [
     ["introductie", article.introTitle],
     ...article.sections.map((section) => [section.id, section.title]),
-    ...(!isIntegrationGuide ? [["sendwise", "Hoe helpt Sendwise?"]] : []),
-    ["samenvatting", "Samengevat"],
-    ["veelgestelde-vragen", "Veelgestelde vragen"],
-    ...(!isIntegrationGuide ? [["bronnen", "Bronnen"]] : []),
+    ...(!isIntegrationGuide && !article.hideSendwiseSection ? [["sendwise", "Hoe helpt Sendwise?"]] : []),
+    ...(showSupplementaryContent ? [["samenvatting", "Samengevat"], ["veelgestelde-vragen", "Veelgestelde vragen"]] : []),
+    ...(!isIntegrationGuide && showSupplementaryContent ? [["bronnen", "Bronnen"]] : []),
   ]
 
   const relatedArticles = Object.entries(KNOWLEDGE_ARTICLES)
@@ -176,10 +176,10 @@ export default function KennisbankArticleDetail() {
           </aside>
 
           <div className="min-w-0">
-            <section className="rounded-[26px] border border-[#cfe0fb] bg-[#f3f8ff] p-6 sm:p-8">
+            {article.quickAnswer ? <section className="rounded-[26px] border border-[#cfe0fb] bg-[#f3f8ff] p-6 sm:p-8">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1a5ee5]">Kort antwoord</p>
               <p className="mt-3 text-[1.08rem] leading-8 text-[#334155] sm:text-[1.14rem]">{article.quickAnswer}</p>
-            </section>
+            </section> : null}
 
             <section className="mt-14">
               <ArticleHeading id="introductie" eyebrow={article.introEyebrow}>
@@ -197,6 +197,31 @@ export default function KennisbankArticleDetail() {
                 {section.paragraphs ? (
                   <div className="mt-5 space-y-5 text-[1rem] leading-8 text-[#526078] sm:text-[1.06rem]">
                     {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                  </div>
+                ) : null}
+
+                {section.table ? (
+                  <div className="mt-7 overflow-x-auto rounded-[22px] border border-[#dce7f4]" role="region" aria-label={section.table.caption} tabIndex={0}>
+                    <table className="w-full min-w-[520px] border-collapse text-left text-sm leading-6 sm:text-base">
+                      <caption className="bg-[#f8fbff] px-5 py-4 text-left font-semibold text-[#0d1321]">{section.table.caption}</caption>
+                      <thead className="border-y border-[#dce7f4] bg-[#eef4fc] text-[#0d1321]">
+                        <tr>{section.table.headers.map((heading) => <th key={heading} scope="col" className="px-5 py-4 font-semibold">{heading}</th>)}</tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#dce7f4] text-[#526078]">
+                        {section.table.rows.map((row) => (
+                          <tr key={row[0]} className="odd:bg-white even:bg-[#f8fbff]">
+                            <th scope="row" className="px-5 py-4 font-medium text-[#0d1321]">{row[0]}</th>
+                            {row.slice(1).map((cell, index) => <td key={index} className="px-5 py-4">{cell}</td>)}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : null}
+
+                {section.paragraphsAfterTable ? (
+                  <div className="mt-5 space-y-5 text-[1rem] leading-8 text-[#526078] sm:text-[1.06rem]">
+                    {section.paragraphsAfterTable.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                   </div>
                 ) : null}
 
@@ -271,21 +296,21 @@ export default function KennisbankArticleDetail() {
               </section>
             ))}
 
-            {!isIntegrationGuide ? (
+            {!isIntegrationGuide && !article.hideSendwiseSection ? (
               <section className="mt-14">
                 <ArticleHeading id="sendwise" eyebrow="Eén verzendplatform">Hoe helpt Sendwise?</ArticleHeading>
                 <p className="mt-5 text-[1rem] leading-8 text-[#526078] sm:text-[1.06rem]">{article.sendwise}</p>
-                <p className="mt-5 text-[1rem] leading-8 text-[#526078] sm:text-[1.06rem]">
+                {showSupplementaryContent ? <p className="mt-5 text-[1rem] leading-8 text-[#526078] sm:text-[1.06rem]">
                   Bekijk ook onze{" "}
                   <Link to="/prijzen" className="font-semibold text-[#1a5ee5] underline decoration-[#1a5ee5]/30 underline-offset-4">verzendtarieven</Link>,{" "}
                   <Link to="/integraties" className="font-semibold text-[#1a5ee5] underline decoration-[#1a5ee5]/30 underline-offset-4">webshopintegraties</Link>{" "}
                   en de mogelijkheden van{" "}
                   <Link to="/oplossingen/connect" className="font-semibold text-[#1a5ee5] underline decoration-[#1a5ee5]/30 underline-offset-4">Sendwise CONNECT</Link>.
-                </p>
+                </p> : null}
               </section>
             ) : null}
 
-            <section id="samenvatting" className="mt-14 scroll-mt-36 rounded-[28px] border border-[#dce7f4] bg-[#f7fbff] p-6 sm:p-8">
+            {showSupplementaryContent ? <><section id="samenvatting" className="mt-14 scroll-mt-36 rounded-[28px] border border-[#dce7f4] bg-[#f7fbff] p-6 sm:p-8">
               <div className="flex items-center gap-3 text-[#1a5ee5]">
                 <FiCheck aria-hidden="true" />
                 <p className="text-xs font-semibold uppercase tracking-[0.14em]">Samengevat</p>
@@ -305,7 +330,9 @@ export default function KennisbankArticleDetail() {
               </div>
             </section>
 
-            {!isIntegrationGuide ? (
+            </> : null}
+
+            {!isIntegrationGuide && showSupplementaryContent ? (
               <section className="mt-14 scroll-mt-36" id="bronnen">
                 <ArticleHeading eyebrow={`Gecontroleerd op ${formatDate(article.publishedTime)}`}>Bronnen en actuele voorwaarden</ArticleHeading>
                 <p className="mt-5 text-[0.98rem] leading-7 text-[#526078]">
@@ -338,7 +365,7 @@ export default function KennisbankArticleDetail() {
               </div>
             </section>
 
-            <section className="mt-14 rounded-[28px] bg-[#0d1b3d] p-7 text-white sm:p-9">
+            {showSupplementaryContent ? <section className="mt-14 rounded-[28px] bg-[#0d1b3d] p-7 text-white sm:p-9">
               <div className="flex items-center gap-3 text-[#8db4ff]">
                 <FiPackage aria-hidden="true" />
                 <p className="text-xs font-semibold uppercase tracking-[0.14em]">Persoonlijk advies</p>
@@ -350,7 +377,7 @@ export default function KennisbankArticleDetail() {
               <Link to="/contact" className="mt-7 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-[#0d1b3d] transition hover:bg-[#eef4ff]">
                 Neem contact op <FiArrowRight aria-hidden="true" />
               </Link>
-            </section>
+            </section> : null}
           </div>
         </div>
       </article>

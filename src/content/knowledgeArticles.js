@@ -2,9 +2,11 @@ import { ADDITIONAL_KNOWLEDGE_ARTICLES } from "./additionalKnowledgeArticles.js"
 import { GUIDE_ARTICLES } from "./guideArticles.js"
 import { IMPORTED_KNOWLEDGE_ARTICLES } from "./importedKnowledgeArticles.js"
 import { PPWR_KNOWLEDGE_ARTICLE } from "./ppwrKnowledgeArticle.js"
+import { PEAK_SURCHARGE_ARTICLE } from "./peakSurchargeArticle.js"
 import { WOOCOMMERCE_GUIDE_ARTICLE } from "./woocommerceGuideArticle.js"
 
 const RAW_KNOWLEDGE_ARTICLES = {
+  ...PEAK_SURCHARGE_ARTICLE,
   "/kennisbank/gofo-voor-webshops": {
     title: "Is GOFO de beste vervoerder voor jouw webshop?",
     seoTitle: "GOFO voor je webshop: voordelen en aandachtspunten | Sendwise",
@@ -1121,7 +1123,7 @@ export const KNOWLEDGE_ARTICLES = Object.fromEntries(
     {
       ...article,
       ...(ARTICLE_IMAGE_OVERRIDES[path] || {}),
-      type: GUIDE_PATHS.has(path) ? "Handleiding" : "Blog",
+      type: GUIDE_PATHS.has(path) ? "Handleiding" : PEAK_SURCHARGE_ARTICLE[path]?.type || "Blog",
       ...(ARTICLE_IMAGE_OVERRIDES[path] ? { imageClassName: "object-cover", imageBackground: "bg-[#eef3f8]" } : {}),
     },
   ]),
