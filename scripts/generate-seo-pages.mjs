@@ -1,3 +1,4 @@
+import { PEAK_SURCHARGE_ARTICLE } from "../src/content/peakSurchargeArticle.js"
 import { mkdir, readFile, writeFile } from "node:fs/promises"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -245,3 +246,32 @@ await mkdir(dirname(postnlOutputPath), { recursive: true })
 await writeFile(postnlOutputPath, postnlHtml)
 
 console.log(`Generated SEO page: ${postnlRoutePath}`)
+
+// Generate only the new peak surcharge article alongside the existing pages.
+const [peakPath, peakArticle] = Object.entries(PEAK_SURCHARGE_ARTICLE)[0]
+const peakCanonical = `${siteUrl}${peakPath}`
+const peakParagraphs = (paragraphs = []) => paragraphs.map((text) => `<p>${escapeHtml(text)}</p>`).join("")
+const peakSections = peakArticle.sections.map((section) => {
+  const table = section.table
+    ? `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;text-align:left"><caption>${escapeHtml(section.table.caption)}</caption><thead><tr>${section.table.headers.map((heading) => `<th scope="col" style="padding:12px;border-bottom:1px solid #dce7f4">${escapeHtml(heading)}</th>`).join("")}</tr></thead><tbody>${section.table.rows.map((row) => `<tr><th scope="row" style="padding:12px">${escapeHtml(row[0])}</th>${row.slice(1).map((cell) => `<td style="padding:12px">${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`
+    : ""
+  return `<section id="${section.id}"><h2>${escapeHtml(section.title)}</h2>${peakParagraphs(section.paragraphs)}${table}${peakParagraphs(section.paragraphsAfterTable)}${peakParagraphs(section.notes?.map((note) => note.text))}</section>`
+}).join("")
+let peakHtml = sourceHtml.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(peakArticle.seoTitle)}</title>`)
+peakHtml = replaceMeta(peakHtml, "name", "description", peakArticle.description)
+for (const [key, value] of Object.entries({ type: "article", title: peakArticle.seoTitle, description: peakArticle.description, url: peakCanonical, image: `${siteUrl}${peakArticle.image}`, "image:alt": peakArticle.imageAlt })) {
+  peakHtml = replaceMeta(peakHtml, "property", `og:${key}`, value)
+}
+peakHtml = replaceMeta(peakHtml, "name", "twitter:title", peakArticle.seoTitle)
+peakHtml = replaceMeta(peakHtml, "name", "twitter:description", peakArticle.description)
+peakHtml = replaceMeta(peakHtml, "name", "twitter:image", `${siteUrl}${peakArticle.image}`)
+peakHtml = replaceMeta(peakHtml, "name", "twitter:image:alt", peakArticle.imageAlt)
+peakHtml = peakHtml.replace(/<link\s+rel="canonical"[^>]*>/i, "")
+peakHtml = peakHtml.replace("</head>", `<link rel="canonical" href="${peakCanonical}" /></head>`)
+const peakSchema = { "@context": "https://schema.org", "@type": "BlogPosting", headline: peakArticle.title, description: peakArticle.description, mainEntityOfPage: peakCanonical, image: `${siteUrl}${peakArticle.image}`, datePublished: peakArticle.publishedTime, dateModified: peakArticle.publishedTime, inLanguage: "nl-NL", author: { "@type": "Organization", name: "Sendwise Team" } }
+peakHtml = peakHtml.replace(/<script\s+id="route-structured-data"[\s\S]*?<\/script>/i, `<script id="route-structured-data" type="application/ld+json">${JSON.stringify(peakSchema).replaceAll("<", "\\u003c")}</script>`)
+peakHtml = peakHtml.replace('<div id="root"></div>', `<div id="root"><main style="font-family:Inter,system-ui,sans-serif;max-width:920px;margin:auto;padding:48px 20px;line-height:1.75"><a href="/kennisbank">Terug naar kennisbank</a><h1>${escapeHtml(peakArticle.title)}</h1><p>${escapeHtml(peakArticle.excerpt)}</p><img src="${peakArticle.image}" alt="${escapeHtml(peakArticle.imageAlt)}" style="max-width:100%" /><h2>${escapeHtml(peakArticle.introTitle)}</h2>${peakParagraphs(peakArticle.intro)}${peakSections}</main></div>`)
+const peakOutputPath = join(distRoot, peakPath.slice(1), "index.html")
+await mkdir(dirname(peakOutputPath), { recursive: true })
+await writeFile(peakOutputPath, peakHtml)
+console.log(`Generated SEO page: ${peakPath}`)

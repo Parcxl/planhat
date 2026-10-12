@@ -23,6 +23,7 @@ const Privacy = lazy(() => import("./page/Privacy"))
 const Integraties = lazy(() => import("./page/Integraties"))
 const BlogGoedgepickt = lazy(() => import("./page/BlogGoedgepickt"))
 const WerkenBij = lazy(() => import("./page/WerkenBij"))
+const KennisbankPiektoeslagen = lazy(() => import("./page/KennisbankPiektoeslagen"))
 const Kennisbank = lazy(() => import("./page/KennisbankHome"))
 const KennisbankWixVerbinden = lazy(() => import("./page/KennisbankWixVerbinden"))
 const KennisbankRetourportaal = lazy(() => import("./page/KennisbankRetourportaal"))
@@ -638,6 +639,14 @@ const AnimatedRoutes = () => {
                 <PageTransition>
                   <BlogGoedgepickt />
                 </PageTransition>
+              </Suspense>
+            }
+          />
+          <Route
+            path="/kennisbank/piektoeslagen-2026"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <PageTransition><KennisbankPiektoeslagen /></PageTransition>
               </Suspense>
             }
           />

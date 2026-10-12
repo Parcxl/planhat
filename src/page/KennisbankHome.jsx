@@ -6,6 +6,16 @@ import Homepage2Footer from "../components/Homepage2/Footer"
 
 const articles = [
   {
+    title: "Piektoeslagen 2026: wat betaal je per vervoerder?",
+    description: "Bekijk de piektoeslagen voor PostNL, DHL en FedEx Economy in 2026.",
+    to: "/kennisbank/piektoeslagen-2026",
+    type: "Nieuws",
+    category: "Tarieven & toeslagen",
+    readTime: "± 3 min",
+    image: "/kennisbank-piekdrukte.jpg",
+    tags: ["Piektoeslagen 2026", "PostNL", "DHL", "FedEx Economy"],
+  },
+  {
     title: "Uitleg over de PostNL-energietoeslag en vrachtwagenheffing",
     description:
       "Lees hoe de variabele PostNL-energietoeslag werkt, waar je het actuele bedrag vindt en waarom Sendwise de vrachtwagenheffing niet doorberekent.",
@@ -109,6 +119,7 @@ export default function KennisbankHome() {
                       <span className="rounded-full bg-[#f2f7ff] px-3 py-1.5 font-semibold text-[#1a5ee5]">
                         {article.category}
                       </span>
+                      {article.type ? <span className="rounded-full bg-[#fff2df] px-3 py-1.5 font-semibold text-[#a65300]">{article.type}</span> : null}
                       <span className="inline-flex items-center gap-2 text-[#5e6a80]">
                         <FiClock size={14} />
                         {article.readTime}
@@ -134,7 +145,7 @@ export default function KennisbankHome() {
                   </div>
 
                   <div className="inline-flex items-center gap-2 text-sm font-semibold text-[#1a5ee5]">
-                    Lees handleiding
+                    {article.type === "Nieuws" ? "Lees artikel" : "Lees handleiding"}
                     <FiArrowRight className="transition group-hover:translate-x-0.5" />
                   </div>
                 </div>
