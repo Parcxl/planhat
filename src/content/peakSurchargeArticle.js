@@ -88,6 +88,20 @@ export const PEAK_SURCHARGE_ARTICLE = {
         },
         paragraphsAfterTable: ["De toepasselijke extra piektoeslag komt bovenop de reguliere afhandelingstoeslag en de internationale Demand Surcharge. FedEx berekent ook brandstoftoeslag over de Demand Surcharge."],
       },
+      {
+        id: "connect-piektoeslagen",
+        title: "Connect: piektoeslagen in 2026",
+        paragraphs: ["Voor Connect NL Pakket, Connect BE Pakket, Connect FR Pakket, Connect ES Pakket en Connect PL Pakket gelden geen piektoeslagen. Voor Connect DE Pakket gelden onderstaande toeslagen per pakket."],
+        table: {
+          caption: "Piektoeslagen Connect DE Pakket in 2026",
+          headers: ["Periode", "Piektoeslag per pakket"],
+          rows: [
+            ["1 november tot 24 november 2026", "€ 0,19"],
+            ["24 november tot 7 december 2026", "€ 0,50"],
+            ["7 december t/m 31 december 2026", "Volgt nog"],
+          ],
+        },
+      },
     ],
     sendwise: "Vragen over de toeslag voor jouw zending? Neem contact op met Sendwise.",
     summary: "PostNL rekent een vast bedrag per pakket of brievenbuspakket. DHL eCommerce heeft geen piektoeslag. Bij FedEx Economy hangt het bedrag af van de bestemming en het gewicht; na 1 november kan het stijgen of dalen met de drukte in het netwerk.",
