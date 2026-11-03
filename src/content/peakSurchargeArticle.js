@@ -91,7 +91,7 @@ export const PEAK_SURCHARGE_ARTICLE = {
       {
         id: "connect-piektoeslagen",
         title: "Connect: piektoeslagen in 2026",
-        paragraphs: ["Voor Connect NL Pakket, Connect BE Pakket, Connect FR Pakket, Connect ES Pakket en Connect PL Pakket gelden geen piektoeslagen. Voor Connect DE Pakket gelden onderstaande toeslagen per pakket."],
+        paragraphs: ["Voor Connect NL Pakket, Connect BE Pakket, Connect FR Pakket, Connect ES Pakket en Connect PL Pakket gelden geen piektoeslagen. Voor Connect NL Brievenbus geldt vanaf 15 november 2026 een piektoeslag van € 0,18 per zending. Voor Connect DE Pakket gelden onderstaande toeslagen per pakket."],
         table: {
           caption: "Piektoeslagen Connect DE Pakket in 2026",
           headers: ["Periode", "Piektoeslag per pakket"],
