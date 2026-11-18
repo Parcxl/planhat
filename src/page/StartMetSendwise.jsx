@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion as Motion } from "framer-motion";
 import {
@@ -15,6 +15,7 @@ import {
 } from "react-icons/fi";
 import Homepage2Header from "../components/Homepage2/Header";
 import Homepage2Footer from "../components/Homepage2/Footer";
+import { submitAccountRequest } from "../lib/accountRequest";
 
 const algemeneVoorwaardenPdf = "/sendwise-algemene-voorwaarden:15-03-2026.pdf";
 
@@ -44,6 +45,7 @@ const expectations = [
 ];
 
 const StartMetSendwise = () => {
+    const submitting = useRef(false);
     const [currentStep, setCurrentStep] = useState(0);
     const [formData, setFormData] = useState({
         bedrijfsnaam: "",
@@ -99,6 +101,8 @@ const StartMetSendwise = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (submitting.current) return;
+
         setTouchedSubmit(true);
         setStatus({ state: "idle", message: "" });
 
@@ -122,20 +126,11 @@ const StartMetSendwise = () => {
             kvk: "1234567",
         };
 
+        submitting.current = true;
         try {
             setStatus({ state: "loading", message: "Aanvraag wordt verstuurd..." });
 
-            const response = await fetch("/api/accountaanvraag", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            });
-
-            const data = await response.json().catch(() => ({}));
-
-            if (!response.ok || data?.success === false) {
-                throw new Error(data?.error || data?.message || "Er ging iets mis bij het versturen.");
-            }
+            await submitAccountRequest(payload, "start-met-sendwise");
 
             setStatus({
                 state: "success",
@@ -157,6 +152,8 @@ const StartMetSendwise = () => {
                 state: "error",
                 message: error?.message || "Er ging iets mis bij het versturen. Probeer het later opnieuw.",
             });
+        } finally {
+            submitting.current = false;
         }
     };
 

@@ -1,8 +1,10 @@
-import { lazy, Suspense, useEffect } from "react"
+import { lazy, Suspense, useEffect, useRef } from "react"
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { AnimatePresence, motion as Motion } from "framer-motion"
 import HomePage2 from "./page/Homepage2"
 import Cookie from "./components/ui/Cookie"
+import { CONSENT_CHANGE_EVENT, getStoredConsent } from "./lib/consent"
+import { scheduleMetaPageView, trackCampaignConfirmation } from "./lib/metaPixel"
 import { CARRIER_ARTICLES, CARRIER_ARTICLE_PATHS } from "./content/carrierArticles"
 import { KNOWLEDGE_ARTICLES, KNOWLEDGE_ARTICLE_PATHS } from "./content/knowledgeArticles"
 import {
@@ -99,6 +101,40 @@ const PageTransition = ({ children }) => (
 const RouteFallback = () => (
   <div className="min-h-screen bg-white" aria-hidden="true" />
 )
+
+const metaPageViewPaths = new Set(["/verzend-slimmer", "/start-met-sendwise"])
+
+const MetaPageView = () => {
+  const { key, pathname } = useLocation()
+  const trackedLocation = useRef(null)
+
+  useEffect(() => {
+    if (pathname === "/verzend-slimmer/bedankt") {
+      return trackCampaignConfirmation()
+    }
+
+    if (!metaPageViewPaths.has(pathname)) return
+
+    let cancelPendingPageView
+    const track = (consent) => {
+      cancelPendingPageView?.()
+      if (trackedLocation.current === key) return
+      cancelPendingPageView = scheduleMetaPageView(consent, () => {
+        trackedLocation.current = key
+      })
+    }
+    const handleConsentChange = (event) => track(event.detail)
+
+    track(getStoredConsent())
+    window.addEventListener(CONSENT_CHANGE_EVENT, handleConsentChange)
+    return () => {
+      cancelPendingPageView?.()
+      window.removeEventListener(CONSENT_CHANGE_EVENT, handleConsentChange)
+    }
+  }, [key, pathname])
+
+  return null
+}
 
 const upsertMeta = (attribute, key, content) => {
   let tag = document.head.querySelector(`meta[${attribute}="${key}"]`)
@@ -526,6 +562,7 @@ export const AnimatedRoutes = () => {
 function App() {
   return (
     <BrowserRouter>
+      <MetaPageView />
       <AnimatedRoutes />
       <Cookie />
     </BrowserRouter>

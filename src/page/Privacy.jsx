@@ -157,7 +157,7 @@ const Privacy = () => {
                                 </div>
                                 <div className="space-y-2">
                                     <p className="text-gray-900 inter-semibold">Meta Pixel (marketing)</p>
-                                    <p>Op pagina's die onderdeel zijn van onze advertentiecampagnes kan de Meta Pixel meten of een campagne tot een bezoek of aanvraag heeft geleid. De Pixel wordt alleen geladen wanneer u marketingcookies accepteert. Meta kan de verzamelde gegevens volgens haar eigen voorwaarden gebruiken.</p>
+                                    <p>Op onze campagne- en aanvraagpagina's gebruiken we de Meta Pixel om bezoeken en geslaagde accountaanvragen te meten en aan advertenties toe te schrijven. De Pixel wordt alleen geladen wanneer u marketingcookies accepteert. Meta kan de verzamelde gegevens volgens haar eigen voorwaarden gebruiken.</p>
                                 </div>
                                 <button
                                     type="button"

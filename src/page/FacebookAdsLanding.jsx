@@ -5,6 +5,7 @@ import Homepage2Header from "../components/Homepage2/Header"
 import Homepage2Footer from "../components/Homepage2/Footer"
 import Reviews from "../components/Homepage2/Reviews"
 import PlatformAutomationAnimation from "../components/animations/PlatformAutomationAnimation"
+import { submitAccountRequest } from "../lib/accountRequest"
 
 const algemeneVoorwaardenPdf = "/sendwise-algemene-voorwaarden:15-03-2026.pdf"
 
@@ -115,6 +116,7 @@ const initialFormData = {
 
 const FacebookAdsLanding = () => {
   const carrierSceneRef = useRef(null)
+  const submitting = useRef(false)
   const navigate = useNavigate()
   const [formData, setFormData] = useState(initialFormData)
   const [acceptedTerms, setAcceptedTerms] = useState(false)
@@ -146,6 +148,8 @@ const FacebookAdsLanding = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    if (submitting.current) return
+
     const formKey = event.currentTarget.dataset.form || "account"
 
     const requiredFields = ["naam", "bedrijfsnaam", "email", "telefoon"]
@@ -175,23 +179,15 @@ const FacebookAdsLanding = () => {
       kvk: "1234567",
     }
 
+    submitting.current = true
     try {
       setStatus({ state: "loading", message: "Aanvraag wordt verstuurd...", form: formKey })
 
-      const response = await fetch("/api/accountaanvraag", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      })
-
-      const data = await response.json().catch(() => ({}))
-
-      if (!response.ok || data?.success === false) {
-        throw new Error(data?.error || data?.message || "Er ging iets mis bij het versturen.")
-      }
+      await submitAccountRequest(payload, "verzend-slimmer")
 
       setFormData(initialFormData)
       setAcceptedTerms(false)
+      setStatus({ state: "idle", message: "", form: "" })
       navigate("/verzend-slimmer/bedankt")
     } catch (error) {
       setStatus({
@@ -199,6 +195,8 @@ const FacebookAdsLanding = () => {
         message: error?.message || "Er ging iets mis bij het versturen. Probeer het later opnieuw.",
         form: formKey,
       })
+    } finally {
+      submitting.current = false
     }
   }
 
@@ -304,7 +302,8 @@ const FacebookAdsLanding = () => {
 
         <button
           type="submit"
-          className="group mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-[#1a5ee5] px-6 inter-medium text-base text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2]"
+          disabled={status.state === "loading"}
+          className="group mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-[#1a5ee5] px-6 inter-medium text-base text-white shadow-[0_14px_30px_rgba(26,94,229,0.22)] transition hover:bg-[#164fc2] disabled:cursor-not-allowed disabled:opacity-70"
         >
           Vraag je account aan
           <FiArrowRight className="h-5 w-5 transition-transform duration-300 ease-out group-hover:translate-x-1" aria-hidden="true" />
