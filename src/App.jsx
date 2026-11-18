@@ -4,7 +4,7 @@ import { AnimatePresence, motion as Motion } from "framer-motion"
 import HomePage2 from "./page/Homepage2"
 import Cookie from "./components/ui/Cookie"
 import { CONSENT_CHANGE_EVENT, getStoredConsent } from "./lib/consent"
-import { trackMetaPageView } from "./lib/metaPixel"
+import { trackCampaignConfirmation, trackMetaPageView } from "./lib/metaPixel"
 import { CARRIER_ARTICLES, CARRIER_ARTICLE_PATHS } from "./content/carrierArticles"
 import { KNOWLEDGE_ARTICLES, KNOWLEDGE_ARTICLE_PATHS } from "./content/knowledgeArticles"
 import {
@@ -109,6 +109,11 @@ const MetaPageView = () => {
   const trackedLocation = useRef(null)
 
   useEffect(() => {
+    if (pathname === "/verzend-slimmer/bedankt") {
+      trackCampaignConfirmation()
+      return
+    }
+
     if (!metaPageViewPaths.has(pathname)) return
 
     const track = (consent) => {

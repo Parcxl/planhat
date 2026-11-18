@@ -3,6 +3,7 @@ import { getStoredConsent } from "./consent"
 const pixelId = "1522034239328606"
 const trackedRequests = new Set()
 let initialized = false
+let campaignConfirmationPending = false
 
 const getPixel = (consent) => {
   if (!consent?.marketing) return null
@@ -15,6 +16,8 @@ const getPixel = (consent) => {
     fbq.push = fbq
     fbq.loaded = true
     fbq.version = "2.0"
+    // Route changes are tracked explicitly, including the one-time campaign confirmation.
+    fbq.disablePushState = true
     fbq.queue = []
     window.fbq = fbq
     window._fbq ||= fbq
@@ -42,6 +45,14 @@ export const trackMetaPageView = (consent) => {
   return true
 }
 
+export const trackCampaignConfirmation = () => {
+  if (!campaignConfirmationPending) return
+
+  // The active ad set still uses a URL-based conversion on the confirmation page.
+  campaignConfirmationPending = false
+  trackMetaPageView(getStoredConsent())
+}
+
 export const trackAccountLead = (requestId, form) => {
   if (!requestId) return
 
@@ -54,6 +65,7 @@ export const trackAccountLead = (requestId, form) => {
 
     fbq("trackSingle", pixelId, "Lead", { content_name: form }, { eventID: eventId })
     trackedRequests.add(eventId)
+    if (form === "verzend-slimmer") campaignConfirmationPending = true
   } catch (error) {
     console.warn("Meta Pixel kon het Lead-event niet versturen.", error)
   }
