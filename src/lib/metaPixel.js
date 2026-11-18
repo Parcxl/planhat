@@ -31,6 +31,8 @@ const getPixel = (consent) => {
   if (!initialized) {
     window.fbq("consent", "grant")
     window.fbq("init", pixelId)
+    // Meta can also emit a PageView when the browser restores a cached page.
+    window.fbq("set", "trackSingleOnly", true, pixelId)
     initialized = true
   }
 
