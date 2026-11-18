@@ -4,7 +4,7 @@ import { AnimatePresence, motion as Motion } from "framer-motion"
 import HomePage2 from "./page/Homepage2"
 import Cookie from "./components/ui/Cookie"
 import { CONSENT_CHANGE_EVENT, getStoredConsent } from "./lib/consent"
-import { trackCampaignConfirmation, trackMetaPageView } from "./lib/metaPixel"
+import { scheduleMetaPageView, trackCampaignConfirmation } from "./lib/metaPixel"
 import { CARRIER_ARTICLES, CARRIER_ARTICLE_PATHS } from "./content/carrierArticles"
 import { KNOWLEDGE_ARTICLES, KNOWLEDGE_ARTICLE_PATHS } from "./content/knowledgeArticles"
 import {
@@ -110,21 +110,27 @@ const MetaPageView = () => {
 
   useEffect(() => {
     if (pathname === "/verzend-slimmer/bedankt") {
-      trackCampaignConfirmation()
-      return
+      return trackCampaignConfirmation()
     }
 
     if (!metaPageViewPaths.has(pathname)) return
 
+    let cancelPendingPageView
     const track = (consent) => {
+      cancelPendingPageView?.()
       if (trackedLocation.current === key) return
-      if (trackMetaPageView(consent)) trackedLocation.current = key
+      cancelPendingPageView = scheduleMetaPageView(consent, () => {
+        trackedLocation.current = key
+      })
     }
     const handleConsentChange = (event) => track(event.detail)
 
     track(getStoredConsent())
     window.addEventListener(CONSENT_CHANGE_EVENT, handleConsentChange)
-    return () => window.removeEventListener(CONSENT_CHANGE_EVENT, handleConsentChange)
+    return () => {
+      cancelPendingPageView?.()
+      window.removeEventListener(CONSENT_CHANGE_EVENT, handleConsentChange)
+    }
   }, [key, pathname])
 
   return null

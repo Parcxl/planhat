@@ -37,12 +37,29 @@ const getPixel = (consent) => {
   return window.fbq
 }
 
-export const trackMetaPageView = (consent) => {
+export const scheduleMetaPageView = (consent, onTracked) => {
   const fbq = getPixel(consent)
-  if (!fbq) return false
+  if (!fbq) return
 
-  fbq("trackSingle", pixelId, "PageView")
-  return true
+  const pathname = window.location.pathname
+  const deadline = Date.now() + 15000
+  let timer
+
+  const send = () => {
+    if (window.location.pathname !== pathname || !getStoredConsent()?.marketing) return
+
+    // The SDK reads the URL when its queue runs. Wait until it can send on this route.
+    if (!fbq.callMethod || fbq.instance?.locks?.isLocked?.()) {
+      if (Date.now() < deadline) timer = window.setTimeout(send, 100)
+      return
+    }
+
+    fbq("trackSingle", pixelId, "PageView")
+    onTracked?.()
+  }
+
+  send()
+  return () => window.clearTimeout(timer)
 }
 
 export const trackCampaignConfirmation = () => {
@@ -50,7 +67,7 @@ export const trackCampaignConfirmation = () => {
 
   // The active ad set still uses a URL-based conversion on the confirmation page.
   campaignConfirmationPending = false
-  trackMetaPageView(getStoredConsent())
+  return scheduleMetaPageView(getStoredConsent())
 }
 
 export const trackAccountLead = (requestId, form) => {
